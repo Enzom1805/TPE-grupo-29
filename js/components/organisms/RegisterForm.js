@@ -73,12 +73,13 @@ export default function RegisterForm() {
     // Términos y condiciones
 
     const termsField = CheckboxField(
+        "terms",
         "Acepto los Términos y condiciones, y la Política de privacidad."
     );
 
     // CAPTCHA
-
     const captchaField = CheckboxField(
+        "captcha",
         "Verificar CAPTCHA"
     );
 
