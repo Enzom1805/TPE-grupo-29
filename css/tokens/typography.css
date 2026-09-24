@@ -1,0 +1,67 @@
+/* css/tokens/typography.css */
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Fuentes base */
+    --font-family-title: 'Krona One', sans-serif;
+    --font-family-body: 'Inter', sans-serif;
+
+    /* Weights */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* Headlines */
+    --text-h1-size: 48px;
+    --text-h1-line: 58px;
+
+    --text-h2-size: 40px;
+    --text-h2-line: 48px;
+
+    --text-h3-size: 32px;
+    --text-h3-line: 38px;
+
+    --text-h4-size: 28px;
+    --text-h4-line: 34px;
+
+    /* Subtitles */
+    --text-s1-size: 20px;
+    --text-s1-line: 28px;
+
+    --text-s2-size: 20px;
+    --text-s2-line: 24px;
+
+    /* Body */
+    --text-b1-size: 18px;
+    --text-b1-line: 24px;
+
+    --text-b2-size: 16px;
+    --text-b2-line: 24px;
+
+    --text-b3-size: 14px;
+    --text-b3-line: 20px;
+
+    --text-b4-size: 14px;
+    --text-b4-line: 20px;
+
+    /* Captions & Labels */
+    --text-caption-c1-size: 12px;
+    --text-caption-c1-line: 16px;
+
+    --text-label-size: 12px;
+    --text-label-line: 16px;
+
+    /* Button Sizes (del cuadro "Button Font") */
+    --btn-font-giant-size: 18px;
+    --btn-font-giant-line: 24px;
+
+    --btn-font-large-size: 16px;
+    --btn-font-large-line: 20px;
+
+    --btn-font-medium-size: 14px;
+    --btn-font-medium-line: 16px;
+
+    --btn-font-small-size: 12px;
+    --btn-font-small-line: 16px;
+}

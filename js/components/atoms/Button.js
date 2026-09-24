@@ -4,6 +4,8 @@ export default function Button (text, type = "button"){
 
     button.type = type;
     button.textContent = text;
+    button.className = "atom-button-register"; // <--- Aca hay que añadir el nombre de clase
+
 
     return button;
 }

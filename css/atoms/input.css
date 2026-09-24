@@ -1,0 +1,23 @@
+.atom-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+
+    /* Superficie oscura para el campo de texto */
+    background-color: var(--color-secondary-background-page);
+    border: 1px solid var(--color-neutral-border-strong);
+    border-radius: 8px;
+    color: var(--color-neutral-text-primary);
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.atom-input::placeholder {
+    color: var(--color-neutral-text-secondary);
+}
+
+/* Al hacer foco, usa el token primary/focus-ring */
+.atom-input:focus {
+    border-color: var(--color-primary-focus-ring);
+    box-shadow: 0 0 0 2px var(--color-primary-focus-ring);
+}

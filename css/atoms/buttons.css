@@ -1,0 +1,24 @@
+.atom-button-register {
+    align-self: center;
+    width: 250px;
+    padding: 0.85rem 1.5rem;
+    border: none;
+    border-radius: 50px;
+
+    /* Token primary/default (#6D28D9) */
+    background-color: var(--color-primary-default);
+    color: var(--color-neutral-text-primary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.atom-button-register:hover {
+    /* Token primary/hover (#7C3AED) */
+    background-color: var(--color-primary-hover);
+}
+
+.atom-button-register:active {
+    /* Token primary/active (#5B21B6) */
+    background-color: var(--color-primary-active);
+}

@@ -6,6 +6,7 @@ export default function Input(type, name, placeholder){
     input.type = type;
     input.name = name;
     input.placeholder = placeholder;
+    input.className = "atom-input"; // <--- Añadimos el nombre de clase
 
     return input;
 }

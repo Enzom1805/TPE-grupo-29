@@ -5,6 +5,7 @@ export default function Label(text, htmlFor) {
 
     label.textContent = text;
     label.htmlFor = htmlFor;
+    label.className = "atom-label"; // <--- Añadir aca nombre de clase
 
     return label;
 }

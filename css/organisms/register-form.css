@@ -1,0 +1,18 @@
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* Fondo del formulario a partir del token de Figma */
+    background-color: var(--color-secondary-surface-elevated);
+
+    /* Borde usando la constante de borde neutral */
+    border: 1px solid var(--color-neutral-border-strong);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 520px;
+    margin: 0 auto;
+
+    /* Texto primario global */
+    color: var(--color-neutral-text-primary);
+    box-shadow: 0 10px 30px var(--color-secondary-shadow-deep);
+}

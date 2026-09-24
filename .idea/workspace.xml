@@ -6,7 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="cd2ada8f-5d52-45e5-8673-f084c7c5d738" name="Changes" comment="improve de RegisterForm">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/atoms/buttons.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/atoms/buttons.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/atoms/input.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/atoms/input.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/atoms/label.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/atoms/label.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/molecules/form-field.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/molecules/form-field.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/organisms/register-form.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/organisms/register-form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/tokens/colors.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/tokens/colors.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/tokens/typography.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/tokens/typography.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/atoms/Button.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/atoms/Button.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/atoms/Input.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/atoms/Input.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/atoms/Label.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/atoms/Label.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/molecules/CheckboxField.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/molecules/CheckboxField.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/molecules/FormField.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/molecules/FormField.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/components/organisms/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/organisms/RegisterForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/pages/registro.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/pages/registro.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/registro.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/registro.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,28 +51,28 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "FrancoMartinMonsalvo"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;FrancoMartinMonsalvo&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/FrancoMartinMonsalvo/TPE-grupo-29.git",
-    "accountId": "843c7b4a-cf41-4983-aeb8-d89d97e0814b"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/FrancoMartinMonsalvo/TPE-grupo-29.git&quot;,
+    &quot;accountId&quot;: &quot;843c7b4a-cf41-4983-aeb8-d89d97e0814b&quot;
   },
-  "recentNewPullRequestHead": {
-    "server": {
-      "useHttp": false,
-      "host": "github.com",
-      "port": null,
-      "suffix": null
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
     },
-    "owner": "FrancoMartinMonsalvo",
-    "repository": "TPE-grupo-29"
+    &quot;owner&quot;: &quot;FrancoMartinMonsalvo&quot;,
+    &quot;repository&quot;: &quot;TPE-grupo-29&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4,
   &quot;fromUser&quot;: false
@@ -73,13 +88,16 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
+    "JavaScript Debug.index.html.executor": "Run",
+    "JavaScript Debug.registro.html.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Node.js.RegisterForm.js.executor": "Run",
     "Node.js.index.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "#2 on feature/create-register-form",
+    "git-widget-placeholder": "feature/create-register-form",
     "javascript.preferred.runtime.type.id": "node",
     "last_opened_file_path": "/home/ccindor/Escritorio",
     "list.type.of.created.stylesheet": "CSS",
@@ -91,13 +109,24 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "/home/ccindor/.config/JetBrains/WebStorm2026.2/node/versions/24.21.0/bin/node",
     "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.web.browsers"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/js" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="registro.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/TPE/pages/registro.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.registro.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -114,7 +143,10 @@
       <option name="presentableId" value="Default" />
       <updated>1790201624197</updated>
       <workItem from="1790201625013" duration="41000" />
-      <workItem from="1790201700181" duration="10742000" />
+      <workItem from="1790201700181" duration="12208000" />
+      <workItem from="1790218689449" duration="16000" />
+      <workItem from="1790218785765" duration="172000" />
+      <workItem from="1790274999336" duration="6833000" />
     </task>
     <task id="LOCAL-00001" summary="Create new class models">
       <option name="closed" value="true" />
@@ -156,7 +188,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790216854789</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="improve de RegisterForm">
+      <option name="closed" value="true" />
+      <created>1790217206545</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1790217206545</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
