@@ -1,0 +1,29 @@
+/* css/tokens/colors.css */
+:root {
+    /* --- Primary --- */
+    --color-primary-highlight: #C4B5FD;
+    --color-primary-focus-ring: #A78BFA;
+    --color-primary-hover: #7C3AED;
+    --color-primary-default: #6D28D9;
+    --color-primary-active: #5B21B6;
+
+    /* --- Secondary --- */
+    --color-secondary-surface-elevated: #2A2238;
+    --color-secondary-surface-dropdown: #211B2C;
+    --color-secondary-background-page: #15111F;
+    --color-secondary-chrome-header-footer: #0D0A12;
+    --color-secondary-shadow-deep: #050407;
+
+    /* --- Accent --- */
+    --color-accent-subtle: #FEF3C7;
+    --color-accent-soft: #FDE68A;
+    --color-accent-default: #FCD34D;
+    --color-accent-hover: #FBBF24;
+    --color-accent-active: #F59E0B;
+
+    /* --- Neutral --- */
+    --color-neutral-text-primary: #F8F7FC;
+    --color-neutral-text-secondary: #C9C5D3;
+    --color-neutral-border-strong: #766F82;
+    --color-neutral-shadow: #141313;
+}

@@ -1,109 +1,28 @@
-import FormField from "../molecules/FormField";
-import CheckboxField from "../molecules/CheckboxField";
-import Button from "../atoms/Button";
+import FormField from '../molecules/FormField.js';
+import CheckboxField from '../molecules/CheckboxField.js';
+import Button from '../atoms/Button.js';
 
 export default function RegisterForm() {
     const form = document.createElement("form");
+    form.className = "register-form";
 
-    // Campos que componen el formulario de registro
+    // Reutilizamos la molécula FormField para cada campo del formulario
+    const nameField = FormField("Nombre", "text", "username", "Ingresá tu nombre");
+    const emailField = FormField("Correo electrónico", "email", "email", "ejemplo@mail.com");
+    const passwordField = FormField("Contraseña", "password", "password", "Mínimo 6 caracteres");
+    const confirmPasswordField = FormField("Repetí contraseña", "password", "password", "");
+    const birthDateField = FormField("Fecha de nacimiento", "date", "birthdate", "");
 
-    const nameField = FormField(
-        "Nombre",
-        "text",
-        "name",
-        "Ingresá tu nombre"
-    );
+    // Reutilizamos CheckboxField para los términos
+    const termsField = CheckboxField("terms", "Acepto los términos y condiciones");
 
-    const lastNameField = FormField(
-        "Apellido",
-        "text",
-        "lastName",
-        "Ingresá tu apellido"
-    );
+    const captchaField = CheckboxField("captcha", "Confirma que no eres un robot");
 
-    const emailField = FormField(
-        "Email",
-        "email",
-        "email",
-        "Ingresá tu email"
-    );
+    // Reutilizamos el átomo Button
+    const submitBtn = Button("Registrarse", "submit");
 
-    const phoneField = FormField(
-        "Teléfono",
-        "tel",
-        "phone",
-        "Ingresá tu número de teléfono"
-    );
-
-    const ageField = FormField(
-        "Edad",
-        "number",
-        "age",
-        "Ingresá tu edad"
-    );
-
-    const postalField = FormField(
-        "Código postal",
-        "text",
-        "postalCode",
-        "7000"
-    );
-
-    const countryField = FormField(
-        "País",
-        "text",
-        "country",
-        "Argentina"
-    );
-
-    const passwordField = FormField(
-        "Contraseña",
-        "password",
-        "password",
-        "Ingresá tu contraseña"
-    );
-
-    const confirmPasswordField = FormField(
-        "Confirmar contraseña",
-        "password",
-        "confirmPassword",
-        "Repetí tu contraseña"
-    );
-
-    // Términos y condiciones
-
-    const termsField = CheckboxField(
-        "terms",
-        "Acepto los Términos y condiciones, y la Política de privacidad."
-    );
-
-    // CAPTCHA
-    const captchaField = CheckboxField(
-        "captcha",
-        "Verificar CAPTCHA"
-    );
-
-    // Botón de registro
-
-    const submitButton = Button(
-        "Registrarse",
-        "submit"
-    );
-
-    // Componemos el formulario
-
-    form.appendChild(nameField);
-    form.appendChild(lastNameField);
-    form.appendChild(emailField);
-    form.appendChild(phoneField);
-    form.appendChild(ageField);
-    form.appendChild(postalField);
-    form.appendChild(countryField);
-    form.appendChild(passwordField);
-    form.appendChild(confirmPasswordField);
-    form.appendChild(termsField);
-    form.appendChild(captchaField);
-    form.appendChild(submitButton);
+    // Ensamblamos el organismo
+    form.append(nameField, emailField, passwordField, confirmPasswordField,birthDateField, termsField, captchaField ,submitBtn);
 
     return form;
 }

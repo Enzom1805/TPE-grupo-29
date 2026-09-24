@@ -1,4 +1,4 @@
-import Checkbox from "../atoms/Checkbox";
+import Checkbox from "../atoms/Checkbox.js";
 
 export default function CheckboxField(name, text) {
     const container = document.createElement("div");

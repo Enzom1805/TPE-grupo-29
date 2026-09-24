@@ -1,8 +1,9 @@
-import Label from '../atoms/Label'
-import Input from '../atoms/Input';
+import Label from '../atoms/Label.js'
+import Input from '../atoms/Input.js';
 
 export default function FormField(labelText, type, name, placeholder) {
     const container = document.createElement("div");
+    container.className = "molecule-form-field"; // <--- Añadir clase hereeeee
 
     const label = Label(labelText, name);
     const input = Input(type, name, placeholder);
