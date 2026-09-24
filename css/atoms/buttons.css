@@ -1,24 +1,76 @@
-.atom-button-register {
-    align-self: center;
-    width: 250px;
-    padding: 0.85rem 1.5rem;
+/* Estilo Base para TODOS los botones */
+.atom-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     border: none;
-    border-radius: 50px;
+    cursor: pointer;
+    font-family: var(--font-family-title), serif;/* Krona One */
+    font-weight: var(--font-weight-semibold);
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+}
 
-    /* Token primary/default (#6D28D9) */
+/* --- Tamaños de Botón --- */
+.atom-button--medium {
+    font-size: var(--btn-font-medium-size);
+    line-height: var(--btn-font-medium-line);
+    /* Padding vertical (12px) y horizontal (24px) */
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: 50px;
+}
+
+.atom-button--large {
+    font-size: var(--btn-font-large-size);
+    line-height: var(--btn-font-large-line);
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+}
+
+/* --- Variantes de Color/Estilo --- */
+
+/* 1. Botón Primario (Registrarse) */
+.atom-button--primary {
     background-color: var(--color-primary-default);
     color: var(--color-neutral-text-primary);
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    box-shadow: 0 0 15px rgba(109, 40, 217, 0.4);
 }
 
-.atom-button-register:hover {
-    /* Token primary/hover (#7C3AED) */
+.atom-button--primary:hover {
     background-color: var(--color-primary-hover);
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.6);
 }
 
-.atom-button-register:active {
-    /* Token primary/active (#5B21B6) */
+.atom-button--primary:active {
     background-color: var(--color-primary-active);
+}
+
+/* 2. Botón Social (Google / Facebook) */
+.atom-button--social {
+    background-color: var(--color-secondary-surface-dropdown);
+    color: var(--color-neutral-text-primary);
+    border: 1px solid var(--color-neutral-border-strong);
+    border-radius: 8px;
+    width: 100%;
+    font-family: var(--font-family-body),sans-serif;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-b3-size);
+}
+
+.atom-button--social:hover {
+    background-color: var(--color-secondary-surface-elevated);
+}
+
+/* 3. Botón de Juego (Play / Jugar) */
+.atom-button--play {
+    background-color: var(--color-accent-default);
+    color: var(--color-secondary-chrome-header-footer);
+    border-radius: 12px;
+    font-size: var(--btn-font-giant-size);
+    padding: 1rem 2.5rem;
+}
+
+.atom-button--play:hover {
+    background-color: var(--color-accent-hover);
 }

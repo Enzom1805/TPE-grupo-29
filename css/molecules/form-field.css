@@ -1,5 +1,6 @@
 .molecule-form-field {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    /* Espacio pequeño entre la etiqueta Label y el Input */
+    gap: var(--spacing-2xs); /* 4px */
 }

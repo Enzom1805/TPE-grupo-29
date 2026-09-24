@@ -1,11 +1,8 @@
-
 export default function Label(text, htmlFor) {
-
     const label = document.createElement("label");
-
     label.textContent = text;
     label.htmlFor = htmlFor;
-    label.className = "atom-label"; // <--- Añadir aca nombre de clase
+    label.className = "atom-label";
 
     return label;
 }

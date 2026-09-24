@@ -1,14 +1,17 @@
 .register-form {
+    /* Separación entre cada campo dentro del formulario */
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--spacing-md); /* 16px */
+
     /* Fondo del formulario a partir del token de Figma */
     background-color: var(--color-secondary-surface-elevated);
 
     /* Borde usando la constante de borde neutral */
-    border: 1px solid var(--color-neutral-border-strong);
+    border: 1px solid var(--color-primary-focus-ring);
     border-radius: 12px;
-    padding: 2rem;
+    /* Padding interno grande para la tarjeta */
+    padding: var(--spacing-xl); /* 32px */
     max-width: 520px;
     margin: 0 auto;
 
