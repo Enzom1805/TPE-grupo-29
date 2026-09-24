@@ -23,7 +23,7 @@ export default function RegisterForm() {
     const emailField = FormField (
         "Email",
         "email",
-        "name",
+        "email",
         "Ingresá tu email"
     );
 
