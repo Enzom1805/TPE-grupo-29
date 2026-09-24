@@ -1,13 +1,10 @@
-export default function Button (text, type = "button"){
-
-    const button = document.createElement("button")
-
+export default function Button(text, type = "button", variant = "primary", size = "medium") {
+    const button = document.createElement("button");
     button.type = type;
     button.textContent = text;
-    button.className = "atom-button-register"; // <--- Aca hay que añadir el nombre de clase
 
+    // Asignación de clases dinámicas según la variante
+    button.className = `atom-button atom-button--${variant} atom-button--${size}`;
 
     return button;
 }
-
-//ejemplo de uso Button("Registrarse", "submit");
