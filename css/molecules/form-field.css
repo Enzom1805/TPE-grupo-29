@@ -3,4 +3,5 @@
     flex-direction: column;
     /* Espacio pequeño entre la etiqueta Label y el Input */
     gap: var(--spacing-2xs); /* 4px */
+    width: 100%;
 }

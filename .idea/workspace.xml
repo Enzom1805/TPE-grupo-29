@@ -6,14 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="cd2ada8f-5d52-45e5-8673-f084c7c5d738" name="Changes" comment="improve de RegisterForm, i added tipography, color and a few styles for buttons, input, label, form-field, register-form and main. I improve the atoms molecules organism and pages in js components. Also added code to registro on pages html">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/atoms/buttons.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/atoms/buttons.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/atoms/label.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/atoms/label.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/atoms/input.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/atoms/input.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/molecules/form-field.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/molecules/form-field.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/organisms/register-form.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/organisms/register-form.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/tokens/spacing.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/tokens/spacing.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/components/atoms/Button.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/atoms/Button.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/components/atoms/Label.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/atoms/Label.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/organisms/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/organisms/RegisterForm.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +34,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/create-models" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -92,7 +88,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "feature/create-register-form",
+    "git-widget-placeholder": "feature/RegisterForm",
     "javascript.preferred.runtime.type.id": "node",
     "last_opened_file_path": "/home/ccindor/Escritorio",
     "list.type.of.created.stylesheet": "CSS",
@@ -142,6 +138,7 @@
       <workItem from="1790218689449" duration="16000" />
       <workItem from="1790218785765" duration="172000" />
       <workItem from="1790274999336" duration="9178000" />
+      <workItem from="1790542222867" duration="4573000" />
     </task>
     <task id="LOCAL-00001" summary="Create new class models">
       <option name="closed" value="true" />

@@ -19,3 +19,21 @@
     color: var(--color-neutral-text-primary);
     box-shadow: 0 10px 30px var(--color-secondary-shadow-deep);
 }
+.register-form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columnas de igual tamaño */
+    gap: var(--spacing-md, 16px);   /* Espacio entre Nombre y Apellido */
+    width: 100%;
+    justify-content: space-between;
+}
+.register-form-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* 3 columnas de igual ancho (33.3% cada una) */
+    gap: var(--spacing-md, 16px);       /* Mismo espacio entre los 3 campos */
+    width: 100%;
+}
+.register-form-header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
