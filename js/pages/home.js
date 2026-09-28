@@ -1,13 +1,22 @@
-// Importamos la función constructora del Loader
+
+import GameCard from '../components/molecules/GameCard.js';
+import { games } from '../data/games.js'; // Ajustá la ruta a donde guardaste el array
 import Loader from '../components/organisms/Loader.js';
 
-// Esperamos a que el HTML termine de cargar
-document.addEventListener("DOMContentLoaded", () => {
-    const appContainer = document.getElementById("app");
+    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", () => {
+        const appContainer = document.getElementById("app");
 
-    // Ejecutamos la función que crea el div del loader, el spinner y el intervalo de 5 segundos
-    const pantallaDeCarga = Loader();
+        const pantallaDeCarga = Loader();
 
-    // Lo inyectamos físicamente en el contenedor principal
-    appContainer.appendChild(pantallaDeCarga);
+        appContainer.appendChild(pantallaDeCarga);
+    });
+
+    const grid = document.getElementById("juegos-container");
+
+
+    games.slice(0, 10).forEach(juego => {
+        const tarjeta = GameCard(juego);
+        grid.appendChild(tarjeta);
+    });
 });

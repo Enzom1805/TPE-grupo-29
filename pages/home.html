@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kingly Games - Home</title>
-
+    <link rel="stylesheet" href="../css/molecules/game-card.css">
     <!-- Tokens de colores (fundamental para que el loader se vea morado y dorado) -->
     <link rel="stylesheet" href="../css/tokens/colors.css">
 
@@ -13,7 +13,9 @@
 </head>
 <body>
 <!-- Contenedor principal donde se va a inyectar todo -->
-<main id="app"></main>
+
+<main id="app"> <!-- Acá van a ir a parar las tarjetas -->
+    <div id="juegos-container" style="display: flex; gap: 16px; padding: 20px; flex-wrap: wrap;"></div></main>
 
 <!-- Script principal de la página como módulo -->
 <script type="module" src="../js/pages/home.js"></script>

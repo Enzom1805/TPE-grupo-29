@@ -1,0 +1,95 @@
+.game-card {
+    position: relative;
+    width: 260px; /* Tarjeta más apaisada */
+    height: 160px;
+    border-radius: 16px; /* Bordes mucho más redondeados */
+    overflow: hidden;
+    cursor: pointer;
+    flex: 0 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.game-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* El degradado morado sobre la imagen */
+.game-card__info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px 16px 12px; /* Espacio arriba para que el degradado sea suave */
+    /* Degradado de morado sólido abajo a transparente arriba */
+    background: linear-gradient(to top, rgba(90, 24, 154, 0.95) 0%, rgba(90, 24, 154, 0) 100%);
+    color: var(--color-neutral-text-primary, #fff);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.3s ease;
+}
+
+/* Revelar la información al pasar el mouse */
+.game-card:hover .game-card__info {
+    opacity: 1;
+}
+
+.game-card__title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+.game-card__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.game-card__play {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    /* Agregamos la transición para que el cambio no sea brusco */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* El efecto específico al posar el cursor sobre el botón */
+.game-card__play:hover {
+    background-color: rgba(255, 255, 255, 0.4); /* Se vuelve más blanco/brillante */
+    transform: scale(1.1); /* Se agranda un 10% */
+}
+
+/* Estilos de la Corona y el texto Gratis */
+.game-card__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: var(--color-neutral-text-primary, #fff);
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+    z-index: 5;
+}
+
+.game-card__badge svg {
+    width: 22px;
+    height: 22px;
+    stroke: #f1c40f; /* Color dorado para la corona */
+}
