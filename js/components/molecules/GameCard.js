@@ -1,3 +1,5 @@
+import Button from '../atoms/Button.js';
+
 export default function GameCard(game) {
     const card = document.createElement("article");
     card.className = "game-card";
@@ -24,9 +26,17 @@ export default function GameCard(game) {
     const catAge = document.createElement("span");
     catAge.textContent = `${game.category} \u00A0\u00A0 ${game.age}`;
 
-    const playBtn = document.createElement("span");
-    playBtn.className = "game-card__play";
-    playBtn.textContent = "Jugar";
+    const playBtn = Button("Jugar", "button", "play", "small");
+    playBtn.classList.add("game-card__play");
+
+    // Lógica condicional para el color del botón según el nivel de acceso
+    if (game.accessLevel === "Premium") {
+        playBtn.classList.add("game-card__play--premium");
+        title.classList.add("game-card__title--premium");
+        catAge.classList.add("game-card__text--premium");
+    } else {
+        playBtn.classList.add("game-card__play--free");
+    }
 
     meta.appendChild(catAge);
     meta.appendChild(playBtn);
@@ -40,7 +50,6 @@ export default function GameCard(game) {
     badge.className = "game-card__badge";
 
     if (game.accessLevel === "Premium") {
-
         const crownIcon = document.createElement("i");
         crownIcon.className = "icon icon-crown";
         badge.appendChild(crownIcon);

@@ -11,7 +11,11 @@
     transition: all 0.2s ease-in-out;
     box-sizing: border-box;
 }
-
+.atom-button--small {
+    font-size: var(--btn-font-small-size);
+    line-height: var(--btn-font-small-line);
+    padding: 4px 15px; /* Padding reducido para tarjetas pequeñas */
+}
 /* --- Tamaños de Botón --- */
 .atom-button--medium {
     font-size: var(--btn-font-medium-size);
@@ -24,8 +28,8 @@
 .atom-button--large {
     font-size: var(--btn-font-large-size);
     line-height: var(--btn-font-large-line);
-    padding: 0.85rem 2rem;
-    border-radius: 50px;
+    padding: 6px 20px;
+
 }
 
 /* --- Variantes de Color/Estilo --- */
@@ -67,8 +71,7 @@
     background-color: var(--color-accent-default);
     color: var(--color-secondary-chrome-header-footer);
     border-radius: 12px;
-    font-size: var(--btn-font-giant-size);
-    padding: 1rem 2.5rem;
+
 }
 
 .atom-button--play:hover {
@@ -99,7 +102,7 @@
 
 /* Modificador de estado: Oculto (para los extremos del carrusel) */
 .atom-button--hidden {
-    opacity: 0 !important;
-    visibility: hidden !important;
+    opacity: 0 ;
+    visibility: hidden ;
     pointer-events: none;
 }

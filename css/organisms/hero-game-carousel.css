@@ -1,0 +1,108 @@
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hero-carousel__header {
+    text-align: center;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.hero-carousel__icon {
+    color: var(--color-primary-focus-ring);
+    width: 40px;
+    height: 40px;
+}
+
+
+.hero-carousel__title {
+    font-family: var(--font-family-title);
+    font-size: var(--text-h4-size);
+    line-height: var(--text-h4-line);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-neutral-text-primary);
+    margin: 0;
+}
+
+
+.hero-carousel__title .text-premium {
+    color: var(--color-accent-default);
+}
+.hero-track-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- TARJETAS DEL HERO --- */
+.hero-card {
+    position: absolute;
+    width: 600px;
+    height: 350px;
+    /* Borramos las cosas de background que estaban acá */
+    opacity: 0;
+    transform: translateX(0) scale(0.5);
+    z-index: 0;
+    pointer-events: none;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.6s ease,
+    z-index 0.6s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Estado de la tarjeta central */
+.hero-card.active {
+    opacity: 1;
+    transform: translateX(0) scale(1); /* Tamaño original y centrada[cite: 25] */
+    z-index: 3;
+    pointer-events: auto;
+    box-shadow: 0 0 40px color-mix(in srgb, var(--color-primary-default) 50%, transparent);
+}
+
+/* Estado de la tarjeta visible a la izquierda */
+.hero-card.prev {
+    opacity: 0.6;
+    transform: translateX(-40%) scale(0.85);
+    z-index: 1;
+}
+
+/* Estado de la tarjeta visible a la derecha */
+.hero-card.next {
+    opacity: 0.6;
+    transform: translateX(40%) scale(0.85);
+    z-index: 1;
+}
+
+/* Tarjetas que están más allá de la vista, preparadas para entrar */
+.hero-card.hidden-left {
+    opacity: 0.3; /* Le agregamos opacidad para que sean visibles */
+    transform: translateX(-80%) scale(0.65); /* Un poco más chicas que las prev/next */
+    z-index: 0;
+}
+
+.hero-card.hidden-right {
+    opacity: 0.3; /* Le agregamos opacidad para que sean visibles */
+    transform: translateX(80%) scale(0.65);
+    z-index: 0;
+}
+/* --- BOTONES LATERALES --- */
+.hero-carousel .atom-button--carousel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+/* Patrón de diseño respetado: botones en los extremos */
+.hero-carousel .btn-prev { left: -30px; }
+.hero-carousel .btn-next { right: -30px; }
