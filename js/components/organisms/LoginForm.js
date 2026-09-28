@@ -2,6 +2,8 @@ import FormField from '../molecules/FormField.js';
 import CheckboxField from '../molecules/CheckboxField.js';
 import Button from '../atoms/Button.js';
 import Link from "../atoms/Link.js";
+import Icon from "../atoms/Icon.js";
+import { setupPasswordToggle } from '../../utils/validators.js';
 
 export default function LoginForm() {
     const form = document.createElement("form");
@@ -13,15 +15,22 @@ export default function LoginForm() {
     const title = document.createElement("h1");
     title.innerText = "Ingresar";
     title.className = "form-h1";
-    const logo = document.createElement("img");
-    logo.src = "img/logo.png";
-    mainHeaderContent.append(title, logo);
+    // Instanciamos el átomo Icon
+    const logo = Icon("../assets/icons/logo-crown-variant.svg", "Logo");
+    logo.className = "form-icon-logo";
+    mainHeaderContent.append(logo,title);
+
 
     const subTitle = document.createElement("p");
     subTitle.innerText = "Inicia sesión para continuar en Kingly Games.";
 
     const emailField = FormField("Correo electrónico", "email", "email", "ejemplo@mail.com");
-    const passwordField = FormField("Contraseña", "password", "password", "Mínimo 6 caracteres");
+
+    const passwordField = FormField("Contraseña", "password", "password", "Mínimo 6 caracteres");    // --- REUTILIZACIÓN DEL TOGGLE ---
+    const passwordInput = passwordField.querySelector("input");
+    if (passwordInput) {
+        setupPasswordToggle(passwordInput);
+    }
 
     // Contenedor de opciones: Recordarme + ¿Olvidaste tu contraseña?
     const optionsDiv = document.createElement("div");

@@ -3,6 +3,7 @@ import CheckboxField from '../molecules/CheckboxField.js';
 import Button from '../atoms/Button.js';
 import Link from "../atoms/Link.js";
 import { validateRegisterForm, setupPasswordToggle } from '../../utils/validators.js';
+import Icon from "../atoms/Icon.js";
 
 export default function RegisterForm() {
     const form = document.createElement("form");
@@ -14,9 +15,11 @@ export default function RegisterForm() {
     const title = document.createElement("h1");
     title.innerText = "Crear una cuenta";
     title.className = "form-h1";
-    const logo = document.createElement("img");
-    logo.src = "img/logo.png";
-    mainHeaderContent.append(title, logo);
+
+    // Instanciamos el átomo Icon
+    const logo = Icon("../assets/icons/logo-crown-variant.svg", "Logo");
+    logo.className = "form-icon-logo";
+    mainHeaderContent.append(logo, title);
 
     const subTitle = document.createElement("p");
     subTitle.innerText = "Completa tus datos para crear tu cuenta en Kingly Games.";
@@ -52,6 +55,7 @@ export default function RegisterForm() {
     const termsField = CheckboxField("terms", "Acepto los términos y condiciones");
     termsField.className = "terms-field";
     const captchaField = CheckboxField("captcha", "Confirma que no eres un robot");
+    captchaField.className = "captcha-field";
 
     // Botón Submit
     const submitBtn = Button("Registrarse", "submit");
@@ -78,9 +82,8 @@ export default function RegisterForm() {
     // Contenedor de mensaje de error
     const errorMessage = document.createElement("div");
     errorMessage.className = "form-error-message";
-    errorMessage.style.cssText = "color: #EF4444; font-size: 13px; text-align: center; display: none;";
 
-    // Evento de submit limpio utilizando el validador
+    // Evento submit utilizando validador
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
