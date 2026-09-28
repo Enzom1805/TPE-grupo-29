@@ -5,3 +5,8 @@
     gap: var(--spacing-2xs); /* 4px */
     width: 100%;
 }
+.molecule-checkbox-field{
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2xs);
+}

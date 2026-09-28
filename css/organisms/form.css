@@ -1,49 +1,165 @@
+/* ==========================================================================
+   Organismo: Formulario (Register / Login)
+   ========================================================================== */
+
+/* Asegura cálculo exacto de box-model en todos los componentes del form */
+.form,
+.form * {
+    box-sizing: border-box;
+}
+
 .form {
-    /* Separación entre cada campo dentro del formulario */
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md); /* 16px */
-
-    /* Fondo del formulario a partir del token de Figma */
-    background-color: var(--color-secondary-surface-elevated);
-
-    /* Borde usando la constante de borde neutral */
-    border: 1px solid var(--color-primary-focus-ring);
-    border-radius: 12px;
-    /* Padding interno grande para la tarjeta */
-    padding: var(--spacing-xl); /* 32px */
+    width: 100%;
     max-width: 520px;
     margin: 0 auto;
+    padding: var(--spacing-xl); /* 32px */
 
-    /* Texto primario global */
-    color: var(--color-neutral-text-primary);
+    background-color: var(--color-secondary-surface-elevated);
+    border: 1px solid var(--color-primary-focus-ring);
+    border-radius: 12px;
     box-shadow: 0 10px 30px var(--color-secondary-shadow-deep);
-    font-family: var(--font-family-body), serif ;
+
+    color: var(--color-neutral-text-primary);
+    font-family: var(--font-family-body), sans-serif;
 }
-.form-h1{
+
+/* --- Header del Formulario --- */
+.form-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--spacing-md, 16px);
+    width: 100%;
+    margin-bottom: var(--spacing-sm, 12px);
+}
+
+.form-logo-crown {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.form-h1 {
     font-size: var(--text-h3-size);
     font-weight: var(--font-weight-medium);
+    margin: 0;
+    white-space: nowrap; /* Evita que "Crear una cuenta" se rompa en 2 líneas */
+    flex-shrink: 0;
 }
+
+/* --- Grillas de Campos --- */
 .form-row-2 {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 columnas de igual tamaño */
-    gap: var(--spacing-md, 16px);   /* Espacio entre Nombre y Apellido */
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md, 16px);
     width: 100%;
-    justify-content: space-between;
 }
+
 .form-row-3 {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* 3 columnas de igual ancho (33.3% cada una) */
-    gap: var(--spacing-md, 16px);       /* Mismo espacio entre los 3 campos */
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--spacing-md, 16px);
     width: 100%;
 }
-.form-header{
+
+/* --- Estructura General de Campos (Móleculas) --- */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 6px;
+}
+
+.form-field label {
+    text-align: left;
+    width: 100%;
+}
+
+/* --- Campo de Contraseña & Toggle Visibilidad --- */
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 6px;
+}
+
+.password-input-wrapper label {
+    text-align: left;
+    width: 100%;
+}
+
+.password-input-wrapper input {
+    width: 100%;
+    padding-right: 40px; /* Previene que el texto toque el icono del ojo */
+}
+
+.toggle-password-btn {
+    position: absolute;
+    right: 12px;
+    bottom: 11px; /* Centrado vertical dentro de la caja del input de 42px */
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.toggle-password-icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    pointer-events: none;
+}
+
+/* --- Checkboxes --- */
+.checkbox-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2px;
+}
+
+.checkbox-label {
+    color: var(--color-neutral-text-secondary);
+    font-size: var(--text-b3-size, 14px);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.terms-field,
+.captcha-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+input[type="checkbox"]:checked + .checkbox-label,
+input[type="checkbox"]:checked + label {
+    color: var(--color-accent-default, #FCD34D);
+    font-weight: var(--font-weight-medium, 500);
+}
+
+/* --- Opciones Extras (Recordarme / Olvidaste Contraseña) --- */
+.form-options {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
+    margin-bottom: var(--spacing-sm, 12px);
 }
-/* Estilos para la parte del "footer" del formulario
-/* Divisor "o continuar con" */
+
+/* --- Divisor "o continuar con" --- */
 .form-divider {
     display: flex;
     align-items: center;
@@ -51,7 +167,7 @@
     color: var(--color-neutral-text-secondary);
     font-family: var(--font-family-title), serif;
     font-size: var(--text-caption-c1-size, 12px);
-    margin: var(--spacing-sm, 12px) 0;
+    margin: var(--spacing-xs, 8px) 0;
     width: 100%;
 }
 
@@ -66,7 +182,16 @@
     padding: 0 var(--spacing-xs, 8px);
 }
 
-/* Footer "¿Ya tenés una cuenta? Ingresar" */
+/* --- Mensaje de Error --- */
+.errorMessage,
+.form-error-message {
+    color: var(--color-warning-text-primary, #EF4444);
+    font-size: 13px;
+    text-align: center;
+    display: none;
+}
+
+/* --- Footer & Enlaces --- */
 .form-footer {
     text-align: center;
     font-family: var(--font-family-title), serif;
@@ -86,33 +211,7 @@
     color: var(--color-accent-hover);
     text-decoration: underline;
 }
-/* Cambia el color del texto cuando el checkbox correspondiente está marcado */
-input[type="checkbox"]:checked + label,
-input[type="checkbox"]:checked + span {
-    color: var(--color-accent-default, #FCD34D); /* Color dorado/amarillo de tu Figma */
-    font-weight: var(--font-weight-medium, 500);
-}
-.checkbox-field {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
 
-.checkbox-label {
-    color: var(--color-neutral-text-secondary);
-    cursor: pointer;
-    transition: color 0.6s ease;
-}
-/* Fila de opciones (Recordarme / Olvidaste contraseña) */
-.form-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: var(--spacing-sm, 12px);
-}
-
-/* Enlace de recuperación de contraseña */
 .atom-link--forgot {
     color: var(--color-accent-default, #FCD34D);
     font-size: var(--text-b3-size, 14px);
@@ -125,10 +224,27 @@ input[type="checkbox"]:checked + span {
     color: var(--color-accent-hover, #FBBF24);
     text-decoration: underline;
 }
-.errorMessage{
-    color: var(--color-warning-text-primary);
-    font-size: 13px;
-    text-align: center;
-    display: none;";
+.toggle-password-icon {
+    width: 20px;
+    height: 20px;
+    /* Aplica directamente la constante de tu token de texto/ícono claro */
+    stroke: var(--color-neutral-text-secondary); /* o var(--color-neutral-text-primary) */
+    fill: none;
+    transition: stroke 0.2s ease;
 }
 
+.toggle-password-icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    pointer-events: none;
+
+    /* Convierte el gráfico oscuro en un tono claro brillante */
+    filter: brightness(0) invert(0.85);
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.toggle-password-btn:hover .toggle-password-icon {
+    opacity: 1;
+}
