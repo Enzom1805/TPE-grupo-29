@@ -13,7 +13,7 @@
 
 .category-title {
     color: var(--color-neutral-text-primary);
-    font-family: var(--font-family-title);
+    font-family: var(--font-family-title) sans-serif;
     font-size: var(--text-s1-size);
     line-height: var(--text-s1-line);
     font-weight: var(--font-weight-regular);
@@ -22,11 +22,10 @@
 
 .category-more {
     color: var(--color-neutral-text-primary, #fff);
-    font-family: var(--font-family-title);
+    font-family: var(--font-family-title) sans-serif;
     font-size: var(--text-b4-size);
     line-height: var(--text-b4-line);
     text-decoration: none;
-    font-size: 0.9rem;
     opacity: 0.8;
     transition: opacity 0.3s;
 }
