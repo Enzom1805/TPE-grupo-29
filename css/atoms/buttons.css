@@ -74,3 +74,32 @@
 .atom-button--play:hover {
     background-color: var(--color-accent-hover);
 }
+
+/* 4. Boton de Carrusel (< >) */
+.atom-button--carousel {
+    width: 60px;
+    height: 60px;
+    padding: 0; /* Anulamos el padding de los tamaños base para que sea cuadrado */
+    background-color: rgba(15, 15, 25, 0.7);
+    border: 2px solid #e8c37d; /* Borde estilo dorado */
+    color: #e8c37d; /* Color que tomará el SVG */
+    border-radius: 16px;
+}
+
+.atom-button--carousel:hover {
+    background-color: rgba(15, 15, 25, 0.95);
+    transform: scale(1.05); /* El base ya tiene transition, así que esto se anima solo */
+}
+
+/* Tamaño estándar para el ícono de flecha adentro del botón */
+.atom-button--carousel svg {
+    width: 32px;
+    height: 32px;
+}
+
+/* Modificador de estado: Oculto (para los extremos del carrusel) */
+.atom-button--hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;
+}

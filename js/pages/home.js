@@ -1,22 +1,24 @@
+import CategoryCarousel from '../components/organisms/CategoryGameCarousel.js';
+import { games } from '../data/games.js';
 
-import GameCard from '../components/molecules/GameCard.js';
-import { games } from '../data/games.js'; // Ajustá la ruta a donde guardaste el array
-import Loader from '../components/organisms/Loader.js';
+document.addEventListener("DOMContentLoaded", () => {
+    const appContainer = document.getElementById("app");
 
-    document.addEventListener("DOMContentLoaded", () => {
-    document.addEventListener("DOMContentLoaded", () => {
-        const appContainer = document.getElementById("app");
+    // Limpiamos el contenedor (por si dejamos el div de prueba anterior)
+    appContainer.innerHTML = '';
 
-        const pantallaDeCarga = Loader();
+    // Filtramos los juegos por categoría
+    const juegosAccion = games.filter(game => game.category === "Acción");
+    const juegosAventura = games.filter(game => game.category === "Aventura");
+    const juegosPelea = games.filter(game => game.category === "Pelea");
 
-        appContainer.appendChild(pantallaDeCarga);
-    });
+    // Instanciamos los carruseles (Organismos)
+    const carruselAccion = CategoryCarousel("Juegos de Accion", juegosAccion);
+    const carruselAventura = CategoryCarousel("Juegos de Aventura", juegosAventura);
+    const carruselPelea = CategoryCarousel("Juegos de Pelea", juegosPelea);
 
-    const grid = document.getElementById("juegos-container");
-
-
-    games.slice(0, 10).forEach(juego => {
-        const tarjeta = GameCard(juego);
-        grid.appendChild(tarjeta);
-    });
+    // Los inyectamos en la pantalla
+    appContainer.appendChild(carruselAccion);
+    appContainer.appendChild(carruselAventura);
+    appContainer.appendChild(carruselPelea);
 });

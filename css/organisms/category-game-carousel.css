@@ -1,0 +1,91 @@
+.category-carousel {
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.category-title {
+
+    font-family: var(--font-family-title);
+    font-size: var(--text-s1-size);
+    line-height: var(--text-s1-line);
+    font-weight: var(--font-weight-regular);
+    margin: 0;
+}
+
+.category-more {
+    color: var(--color-neutral-text-primary, #fff);
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.category-more:hover {
+    opacity: 1;
+}
+
+
+.carousel-wrapper {
+    position: relative;
+
+    margin: 0 -10px;
+    padding: 0 10px;
+}
+
+/* La pista deslizable */
+.carousel-track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding: 20px 10px;
+    margin: 0 -10px;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* Los botones flotantes */
+.carousel-wrapper {
+    position: relative;
+    /* Mantenemos el padding/margin de la respuesta anterior para que no se corten las sombras */
+    padding: 0 10px;
+    margin: 0 -10px;
+}
+
+.carousel-wrapper .atom-button--carousel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    /* La transición de opacidad y visibilidad ya viene de .atom-button y .atom-button--hidden,
+       pero necesitamos definir que arranquen invisibles en el contexto del carrusel */
+    opacity: 0;
+    visibility: hidden;
+}
+.carousel-wrapper .atom-button--carousel:hover {
+    transform: translateY(-50%) scale(1.05);
+}
+/* Mostrar botones al hacer hover en el wrapper, PERO solo si no tienen la clase hidden */
+.carousel-wrapper:hover .atom-button--carousel:not(.atom-button--hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+.carousel-wrapper .prev {
+    left: 10px;
+}
+
+.carousel-wrapper .next {
+    right: 10px;
+}
