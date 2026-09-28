@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border: none;
+    border: 1px solid var(--color-primary-focus-ring);
     cursor: pointer;
     font-family: var(--font-family-title), serif;/* Krona One */
     font-weight: var(--font-weight-semibold);
@@ -50,8 +50,8 @@
 .atom-button--social {
     background-color: var(--color-secondary-surface-dropdown);
     color: var(--color-neutral-text-primary);
-    border: 1px solid var(--color-neutral-border-strong);
-    border-radius: 8px;
+    border: 1px solid var(--color-primary-focus-ring);
+    border-radius: 5px;
     width: 100%;
     font-family: var(--font-family-body),sans-serif;
     font-weight: var(--font-weight-medium);
@@ -59,7 +59,7 @@
 }
 
 .atom-button--social:hover {
-    background-color: var(--color-secondary-surface-elevated);
+    background-color: var(--color-primary-hover);
 }
 
 /* 3. Botón de Juego (Play / Jugar) */
