@@ -4,12 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ada8f-5d52-45e5-8673-f084c7c5d738" name="Changes" comment="improve de RegisterForm, i added tipography, color and a few styles for buttons, input, label, form-field, register-form and main. I improve the atoms molecules organism and pages in js components. Also added code to registro on pages html">
+    <list default="true" id="cd2ada8f-5d52-45e5-8673-f084c7c5d738" name="Changes" comment="improve de RegisterForm">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/atoms/input.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/atoms/input.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/molecules/form-field.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/molecules/form-field.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/organisms/register-form.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/organisms/register-form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/atoms/buttons.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/atoms/buttons.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/organisms/login-form.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/organisms/register-form.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/tokens/colors.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/tokens/colors.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/atoms/Checkbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/atoms/Checkbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/atoms/Link.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/atoms/Link.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/components/molecules/CheckboxField.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/molecules/CheckboxField.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/components/organisms/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/organisms/RegisterForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/pages/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/pages/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/registro.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/registro.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +97,7 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "feature/RegisterForm",
     "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "/home/ccindor/Escritorio",
+    "last_opened_file_path": "/home/ccindor/Escritorio/TPE/js/components/organisms",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.jshint": "true",
@@ -105,6 +112,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/js/components/organisms" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/js" />
     </key>
@@ -138,7 +148,8 @@
       <workItem from="1790218689449" duration="16000" />
       <workItem from="1790218785765" duration="172000" />
       <workItem from="1790274999336" duration="9178000" />
-      <workItem from="1790542222867" duration="4573000" />
+      <workItem from="1790542222867" duration="4651000" />
+      <workItem from="1790553932745" duration="8786000" />
     </task>
     <task id="LOCAL-00001" summary="Create new class models">
       <option name="closed" value="true" />
@@ -196,7 +207,15 @@
       <option name="project" value="LOCAL" />
       <updated>1790284697863</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="improve de RegisterForm">
+      <option name="closed" value="true" />
+      <created>1790549007584</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1790549007585</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,8 +227,8 @@
     <MESSAGE value="Create directory assets (fast solution I have to create a file named &quot;.gitkeep&quot; so git can recognize te directory and sub directory" />
     <MESSAGE value="add atoms, molecules, and organisms to build the registration form" />
     <MESSAGE value="jejej my bad" />
-    <MESSAGE value="improve de RegisterForm" />
     <MESSAGE value="improve de RegisterForm, i added tipography, color and a few styles for buttons, input, label, form-field, register-form and main. I improve the atoms molecules organism and pages in js components. Also added code to registro on pages html" />
-    <option name="LAST_COMMIT_MESSAGE" value="improve de RegisterForm, i added tipography, color and a few styles for buttons, input, label, form-field, register-form and main. I improve the atoms molecules organism and pages in js components. Also added code to registro on pages html" />
+    <MESSAGE value="improve de RegisterForm" />
+    <option name="LAST_COMMIT_MESSAGE" value="improve de RegisterForm" />
   </component>
 </project>

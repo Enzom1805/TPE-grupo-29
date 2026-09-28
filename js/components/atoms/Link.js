@@ -1,8 +1,7 @@
-export default function Link(text, href){
+export default function Link(text, href) {
     const link = document.createElement("a");
-
     link.textContent = text;
     link.href = href;
-
+    link.className = "atom-link";
     return link;
 }

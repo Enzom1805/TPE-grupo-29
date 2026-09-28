@@ -26,4 +26,7 @@
     --color-neutral-text-secondary: #C9C5D3;
     --color-neutral-border-strong: #766F82;
     --color-neutral-shadow: #141313;
+
+    /* --- Warning --- */
+    --color-warning-text-primary: #c41717;
 }
