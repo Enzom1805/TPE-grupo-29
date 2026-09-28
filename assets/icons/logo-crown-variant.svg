@@ -1,0 +1,21 @@
+<svg width="120" height="120" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Kingly Games Logo with Halo">
+  <defs>
+    <!-- Halo ambiental posterior (Luz difusa de fondo) -->
+    <radialGradient id="kg-ambient-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.35" />
+      <stop offset="70%" stop-color="#6D28D9" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#1F192F" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Luz de fondo suave (Sin forma de botón) -->
+  <circle cx="75" cy="73" r="60" fill="url(#kg-ambient-halo)" />
+
+  <!-- Vector original en blanco pulcro -->
+  <g>
+    <path d="M74.9999 105.278C56.5904 105.278 41.6666 90.9758 41.6666 73.3333C41.6666 55.6909 56.5904 41.3889 74.9999 41.3889C93.4094 41.3889 108.333 55.6909 108.333 73.3333C108.333 90.9758 93.4094 105.278 74.9999 105.278Z" 
+          stroke="#F8F7FC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M91 84.5139L95 62.1528L81 68.8611L75 62.1528L69 68.8611L55 62.1528L59 84.5139H91Z" 
+          stroke="#F8F7FC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
