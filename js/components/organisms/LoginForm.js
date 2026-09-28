@@ -15,18 +15,20 @@ export default function LoginForm() {
     const title = document.createElement("h1");
     title.innerText = "Ingresar";
     title.className = "form-h1";
+
     // Instanciamos el átomo Icon
     const logo = Icon("../assets/icons/logo-crown-variant.svg", "Logo");
     logo.className = "form-icon-logo";
-    mainHeaderContent.append(logo,title);
-
+    mainHeaderContent.append(logo, title);
 
     const subTitle = document.createElement("p");
     subTitle.innerText = "Inicia sesión para continuar en Kingly Games.";
 
     const emailField = FormField("Correo electrónico", "email", "email", "ejemplo@mail.com");
 
-    const passwordField = FormField("Contraseña", "password", "password", "Mínimo 6 caracteres");    // --- REUTILIZACIÓN DEL TOGGLE ---
+    const passwordField = FormField("Contraseña", "password", "password", "Mínimo 6 caracteres");
+
+    // --- REUTILIZACIÓN DEL TOGGLE ---
     const passwordInput = passwordField.querySelector("input");
     if (passwordInput) {
         setupPasswordToggle(passwordInput);
@@ -57,6 +59,24 @@ export default function LoginForm() {
     const googleBtn = Button("Google", "button", "social", "medium");
     const facebookBtn = Button("Facebook", "button", "social", "medium");
     mediaDiv.append(googleBtn, facebookBtn);
+
+    // --- MANEJADORES DE REDIRECCIÓN A HOME ---
+
+    // 1. Redirección al enviar el formulario (Submit)
+    form.addEventListener("submit", (e) => {
+        e.preventDefault(); // Evitamos el comportamiento por defecto de envío del formulario
+        window.location.href = "home.html";
+    });
+
+    // 2. Redirección al hacer clic en Google
+    googleBtn.addEventListener("click", () => {
+        window.location.href = "home.html";
+    });
+
+    // 3. Redirección al hacer clic en Facebook
+    facebookBtn.addEventListener("click", () => {
+        window.location.href = "home.html";
+    });
 
     // Pie de página con el link a Registro
     const footerText = document.createElement("p");

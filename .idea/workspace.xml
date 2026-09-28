@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cd2ada8f-5d52-45e5-8673-f084c7c5d738" name="Changes" comment="improve de RegisterForm">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/atoms/icon.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/atoms/icon.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/molecules/form-field.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/molecules/form-field.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/molecules/game-card.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/molecules/game-card.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/organisms/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/organisms/form.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/components/organisms/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/organisms/LoginForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/components/organisms/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/organisms/RegisterForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/utils/validators.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/utils/validators.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="feature/Forms" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -91,7 +85,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "feature/Forms",
+    "git-widget-placeholder": "main",
     "javascript.preferred.runtime.type.id": "node",
     "last_opened_file_path": "/home/ccindor/Escritorio/TPE/js/components/organisms",
     "list.type.of.created.stylesheet": "CSS",
@@ -121,8 +115,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.registro.html" />
-        <item itemvalue="JavaScript Debug.registro.html" />
         <item itemvalue="JavaScript Debug.registro.html" />
         <item itemvalue="JavaScript Debug.registro.html" />
         <item itemvalue="JavaScript Debug.registro.html" />
