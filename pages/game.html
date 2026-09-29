@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Batman Peg Solitaire - Kingly Games</title>
+
+    <!-- 1. Estilos Base y Tokens -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- 2. Estilos de Átomos -->
+    <link rel="stylesheet" href="../css/atoms/buttons.css">
+    <link rel="stylesheet" href="../css/atoms/icon.css">
+    <link rel="stylesheet" href="../css/atoms/input.css">
+    <link rel="stylesheet" href="../css/atoms/label.css">
+    <link rel="stylesheet" href="../css/atoms/textarea.css">
+
+    <!-- 3. Estilos de Moléculas -->
+    <link rel="stylesheet" href="../css/molecules/form-field.css">
+
+    <!-- 4. Estilos de Organismos -->
+    <link rel="stylesheet" href="../css/organisms/header.css">
+    <link rel="stylesheet" href="../css/organisms/fat-footer.css">
+    <link rel="stylesheet" href="../css/organisms/community.css">
 </head>
 <body>
 
+<!-- Header / Navbar Principal (si lo inyectas dinámicamente o estático) -->
+<header id="main-header"></header>
+
+<!-- Contenedor Principal de la Página de Juego -->
+<main id="game-container">
+    <!-- Aquí va el reproductor del juego, instrucciones, etc. -->
+
+    <!-- El organismo Community.js se inyectará dinámicamente al final de este contenedor -->
+</main>
+
+<!-- Footer Principal -->
+<footer id="main-footer"></footer>
+
+<!-- Script de la página en modo Módulo Nativo ES6 -->
+<script type="module" src="../js/pages/game.js"></script>
 </body>
 </html>

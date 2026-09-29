@@ -144,3 +144,11 @@
     mask-image: url('../../assets/icons/twitter.svg');
     -webkit-mask-image: url('../../assets/icons/twitter.svg');
 }
+.atom-icon-avatar{
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    object-fit: cover; /* Llena el 100% del recuadro */
+    display: block;
+    flex-shrink: 0;
+}

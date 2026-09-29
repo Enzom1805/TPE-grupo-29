@@ -2,8 +2,18 @@ import CategoryCarousel from '../components/organisms/CategoryGameCarousel.js';
 import HeroCarousel from '../components/organisms/HeroGameCarousel.js';
 import Footer from '../components/organisms/FatFooter.js';
 import { games } from '../data/games.js';
+import Loader from "../components/organisms/Loader.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    // Acá instanciamos el Loader
+    const loader = Loader(() => {
+        console.log("Carga de la Home completada.");
+    });
+
+    // Agregamos el Loader al body para que cubra la pantalla desde el inicio
+    document.body.appendChild(loader);
+
     const appContainer = document.getElementById("app");
 
     const farLeftGame = games.find(game => game.id === 5);
