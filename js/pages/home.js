@@ -1,5 +1,6 @@
 import CategoryCarousel from '../components/organisms/CategoryGameCarousel.js';
 import HeroCarousel from '../components/organisms/HeroGameCarousel.js';
+import Footer from '../components/organisms/FatFooter.js';
 import { games } from '../data/games.js';
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -7,24 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const farLeftGame = games.find(game => game.id === 5);
 
-// Comix Zone (Izquierda)
+
     const leftGame = games.find(game => game.id === 3);
-
-// Batman (Centro)
     const centerGame = games.find(game => game.id === 2);
-
-// Battletoads (Derecha)
     const rightGame = games.find(game => game.id === 1);
-
-// Premium extra para la derecha (ej: Castlevania, ID 6)
     const farRightGame = games.find(game => game.id === 6);
 
-// 2. Armás un nuevo array con exactamente 5 posiciones en este orden estricto
     const heroGamesArray = [farLeftGame, leftGame, centerGame, rightGame, farRightGame];
 
-// 3. Le pasás este array específico a tu carrusel
+
     const heroSection = HeroCarousel(heroGamesArray);
-    // 4. Lo inyectamos PRIMERO para que quede arriba de todo
+
     appContainer.appendChild(heroSection);
     // ----------------------------
 
@@ -49,4 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     appContainer.appendChild(carruselPelea);
     appContainer.appendChild(carruselDeportes);
     appContainer.appendChild(carruselEstrategia);
+
+    const footerSection = Footer();
+    appContainer.appendChild(footerSection);
 });

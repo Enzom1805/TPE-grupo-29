@@ -43,7 +43,7 @@
 
 .game-card__title {
     margin: 0;
-    font-family: var(--font-family-title) sans-serif;
+    font-family: var(--font-family-title);
     font-size: var(--text-b3-size);
     line-height: var(--text-b3-line);
     font-weight: var(--font-weight-semibold);
@@ -58,7 +58,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: var(--font-family-title) sans-serif;
+    font-family: var(--font-family-title) ;
     font-size: var(--text-caption-c2-size);
     line-height: var(--text-caption-c2-line);
     font-weight: var(--font-weight-medium);
@@ -99,7 +99,7 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    font-family: var(--font-family-title) sans-serif;
+    font-family: var(--font-family-title) ;
     font-size: var(--text-caption-c1-size);
     font-weight: var(--font-weight-bold);
     color: var(--color-neutral-text-primary, #fff);

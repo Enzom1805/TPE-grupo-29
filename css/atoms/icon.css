@@ -140,3 +140,7 @@
     mask-image: url('../../assets/icons/youtube.svg');
     -webkit-mask-image: url('../../assets/icons/youtube.svg');
 }
+.icon-twitter {
+    mask-image: url('../../assets/icons/twitter.svg');
+    -webkit-mask-image: url('../../assets/icons/twitter.svg');
+}
