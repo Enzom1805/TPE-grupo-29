@@ -104,6 +104,7 @@ export default function RegisterForm() {
         }
 
         errorMessage.style.display = "none";
+        //Acá deberia agregar alguna animacion de registro exitoso mas que un alert de mierda
         alert("¡Registro exitoso!");
         window.location.href = "login.html";
     });

@@ -1,0 +1,215 @@
+/* Reset local y tipografía del contenedor */
+.organism-community,
+.organism-community * {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.organism-community {
+    width: 100%;
+    max-width: 680px;
+    margin: 2.5rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    color: #ffffff;
+}
+
+/* Header del foro */
+.community__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.25rem;
+}
+
+.community__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.2px;
+}
+
+.community__count {
+    font-size: 0.85rem;
+    color: #a0a0b0;
+    font-weight: 400;
+}
+
+/* Molécula CommentForm */
+.molecule-comment-form {
+    background-color: #1a162b;
+    border: 1px solid #322b4d;
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.comment-form__title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    color: #ffffff;
+}
+
+.comment-form__label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.comment-form__optional {
+    color: #a0a0b0;
+    font-weight: 400;
+}
+
+.atom-textarea {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    color: #111111;
+    font-size: 0.95rem;
+    resize: none;
+    outline: none;
+    line-height: 1.4;
+}
+
+.atom-textarea::placeholder {
+    color: #71717a;
+}
+
+.comment-form__actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Lista de Comentarios */
+.community__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Molécula CommentCard */
+.molecule-comment-card {
+    background-color: #1a162b;
+    border: 1px solid #322b4d;
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.comment-card__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.comment-card__username {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.comment-card__time {
+    font-size: 0.85rem;
+    color: #a0a0b0;
+    font-weight: 400;
+}
+
+.comment-card__body {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: #e0e0e0;
+}
+
+.comment-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.25rem;
+}
+
+.comment-card__like-btn {
+    background: transparent;
+    border: none;
+    color: #a0a0b0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0;
+    transition: color 0.2s ease;
+}
+
+.comment-card__like-btn.is-liked {
+    color: #a78bfa;
+}
+
+/* Estilos de botones redondeados */
+.atom-button--pill {
+    background-color: #6b21a8;
+    color: #ffffff;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.65rem 1.75rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.atom-button--pill:hover {
+    background-color: #7c3aed;
+}
+
+.comment-card__reply-btn {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid #4a3f6e;
+    border-radius: 9999px;
+    padding: 0.45rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.comment-card__reply-btn:hover {
+    border-color: #6b21a8;
+    background-color: rgba(107, 33, 168, 0.2);
+}
+
+.community__load-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.75rem;
+}
+
+.atom-button--pill-large {
+    background-color: #6b21a8;
+    color: #ffffff;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.8rem 2.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.atom-button--pill-large:hover {
+    background-color: #7c3aed;
+}
