@@ -10,10 +10,7 @@ export default function LoginForm() {
     const form = document.createElement("form");
     form.className = "form";
 
-    // ==========================================
-    // CONTENEDOR PRINCIPAL DEL HEADER
-    // ==========================================
-
+    // Header
     const mainHeaderContent = document.createElement("div");
     mainHeaderContent.className = "form-header";
 
@@ -22,21 +19,15 @@ export default function LoginForm() {
     title.className = "form-h1";
 
     const logo = Icon("../assets/icons/logo-crown-variant.svg", "Logo");
-    logo.className = "form-icon-logo";
+    logo.classList.add("form-icon-logo");
 
     mainHeaderContent.append(logo, title);
 
-    // ==========================================
-    // SUBTÍTULO
-    // ==========================================
-
+    // Subtítulo
     const subTitle = document.createElement("p");
     subTitle.innerText = "Inicia sesión para continuar en Kingly Games.";
 
-    // ==========================================
-    // CAMPOS
-    // ==========================================
-
+    // Campos
     const emailField = FormField(
         "Correo electrónico",
         "email",
@@ -51,17 +42,12 @@ export default function LoginForm() {
         "Mínimo 6 caracteres"
     );
 
-    // Toggle de contraseña
     const passwordInput = passwordField.querySelector("input");
-
     if (passwordInput) {
         setupPasswordToggle(passwordInput);
     }
 
-    // ==========================================
-    // CONTENEDOR DE OPCIONES
-    // ==========================================
-
+    // Opciones (Recordarme / Olvidaste contraseña)
     const optionsDiv = document.createElement("div");
     optionsDiv.className = "form-options";
 
@@ -74,7 +60,6 @@ export default function LoginForm() {
         "¿Olvidaste tu contraseña?",
         "#"
     );
-
     forgotPasswordLink.className = "atom-link atom-link--forgot";
 
     optionsDiv.append(
@@ -82,41 +67,32 @@ export default function LoginForm() {
         forgotPasswordLink
     );
 
-    // ==========================================
-    // BOTÓN DE SUBMIT
-    // ==========================================
-
+    // Botón Submit
     const submitBtn = Button(
         "Iniciar sesión",
         "submit"
     );
 
-    // ==========================================
-    // DIVISOR VISUAL
-    // ==========================================
-
+    // Divisor
     const divider = document.createElement("div");
     divider.className = "form-divider";
     divider.innerHTML = "<span>o iniciar con</span>";
 
-    // ==========================================
-    // BOTONES SOCIALES
-    // ==========================================
-
+    // Botones sociales
     const mediaDiv = document.createElement("div");
     mediaDiv.className = "form-row-2";
 
     const googleBtn = Button(
         "Google",
         "button",
-        "social",
+        "social atom-button--google",
         "medium"
     );
 
     const facebookBtn = Button(
         "Facebook",
         "button",
-        "social",
+        "social atom-button--facebook",
         "medium"
     );
 
@@ -124,10 +100,6 @@ export default function LoginForm() {
         googleBtn,
         facebookBtn
     );
-
-    // ==========================================
-    // REDIRECCIÓN DIRECTA A HOME
-    // ==========================================
 
     const redirectToHome = () => {
         window.location.href = "home.html";
@@ -141,11 +113,8 @@ export default function LoginForm() {
     googleBtn.addEventListener("click", redirectToHome);
     facebookBtn.addEventListener("click", redirectToHome);
 
-    // ==========================================
-    // FOOTER
-    // ==========================================
-
-    const footerText = document.createElement("p");
+    // Footer
+    const footerText = document.createElement("span");
     footerText.className = "form-footer";
     footerText.textContent = "¿No tenés una cuenta? ";
 
@@ -156,10 +125,7 @@ export default function LoginForm() {
 
     footerText.appendChild(registerLink);
 
-    // ==========================================
-    // ENSAMBLADO DEL ORGANISMO
-    // ==========================================
-
+    // Ensamblado
     form.append(
         mainHeaderContent,
         subTitle,
