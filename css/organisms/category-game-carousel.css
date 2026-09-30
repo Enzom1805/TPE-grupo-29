@@ -1,17 +1,14 @@
-/* ==========================================================================
-   Category Carousel (Base / Horizontal)
-   ========================================================================== */
-
 .category-carousel {
-    margin-bottom: 40px;
-    padding: 0 20px;
+    margin-bottom: 32px; /* Margen ligeramente menor en móvil */
+    padding: 0 16px; /* Padding más ajustado */
 }
 
 .category-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    gap: 1rem;
 }
 
 .category-title {
@@ -29,12 +26,10 @@
     font-size: var(--text-b4-size);
     line-height: var(--text-b4-line);
     text-decoration: none;
-    opacity: 0.8;
-    transition: opacity 0.3s;
-}
-
-.category-more:hover {
     opacity: 1;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .carousel-wrapper {
@@ -43,66 +38,37 @@
     padding: 0 10px;
 }
 
-/* Pista deslizable horizontal */
+/* Pista deslizable horizontal (Swipe táctil nativo) */
 .carousel-track {
     display: flex;
-    gap: 16px;
+    gap: 12px;
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    padding: 20px 10px;
+    padding: 16px 10px;
     margin: 0 -10px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .carousel-track::-webkit-scrollbar {
     display: none;
 }
 
-/* Botones flotantes */
+/* se ocultan flechas flotantes en movil */
 .carousel-wrapper .atom-button--carousel {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    opacity: 0;
-    visibility: hidden;
-}
-
-.carousel-wrapper .atom-button--carousel:hover {
-    transform: translateY(-50%) scale(1.05);
-}
-
-.carousel-wrapper:hover .atom-button--carousel:not(.atom-button--hidden) {
-    opacity: 1;
-    visibility: visible;
-}
-
-.carousel-wrapper .prev {
-    left: 10px;
-}
-
-.carousel-wrapper .next {
-    right: 10px;
+    display: none;
 }
 
 
-/* ==========================================================================
-   Variante Vertical para Columnas Laterales (.category-carousel--vertical)
-   ========================================================================== */
-
+/* --- VARIANTE VERTICAL (Celulares) --- */
+/* En celular fluye de manera normal sin fijarse a los bordes */
 .category-carousel--vertical {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 70px; /* Descuenta la altura del botón 'Ver más comentarios' */
     display: flex;
     flex-direction: column;
-    margin-bottom: 0;
-    padding: 0;
+    margin-bottom: 32px;
+    padding: 0 16px;
 }
 
-/* Centrar título */
 .category-carousel--vertical .category-header {
     justify-content: center;
 }
@@ -112,38 +78,30 @@
     width: 100%;
 }
 
-/* Ocultar elementos de navegación horizontal */
-.category-carousel--vertical .category-more,
-.category-carousel--vertical .atom-button--carousel {
+.category-carousel--vertical .category-more {
     display: none;
 }
 
-/* Wrapper expansivo */
 .category-carousel--vertical .carousel-wrapper {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    min-height: 0;
     margin: 0;
     padding: 0;
 }
 
-/* Pista vertical acotada con scroll */
 .category-carousel--vertical .carousel-track {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    gap: 16px;
+    gap: 12px;
     overflow-x: hidden;
     overflow-y: auto;
     padding: 0;
     margin: 0;
 }
 
-/* Tarjeta acotada a formato banner lateral */
 .category-carousel--vertical .game-card {
     width: 100%;
-    height: 150px;
+    height: 120px; /* Formato ligeramente más chato en celular */
     flex-shrink: 0;
     position: relative;
     border-radius: 12px;
@@ -156,4 +114,75 @@
     object-fit: cover;
     object-position: center;
     display: block;
+}
+
+
+/* ==========================================================================
+   MEDIA QUERIES (TABLET Y DESKTOP)
+   ========================================================================== */
+@media (min-width: 768px) {
+    /* Restauramos medidas y espacios amplios */
+    .category-carousel {
+        margin-bottom: 40px;
+        padding: 0 20px;
+    }
+
+    .category-header {
+        margin-bottom: 16px;
+    }
+
+    .carousel-track {
+        gap: 16px;
+        padding: 20px 10px;
+    }
+
+    /* Restauramos el efecto hover transparente */
+    .category-more {
+        opacity: 0.8;
+    }
+    .category-more:hover {
+        opacity: 1;
+    }
+
+    /* mostramos y configuramos los botones laterales del carrusel */
+    .carousel-wrapper .atom-button--carousel {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .carousel-wrapper .atom-button--carousel:hover {
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    .carousel-wrapper:hover .atom-button--carousel:not(.atom-button--hidden) {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .carousel-wrapper .prev {
+        left: 10px;
+    }
+    .carousel-wrapper .next {
+        right: 10px;
+    }
+
+    /* Variante vertical recupera su diseño de barra lateral  */
+    .category-carousel--vertical {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 70px;
+        margin-bottom: 0;
+        padding: 0;
+    }
+
+    .category-carousel--vertical .game-card {
+        height: 150px;
+    }
 }

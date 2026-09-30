@@ -1,10 +1,10 @@
 .hero-card {
-    border-radius: 24px;
+    border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
 }
 
-/* La imagen de fondo ahora es un elemento interno */
+
 .hero-card__bg {
     position: absolute;
     top: 0;
@@ -17,85 +17,79 @@
     z-index: 1;
 }
 
-/* EFECTO HOVER: Solo funciona si la tarjeta es la activa (la del centro) */
-.hero-card.active:hover .hero-card__bg {
-    transform: scale(1.03); /* Zoom suave */
-}
-
 /* --- INFORMACIÓN Y TEXTOS --- */
 .hero-card__info {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 80px 32px 32px;
+    padding: 50px 16px 16px;
     background: linear-gradient(to top, rgba(90, 24, 154, 0.95) 0%, rgba(90, 24, 154, 0) 100%);
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s ease;
+    gap: 8px;
 
-}
 
-.hero-card.active:hover .hero-card__info {
     opacity: 1;
     transform: translateY(0);
+    transition: all 0.4s ease;
 }
 
 .hero-card__title {
     margin: 0;
     font-family: var(--font-family-title), sans-serif;
-    font-size: 32px;
+    font-size: 22px;
     color: var(--color-accent-default);
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* --- ESTRUCTURA INFERIOR (Textos izq, Botón der) --- */
+/* --- ESTRUCTURA INFERIOR --- */
 .hero-card__meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    gap: 8px;
 }
 
 .hero-card__tags {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 8px;
 }
 
 .hero-card__category {
     background-color: rgba(90, 24, 154, 0.8);
     color: var(--color-accent-default);
-    padding: 6px 16px;
-    border-radius: 16px;
+    padding: 4px 10px;
+    border-radius: 12px;
     font-family: var(--font-family-title), sans-serif;
-    font-size: var(--text-b3-size, 14px);
+    font-size: 12px;
     font-weight: var(--font-weight-bold);
 }
 
 .hero-card__age {
-
     color: var(--color-accent-default);
     font-family: var(--font-family-title), sans-serif;
-    font-size: var(--text-caption-c1-size);
+    font-size: 12px;
     font-weight: var(--font-weight-medium);
 }
-/* --- AJUSTE DE TAMAÑO DEL BOTÓN ÁTOMO --- */
-/* --- AJUSTE Y ANIMACIÓN DEL BOTÓN JUGAR --- */
+
+/* --- BOTÓN JUGAR --- */
 .hero-card__play {
     position: relative;
-    overflow: hidden; /* Oculta el destello fuera de los bordes del botón */
-    padding: 10px 24px;
-    font-size: 16px;
+    overflow: hidden;
+    padding: 6px 16px;
+    font-size: 14px;
     border-radius: 20px;
     transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
-/* Destello diagonal (Reflejo de vidrio) */
+
 .hero-card__play::before {
     content: "";
     position: absolute;
@@ -113,23 +107,76 @@
     transition: left 0.5s ease-in-out;
 }
 
-/* --- ESTADO HOVER --- */
-
-/* 1. El botón se eleva levemente y genera resplandor */
-.hero-card__play:hover {
-    transform: scale(1.06) translateY(-2px);
-    box-shadow: 0 0 18px var(--color-accent-hover, #e8c37d);
-}
-
-/* 2. El reflejo cruza de izquierda a derecha */
-.hero-card__play:hover::before {
-    left: 150%;
-}
-
-/* 3. Mantener el icono sobre el destello */
 .hero-card__play .icon {
     position: relative;
     z-index: 1;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
+}
+
+
+/* ==========================================================================
+   MEDIA QUERIES (TABLET Y DESKTOP)
+   ========================================================================== */
+@media (min-width: 768px) {
+    .hero-card {
+        border-radius: 24px;
+    }
+
+    .hero-card__info {
+        padding: 80px 32px 32px;
+        gap: 16px;
+
+
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .hero-card__title {
+        font-size: 32px;
+        white-space: normal;
+    }
+
+    .hero-card__tags {
+        gap: 16px;
+    }
+
+    .hero-card__category {
+        padding: 6px 16px;
+        font-size: var(--text-b3-size, 14px);
+    }
+
+    .hero-card__age {
+        font-size: var(--text-caption-c1-size);
+    }
+
+    .hero-card__play {
+        padding: 10px 24px;
+        font-size: 16px;
+    }
+
+    .hero-card__play .icon {
+        width: 20px;
+        height: 20px;
+    }
+
+
+    .hero-card.active:hover .hero-card__bg {
+        transform: scale(1.03);
+    }
+
+
+    .hero-card.active:hover .hero-card__info {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .hero-card__play:hover {
+        transform: scale(1.06) translateY(-2px);
+        box-shadow: 0 0 18px var(--color-accent-hover, #e8c37d);
+    }
+
+    .hero-card__play:hover::before {
+        left: 150%;
+    }
 }

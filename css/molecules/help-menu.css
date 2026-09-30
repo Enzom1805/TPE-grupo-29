@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    position: relative; /* CRÍTICO: Mantiene el modal atado a esta esquina */
+    position: relative;
 }
 
 .help-section__title {
@@ -17,8 +17,8 @@
 /* Modal base: Flotante, oscuro y OCULTO por defecto */
 .help-section__modal {
     position: absolute;
-    bottom: 120%; /* Aparece por encima del botón */
-    right: 0; /* Se alinea a la derecha para no salirse de la pantalla */
+    bottom: 120%;
+    right: 0;
     width: 350px;
     background: rgba(40, 40, 45, 0.95);
     border-radius: 8px;
@@ -28,8 +28,7 @@
     font-size: 0.85rem;
     line-height: 1.5;
     box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-
-    /* Reglas que ocultan el texto inicialmente */
+    /* reglas que ocultan el texto inicialmente */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -43,7 +42,7 @@
     margin-bottom: 0;
 }
 
-/* Clase que tu JS activa al hacer clic */
+/* clase que JS activa al hacer clic */
 .help-section__modal--active {
     opacity: 1;
     visibility: visible;

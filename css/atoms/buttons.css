@@ -6,7 +6,7 @@
     gap: 0.5rem;
     border: 1px solid var(--color-primary-focus-ring);
     cursor: pointer;
-    font-family: var(--font-family-title), serif;/* Krona One */
+    font-family: var(--font-family-title), serif;
     font-weight: var(--font-weight-semibold);
     transition: all 0.2s ease-in-out;
     box-sizing: border-box;
@@ -14,13 +14,12 @@
 .atom-button--small {
     font-size: var(--btn-font-small-size);
     line-height: var(--btn-font-small-line);
-    padding: 4px 15px; /* Padding reducido para tarjetas pequeñas */
+    padding: 4px 15px;
 }
 /* --- Tamaños de Botón --- */
 .atom-button--medium {
     font-size: var(--btn-font-medium-size);
     line-height: var(--btn-font-medium-line);
-    /* Padding vertical (12px) y horizontal (24px) */
     padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: 50px;
 }
@@ -84,8 +83,8 @@
     height: 60px;
     padding: 0;
     background-color: rgba(15, 15, 25, 0.7);
-    border: 2px solid #e8c37d; /* Borde dorado */
-    color: #e8c37d; /* Color que toma el SVG */
+    border: 2px solid #e8c37d;
+    color: #e8c37d;
     border-radius: 16px;
 }
 
@@ -106,7 +105,7 @@
     visibility: hidden ;
     pointer-events: none;
 }
-/* 4. Boton Social para el juego (google,facebook,ig,twitter,msg) */
+/* 5. Boton Social para el juego (google,facebook,ig,twitter,msg) */
 .atom-button--social-game {
     font-family: var(--font-family-batman), sans-serif;
     font-size: var(--text-caption-c2-size);
@@ -118,8 +117,8 @@
     flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem; /* Reducido */
-    padding: 0.4rem 0.8rem; /* Padding más compacto */
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
     color: var(--color-neutral-text-primary);
     cursor: pointer;
     width: max-content;
@@ -128,7 +127,7 @@
 
 .atom-button--social-game .atom-button__text {
 
-    font-size: 0.7rem; /* Texto más chico */
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -141,14 +140,14 @@
     background-color: color-mix(in srgb, #7b7586 80%, black);
     transform: scale(0.98);
 }
-/* 5. Boton Ayuda (Juego peg) */
+/* 6. Boton Ayuda (Juego peg) */
 .atom-button--help {
     background: transparent ;
     border: none ;
     padding: 0;
     width: 40px ;
     height: 40px ;
-    box-shadow: none ; /* Quitamos las sombras viejas */
+    box-shadow: none ;
 
     display: flex;
     align-items: center;
@@ -158,7 +157,7 @@
     transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-/* Hacemos que el SVG ocupe el 100% del botón */
+
 .atom-button--help img {
     width: 100%;
     height: 100%;
@@ -167,7 +166,6 @@
 
 .atom-button--help:hover {
     transform: scale(1.1);
-    /* Le damos una sombra exterior al hacer hover para que resalte */
     filter: drop-shadow(0 4px 10px rgba(0,0,0,0.8));
 }
 /* --- Estados de Carga y Éxito --- */

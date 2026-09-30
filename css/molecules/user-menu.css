@@ -45,7 +45,7 @@
     padding: 0 2rem;
 }
 
-/* Configuración del botón de Cerrar Sesión con animación */
+/* Configuración del botón de cerrar sesion con animación */
 .user-menu__footer .atom-button {
     width: 100%;
     position: relative;
@@ -54,8 +54,6 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-
-    /* Usamos background-image para evitar advertencias de shorthand en el IDE */
     background-image: linear-gradient(
             90deg,
             var(--color-secondary-surface-dropdown) 0%,
@@ -65,23 +63,18 @@
     );
     background-size: 200% 100%;
     background-position: 0 0;
-
-    /* Transición suave para desplazamiento de fondo, color y sombra */
     transition: background-position 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
 }
 
-/* Pseudo-elemento para renderizar el icono logout-svg.svg */
+
 .user-menu__footer .atom-button::after {
     content: "";
     display: inline-block;
     width: 18px;
     height: 18px;
-
-    /* Renderiza el SVG usando máscara para que tome automáticamente el color del texto */
     background-color: currentColor;
     -webkit-mask: url("/assets/icons/logout-svg.svg") no-repeat center / contain;
     mask: url("/assets/icons/logout-svg.svg") no-repeat center / contain;
-
     /* Estado inicial: oculto y desplazado ligeramente hacia la izquierda */
     opacity: 0;
     transform: translateX(-8px);

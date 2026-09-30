@@ -15,8 +15,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 2rem;
-
-    /* Configuración del fondo de Batman */
+    /* fondo de Batman */
     background-image: url('../../assets/images/batmanBackground.png');
     background-size: cover;
     background-position: center;
@@ -28,7 +27,7 @@
     box-shadow: 0 10px 40px rgba(0,0,0,0.8);
 }
 
-/* El título usando la fuente DkcForever */
+/* titulo con la fuente DkcForever */
 .game-frame__title {
     font-family: var(--font-family-batman), sans-serif;
     color: var(--color-neutral-text-primary);
@@ -37,7 +36,7 @@
     margin: 0;
     text-transform: uppercase;
     letter-spacing: var(--spacing-2xs);
-    /* Sombra para despegar el texto del fondo de la imagen */
+
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
 }
 
@@ -49,7 +48,7 @@
     justify-content: center;
 }
 
-/* El footer interno del juego */
+/* footer interno del juego */
 .game-frame__footer {
     display: flex;
     justify-content: space-between;

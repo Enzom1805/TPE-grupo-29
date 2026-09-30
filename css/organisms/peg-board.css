@@ -1,7 +1,7 @@
 .organism-game-board {
     display: grid;
     grid-template-columns: repeat(9, max-content);
-    gap: 20px; /* Aumentado de 12px a 20px para separar más las fichas */
+    gap: 20px;
     padding: 2rem;
 
     border-radius: 20px;
@@ -9,7 +9,7 @@
 }
 
 .board__placeholder {
-    width: 75px; /* Debe coincidir con el nuevo width de .atom-peg */
-    height: 75px; /* Debe coincidir con el nuevo height de .atom-peg */
+    width: 75px; /* coincide con el width de las fichas */
+    height: 75px; /* coincide con el height de las fichas */
     visibility: hidden;
 }

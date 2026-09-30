@@ -1,10 +1,10 @@
-/* --- CONTENEDOR PRINCIPAL --- */
+/* --- CONTENEDOR PRINCIPAL (Mobile por defecto) --- */
 .organism-header {
     background-color: var(--color-secondary-chrome-header-footer);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 24px;
+    padding: 0.75rem 1rem; /* Más compacto en celular */
     width: 100%;
     color: var(--color-neutral-text-primary);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
@@ -14,19 +14,17 @@
     z-index: 100;
 }
 
-/* --- GRUPOS (Izquierda, Centro, Derecha) --- */
+/* --- GRUPOS (Mobile por defecto) --- */
 .header__left,
 .header__right {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem; /* Menor espacio entre íconos en celular */
 }
 
+/* Ocultamos el buscador en celular para que no rompa el ancho */
 .header__center {
-    flex: 1; /* Ocupa el espacio restante */
-    display: flex;
-    justify-content: center;
-    padding: 0 2rem;
+    display: none;
 }
 
 /* --- IZQUIERDA: Menú y Logo --- */
@@ -59,14 +57,16 @@
     font-size: 20px;
 }
 
+/* Ocultamos el texto en celular, dejamos solo el isotipo (la corona) */
 .header__logo-text {
+    display: none;
     font-family: var(--font-family-title), sans-serif;
     font-size: 0.85rem;
     line-height: 1.2;
     text-transform: capitalize;
 }
 
-/* --- CENTRO: Buscador --- */
+/* --- CENTRO: Buscador (Se estructura pero arranca oculto por .header__center) --- */
 .header__search {
     position: relative;
     width: 100%;
@@ -105,7 +105,9 @@
 }
 
 /* --- DERECHA: Acciones --- */
+/* Ocultamos el botón extra en celular */
 .header__btn-mis-juegos {
+    display: none !important;
     border-radius: 20px;
     padding: 0.5rem 1.5rem;
 }
@@ -132,4 +134,34 @@
     background-color: color-mix(in srgb, var(--color-primary-default) 20%, transparent);
 }
 
+/* =========================================
+   MEDIA QUERIES (TABLET Y DESKTOP)
+   ========================================= */
+@media (min-width: 768px) {
+    .organism-header {
+        padding: 1rem 24px;
+    }
 
+    .header__left,
+    .header__right {
+        gap: 1.5rem;
+    }
+
+    /* Mostramos el texto del logo */
+    .header__logo-text {
+        display: block;
+    }
+
+    /* Revelamos el buscador y le damos su estructura central */
+    .header__center {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        padding: 0 2rem;
+    }
+
+    /* Revelamos el botón de Mis Juegos */
+    .header__btn-mis-juegos {
+        display: block;
+    }
+}
