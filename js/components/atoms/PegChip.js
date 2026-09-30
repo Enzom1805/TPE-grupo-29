@@ -11,7 +11,22 @@ export default function PegChip(initialState = 'filled') {
 
     peg.appendChild(icon);
 
-    // Lógica visual temporal para probar la interacción (Mockup)
+    if (initialState === 'filled') {
+        peg.className = 'atom-peg atom-peg--filled';
+
+        // Creamos la imagen del murciélago
+        const batIcon = document.createElement('img');
+        // Ajustá la ruta hacia tu carpeta assets
+        batIcon.src = '../../assets/images/bat.png';
+        batIcon.className = 'atom-peg__icon';
+        batIcon.alt = 'Ficha de Batman';
+        // Evita el comportamiento molesto de arrastrar imágenes en navegadores
+        batIcon.draggable = false;
+
+        peg.appendChild(batIcon);
+    } else if (initialState === 'hole') {
+        peg.className = 'atom-peg atom-peg--hole';
+    }
     peg.addEventListener('click', () => {
         if (peg.classList.contains('atom-peg--filled')) {
             peg.classList.replace('atom-peg--filled', 'atom-peg--selected');

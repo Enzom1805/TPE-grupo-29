@@ -2,13 +2,13 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: 2rem;
+    padding-top: var(--spacing-2xl);
     background-color: var(--color-secondary-background-page);
 }
 
 .game-frame__screen {
     width: 100%;
-    max-width: 1300px;
+    max-width: 1200px;
     aspect-ratio: 16 / 9;
     position: relative;
     display: flex;
@@ -31,12 +31,12 @@
 /* El título usando la fuente DkcForever */
 .game-frame__title {
     font-family: var(--font-family-batman), sans-serif;
-    color: #ffffff;
+    color: var(--color-neutral-text-primary);
     font-size: 2rem;
     text-align: center;
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: var(--spacing-2xs);
     /* Sombra para despegar el texto del fondo de la imagen */
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
 }

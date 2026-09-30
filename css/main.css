@@ -4,6 +4,7 @@
 @import url('./tokens/spacing.css');
 @import url('./atoms/buttons.css');
 @import url('./molecules/share-group.css');
+@import url('./molecules/help-menu.css');
 body {
     margin: 0;
     padding: 0;

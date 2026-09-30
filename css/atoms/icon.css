@@ -67,6 +67,11 @@
     -webkit-mask-image: url('../../assets/icons/eye-close.svg');
 }
 
+.icon-help {
+    mask-image: url('../../assets/icons/help.svg');
+    -webkit-mask-image: url('../../assets/icons/help.svg');
+}
+
 .icon-facebook {
     mask-image: url('../../assets/icons/facebook.svg');
     -webkit-mask-image: url('../../assets/icons/facebook.svg');
