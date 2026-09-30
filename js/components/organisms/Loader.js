@@ -1,5 +1,4 @@
-
-export default function Loader() {
+export default function Loader(onComplete) {
 
     const container = document.createElement("div");
     container.className = "loader-container";
@@ -19,20 +18,36 @@ export default function Loader() {
     const totalTime = 5000;
     const increment = 100 / (totalTime / intervalTime);
 
-    const  loadingInterval = setInterval(() => {
+    const loadingInterval = setInterval(() => {
+
         progress += increment;
 
-        if(progress >= 100){
+        if (progress >= 100) {
+
             progress = 100;
             clearInterval(loadingInterval);
+
+            text.textContent = "100%";
 
             container.style.opacity = "0";
 
             setTimeout(() => {
+
                 container.remove();
+
+                // Cuando termina el Loader
+                if (onComplete) {
+                    onComplete();
+                }
+
             }, 500);
+
+        } else {
+
+            text.textContent = `${Math.floor(progress)}%`;
+
         }
-        text.textContent = `${Math.floor(progress)}%`;
+
     }, intervalTime);
 
     return container;

@@ -1,6 +1,9 @@
 .loader-container {
     position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     background-color: var(--color-secondary-background-page);
     display: flex;
     flex-direction: column;
@@ -11,7 +14,8 @@
 }
 
 .loader-spinner {
-    width: 60px; height: 60px;
+    width: 60px;
+    height: 60px;
     border: 6px solid var(--color-secondary-surface-elevated);
     border-top: 6px solid var(--color-primary-focus-ring);
     border-radius: 50%;
@@ -21,7 +25,8 @@
 .loader-text {
     margin-top: 20px;
     color: var(--color-neutral-text-primary);
-    font-size: 1.5rem;
+    font-family: var(--font-family-title), serif;
+    font-size: var(--text-b1-size);
     font-weight: bold;
 }
 
@@ -30,10 +35,12 @@
         transform: rotate(0deg) scale(1);
         border-top-color: var(--color-primary-focus-ring);
     }
+
     50% {
         transform: rotate(180deg) scale(1.15);
         border-top-color: var(--color-accent-default);
     }
+
     100% {
         transform: rotate(360deg) scale(1);
         border-top-color: var(--color-primary-focus-ring);

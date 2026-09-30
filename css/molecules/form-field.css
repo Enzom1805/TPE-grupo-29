@@ -1,12 +1,94 @@
+/* ==========================================================================
+   Molécula: FormField & CheckboxField
+   ========================================================================== */
+
 .molecule-form-field {
     display: flex;
     flex-direction: column;
-    /* Espacio pequeño entre la etiqueta Label y el Input */
-    gap: var(--spacing-2xs); /* 4px */
+    gap: var(--spacing-2xs);
     width: 100%;
 }
-.molecule-checkbox-field{
+
+/* Cabecera del campo: Alinea Label a la izquierda y Requerido a la derecha */
+.form-field-header {
     display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--spacing-xs);
+    width: 100%;
+    min-height: var(--text-b3-line); /* Garantiza nivelación en grillas multicolumna */
+}
+
+/* Estilo del Label */
+.atom-label,
+.form-field-header label {
+    font-family: var(--font-family-body), sans-serif;
+    font-size: var(--text-b3-size);
+    line-height: var(--text-b3-line);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-neutral-text-primary);
+    margin: 0;
+}
+
+/* Indicador Requerido */
+.form-field-required {
+    font-family: var(--font-family-body), sans-serif;
+    font-size: var(--text-b1-size);
+    line-height: var(--text-caption-c1-line);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-warning-text-primary);
+    white-space: nowrap;
+    flex-shrink: 0;
+    opacity: 0.9;
+}
+
+/* Molécula de Checkbox: Alineación en una misma línea horizontal */
+.molecule-checkbox-field,
+.terms-field,
+.captcha-field {
+    display: flex !important;
+    flex-direction: row !important;
     align-items: center;
-    gap: var(--spacing-2xs);
+    gap: var(--spacing-xs);
+    width: 100%;
+}
+
+/* Impide que la casilla se encoga o empuje al texto hacia abajo */
+.molecule-checkbox-field > input[type="checkbox"],
+.molecule-checkbox-field > .atom-checkbox,
+.terms-field > input[type="checkbox"],
+.terms-field > .atom-checkbox,
+.captcha-field > input[type="checkbox"],
+.captcha-field > .atom-checkbox {
+    flex-shrink: 0;
+    margin: 0;
+}
+
+/* Wrapper que distribuye Label a la izquierda y Requerido a la derecha */
+.checkbox-label-wrapper {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-xs);
+    width: 100%;
+    min-width: 0;
+}
+
+.checkbox-label {
+    font-family: var(--font-family-body), sans-serif;
+    font-size: var(--text-b3-size);
+    line-height: var(--text-b3-line);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-neutral-text-secondary);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    margin: 0;
+}
+
+/* Estado seleccionado para resaltar el label */
+.molecule-checkbox-field:has(input:checked) .checkbox-label,
+input[type="checkbox"]:checked ~ .checkbox-label-wrapper .checkbox-label {
+    color: var(--color-accent-default);
+    font-weight: var(--font-weight-medium);
 }
