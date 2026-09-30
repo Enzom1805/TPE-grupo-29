@@ -15,16 +15,26 @@ export default function Header() {
     const logoDiv = document.createElement('div');
     logoDiv.className = 'header__logo';
 
+    const redirectToHome = () => {
+        window.location.href = "home.html";
+    };
+
     const logoBox = document.createElement('div');
     logoBox.className = 'header__logo-box';
     const crownIcon = document.createElement('i');
     crownIcon.className = 'icon icon-crown';
     logoBox.appendChild(crownIcon);
+    logoBox.addEventListener('click', (redirectToHome));
+
+
 
     const logoText = document.createElement('span');
     logoText.className = 'header__logo-text';
-    // Para que "Kingly Games" quede en dos líneas como en tu diseño[cite: 9]
+    // Para que "Kingly Games" quede en dos líneas
     logoText.innerHTML = 'Kingly<br>Games';
+    logoText.addEventListener('click', (redirectToHome));
+
+
 
     logoDiv.append(logoBox, logoText);
     leftGroup.append(menuDropdown, logoDiv);

@@ -84,16 +84,52 @@
     font-size: var(--text-caption-c1-size);
     font-weight: var(--font-weight-medium);
 }
-
 /* --- AJUSTE DE TAMAÑO DEL BOTÓN ÁTOMO --- */
+/* --- AJUSTE Y ANIMACIÓN DEL BOTÓN JUGAR --- */
 .hero-card__play {
-    /* Sobrescribimos el tamaño "medium" del átomo para que destaque en el carrusel grande */
-    padding: 10px 24px ;
-    font-size: 16px ;
-    border-radius: 20px ;
+    position: relative;
+    overflow: hidden; /* Oculta el destello fuera de los bordes del botón */
+    padding: 10px 24px;
+    font-size: 16px;
+    border-radius: 20px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
+/* Destello diagonal (Reflejo de vidrio) */
+.hero-card__play::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+            120deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.6) 50%,
+            transparent 100%
+    );
+    transform: skewX(-25deg);
+    transition: left 0.5s ease-in-out;
+}
+
+/* --- ESTADO HOVER --- */
+
+/* 1. El botón se eleva levemente y genera resplandor */
+.hero-card__play:hover {
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 0 18px var(--color-accent-hover, #e8c37d);
+}
+
+/* 2. El reflejo cruza de izquierda a derecha */
+.hero-card__play:hover::before {
+    left: 150%;
+}
+
+/* 3. Mantener el icono sobre el destello */
 .hero-card__play .icon {
+    position: relative;
+    z-index: 1;
     width: 20px;
     height: 20px;
 }

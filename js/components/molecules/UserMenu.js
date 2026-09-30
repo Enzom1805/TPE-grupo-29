@@ -42,8 +42,14 @@ export default function UserMenu() {
     const footerAction = document.createElement('div');
     footerAction.className = 'user-menu__footer';
 
+    const redirectToLogin = () => {
+        window.location.href = "login.html";
+    };
+
     const logoutBtn = Button("Cerrar Sesion", "button", "primary", "medium");
+    logoutBtn.addEventListener('click', redirectToLogin);
     footerAction.appendChild(logoutBtn);
+
 
     menuContent.append(greeting, list, footerAction);
 

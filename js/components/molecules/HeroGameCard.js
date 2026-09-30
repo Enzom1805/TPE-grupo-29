@@ -37,9 +37,16 @@ export default function HeroCard(game) {
     tags.appendChild(category);
     tags.appendChild(age);
 
-    // Instanciamos el botón y le agregamos una clase modificadora para el Hero
+    // Instanciamos el botón
     const playBtn = Button("Jugar", "button", "play", "large");
     playBtn.classList.add("hero-card__play");
+
+    // SI ES EL JUEGO ID 2 (Batman Peg Solitaire), LE ASIGNAMOS LA REDIRECCIÓN
+    if (game.id === 2) {
+        playBtn.addEventListener("click", () => {
+            window.location.href = "game.html";
+        });
+    }
 
     meta.appendChild(tags);
     meta.appendChild(playBtn);
@@ -50,5 +57,4 @@ export default function HeroCard(game) {
     article.appendChild(info);
 
     return article;
-
 }
