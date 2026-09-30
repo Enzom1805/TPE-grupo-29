@@ -52,7 +52,7 @@ export default function Header() {
     searchInput.className = 'header__search-input';
 
     const searchIcon = document.createElement('i');
-    searchIcon.className = 'icon icon-search header__search-icon'; // Asumiendo que tenés este ícono
+    searchIcon.className = 'icon icon-search header__search-icon';
 
     searchContainer.append(searchInput, searchIcon);
     centerGroup.appendChild(searchContainer);

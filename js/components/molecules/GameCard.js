@@ -38,7 +38,7 @@ export default function GameCard(game) {
     const playBtn = Button("Jugar", "button", "play", "small");
     playBtn.classList.add("game-card__play");
 
-    // Lógica condicional para el color del botón según el nivel de acceso
+    // Logica condicional para el color del botón segun si es premium o gratis
     if (game.accessLevel === "Premium") {
         playBtn.classList.add("game-card__play--premium");
         title.classList.add("game-card__title--premium");
@@ -53,7 +53,7 @@ export default function GameCard(game) {
     info.appendChild(meta);
     card.appendChild(info);
 
-    // Etiqueta superior derecha (Corona o Gratis)
+    // Etiqueta superior derecha (premium o gratis)
     const badge = document.createElement("div");
     badge.className = "game-card__badge";
 

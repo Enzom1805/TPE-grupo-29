@@ -21,7 +21,7 @@ export default function HamburgerMenu() {
         { label: 'Pelea', href: 'home.html#pelea' }
     ];
 
-    // 2. Función creadora de ítems con asignación de href
+    // 2. Funcion que crea los ítems con asignación de href
     const createMenuItem = ({ label, href, isTitle = false }) => {
         const li = document.createElement('li');
 
@@ -39,7 +39,7 @@ export default function HamburgerMenu() {
         return li;
     };
 
-    // 3. Generación dinámica de la lista
+    // 3. Generacion dinámica de la lista
     menuItems.forEach(item => {
         list.appendChild(createMenuItem(item));
     });

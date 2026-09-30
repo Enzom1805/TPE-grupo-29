@@ -4,9 +4,8 @@ export default function PegChip(initialState = 'filled') {
     // Asignamos la clase base y el estado inicial (hole, filled o selected)
     peg.className = `atom-peg atom-peg--${initialState}`;
 
-    // Contenedor para el ícono del murciélago (puedes usar tu clase de fuente de íconos o una imagen)
+    // Contenedor para el ícono de batman
     const icon = document.createElement('i');
-    // Si usás una imagen en lugar de un ícono font, cambialo por un <img>
     icon.className = 'icon-bat atom-peg__icon';
 
     peg.appendChild(icon);
@@ -16,11 +15,9 @@ export default function PegChip(initialState = 'filled') {
 
         // Creamos la imagen del murciélago
         const batIcon = document.createElement('img');
-        // Ajustá la ruta hacia tu carpeta assets
         batIcon.src = '../../assets/images/bat.png';
         batIcon.className = 'atom-peg__icon';
         batIcon.alt = 'Ficha de Batman';
-        // Evita el comportamiento molesto de arrastrar imágenes en navegadores
         batIcon.draggable = false;
 
         peg.appendChild(batIcon);

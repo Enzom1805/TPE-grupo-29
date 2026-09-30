@@ -28,7 +28,7 @@ export default function Footer() {
 
     const description = document.createElement('p');
     description.className = 'footer__description';
-    // Mantenemos innerHTML acá solo por los saltos de línea (<br>), o podrías crear múltiples <span>
+    // Mantenemos innerHTML acá solo por los saltos de línea (<br>)
     description.innerHTML = 'Tu pagina definitiva para<br>juegos online.<br>Sin descargas, Rapido y<br>Muchas horas de vicio.';
 
     const socials = document.createElement('div');

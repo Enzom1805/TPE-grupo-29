@@ -32,7 +32,7 @@ export default function HeroCarousel(gamesArray) {
     });
 
     const btnPrev = Button("", "button", "carousel", "medium", "icon-nav-arrow-left");
-    btnPrev.classList.add('btn-prev'); // Clase específica para ubicarlo
+    btnPrev.classList.add('btn-prev'); // clase  para ubicarlo
 
     const btnNext = Button("", "button", "carousel", "medium", "icon-nav-arrow-right");
     btnNext.classList.add('btn-next');
