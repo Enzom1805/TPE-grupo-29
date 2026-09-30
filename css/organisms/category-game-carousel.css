@@ -1,14 +1,14 @@
 .category-carousel {
-    margin-bottom: 32px; /* Margen ligeramente menor en móvil */
-    padding: 0 16px; /* Padding más ajustado */
+    margin-bottom: var(--spacing-xl);
+    padding: 0 var(--spacing-md);
 }
 
 .category-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
-    gap: 1rem;
+    margin-bottom: var(--spacing-sm);
+    gap: var(--spacing-md);
 }
 
 .category-title {
@@ -34,19 +34,19 @@
 
 .carousel-wrapper {
     position: relative;
-    margin: 0 -10px;
-    padding: 0 10px;
+    margin: 0 calc(var(--spacing-sm) * -1);
+    padding: 0 var(--spacing-sm);
 }
 
-/* Pista deslizable horizontal (Swipe táctil nativo) */
+/* Pista deslizable horizontal */
 .carousel-track {
     display: flex;
-    gap: 12px;
+    gap: var(--spacing-sm);
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    padding: 16px 10px;
-    margin: 0 -10px;
+    padding: var(--spacing-md) var(--spacing-sm);
+    margin: 0 calc(var(--spacing-sm) * -1);
     -webkit-overflow-scrolling: touch;
 }
 
@@ -54,19 +54,18 @@
     display: none;
 }
 
-/* se ocultan flechas flotantes en movil */
+/* Ocultamos botones flotantes  */
 .carousel-wrapper .atom-button--carousel {
     display: none;
 }
 
 
-/* --- VARIANTE VERTICAL (Celulares) --- */
-/* En celular fluye de manera normal sin fijarse a los bordes */
+/* --- VARIANTE VERTICAL  --- */
 .category-carousel--vertical {
     display: flex;
     flex-direction: column;
-    margin-bottom: 32px;
-    padding: 0 16px;
+    margin-bottom: var(--spacing-xl);
+    padding: 0 var(--spacing-md);
 }
 
 .category-carousel--vertical .category-header {
@@ -85,6 +84,8 @@
 .category-carousel--vertical .carousel-wrapper {
     display: flex;
     flex-direction: column;
+    flex: 1;
+    min-height: 0;
     margin: 0;
     padding: 0;
 }
@@ -92,16 +93,17 @@
 .category-carousel--vertical .carousel-track {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    flex: 1;
+    gap: var(--spacing-sm);
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: visible;
     padding: 0;
     margin: 0;
 }
 
 .category-carousel--vertical .game-card {
     width: 100%;
-    height: 120px; /* Formato ligeramente más chato en celular */
+    height: 120px;
     flex-shrink: 0;
     position: relative;
     border-radius: 12px;
@@ -121,30 +123,30 @@
    MEDIA QUERIES (TABLET Y DESKTOP)
    ========================================================================== */
 @media (min-width: 768px) {
-    /* Restauramos medidas y espacios amplios */
+    /* Carrusel Horizontal (PC) */
     .category-carousel {
-        margin-bottom: 40px;
-        padding: 0 20px;
+        margin-bottom: var(--spacing-2xl);
+        padding: 0 var(--spacing-lg);
     }
 
     .category-header {
-        margin-bottom: 16px;
+        margin-bottom: var(--spacing-md);
     }
 
     .carousel-track {
-        gap: 16px;
-        padding: 20px 10px;
+        gap: var(--spacing-md);
+        padding: var(--spacing-lg) var(--spacing-sm);
     }
 
-    /* Restauramos el efecto hover transparente */
     .category-more {
         opacity: 0.8;
     }
+
     .category-more:hover {
         opacity: 1;
     }
 
-    /* mostramos y configuramos los botones laterales del carrusel */
+    /* Botones laterales */
     .carousel-wrapper .atom-button--carousel {
         display: flex;
         position: absolute;
@@ -165,13 +167,14 @@
     }
 
     .carousel-wrapper .prev {
-        left: 10px;
-    }
-    .carousel-wrapper .next {
-        right: 10px;
+        left: var(--spacing-sm);
     }
 
-    /* Variante vertical recupera su diseño de barra lateral  */
+    .carousel-wrapper .next {
+        right: var(--spacing-sm);
+    }
+
+    /* --- VARIANTE VERTICAL --- */
     .category-carousel--vertical {
         position: absolute;
         top: 0;
@@ -182,7 +185,14 @@
         padding: 0;
     }
 
+    .category-carousel--vertical .carousel-track {
+        overflow-y: auto;
+    }
+
     .category-carousel--vertical .game-card {
         height: 150px;
+    }
+    .category-carousel--vertical .carousel-wrapper .atom-button--carousel {
+        display: none;
     }
 }
