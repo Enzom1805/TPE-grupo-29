@@ -19,7 +19,7 @@
 
 /* EFECTO HOVER: Solo funciona si la tarjeta es la activa (la del centro) */
 .hero-card.active:hover .hero-card__bg {
-    transform: scale(1.08); /* Zoom interno suave */
+    transform: scale(1.03); /* Zoom suave */
 }
 
 /* --- INFORMACIÓN Y TEXTOS --- */
@@ -28,7 +28,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 80px 32px 32px; /* Un poco más de gradiente hacia arriba */
+    padding: 80px 32px 32px;
     background: linear-gradient(to top, rgba(90, 24, 154, 0.95) 0%, rgba(90, 24, 154, 0) 100%);
     z-index: 2;
     display: flex;
@@ -47,7 +47,7 @@
 
 .hero-card__title {
     margin: 0;
-    font-family: var(--font-family-title);
+    font-family: var(--font-family-title), sans-serif;
     font-size: 32px;
     color: var(--color-accent-default);
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
@@ -56,7 +56,7 @@
 /* --- ESTRUCTURA INFERIOR (Textos izq, Botón der) --- */
 .hero-card__meta {
     display: flex;
-    justify-content: space-between; /* Separa los tags del botón */
+    justify-content: space-between;
     align-items: center;
     width: 100%;
 }
@@ -72,7 +72,7 @@
     color: var(--color-accent-default);
     padding: 6px 16px;
     border-radius: 16px;
-    font-family: var(--font-family-title);
+    font-family: var(--font-family-title), sans-serif;
     font-size: var(--text-b3-size, 14px);
     font-weight: var(--font-weight-bold);
 }
@@ -80,7 +80,7 @@
 .hero-card__age {
 
     color: var(--color-accent-default);
-    font-family: var(--font-family-title);
+    font-family: var(--font-family-title), sans-serif;
     font-size: var(--text-caption-c1-size);
     font-weight: var(--font-weight-medium);
 }

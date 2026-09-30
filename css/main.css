@@ -3,6 +3,8 @@
 @import url('./tokens/typography.css');
 @import url('./tokens/spacing.css');
 
-body{
+body {
+    margin: 0;
+    padding: 0;
     background-color: var(--color-secondary-background-page);
 }

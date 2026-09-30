@@ -1,0 +1,136 @@
+/* --- CONTENEDOR PRINCIPAL --- */
+.organism-header {
+    background-color: var(--color-secondary-chrome-header-footer);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 24px;
+    width: 100%;
+    color: var(--color-neutral-text-primary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* --- GRUPOS (Izquierda, Centro, Derecha) --- */
+.header__left,
+.header__right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header__center {
+    flex: 1; /* Ocupa el espacio restante */
+    display: flex;
+    justify-content: center;
+    padding: 0 2rem;
+}
+
+/* --- IZQUIERDA: Menú y Logo --- */
+.header__menu-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-neutral-text-primary);
+}
+
+.header__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+.header__logo-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-primary-default);
+    border-radius: 8px;
+    box-shadow: 0 0 15px color-mix(in srgb, var(--color-primary-default) 60%, transparent);
+}
+
+.header__logo-box .icon-crown {
+    color: #fff;
+    font-size: 20px;
+}
+
+.header__logo-text {
+    font-family: var(--font-family-title), sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    text-transform: capitalize;
+}
+
+/* --- CENTRO: Buscador --- */
+.header__search {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.header__search-input {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid var(--color-neutral-text-secondary);
+    color: var(--color-neutral-text-primary);
+    font-family: var(--font-family-body), sans-serif;
+    font-size: 0.9rem;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.header__search-input::placeholder {
+    color: var(--color-neutral-text-secondary);
+}
+
+.header__search-input:focus {
+    border-color: var(--color-primary-default);
+}
+
+.header__search-icon {
+    position: absolute;
+    right: 1rem;
+    color: var(--color-neutral-text-secondary);
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+/* --- DERECHA: Acciones --- */
+.header__btn-mis-juegos {
+    border-radius: 20px;
+    padding: 0.5rem 1.5rem;
+}
+
+.header__profile-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid var(--color-primary-default);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.header__profile-box .icon-user {
+    color: var(--color-primary-default);
+    font-size: 20px;
+}
+
+.header__profile-box:hover {
+    background-color: color-mix(in srgb, var(--color-primary-default) 20%, transparent);
+}
+
+
+

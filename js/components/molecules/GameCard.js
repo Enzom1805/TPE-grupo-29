@@ -23,8 +23,17 @@ export default function GameCard(game) {
     const meta = document.createElement("div");
     meta.className = "game-card__meta";
 
-    const catAge = document.createElement("span");
-    catAge.textContent = `${game.category} \u00A0\u00A0 ${game.age}`;
+    const textGroup = document.createElement("div");
+    textGroup.className = "game-card__text-group";
+
+    const categorySpan = document.createElement("span");
+    categorySpan.textContent = game.category;
+
+    const ageSpan = document.createElement("span");
+    ageSpan.textContent = game.age;
+
+    textGroup.appendChild(categorySpan);
+    textGroup.appendChild(ageSpan);
 
     const playBtn = Button("Jugar", "button", "play", "small");
     playBtn.classList.add("game-card__play");
@@ -33,14 +42,13 @@ export default function GameCard(game) {
     if (game.accessLevel === "Premium") {
         playBtn.classList.add("game-card__play--premium");
         title.classList.add("game-card__title--premium");
-        catAge.classList.add("game-card__text--premium");
+        textGroup.classList.add("game-card__text--premium");
     } else {
         playBtn.classList.add("game-card__play--free");
     }
 
-    meta.appendChild(catAge);
+    meta.appendChild(textGroup);
     meta.appendChild(playBtn);
-
     info.appendChild(title);
     info.appendChild(meta);
     card.appendChild(info);

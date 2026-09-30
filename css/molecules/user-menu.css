@@ -1,0 +1,50 @@
+.user-menu-content {
+    background-color: var(--color-secondary-chrome-header-footer);
+    border-radius: 8px;
+    padding: 1.5rem 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    min-width: 260px;
+}
+
+/* El texto de saludo en dorado/amarillo */
+.user-menu__greeting {
+    color: var(--color-accent-default);
+    font-family: var(--font-family-title), sans-serif;
+    font-size: 0.9rem;
+    text-align: center;
+    margin: 0 0 1.5rem 0;
+    padding: 0 1rem;
+    font-weight: normal;
+}
+
+.user-menu__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-menu__link {
+    display: block;
+    padding: 0.75rem 2rem;
+    color: var(--color-neutral-text-primary);
+    text-decoration: none;
+    font-family: var(--font-family-body), sans-serif;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.user-menu__link:hover {
+    background-color: color-mix(in srgb, var(--color-primary-default) 15%, transparent);
+}
+
+.user-menu__footer {
+    display: flex;
+    justify-content: center;
+    padding: 0 2rem;
+}
+
+.user-menu__footer .atom-button {
+    width: 100%;
+}
