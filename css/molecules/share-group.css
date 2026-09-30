@@ -7,7 +7,7 @@
 
 .share-group__title {
     font-family: var(--font-family-batman), sans-serif;
-    color: #ffffff;
+    color: var(--color-neutral-text-primary);
     font-size: 1rem;
     text-transform: uppercase;
     white-space: nowrap;

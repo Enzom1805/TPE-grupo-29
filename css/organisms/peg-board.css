@@ -1,6 +1,6 @@
 .organism-game-board {
     display: grid;
-    grid-template-columns: repeat(7, max-content);
+    grid-template-columns: repeat(9, max-content);
     gap: 20px; /* Aumentado de 12px a 20px para separar más las fichas */
     padding: 2rem;
 

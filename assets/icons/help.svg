@@ -1,0 +1,25 @@
+<svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <!-- Gradiente que va de lila claro a gris oscuro -->
+        <linearGradient id="help-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#d9d1e5"/>
+            <stop offset="100%" stop-color="#4f465c"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Círculo base con el gradiente (el borde exterior se logra ocupando todo el ancho) -->
+    <circle cx="50" cy="50" r="49" fill="url(#help-grad)" />
+
+    <!-- Anillo oscuro interior -->
+    <circle cx="50" cy="50" r="41" fill="none" stroke="#17151e" stroke-width="3" />
+
+    <!-- Curva del signo de interrogación -->
+    <path d="M41 40 C 41 28, 59 28, 59 40 C 59 48, 50 51, 50 60"
+          fill="none"
+          stroke="#17151e"
+          stroke-width="4.5"
+          stroke-linecap="round" />
+
+    <!-- Punto del signo de interrogación -->
+    <circle cx="50" cy="71" r="2.8" fill="#17151e" />
+</svg>

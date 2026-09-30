@@ -1,10 +1,10 @@
 import ShareGroup from '../molecules/ShareGroup.js';
+import HelpButton from "../molecules/HelpButton.js";
 import PegBoard from './PegBoard.js';
 export default function GameFrame() {
     // Contenedor principal de la sección del juego
     const section = document.createElement('section');
     section.className = 'organism-game-frame';
-
 
     const screen = document.createElement('div');
     screen.className = 'game-frame__screen';
@@ -23,12 +23,12 @@ export default function GameFrame() {
 
     //  redes sociales
     const shareMolecule = ShareGroup();
+    const helpMenu = HelpButton();
     const board = PegBoard();
     boardArea.appendChild(board);
 
-    // Acá en el futuro podés instanciar y agregar el botón de "Necesitas ayuda?"
 
-    screenFooter.appendChild(shareMolecule);
+    screenFooter.append(shareMolecule, helpMenu);
 
     // Ensamblamos la pantalla
     screen.append(title, boardArea, screenFooter);

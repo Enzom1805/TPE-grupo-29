@@ -10,7 +10,7 @@ export default function Dropdown(trigger, content, align = "left"){
     let isOpen = false;
 
     const toggleDropdown = (e) => {
-
+        e.stopPropagation();
         isOpen = !isOpen;
 
         if(isOpen){

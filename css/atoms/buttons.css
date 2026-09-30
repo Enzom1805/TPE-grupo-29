@@ -120,7 +120,7 @@
     justify-content: center;
     gap: 0.4rem; /* Reducido */
     padding: 0.4rem 0.8rem; /* Padding más compacto */
-    color: #ffffff;
+    color: var(--color-neutral-text-primary);
     cursor: pointer;
     width: max-content;
     transition: background-color 0.2s ease, transform 0.1s ease;
@@ -135,11 +135,40 @@
 
 .atom-button--social-game .atom-button__icon {
     font-size: 1rem;
-    color: #ffffff;
+    color: var(--color-neutral-text-primary);
 }
 .atom-button--social-game:hover {
     background-color: color-mix(in srgb, #7b7586 80%, black);
     transform: scale(0.98);
+}
+/* 5. Boton Ayuda (Juego peg) */
+.atom-button--help {
+    background: transparent ;
+    border: none ;
+    padding: 0;
+    width: 40px ;
+    height: 40px ;
+    box-shadow: none ; /* Quitamos las sombras viejas */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Hacemos que el SVG ocupe el 100% del botón */
+.atom-button--help img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.atom-button--help:hover {
+    transform: scale(1.1);
+    /* Le damos una sombra exterior al hacer hover para que resalte */
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.8));
 }
 /* --- Estados de Carga y Éxito --- */
 .atom-button--loading {
