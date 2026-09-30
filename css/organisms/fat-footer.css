@@ -4,7 +4,7 @@
     background-color: var(--color-secondary-chrome-header-footer);
     width: 100%;
     color: var(--color-neutral-text-primary);
-    font-family: var(--font-family-body);
+    font-family: var(--font-family-body), sans-serif;
 }
 
 /* --- GRID DE 4 COLUMNAS --- */
@@ -45,7 +45,7 @@
 }
 
 .footer__logo-text {
-    font-family: var(--font-family-title); /* Krona One */
+    font-family: var(--font-family-title), sans-serif; /* Krona One */
     font-size: 1.25rem;
 }
 
@@ -74,7 +74,7 @@
 
 /* --- LISTAS DE NAVEGACIÓN (Columnas 2, 3, 4) --- */
 .footer__title {
-    font-family: var(--font-family-title); /* Krona One */
+    font-family: var(--font-family-title), sans-serif; /* Krona One */
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
     font-weight: normal;

@@ -1,5 +1,6 @@
 import Community from '../components/organisms/Community.js';
 import { commentsData } from '../data/comments.js';
+import Footer from "../components/organisms/FatFooter.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     // Buscamos el contenedor principal de la página de detalle del juego
@@ -12,5 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Se inyecta exactamente al final de la página
-    mainContainer.appendChild(communitySection);
+    const footerSection = Footer();
+
+    mainContainer.append(communitySection, footerSection);
+
+
+
 });
