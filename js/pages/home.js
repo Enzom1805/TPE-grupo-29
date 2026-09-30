@@ -1,6 +1,7 @@
 import CategoryCarousel from '../components/organisms/CategoryGameCarousel.js';
 import HeroCarousel from '../components/organisms/HeroGameCarousel.js';
 import Footer from '../components/organisms/FatFooter.js';
+import Header from '../components/organisms/Header.js';
 import { games } from '../data/games.js';
 import Loader from "../components/organisms/Loader.js";
 
@@ -16,9 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const appContainer = document.getElementById("app");
 
+    const header = Header();
+    document.body.prepend(header);
+
+
     const farLeftGame = games.find(game => game.id === 5);
-
-
     const leftGame = games.find(game => game.id === 3);
     const centerGame = games.find(game => game.id === 2);
     const rightGame = games.find(game => game.id === 1);

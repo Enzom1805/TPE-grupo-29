@@ -1,10 +1,17 @@
 /* css/tokens/typography.css */
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Inter:wght@400;500;600;700&display=swap');
-
+@font-face {
+    font-family: 'DkcForever';
+    /* Ajustá la cantidad de "../" dependiendo de dónde esté este archivo CSS respecto a la carpeta assets */
+    src: url('../../assets/fonts/DkcForever-ZGXq.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 :root {
     /* Fuentes base */
     --font-family-title: 'Krona One', sans-serif;
     --font-family-body: 'Inter', sans-serif;
+    --font-family-batman: 'DkcForever', sans-serif;
 
     /* Weights */
     --font-weight-regular: 400;

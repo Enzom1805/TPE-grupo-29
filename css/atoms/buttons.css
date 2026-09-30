@@ -82,29 +82,64 @@
 .atom-button--carousel {
     width: 60px;
     height: 60px;
-    padding: 0; /* Anulamos el padding de los tamaños base para que sea cuadrado */
+    padding: 0;
     background-color: rgba(15, 15, 25, 0.7);
-    border: 2px solid #e8c37d; /* Borde estilo dorado */
-    color: #e8c37d; /* Color que tomará el SVG */
+    border: 2px solid #e8c37d; /* Borde dorado */
+    color: #e8c37d; /* Color que toma el SVG */
     border-radius: 16px;
 }
 
 .atom-button--carousel:hover {
     background-color: rgba(15, 15, 25, 0.95);
-    transform: scale(1.05); /* El base ya tiene transition, así que esto se anima solo */
+    transform: scale(1.05);
 }
 
-/* Tamaño estándar para el ícono de flecha adentro del botón */
+
 .atom-button--carousel svg {
     width: 32px;
     height: 32px;
 }
 
-/* Modificador de estado: Oculto (para los extremos del carrusel) */
+
 .atom-button--hidden {
     opacity: 0 ;
     visibility: hidden ;
     pointer-events: none;
+}
+/* 4. Boton Social para el juego (google,facebook,ig,twitter,msg) */
+.atom-button--social-game {
+    font-family: var(--font-family-batman), sans-serif;
+    font-size: var(--text-caption-c2-size);
+    font-weight: var(--font-weight-regular);
+    background-color: #7b7586;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem; /* Reducido */
+    padding: 0.4rem 0.8rem; /* Padding más compacto */
+    color: #ffffff;
+    cursor: pointer;
+    width: max-content;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.atom-button--social-game .atom-button__text {
+
+    font-size: 0.7rem; /* Texto más chico */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.atom-button--social-game .atom-button__icon {
+    font-size: 1rem;
+    color: #ffffff;
+}
+.atom-button--social-game:hover {
+    background-color: color-mix(in srgb, #7b7586 80%, black);
+    transform: scale(0.98);
 }
 /* --- Estados de Carga y Éxito --- */
 .atom-button--loading {

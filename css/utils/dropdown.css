@@ -1,0 +1,32 @@
+.util-dropdown {
+    display: inline-block;
+}
+
+/* Estado base del contenido: oculto e invisible */
+.util-dropdown__content {
+    position: absolute;
+    top: 100%;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    z-index: 1000;
+}
+
+/* Alineaciones según el caso de uso */
+.util-dropdown__content {
+    left: 0;
+}
+
+.util-dropdown__content--right {
+    left: auto;
+    right: 0;
+}
+
+/* Estado activo: visible y en posición */
+.util-dropdown__content.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
