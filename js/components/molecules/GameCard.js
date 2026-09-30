@@ -38,14 +38,6 @@ export default function GameCard(game) {
     const playBtn = Button("Jugar", "button", "play", "small");
     playBtn.classList.add("game-card__play");
 
-    // Logica condicional para el color del botón segun si es premium o gratis
-    if (game.accessLevel === "Premium") {
-        playBtn.classList.add("game-card__play--premium");
-        title.classList.add("game-card__title--premium");
-        textGroup.classList.add("game-card__text--premium");
-    } else {
-        playBtn.classList.add("game-card__play--free");
-    }
 
     meta.appendChild(textGroup);
     meta.appendChild(playBtn);
@@ -53,17 +45,20 @@ export default function GameCard(game) {
     info.appendChild(meta);
     card.appendChild(info);
 
-    // Etiqueta superior derecha (premium o gratis)
     const badge = document.createElement("div");
+    // Agregamos la clase base del listón
     badge.className = "game-card__badge";
 
+    // Modificador y texto según el nivel de acceso
     if (game.accessLevel === "Premium") {
-        const crownIcon = document.createElement("i");
-        crownIcon.className = "icon icon-crown";
-        badge.appendChild(crownIcon);
+        badge.classList.add("game-card__badge--premium");
+        badge.textContent = "Premium";
     } else {
+        badge.classList.add("game-card__badge--free");
         badge.textContent = "Gratis";
     }
+
+    card.appendChild(badge);
 
     card.appendChild(badge);
 

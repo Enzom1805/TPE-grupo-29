@@ -67,14 +67,14 @@
 
 /* 3. Botón de Juego (Play / Jugar) */
 .atom-button--play {
-    background-color: var(--color-accent-default);
-    color: var(--color-secondary-chrome-header-footer);
+    background-color: var(--color-primary-default);
+    color: var(--color-neutral-text-primary);
     border-radius: 12px;
 
 }
 
 .atom-button--play:hover {
-    background-color: var(--color-accent-hover);
+    background-color: var(--color-primary-hover);
 }
 
 /* 4. Boton de Carrusel (< >) */
@@ -167,6 +167,17 @@
 .atom-button--help:hover {
     transform: scale(1.1);
     filter: drop-shadow(0 4px 10px rgba(0,0,0,0.8));
+}
+/* 7. Botón de Juego 2 (Play para Hero card) */
+.atom-button--hero {
+    background-color: var(--color-accent-default);
+    color: var(--color-secondary-chrome-header-footer);
+    border-radius: 12px;
+
+}
+
+.atom-button--hero:hover {
+    background-color: var(--color-accent-hover);
 }
 /* --- Estados de Carga y Éxito --- */
 .atom-button--loading {

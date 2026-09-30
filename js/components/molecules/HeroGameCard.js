@@ -38,7 +38,7 @@ export default function HeroCard(game) {
     tags.appendChild(age);
 
     // Instanciamos el botón
-    const playBtn = Button("Jugar", "button", "play", "large");
+    const playBtn = Button("Jugar", "button", "hero", "large");
     playBtn.classList.add("hero-card__play");
 
     // SI ES EL JUEGO ID 2 (Batman Peg Solitaire), LE ASIGNAMOS LA REDIRECCIÓN

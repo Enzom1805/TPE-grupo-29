@@ -15,6 +15,7 @@
     object-fit: cover;
     display: block;
 }
+
 /* --- INFORMACIÓN Y TEXTOS --- */
 .game-card__info {
     position: absolute;
@@ -53,7 +54,6 @@
     line-height: var(--text-caption-c2-line);
     font-weight: var(--font-weight-medium);
     gap: 8px;
-
 }
 
 .game-card__text-group {
@@ -61,10 +61,12 @@
     gap: 6px;
     align-items: center;
 }
+
 .game-card__text-group span {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 /* --- BOTÓN JUGAR --- */
 .game-card__play {
     border-radius: 16px;
@@ -74,46 +76,42 @@
     flex-shrink: 0;
 }
 
-/* Variante Premium */
-.game-card__play.game-card__play--premium {
-    background-color: var(--color-accent-default);
-    color: var(--color-secondary-background-page);
-}
-
-/* Variante Gratis */
-.game-card__play.game-card__play--free {
-    background-color: color-mix(in srgb, var(--color-primary-default) 60%, transparent);
-    color: var(--color-neutral-text-primary);
-    backdrop-filter: blur(4px);
-}
 
 
+/* ==========================================================================
+   LISTÓN DIAGONAL (RIBBON) - ESTADOS PREMIUM Y GRATIS
+   ========================================================================== */
 .game-card__badge {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    font-family: var(--font-family-title), sans-serif ;
-    font-size: var(--text-caption-c1-size);
+    top: 14px;
+    right: -32px;
+    width: 120px;
+    padding: 4px 0;
+    text-align: center;
+    /* Inclinación de 45 grados */
+    transform: rotate(45deg);
+    font-family: var(--font-family-title), sans-serif;
+    font-size: 11px;
     font-weight: var(--font-weight-bold);
-    color: var(--color-neutral-text-primary, #fff);
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+    text-transform: uppercase;
+    letter-spacing: var(--spacing-3xs);
     z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
 }
 
-.game-card__badge .icon {
-    color: #f1c40f;
-    width: 24px;
-    height: 24px;
-    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.8));
+.game-card__badge--premium {
+    background-color: var(--color-accent-default);
+    color: var(--color-secondary-background-page, #12101a);
+    font-size: var(--text-caption-c2-size);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.5px;
 }
 
-.game-card__title--premium,
-.game-card__text--premium {
-    color: var(--color-accent-default);
+.game-card__badge--free {
+    background-color: var(--color-primary-default);
+    color: var(--color-neutral-text-primary, #fff);
 }
+
 
 /* ==========================================================================
    MEDIA QUERIES (TABLET Y DESKTOP)
@@ -135,17 +133,6 @@
         line-height: var(--text-b3-line);
     }
 
-    .game-card__badge {
-        top: 12px;
-        right: 12px;
-    }
-
-    .game-card__badge .icon {
-        width: 28px;
-        height: 28px;
-    }
-
-    /* la mostramos solo al pasar el mouse  */
     .game-card:hover .game-card__info {
         opacity: 1;
     }
