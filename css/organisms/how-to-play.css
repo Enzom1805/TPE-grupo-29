@@ -1,0 +1,147 @@
+/* ==========================================================================
+   Organismo: HowToPlay (Instrucciones de Juego)
+   ========================================================================== */
+
+.how-to-play {
+    width: 100%;
+    max-width: 1300px; /* Ancho idéntico al viewport del juego (.game-frame__screen) */
+    margin: var(--spacing-2xl) auto;
+    padding: 0 var(--spacing-lg);
+    background-color: transparent; /* Integrado al fondo de la página */
+    box-shadow: none;
+    box-sizing: border-box;
+    color: var(--color-neutral-text-primary);
+}
+
+/* --- Encabezado --- */
+.how-to-play__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    text-align: center;
+}
+
+.how-to-play__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--color-accent-default);
+    color: var(--color-accent-default);
+    font-family: var(--font-family-title), serif;
+    font-size: var(--text-s1-size);
+    font-weight: var(--font-weight-bold);
+    box-shadow: 0 0 12px rgba(245, 166, 35, 0.25);
+    flex-shrink: 0;
+}
+
+.how-to-play__title {
+    font-family: var(--font-family-title), sans-serif;
+    font-size: var(--text-s1-size);
+    line-height: var(--text-s1-line);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-text-primary);
+    margin: 0;
+}
+
+/* --- Línea Divisora --- */
+.how-to-play__divider {
+    border: 0;
+    height: 1px;
+    background-color: var(--color-neutral-border-strong);
+    opacity: 0.6;
+    margin: var(--spacing-md) 0 var(--spacing-lg) 0;
+}
+
+/* --- Contenido de Texto --- */
+.how-to-play__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    font-family: var(--font-family-body), sans-serif;
+    font-size: var(--text-b2-size);
+    line-height: var(--text-b2-line);
+    color: var(--color-neutral-text-secondary);
+}
+
+.how-to-play__content p {
+    margin: 0;
+}
+
+.how-to-play__content strong {
+    color: var(--color-neutral-text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.how-to-play__highlight {
+    color: var(--color-neutral-text-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+.how-to-play__subtitle {
+    font-family: var(--font-family-body), sans-serif;
+    font-size: var(--text-b1-size);
+    line-height: var(--text-b1-line);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-text-primary);
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+/* --- Lista de Viñetas --- */
+.how-to-play__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.how-to-play__list li {
+    position: relative;
+    padding-left: var(--spacing-lg);
+    color: var(--color-neutral-text-secondary);
+}
+
+.how-to-play__list li::before {
+    content: "•";
+    position: absolute;
+    left: var(--spacing-xs);
+    color: var(--color-neutral-text-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+/* --- Contenedor Multimedia (Imagen + Video) --- */
+.how-to-play__media {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    width: 100%;
+    margin-top: var(--spacing-lg);
+}
+
+.how-to-play__media-item {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9; /* Mantiene la proporción idéntica al reproductor */
+    object-fit: cover;
+    border-radius: var(--spacing-xs);
+    border: 1px solid var(--color-neutral-border-strong);
+    background-color: #000;
+    box-sizing: border-box;
+}
+
+video.how-to-play__media-item {
+    cursor: pointer;
+}
+
+/* Adaptabilidad Mobile */
+@media (max-width: 768px) {
+    .how-to-play__media {
+        grid-template-columns: 1fr;
+    }
+}

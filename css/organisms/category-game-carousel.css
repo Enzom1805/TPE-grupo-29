@@ -1,8 +1,11 @@
+/* ==========================================================================
+   Category Carousel (Base / Horizontal)
+   ========================================================================== */
+
 .category-carousel {
     margin-bottom: 40px;
     padding: 0 20px;
 }
-
 
 .category-header {
     display: flex;
@@ -34,15 +37,13 @@
     opacity: 1;
 }
 
-
 .carousel-wrapper {
     position: relative;
-
     margin: 0 -10px;
     padding: 0 10px;
 }
 
-/* La pista deslizable */
+/* Pista deslizable horizontal */
 .carousel-track {
     display: flex;
     gap: 16px;
@@ -57,28 +58,20 @@
     display: none;
 }
 
-/* Los botones flotantes */
-.carousel-wrapper {
-    position: relative;
-    /* Mantenemos el padding/margin de la respuesta anterior para que no se corten las sombras */
-    padding: 0 10px;
-    margin: 0 -10px;
-}
-
+/* Botones flotantes */
 .carousel-wrapper .atom-button--carousel {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-    /* La transición de opacidad y visibilidad ya viene de .atom-button y .atom-button--hidden,
-       pero necesitamos definir que arranquen invisibles en el contexto del carrusel */
     opacity: 0;
     visibility: hidden;
 }
+
 .carousel-wrapper .atom-button--carousel:hover {
     transform: translateY(-50%) scale(1.05);
 }
-/* Mostrar botones al hacer hover en el wrapper, PERO solo si no tienen la clase hidden */
+
 .carousel-wrapper:hover .atom-button--carousel:not(.atom-button--hidden) {
     opacity: 1;
     visibility: visible;
@@ -90,4 +83,77 @@
 
 .carousel-wrapper .next {
     right: 10px;
+}
+
+
+/* ==========================================================================
+   Variante Vertical para Columnas Laterales (.category-carousel--vertical)
+   ========================================================================== */
+
+.category-carousel--vertical {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 70px; /* Descuenta la altura del botón 'Ver más comentarios' */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+/* Centrar título */
+.category-carousel--vertical .category-header {
+    justify-content: center;
+}
+
+.category-carousel--vertical .category-title {
+    text-align: center;
+    width: 100%;
+}
+
+/* Ocultar elementos de navegación horizontal */
+.category-carousel--vertical .category-more,
+.category-carousel--vertical .atom-button--carousel {
+    display: none;
+}
+
+/* Wrapper expansivo */
+.category-carousel--vertical .carousel-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Pista vertical acotada con scroll */
+.category-carousel--vertical .carousel-track {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 16px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+}
+
+/* Tarjeta acotada a formato banner lateral */
+.category-carousel--vertical .game-card {
+    width: 100%;
+    height: 150px;
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.category-carousel--vertical .game-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
 }

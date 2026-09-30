@@ -1,0 +1,40 @@
+.molecule-breadcrumbs {
+    font-family: var(--font-family-body), sans-serif;
+    margin: 1rem 1rem;
+}
+
+.breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 0.5rem;
+}
+
+.breadcrumbs__item {
+    display: flex;
+    align-items: center;
+}
+
+/* Agrega el separador '/' entre cada ítem excepto el último */
+.breadcrumbs__item:not(:last-child)::after {
+    content: ">";
+    margin-left: 0.5rem;
+    color: var(--color-accent-hover);
+}
+
+.breadcrumbs__link {
+    color: var(--color-neutral-text-secondary);
+    text-decoration: none;
+}
+
+.breadcrumbs__link:hover {
+    color: var(--color-accent-subtle);
+}
+
+.breadcrumbs__current {
+    color: var(--color-accent-hover);
+    font-weight: var(--font-weight-bold);
+}

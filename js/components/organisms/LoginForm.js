@@ -32,14 +32,16 @@ export default function LoginForm() {
         "Correo electrónico",
         "email",
         "email",
-        "ejemplo@mail.com"
+        "ejemplo@mail.com",
+        true
     );
 
     const passwordField = FormField(
         "Contraseña",
         "password",
         "password",
-        "Mínimo 6 caracteres"
+        "Mínimo 6 caracteres",
+        true
     );
 
     const passwordInput = passwordField.querySelector("input");
