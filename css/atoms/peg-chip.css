@@ -1,0 +1,59 @@
+.atom-peg {
+    width: 75px; /* Aumentado de 50px a 75px */
+    height: 75px; /* Aumentado de 50px a 75px */
+    border-radius: 50%;
+    border: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.atom-peg__icon {
+    opacity: 0;
+    font-size: 2.2rem; /* Ícono más grande para acompañar la ficha */
+    color: #111;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.atom-peg--hole {
+    background-color: #1a1a24;
+    /* Sombras ajustadas proporcionalmente */
+    box-shadow: inset 0 12px 20px rgba(0, 0, 0, 0.9),
+    inset 0 3px 6px rgba(255, 255, 255, 0.05);
+    cursor: default;
+}
+
+.atom-peg--filled {
+    background: radial-gradient(circle at 30% 30%, #a5a5b0, #4a4a55);
+    /* Sombras ajustadas proporcionalmente */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6),
+    inset 0 3px 5px rgba(255, 255, 255, 0.4);
+}
+
+.atom-peg--filled .atom-peg__icon {
+    opacity: 0.8;
+}
+
+.atom-peg--selected {
+    background: radial-gradient(circle at 30% 30%, #c4c4ce, #5d5d6a);
+    box-shadow: 0 0 20px 4px rgba(138, 128, 168, 0.6),
+    0 12px 20px rgba(0, 0, 0, 0.8),
+    inset 0 3px 5px rgba(255, 255, 255, 0.6);
+    transform: translateY(-6px) scale(1.05); /* Mayor elevación */
+    border: 2px solid rgba(138, 128, 168, 0.8);
+}
+.atom-peg--selected .atom-peg__icon {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+
+.atom-peg:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.8);
+}
+.atom-peg--hole:active {
+    transform: none; }

@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Batman Peg Solitaire | Kingly Games</title>
+
+    <!--
+      Acá va el enlace a tu CSS principal.
+      Asegurate de que este main.css esté importando tu reset,
+      tus tokens (incluyendo la fuente de Batman DkcForever) y los estilos de componentes.
+    -->
+    <link rel="stylesheet" href="../css/organisms/header.css">
+    <link rel="stylesheet" href="../css/atoms/icon.css">
+    <link rel="stylesheet" href="../css/organisms/fat-footer.css">
+    <link rel="stylesheet" href="../css/utils/dropdown.css">
+    <link rel="stylesheet" href="../css/molecules/hamburger-menu.css">
+    <link rel="stylesheet" href="../css/molecules/user-menu.css">
+    <link rel="stylesheet" href="../css/tokens/colors.css">
+    <link rel="stylesheet" href="../css/atoms/buttons.css">
+    <link rel="stylesheet" href="../css/atoms/peg-chip.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/tokens/typography.css">
+    <link rel="stylesheet" href="../css/organisms/game-player.css">
+    <link rel="stylesheet" href="../css/molecules/share-group.css">
+    <link rel="stylesheet" href="../css/organisms/peg-board.css">
 </head>
 <body>
+
+<!--
+  Este es el lienzo en blanco.
+  Acá es donde tu archivo game.js va a inyectar el Header, el GameFrame y el Footer.
+-->
+<div id="app"></div>
+
+<!--
+  Importamos la lógica de la página.
+  El type="module" es obligatorio para que funcionen los 'import' y 'export' en JS.
+  Ajustá la ruta si tu carpeta JS principal tiene otro nombre.
+-->
+<script type="module" src="../js/pages/game.js"></script>
 
 </body>
 </html>
