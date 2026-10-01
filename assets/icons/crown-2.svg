@@ -1,0 +1,21 @@
+<svg width="32" height="28" viewBox="0 0 32 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradiente dorado vibrante, 100% opaco -->
+    <linearGradient id="premium_gold" x1="16" y1="19.8333" x2="16" y2="8.16667" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F59E0B"/> <!-- Dorado intenso en la base -->
+      <stop offset="1" stop-color="#FEF08A"/> <!-- Amarillo brillante en las puntas -->
+    </linearGradient>
+    
+    <!-- Sombra sutil para separarlo del fondo y darle presencia -->
+    <filter id="crown-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <path d="M25.6 19.8333L28 8.16667L19.6 11.6667L16 8.16667L12.4 11.6667L4 8.16667L6.4 19.8333H25.6Z" 
+        stroke="url(#premium_gold)" 
+        stroke-width="2.5" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        filter="url(#crown-shadow)"/>
+</svg>

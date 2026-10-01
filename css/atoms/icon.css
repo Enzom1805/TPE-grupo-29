@@ -56,6 +56,11 @@
     mask-image: url('../../assets/icons/crown-1.svg');
     -webkit-mask-image: url('../../assets/icons/crown-1.svg');
 }
+.icon-crown-2 {
+    mask-image: url('../../assets/icons/crown-2.svg');
+    -webkit-mask-image: url('../../assets/icons/crown-2.svg');
+}
+
 
 .icon-eye-alt {
     mask-image: url('../../assets/icons/eye-alt.svg');
