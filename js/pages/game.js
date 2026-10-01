@@ -2,7 +2,7 @@ import Header from '../components/organisms/Header.js';
 import GameFrame from '../components/organisms/GameFrame.js';
 import HowToPlay from '../components/organisms/HowToPlay.js';
 import Community from '../components/organisms/Community.js';
-import CategoryCarousel from '../components/organisms/CategoryGameCarousel.js'; // Reutilizamos el mismo componente
+import CategoryCarousel from '../components/organisms/CategoryGameCarousel.js';
 import Breadcrumbs from '../components/molecules/Breadcrumbs.js';
 import Footer from '../components/organisms/FatFooter.js';
 
@@ -17,17 +17,37 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Instanciamos los componentes principales
     const header = Header();
     const breadcrumbs = Breadcrumbs(gameBreadcrumbs);
+
+    // --- CONTENEDOR PRINCIPAL: JUEGO (IZQ) + SIDEBAR (DER) ---
+    const gameMainContainer = document.createElement('div');
+    gameMainContainer.className = 'game-main-container';
+
+    // Componente del juego
     const gameArea = GameFrame();
+
+    // Columna Derecha con la imagen
+    const sidebarContainer = document.createElement('div');
+    sidebarContainer.className = 'game-main-container__sidebar';
+
+    const sidebarImg = document.createElement('img');
+    sidebarImg.src = '../assets/images/game-stats-info.jpg'; // Colocá aquí la ruta a tu imagen
+    sidebarImg.alt = 'Métricas y Acciones Rápidas del Juego';
+    sidebarImg.className = 'game-main-container__sidebar-img';
+
+    sidebarContainer.appendChild(sidebarImg);
+
+    // Integramos ambas columnas en el contenedor principal del juego
+    gameMainContainer.appendChild(gameArea);
+    gameMainContainer.appendChild(sidebarContainer);
+
+    // 2. Secciones inferiores
     const howToPlaySection = HowToPlay();
     const communitySection = Community({
         gameTitle: "The Batman Peg Solitaire",
         comments: commentsData
     });
 
-    // 2. Filtramos para "Juegos Sugeridos" (excluyendo Batman Peg Solitaire ID: 2)
     const suggestedGames = games.filter(game => game.id !== 2);
-
-    // Reutilizamos CategoryCarousel pasándole la categoría
     const suggestedCarousel = CategoryCarousel("Juegos Sugeridos", suggestedGames);
     suggestedCarousel.classList.add("category-carousel--vertical");
 
@@ -41,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const rightCol = document.createElement("div");
     rightCol.className = "game-bottom-container__right";
-    rightCol.appendChild(suggestedCarousel); // Inyectamos el carrusel directamente
+    rightCol.appendChild(suggestedCarousel);
 
     bottomContainer.append(leftCol, rightCol);
 
@@ -50,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Renderizado en orden
     app.appendChild(header);
     app.appendChild(breadcrumbs);
-    app.appendChild(gameArea);
+    app.appendChild(gameMainContainer); // <--- Reemplaza al gameArea individual
     app.appendChild(howToPlaySection);
     app.appendChild(bottomContainer);
     app.appendChild(footer);

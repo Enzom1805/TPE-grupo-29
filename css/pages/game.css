@@ -44,3 +44,68 @@
         height: 500px;
     }
 }
+/* ==========================================================================
+   Contenedor Principal: Juego (Izquierda Full Width) + Sidebar (Derecha)
+   ========================================================================== */
+
+.game-main-container {
+    width: 100%;
+    max-width: 100%;              /* Ocupa todo el ancho de la pantalla */
+    margin: 0 0 var(--spacing-2xl) 0;
+    padding: 0;                    /* Eliminamos padding lateral para ir borde a borde */
+    display: grid;
+    /* La izquierda toma todo el espacio flexible y la derecha queda fija a 320px */
+    grid-template-columns: 1fr 320px;
+    gap: 0;                        /* Sin separación entre la pantalla del juego y el panel */
+    align-items: stretch;          /* Asegura que ambos lados tengan exactamente la misma altura */
+    box-sizing: border-box;
+}
+
+/* Columna Derecha (Panel con imagen) */
+.game-main-container__sidebar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.game-main-container__sidebar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;              /* Estira la imagen para cubrir el 100% de alto y ancho */
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* Adaptabilidad Mobile / Tablet */
+@media (max-width: 992px) {
+    .game-main-container {
+        grid-template-columns: 1fr;
+    }
+
+    .game-main-container__sidebar {
+        height: auto;
+    }
+
+    .game-main-container__sidebar-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0 0 8px 8px;
+    }
+}
+
+/* Responsive: En tablets y pantallas pequeñas la sidebar se posiciona debajo */
+@media (max-width: 992px) {
+    .game-main-container {
+        grid-template-columns: 1fr;
+    }
+
+    .game-main-container__sidebar {
+        height: auto;
+    }
+
+    .game-main-container__sidebar-img {
+        max-width: 350px;
+        height: auto;
+    }
+}

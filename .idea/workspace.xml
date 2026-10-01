@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ada8f-5d52-45e5-8673-f084c7c5d738" name="Changes" comment="improve a lot of things">
+    <list default="true" id="cd2ada8f-5d52-45e5-8673-f084c7c5d738" name="Changes" comment="solve an particular issue on Input.css">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icons/logo-crown-variant.svg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/icons/logo-crown-variant.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/atoms/buttons.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/atoms/buttons.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/atoms/input.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/atoms/input.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/molecules/form-field.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/molecules/form-field.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/organisms/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/organisms/form.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/tokens/colors.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/tokens/colors.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/components/organisms/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/organisms/LoginForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/components/organisms/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/components/organisms/RegisterForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/utils/validators.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/utils/validators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/registro.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/registro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/organisms/game-player.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/organisms/game-player.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/pages/game.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/pages/game.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/pages/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/pages/game.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +146,9 @@
       <workItem from="1790274999336" duration="9178000" />
       <workItem from="1790542222867" duration="4651000" />
       <workItem from="1790553932745" duration="8786000" />
-      <workItem from="1790795366012" duration="16433000" />
+      <workItem from="1790795366012" duration="16702000" />
+      <workItem from="1790815332384" duration="29000" />
+      <workItem from="1790820832603" duration="2420000" />
     </task>
     <task id="LOCAL-00001" summary="Create new class models">
       <option name="closed" value="true" />
@@ -220,7 +214,31 @@
       <option name="project" value="LOCAL" />
       <updated>1790549007585</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fixed some issues on the Login and Register form, also i added the reCaptcha field">
+      <option name="closed" value="true" />
+      <created>1790815196202</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1790815196202</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Fixed some issues on the Login and Register form, also i added the reCaptcha field">
+      <option name="closed" value="true" />
+      <created>1790815202581</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1790815202581</updated>
+    </task>
+    <task id="LOCAL-00011" summary="solve an particular issue on Input.css">
+      <option name="closed" value="true" />
+      <created>1790815292094</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1790815292094</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,6 +253,8 @@
     <MESSAGE value="improve de RegisterForm, i added tipography, color and a few styles for buttons, input, label, form-field, register-form and main. I improve the atoms molecules organism and pages in js components. Also added code to registro on pages html" />
     <MESSAGE value="improve de RegisterForm" />
     <MESSAGE value="improve a lot of things XD" />
-    <option name="LAST_COMMIT_MESSAGE" value="improve a lot of things XD" />
+    <MESSAGE value="Fixed some issues on the Login and Register form, also i added the reCaptcha field" />
+    <MESSAGE value="solve an particular issue on Input.css" />
+    <option name="LAST_COMMIT_MESSAGE" value="solve an particular issue on Input.css" />
   </component>
 </project>
