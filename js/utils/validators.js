@@ -1,3 +1,5 @@
+// src/utils/validators.js
+
 /**
  * Valida los datos del formulario de registro.
  *
@@ -5,9 +7,9 @@
  * @returns {string|null} Mensaje de error o null si es válido.
  */
 export function validateRegisterForm(formData) {
-    const { name, lastName, email, password, confirmPassword, terms, captcha } = formData;
+    const { name, lastName, email, password, confirmPassword, terms, captchaValid } = formData;
 
-    if (!name ||  !lastName || !email || !password) {
+    if (!name || !lastName || !email || !password) {
         return "Por favor, completa todos los campos obligatorios.";
     }
 
@@ -27,8 +29,9 @@ export function validateRegisterForm(formData) {
     if (!terms) {
         return "Debes aceptar los términos y condiciones para continuar.";
     }
-    if (!captcha) {
-        return "Debes verificar que eres humano antes de continuar.";
+
+    if (!captchaValid) {
+        return "Confirma que no eres un robot antes de continuar.";
     }
 
     return null;
@@ -64,7 +67,6 @@ export function setupPasswordToggle(inputElement, iconsPath = "../assets/icons/"
     iconImg.onerror = () => {
         if (!iconImg.dataset.retried) {
             iconImg.dataset.retried = "true";
-            // Intenta cargar desde la raíz del servidor si falla la ruta relativa
             iconImg.src = `./assets/icons/eye-alt.svg`;
         }
     };

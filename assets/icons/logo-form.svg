@@ -1,0 +1,20 @@
+<svg width="52" height="52" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Kingly Games Isotype">
+  <defs>
+    <!-- Filtro Glow (Se adapta proporcionalmente al nuevo tamaño) -->
+    <!-- Márgenes ampliados (-15% y 130%) para que el difuminado no choque con la caja -->
+    <filter id="kg-logo-glow-medium" x="-15%" y="-15%" width="130%" height="130%" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#7614cc" flood-opacity="0.8"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#9933ff" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Isotipo compuesto: Circunferencia + Corona -->
+  <g filter="url(#kg-logo-glow-medium)">
+    <!-- Circunferencia -->
+    <circle cx="37" cy="37" r="31.9" stroke="#F8F7FC" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Corona -->
+    <path d="M53 48.5139L57 26.1528L43 32.8611L37 26.1528L31 32.8611L17 26.1528L21 48.5139H53Z" 
+          stroke="#F8F7FC" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

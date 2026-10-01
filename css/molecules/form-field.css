@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Molécula: FormField & CheckboxField
+   Molécula: FormField & CheckboxField (Estilos Atómicos)
    ========================================================================== */
 
 .molecule-form-field {
@@ -7,19 +7,19 @@
     flex-direction: column;
     gap: var(--spacing-2xs);
     width: 100%;
+    min-width: 0;
 }
 
-/* Cabecera del campo: Alinea Label a la izquierda y Requerido a la derecha */
+/* Header del campo: Label + Asterisco */
 .form-field-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: baseline;
-    gap: var(--spacing-xs);
+    gap: var(--spacing-3xs);
     width: 100%;
-    min-height: var(--text-b3-line); /* Garantiza nivelación en grillas multicolumna */
+    min-height: var(--text-b3-line);
 }
 
-/* Estilo del Label */
 .atom-label,
 .form-field-header label {
     font-family: var(--font-family-body), sans-serif;
@@ -30,65 +30,93 @@
     margin: 0;
 }
 
-/* Indicador Requerido */
 .form-field-required {
     font-family: var(--font-family-body), sans-serif;
-    font-size: var(--text-b1-size);
-    line-height: var(--text-caption-c1-line);
+    font-size: var(--text-b3-size);
+    line-height: var(--text-b3-line);
     font-weight: var(--font-weight-regular);
     color: var(--color-warning-text-primary);
     white-space: nowrap;
     flex-shrink: 0;
-    opacity: 0.9;
 }
 
-/* Molécula de Checkbox: Alineación en una misma línea horizontal */
-.molecule-checkbox-field,
-.terms-field,
-.captcha-field {
-    display: flex !important;
-    flex-direction: row !important;
+/* Componente Contraseña */
+.password-input-wrapper {
+    position: relative;
+    display: flex;
     align-items: center;
-    gap: var(--spacing-xs);
     width: 100%;
 }
 
-/* Impide que la casilla se encoga o empuje al texto hacia abajo */
-.molecule-checkbox-field > input[type="checkbox"],
-.molecule-checkbox-field > .atom-checkbox,
-.terms-field > input[type="checkbox"],
-.terms-field > .atom-checkbox,
-.captcha-field > input[type="checkbox"],
-.captcha-field > .atom-checkbox {
+.password-input-wrapper input {
+    padding-right: var(--spacing-2xl);
+}
+
+/* Botón Mostrar/Ocultar Contraseña (Ojito blanco radiante) */
+.toggle-password-btn {
+    position: absolute;
+    right: var(--spacing-xs);
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-text-primary, #ffffff);
+    z-index: 2;
+    filter: brightness(0) invert(1) !important; /* Fuerza el icono a blanco en tema oscuro */
+    opacity: 0.85;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.toggle-password-btn:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.08);
+}
+
+.toggle-password-btn svg,
+.toggle-password-btn img {
+    width: 18px;
+    height: 18px;
+    display: block;
+    fill: currentColor;
+    stroke: currentColor;
+}
+
+/* --- Checkbox Molécula --- */
+.molecule-checkbox-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-xs);
+    width: auto;
+}
+
+.molecule-checkbox-field input[type="checkbox"] {
     flex-shrink: 0;
     margin: 0;
-}
-
-/* Wrapper que distribuye Label a la izquierda y Requerido a la derecha */
-.checkbox-label-wrapper {
-    display: flex;
-    flex-grow: 1;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--spacing-xs);
-    width: 100%;
-    min-width: 0;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--color-primary-default);
 }
 
 .checkbox-label {
     font-family: var(--font-family-body), sans-serif;
     font-size: var(--text-b3-size);
     line-height: var(--text-b3-line);
-    font-weight: var(--font-weight-regular);
     color: var(--color-neutral-text-secondary);
     cursor: pointer;
-    transition: color 0.2s ease;
     margin: 0;
+    display: inline-flex;
+    align-items: center;
 }
 
-/* Estado seleccionado para resaltar el label */
-.molecule-checkbox-field:has(input:checked) .checkbox-label,
-input[type="checkbox"]:checked ~ .checkbox-label-wrapper .checkbox-label {
-    color: var(--color-accent-default);
-    font-weight: var(--font-weight-medium);
+/* Espaciado mínimo entre label del checkbox y asterisco */
+.molecule-checkbox-field .form-field-required {
+    margin-left: 3px;
 }

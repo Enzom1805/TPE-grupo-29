@@ -1,8 +1,7 @@
 /* ==========================================================================
-   Organismo: Formulario (Register / Login)
+   Organismo: Formulario (Layout y Estructura)
    ========================================================================== */
 
-/* Box-sizing unificado para todo el árbol del formulario */
 .form,
 .form *,
 .form *::before,
@@ -10,36 +9,23 @@
     box-sizing: border-box;
 }
 
-/* --- Contenedor Principal --- */
 .form {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
     width: 100%;
     max-width: 520px;
-    margin: 0 auto;
-    padding: var(--spacing-xl);
-
+    margin: auto;
+    padding: var(--spacing-lg);
     background-color: var(--color-secondary-surface-elevated);
     border: 1px solid var(--color-primary-focus-ring);
     border-radius: var(--spacing-sm);
     box-shadow: 0 10px 30px var(--color-secondary-shadow-deep);
-
     color: var(--color-neutral-text-primary);
     font-family: var(--font-family-body), sans-serif;
 }
 
-/* --- Subtítulo del Formulario --- */
-.form > p:not(.form-required-legend):not(.form-footer),
-.form-subtitle {
-    font-family: var(--font-family-body), sans-serif;
-    font-size: var(--text-b3-size);
-    line-height: var(--text-b3-line);
-    color: var(--color-neutral-text-secondary);
-    margin: 0 0 var(--spacing-2xs) 0;
-}
-
-/* --- Header del Formulario --- */
+/* Header Organismo */
 .form-header {
     display: flex;
     justify-content: flex-start;
@@ -49,166 +35,81 @@
     margin-bottom: var(--spacing-3xs);
 }
 
-/* Ícono / Logo: Escala directa sobre la img y soporte para contenedor */
-.form-icon-logo,
-img.form-icon-logo {
-    display: inline-block;
-    width: 54px;
-    height: 54px;
-    object-fit: contain;
-    flex-shrink: 0;
-    margin-left: -4px;
-}
-
-.form-icon-logo > img,
-.form-icon-logo > svg,
-.form-icon-logo > .icon {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-}
-
 .form-h1 {
     font-family: var(--font-family-title), sans-serif;
-    font-size: var(--text-h4-size); /* 28px */
-    line-height: 1;
+    font-size: var(--text-h4-size);
+    line-height: var(--text-h4-line);
     font-weight: var(--font-weight-medium);
     color: var(--color-neutral-text-primary);
     margin: 0;
-    display: flex;
-    align-items: center;
 }
 
-/* Leyenda de campos requeridos */
-.form-required-legend {
-    font-family: var(--font-family-body), sans-serif;
-    font-size: var(--text-caption-c1-size);
-    line-height: var(--text-caption-c1-line);
-    color: var(--color-neutral-text-secondary);
-    margin: 0 0 var(--spacing-xs) 0;
-    opacity: 0.85;
-}
-
-/* --- Grillas de Campos --- */
+/* Grillas */
 .form-row-2 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-md);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-sm);
     width: 100%;
     align-items: start;
 }
 
 .form-row-3 {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: var(--spacing-md);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: var(--spacing-xs);
     width: 100%;
     align-items: start;
 }
 
-/* Alineación horizontal para headers de moléculas FormField */
-.form-field-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    min-height: 20px;
-    margin-bottom: var(--spacing-2xs);
+/* Selector compuesto corregido */
+.form-row-2 > *,
+.form-row-3 > * {
+    min-width: 0;
 }
 
-.form-field-required {
-    font-size: var(--text-b3-size);
-    color: var(--color-accent-default);
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-left: var(--spacing-2xs);
-}
-
-/* --- Campo de Contraseña & Toggle Visibilidad --- */
-.password-input-wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    gap: var(--spacing-2xs);
-}
-
-.password-input-wrapper input {
-    width: 100%;
-    padding-right: var(--spacing-2xl);
-}
-
-.toggle-password-btn {
-    position: absolute;
-    right: var(--spacing-sm);
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-    border-radius: 4px;
-}
-
-.toggle-password-btn:focus-visible {
-    outline: 2px solid var(--color-primary-focus-ring);
-}
-
-/* Ícono de visibilidad en color claro brillante */
-.toggle-password-icon {
-    width: 20px;
-    height: 20px;
-    display: block;
-    pointer-events: none;
-    opacity: 0.95;
-    color: var(--color-neutral-text-primary, #ffffff);
-    filter: brightness(0) invert(1);
-    transition: opacity 0.2s ease, color 0.2s ease;
-}
-
-.toggle-password-btn:hover .toggle-password-icon {
-    opacity: 1;
-}
-
-/* --- Checkboxes --- */
-input[type="checkbox"]:checked + .checkbox-label,
-input[type="checkbox"]:checked + label {
-    color: var(--color-accent-default);
-    font-weight: var(--font-weight-medium);
-}
-
-/* --- Opciones Extras (Login) --- */
+/* Opciones (Recordarme + Enlace Olvidaste tu contraseña) */
 .form-options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: nowrap;
     width: 100%;
     gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-2xs);
+    font-size: var(--text-b3-size);
 }
 
-.form-options > * {
-    width: auto;
-    flex: 0 1 auto;
+/* Reset y Normalización Global de Enlaces en el Formulario */
+.form a,
+.form a:link,
+.form a:visited,
+.form-options a,
+.form-options a:link,
+.form-options a:visited,
+.form-footer a,
+.form-footer a:link,
+.form-footer a:visited {
+    color: var(--color-accent-default); /* Color amarillo de la variable token */
+    text-decoration: none;
+    white-space: nowrap; /* Mantiene "¿Olvidaste tu contraseña?" en una sola línea */
+    font-size: inherit;
+    transition: opacity 0.2s ease, color 0.2s ease;
 }
 
-/* --- Divisor "o continuar con" --- */
+.form a:hover,
+.form-options a:hover,
+.form-footer a:hover {
+    color: var(--color-accent-active);
+    opacity: 0.85;
+    text-decoration: none;
+}
+
+/* Divisor y Footer */
 .form-divider {
     display: flex;
     align-items: center;
     text-align: center;
     color: var(--color-neutral-text-secondary);
-    font-family: var(--font-family-title), sans-serif;
     font-size: var(--text-caption-c1-size);
-    line-height: var(--text-caption-c1-line);
-    margin: var(--spacing-2xs) 0;
+    margin: var(--spacing-3xs) 0;
     width: 100%;
 }
 
@@ -223,89 +124,20 @@ input[type="checkbox"]:checked + label {
     padding: 0 var(--spacing-xs);
 }
 
-/* --- Mensaje de Error (Feedback UI) --- */
-.errorMessage,
-.form-error-message {
-    color: var(--color-warning-text-primary);
-    background-color: rgba(196, 23, 23, 0.1);
-    border: 1px solid var(--color-warning-text-primary);
-    border-radius: var(--spacing-2xs);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-family: var(--font-family-body), sans-serif;
-    font-size: var(--text-b3-size);
-    line-height: var(--text-b3-line);
-    text-align: center;
-    display: none;
-    width: 100%;
-}
-
-/* --- Footer & Enlaces --- */
 .form-footer {
     text-align: center;
-    font-family: var(--font-family-body), sans-serif;
     font-size: var(--text-caption-c1-size);
-    line-height: var(--text-caption-c1-line);
-    color: var(--color-neutral-text-primary);
-    margin-top: var(--spacing-xs);
+    margin-top: var(--spacing-3xs);
 }
 
-.atom-link {
-    color: var(--color-accent-default);
-    text-decoration: none;
-    font-weight: var(--font-weight-semibold);
-    margin-left: var(--spacing-2xs);
-    transition: color 0.2s ease;
-}
-
-.atom-link:hover {
-    color: var(--color-accent-hover);
-    text-decoration: underline;
-}
-
-.atom-link--forgot {
-    color: var(--color-accent-default);
-    font-family: var(--font-family-body), sans-serif;
-    font-size: var(--text-b3-size);
-    line-height: var(--text-b3-line);
-    font-weight: var(--font-weight-medium);
-    text-decoration: none;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-left: 0;
-    transition: color 0.2s ease;
-}
-
-.atom-link--forgot:hover {
-    color: var(--color-accent-hover);
-    text-decoration: underline;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1) brightness(1.2);
-    cursor: pointer;
-    opacity: 0.95;
-    transition: opacity 0.2s ease;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator:hover {
-    opacity: 1;
-}
-
-/* --- Adaptabilidad Responsive --- */
 @media (max-width: 600px) {
-    .form {
-        padding: var(--spacing-lg);
-    }
-
     .form-row-2,
     .form-row-3 {
         grid-template-columns: 1fr;
-        gap: var(--spacing-sm);
     }
 
     .form-options {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-wrap: wrap;
         gap: var(--spacing-2xs);
     }
 }

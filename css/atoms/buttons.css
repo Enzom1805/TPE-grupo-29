@@ -293,9 +293,9 @@
     /* Sintaxis: linear-gradient(...) posicion / tamaño */
     background: linear-gradient(
             90deg,
-            #0866FF 0%,
-            #1877F2 20%,
-            #0062E0 40%,
+            var(--color-media-primary) 0%,
+            var(--color-media-secondary-light) 20%,
+            var(--color-media-secondary-shadow) 40%,
             var(--color-secondary-surface-dropdown) 50%,
             var(--color-secondary-surface-dropdown) 100%
     ) 100% 0 / 220% 100%;
