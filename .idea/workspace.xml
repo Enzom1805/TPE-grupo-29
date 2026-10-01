@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ada8f-5d52-45e5-8673-f084c7c5d738" name="Changes" comment="solve an particular issue on Input.css">
+    <list default="true" id="cd2ada8f-5d52-45e5-8673-f084c7c5d738" name="Changes" comment="Fix some issues for the ghpages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/organisms/game-player.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/organisms/game-player.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/pages/game.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/pages/game.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/pages/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/pages/game.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +76,7 @@
   &quot;keyToString&quot;: {
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;JavaScript Debug.index.html.executor&quot;: &quot;Run&quot;,
-    &quot;JavaScript Debug.registro.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.register.html.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;Node.js.RegisterForm.js.executor&quot;: &quot;Run&quot;,
     &quot;Node.js.index.js.executor&quot;: &quot;Run&quot;,
@@ -112,16 +109,16 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="registro.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/TPE/pages/registro.html" useBuiltInWebServerPort="true">
+    <configuration name="register.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/TPE/pages/register.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.registro.html" />
-        <item itemvalue="JavaScript Debug.registro.html" />
-        <item itemvalue="JavaScript Debug.registro.html" />
-        <item itemvalue="JavaScript Debug.registro.html" />
-        <item itemvalue="JavaScript Debug.registro.html" />
+        <item itemvalue="JavaScript Debug.register.html" />
+        <item itemvalue="JavaScript Debug.register.html" />
+        <item itemvalue="JavaScript Debug.register.html" />
+        <item itemvalue="JavaScript Debug.register.html" />
+        <item itemvalue="JavaScript Debug.register.html" />
       </list>
     </recent_temporary>
   </component>
@@ -148,7 +145,8 @@
       <workItem from="1790553932745" duration="8786000" />
       <workItem from="1790795366012" duration="16702000" />
       <workItem from="1790815332384" duration="29000" />
-      <workItem from="1790820832603" duration="2420000" />
+      <workItem from="1790820832603" duration="4347000" />
+      <workItem from="1790825433119" duration="481000" />
     </task>
     <task id="LOCAL-00001" summary="Create new class models">
       <option name="closed" value="true" />
@@ -238,7 +236,31 @@
       <option name="project" value="LOCAL" />
       <updated>1790815292094</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added an img to cover the right side of the playable screen. In a future it will be a status bar for the game.">
+      <option name="closed" value="true" />
+      <created>1790823312190</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1790823312190</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Added an img to cover the right side of the playable screen. In a future it will be a status bar for the game.">
+      <option name="closed" value="true" />
+      <created>1790823316523</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1790823316523</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Fix some issues for the ghpages">
+      <option name="closed" value="true" />
+      <created>1790825171567</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1790825171567</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,6 +277,8 @@
     <MESSAGE value="improve a lot of things XD" />
     <MESSAGE value="Fixed some issues on the Login and Register form, also i added the reCaptcha field" />
     <MESSAGE value="solve an particular issue on Input.css" />
-    <option name="LAST_COMMIT_MESSAGE" value="solve an particular issue on Input.css" />
+    <MESSAGE value="Added an img to cover the right side of the playable screen. In a future it will be a status bar for the game." />
+    <MESSAGE value="Fix some issues for the ghpages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix some issues for the ghpages" />
   </component>
 </project>
