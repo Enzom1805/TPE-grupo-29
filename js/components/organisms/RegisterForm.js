@@ -1,5 +1,6 @@
 import FormField from '../molecules/FormField.js';
 import CheckboxField from '../molecules/CheckboxField.js';
+import CaptchaField from '../molecules/CaptchaField.js';
 import Button from '../atoms/Button.js';
 import Link from "../atoms/Link.js";
 import { validateRegisterForm, setupPasswordToggle } from '../../utils/validators.js';
@@ -18,8 +19,8 @@ export default function RegisterForm() {
     title.innerText = "Crear una cuenta";
     title.className = "form-h1";
 
-    const logo = Icon("../assets/icons/logo-crown-variant.svg", "Logo");
-    logo.classList.add("form-icon-logo");
+    const logo = Icon("../assets/icons/logo-form.svg", "Logo");
+
 
     mainHeaderContent.append(logo, title);
 
@@ -30,7 +31,7 @@ export default function RegisterForm() {
     requiredLegend.className = "form-required-legend";
     requiredLegend.innerText = "Los campos marcados con (*) son requeridos.";
 
-    // Campos
+    // Campos de texto
     const fullNameDiv = document.createElement("div");
     const nameField = FormField("Nombre", "text", "name", "Ingresá tu nombre", true);
     const lastNameField = FormField("Apellido", "text", "lastName", "Ingresá tu apellido", true);
@@ -46,7 +47,6 @@ export default function RegisterForm() {
     const agePostalCountryDiv = document.createElement("div");
     const birthDateField = FormField("Edad", "date", "birthdate", "", false);
     const postalCodeField = FormField("Código postal", "text", "postalcode", "B7000", false);
-
     const countryField = FormField("País", "select", "country", "Seleccioná tu país", false, countries);
 
     agePostalCountryDiv.append(birthDateField, postalCodeField, countryField);
@@ -57,12 +57,13 @@ export default function RegisterForm() {
     const confirmPasswordField = FormField("Repetí contraseña", "password", "password", "", true);
 
     setupPasswordToggle(passwordField.querySelector("input"));
+    setupPasswordToggle(confirmPasswordField.querySelector("input"));
 
-    // Checkboxes
+    // Checkbox de Términos y Componente Captcha Widget
     const termsField = CheckboxField("terms", "Acepto los términos y condiciones", true);
     termsField.classList.add("terms-field");
-    const captchaField = CheckboxField("captcha", "Confirma que no eres un robot", true);
-    captchaField.classList.add("captcha-field");
+
+    const captchaField = CaptchaField();
 
     // Botón Submit
     const submitBtn = Button("Registrarse", "submit");
@@ -106,7 +107,7 @@ export default function RegisterForm() {
             password: passwordField.querySelector("input")?.value,
             confirmPassword: confirmPasswordField.querySelector("input")?.value,
             terms: termsField.querySelector("input[type='checkbox']")?.checked,
-            captcha: captchaField.querySelector("input[type='checkbox']")?.checked
+            captchaValid: captchaField.isValid()
         };
 
         const error = validateRegisterForm(formData);

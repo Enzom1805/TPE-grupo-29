@@ -18,8 +18,7 @@ export default function LoginForm() {
     title.innerText = "Ingresar";
     title.className = "form-h1";
 
-    const logo = Icon("../assets/icons/logo-crown-variant.svg", "Logo");
-    logo.classList.add("form-icon-logo");
+    const logo = Icon("../assets/icons/logo-form.svg", "Logo");
 
     mainHeaderContent.append(logo, title);
 

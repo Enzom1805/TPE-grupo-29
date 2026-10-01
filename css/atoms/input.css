@@ -1,24 +1,72 @@
+/* ==========================================================================
+   Átomo: Input Base (.atom-input)
+   ========================================================================== */
+
 .atom-input {
     width: 100%;
-    padding: 0.75rem 1rem;
+    min-width: 0;
+    height: var(--spacing-2xl, 40px);
+    padding: 0 var(--spacing-sm, 16px);
 
-
-    /* Superficie oscura para el campo de texto */
     background-color: var(--color-secondary-background-page);
     border: 1px solid var(--color-neutral-border-strong);
-    border-radius: 8px;
+    border-radius: var(--spacing-xs, 10px); /* Borde redondeado ajustado */
+
     color: var(--color-neutral-text-primary);
+    font-family: var(--font-family-body), sans-serif;
+    font-size: var(--text-b3-size);
+    line-height: var(--text-b3-line);
+
     outline: none;
     box-sizing: border-box;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color-scheme: dark; /* Adapta controles nativos a tema oscuro */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
+/* Icono del almanaque blanco/claro para inputs tipo date */
+.atom-input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(1) brightness(1.8) !important; /* Forzado a blanco brillante */
+    opacity: 0.9;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.atom-input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Placeholder */
 .atom-input::placeholder {
     color: var(--color-neutral-text-secondary);
+    opacity: 0.75;
 }
 
-/* Al hacer foco, usa el token primary/focus-ring */
+/* Hover y Focus */
+.atom-input:hover {
+    border-color: var(--color-primary-focus-ring);
+}
+
 .atom-input:focus {
     border-color: var(--color-primary-focus-ring);
     box-shadow: 0 0 0 2px var(--color-primary-focus-ring);
+    background-color: var(--color-secondary-background-page);
+}
+
+/* Autocompletado nativo */
+.atom-input:-webkit-autofill,
+.atom-input:-webkit-autofill:hover,
+.atom-input:-webkit-autofill:focus,
+.atom-input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--color-neutral-text-primary);
+    box-shadow: 0 0 0px 1000px var(--color-secondary-background-page) inset;
+    transition: background-color 50000s ease-in-out 0s;
+}
+
+/* Menú desplegable para cuando .atom-input es un <select> */
+.atom-input option {
+    background-color: var(--color-secondary-surface-dropdown);
+    color: var(--color-neutral-text-primary);
 }
