@@ -73,9 +73,18 @@
     width: 18px;
     height: 18px;
     background-color: currentColor;
-    -webkit-mask: url("/assets/icons/logout-svg.svg") no-repeat center / contain;
-    mask: url("/assets/icons/logout-svg.svg") no-repeat center / contain;
-    /* Estado inicial: oculto y desplazado ligeramente hacia la izquierda */
+
+    /* Aplica la máscara usando la variable definida en icons.css */
+    -webkit-mask-image: var(--icon-logout-path);
+    mask-image: var(--icon-logout-path);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+
+    /* Estado inicial */
     opacity: 0;
     transform: translateX(-8px);
     transition: transform 0.3s ease, opacity 0.3s ease;

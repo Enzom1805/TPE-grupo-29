@@ -121,7 +121,7 @@ export default function LoginForm() {
 
     const registerLink = Link(
         "Crear una",
-        "registro.html"
+        "register.html"
     );
 
     footerText.appendChild(registerLink);
