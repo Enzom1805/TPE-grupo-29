@@ -6,24 +6,25 @@
 @import url('./molecules/share-group.css');
 @import url('./molecules/help-menu.css');
 /* Asegura que el contenedor principal de la App se adapte y centre */
-#app {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-}
+
 body {
     margin: 0;
     min-height: 100dvh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: var(--spacing-md);
-    box-sizing: border-box;
     background-color: var(--color-secondary-background-page);
+    color: var(--color-neutral-text-primary);
+    font-family: var(--font-family-body), sans-serif;
+    box-sizing: border-box;
 }
 
+/* El contenedor principal de la App se adapta con normalidad */
+#app {
+    width: 100%;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* El centrado por flexbox se reserva exclusivamente para el Login / Auth */
 body.auth-page {
     min-height: 100vh;
     display: flex;
