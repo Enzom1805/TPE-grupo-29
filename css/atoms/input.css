@@ -61,7 +61,7 @@
 .atom-input:-webkit-autofill:focus,
 .atom-input:-webkit-autofill:active {
     -webkit-text-fill-color: var(--color-neutral-text-primary);
-    box-shadow: 0 0 0px 1000px var(--color-secondary-background-page) inset;
+    box-shadow: 0 0 0 1000px var(--color-secondary-background-page) inset;
     transition: background-color 50000s ease-in-out 0s;
 }
 
