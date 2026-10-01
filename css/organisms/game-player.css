@@ -2,31 +2,29 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-top: var(--spacing-2xl);
     background-color: var(--color-secondary-background-page);
 }
 
 .game-frame__screen {
     width: 100%;
-    max-width: 1200px;
-    aspect-ratio: 16 / 9;
+    max-width: 1200px;       /* Reducimos el ancho máximo para que el juego no se vea tan enorme */
+    aspect-ratio: 16 / 9;    /* Volvemos a la proporción clásica y equilibrada */
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 2rem;
-    /* fondo de Batman */
+    padding: 1.5rem;
+
+    /* Fondo de Batman */
     background-image: url('../../assets/images/batmanBackground.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-
     border: 2px solid #333;
     border-radius: 8px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.8);
 }
-
 /* titulo con la fuente DkcForever */
 .game-frame__title {
     font-family: var(--font-family-batman), sans-serif;

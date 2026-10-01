@@ -81,9 +81,9 @@ export default function Footer() {
     const catCol = createNavColumn('Categorias', ['Acción', 'Deportes', 'Estrategia', 'Aventura', 'Pelea']);
     const supportCol = createNavColumn('Soporte', ['Ayuda', 'Desarrolladores', 'Contacto', 'FAQ', 'Comunidad']);
     const legalCol = createNavColumn('Legal', ['Privacidad', 'Terminos de Servicio', 'Politica de Cookies', 'Accesibilidad']);
-
+    const communityCol = createNavColumn('Comunidad', ['Blog', 'Torneos', 'Discord', 'Prensa', 'Streamers']);
     // Ensamblamos el Grid principal
-    mainContainer.append(brandCol, catCol, supportCol, legalCol);
+    mainContainer.append(brandCol, catCol, supportCol, legalCol, communityCol);
 
     // --- Barra inferior ---
     const bottomBar = document.createElement('div');

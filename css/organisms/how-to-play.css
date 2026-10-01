@@ -3,8 +3,9 @@
    ========================================================================== */
 
 .how-to-play {
-    width: 100%;
-    max-width: 1300px; /* Ancho idéntico al viewport del juego (.game-frame__screen) */
+    width: 100%;             /* Ocupa el 100% del espacio asignado en su columna */
+    max-width: none;
+    aspect-ratio: 16 / 9;
     margin: var(--spacing-2xl) auto;
     padding: 0 var(--spacing-lg);
     background-color: transparent; /* Integrado al fondo de la página */

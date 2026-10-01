@@ -1,6 +1,6 @@
 .molecule-breadcrumbs {
     font-family: var(--font-family-body), sans-serif;
-    margin: 1rem 1rem;
+    margin: 0.5rem 1rem;
 }
 
 .breadcrumbs__list {

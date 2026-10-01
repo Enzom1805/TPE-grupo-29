@@ -46,18 +46,19 @@ export default function GameCard(game) {
     card.appendChild(info);
 
     const badge = document.createElement("div");
-    // Agregamos la clase base del listón
     badge.className = "game-card__badge";
 
-    // Modificador y texto según el nivel de acceso
     if (game.accessLevel === "Premium") {
         badge.classList.add("game-card__badge--premium");
-        badge.textContent = "Premium";
+        const crownIcon = document.createElement("img");
+        crownIcon.src = "../assets/icons/crown-2.svg";
+
+        badge.appendChild(crownIcon);
+
     } else {
         badge.classList.add("game-card__badge--free");
         badge.textContent = "Gratis";
     }
-
     card.appendChild(badge);
 
     card.appendChild(badge);

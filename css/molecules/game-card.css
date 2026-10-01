@@ -74,6 +74,8 @@
     transition: all 0.3s ease;
     padding: 2px 8px;
     flex-shrink: 0;
+    background-color: color-mix(in srgb, var(--color-primary-default) 60%, transparent) !important;
+    color: var(--color-neutral-text-primary);
 }
 
 
@@ -86,30 +88,42 @@
     top: 14px;
     right: -32px;
     width: 120px;
+    height: 20px;
     padding: 4px 0;
     text-align: center;
-    /* Inclinación de 45 grados */
     transform: rotate(45deg);
     font-family: var(--font-family-title), sans-serif;
     font-size: 11px;
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
-    letter-spacing: var(--spacing-3xs);
+    letter-spacing: 1px;
     z-index: 5;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+    background-color: var(--color-primary-default);
+    color: var(--color-neutral-text-primary, #fff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .game-card__badge--premium {
-    background-color: var(--color-accent-default);
+    background-color: var(--color-primary-hover);
     color: var(--color-secondary-background-page, #12101a);
-    font-size: var(--text-caption-c2-size);
-    font-weight: var(--font-weight-semibold);
     letter-spacing: 0.5px;
 }
 
 .game-card__badge--free {
     background-color: var(--color-primary-default);
     color: var(--color-neutral-text-primary, #fff);
+}
+
+.game-card__badge-icon {
+    width: 16px; /* Dejalo en el tamaño original que no te rompía el listón */
+    height: auto;
+    display: block;
+
+    /* ACÁ ESTÁ LA MAGIA: scale(1.5) lo hace 50% más grande sin desarmar la caja */
+    transform: translateY(1px) scale(1.5);
 }
 
 
