@@ -13,7 +13,7 @@ export default function HelpButton() {
     helpBtn.className = 'atom-button--help';
 
     const helpIcon = document.createElement('img');
-    helpIcon.src = '../../assets/icons/help.svg';
+    helpIcon.src = '../assets/icons/help.svg';
     helpIcon.alt = 'Ayuda';
 
     helpBtn.appendChild(helpIcon);

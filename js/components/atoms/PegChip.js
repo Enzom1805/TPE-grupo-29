@@ -15,7 +15,7 @@ export default function PegChip(initialState = 'filled') {
 
         // Creamos la imagen del murciélago
         const batIcon = document.createElement('img');
-        batIcon.src = '../../assets/images/bat.png';
+        batIcon.src = '../assets/images/bat.png';
         batIcon.className = 'atom-peg__icon';
         batIcon.alt = 'Ficha de Batman';
         batIcon.draggable = false;

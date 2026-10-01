@@ -127,6 +127,12 @@
     -webkit-mask-image: url('../../assets/icons/nav-arrow-right.svg');
 }
 
+.icon-logout{
+    mask-image: url('../../assets/icons/logout-svg.svg');
+    -webkit-mask-image: url('../../assets/icons/logout-svg.svg');
+}
+
+
 .icon-play {
     mask-image: url('../../assets/icons/play.svg');
     -webkit-mask-image: url('../../assets/icons/play.svg');
