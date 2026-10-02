@@ -1,6 +1,11 @@
 // src/js/molecules/CaptchaField.js
 
 export default function CaptchaField() {
+    // Wrapper exterior (sirve como contenedor flex para la molécula y el error)
+    const wrapper = document.createElement("div");
+    wrapper.className = "molecule-captcha-field";
+
+    // Recuadro visible de KinglyGuard
     const container = document.createElement("div");
     container.className = "captcha-widget";
 
@@ -55,6 +60,7 @@ export default function CaptchaField() {
     rightGroup.append(logoIcon, brandTitle, brandSub);
 
     container.append(leftGroup, rightGroup);
+    wrapper.appendChild(container);
 
     // Interacción: Simula la verificación del Captcha al marcar el checkbox
     checkbox.addEventListener("change", () => {
@@ -73,14 +79,14 @@ export default function CaptchaField() {
         }
     });
 
-    // Métodos públicos
-    container.isValid = () => isVerified;
-    container.reset = () => {
+    // Métodos públicos asociados al wrapper
+    wrapper.isValid = () => isVerified;
+    wrapper.reset = () => {
         isVerified = false;
         checkbox.checked = false;
         checkbox.disabled = false;
         container.classList.remove("is-loading", "is-verified");
     };
 
-    return container;
+    return wrapper;
 }

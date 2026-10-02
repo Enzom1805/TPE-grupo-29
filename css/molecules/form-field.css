@@ -2,6 +2,7 @@
    Molécula: FormField & CheckboxField (Estilos Atómicos)
    ========================================================================== */
 
+/* 1. Contenedores Principales */
 .molecule-form-field {
     display: flex;
     flex-direction: column;
@@ -10,14 +11,13 @@
     min-width: 0;
 }
 
-/* Header del campo: Label + Asterisco */
+/* 2. Cabecera del Campo (Label + (*) Requerido) */
 .form-field-header {
     display: flex;
+    align-items: center;
     justify-content: flex-start;
-    align-items: baseline;
     gap: var(--spacing-3xs);
     width: 100%;
-    min-height: var(--text-b3-line);
 }
 
 .atom-label,
@@ -40,7 +40,7 @@
     flex-shrink: 0;
 }
 
-/* Componente Contraseña */
+/* 3. Componente Contraseña */
 .password-input-wrapper {
     position: relative;
     display: flex;
@@ -52,7 +52,6 @@
     padding-right: var(--spacing-2xl);
 }
 
-/* Botón Mostrar/Ocultar Contraseña (Ojito blanco radiante) */
 .toggle-password-btn {
     position: absolute;
     right: var(--spacing-xs);
@@ -68,7 +67,7 @@
     justify-content: center;
     color: var(--color-neutral-text-primary, #ffffff);
     z-index: 2;
-    filter: brightness(0) invert(1) !important; /* Fuerza el icono a blanco en tema oscuro */
+    filter: brightness(0) invert(1) !important;
     opacity: 0.85;
     transition: opacity 0.2s ease, transform 0.2s ease;
 }
@@ -87,13 +86,13 @@
     stroke: currentColor;
 }
 
-/* --- Checkbox Molécula --- */
+/* 4. Checkbox Molécula */
 .molecule-checkbox-field {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: var(--spacing-xs);
-    width: auto;
+    width: 100%;
 }
 
 .molecule-checkbox-field input[type="checkbox"] {
@@ -116,7 +115,6 @@
     align-items: center;
 }
 
-/* Espaciado mínimo entre label del checkbox y asterisco */
 .molecule-checkbox-field .form-field-required {
     margin-left: 3px;
 }
