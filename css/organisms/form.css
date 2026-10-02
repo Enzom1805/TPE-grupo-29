@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Organismo: Formulario (Layout y Estructura)
+   Organismo: Formulario (Layout, Estructura y Estilos de Error)
    ========================================================================== */
 
 .form,
@@ -8,6 +8,10 @@
 .form *::after {
     box-sizing: border-box;
 }
+
+/* ==========================================================================
+   Animaciones y Estados del Formulario
+   ========================================================================== */
 
 .form {
     display: flex;
@@ -23,6 +27,29 @@
     box-shadow: 0 10px 30px var(--color-secondary-shadow-deep);
     color: var(--color-neutral-text-primary);
     font-family: var(--font-family-body), sans-serif;
+
+    /* Animación suave para elevación, borde y sombra */
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+/* Keyframes para el efecto sacudida */
+@keyframes form-shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60%  { transform: translateX(-8px); }
+    40%, 80%  { transform: translateX(8px); }
+}
+
+/* Estado de Error al Enviar */
+.form.form--error {
+    border-color: var(--color-warning-text-primary, #ef4444);
+    box-shadow: 0 10px 30px rgba(239, 68, 68, 0.25);
+    animation: form-shake 0.4s ease-in-out;
+}
+
+/* Estado de Éxito al Enviar */
+.form.form--success {
+    border-color: var(--color-success-background-primary, #22c55e);
+    box-shadow: 0 14px 35px rgba(34, 197, 94, 0.25);
+    transform: translateY(-4px);
 }
 
 /* Header Organismo */
@@ -67,7 +94,30 @@
     min-width: 0;
 }
 
-/* Opciones (Recordarme + Enlace Olvidaste tu contraseña) */
+/* ==========================================================================
+   Manejo de Errores Contextualizado en el Formulario
+   ========================================================================== */
+
+/* Alineación y estilo del span/p de error inyectado en el header del campo */
+.form .form-field-header span.field-error,
+.form .form-field-header p.field-error,
+.form .field-error {
+    margin-left: auto;
+    font-size: var(--text-caption-c1-size);
+    line-height: 1;
+    color: var(--color-warning-text-primary);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+}
+
+/* Borde rojo para inputs/selects con error dentro del formulario */
+.form input.input-error,
+.form select.input-error,
+.form .input-error {
+    border-color: var(--color-warning-text-primary) !important;
+}
+
+/* Opciones */
 .form-options {
     display: flex;
     justify-content: space-between;
@@ -77,7 +127,7 @@
     font-size: var(--text-b3-size);
 }
 
-/* Reset y Normalización Global de Enlaces en el Formulario */
+/* Reset y Normalización Global de Enlaces */
 .form a,
 .form a:link,
 .form a:visited,
@@ -87,9 +137,9 @@
 .form-footer a,
 .form-footer a:link,
 .form-footer a:visited {
-    color: var(--color-accent-default); /* Color amarillo de la variable token */
+    color: var(--color-accent-default);
     text-decoration: none;
-    white-space: nowrap; /* Mantiene "¿Olvidaste tu contraseña?" en una sola línea */
+    white-space: nowrap;
     font-size: inherit;
     transition: opacity 0.2s ease, color 0.2s ease;
 }

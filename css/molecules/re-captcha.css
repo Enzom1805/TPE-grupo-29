@@ -2,6 +2,15 @@
    Molécula: Captcha Widget (KinglyGuard)
    ========================================================================== */
 
+/* Contenedor Wrapper de la molécula */
+.molecule-captcha-field {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: var(--spacing-xs);
+}
+
 .captcha-widget {
     display: flex;
     justify-content: space-between;
@@ -17,6 +26,7 @@
     box-shadow: 0 2px 8px var(--color-secondary-shadow-deep);
     user-select: none;
     box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 /* Lado Izquierdo: Checkbox y Texto */

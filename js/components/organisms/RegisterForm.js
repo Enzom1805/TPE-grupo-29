@@ -3,15 +3,16 @@ import CheckboxField from '../molecules/CheckboxField.js';
 import CaptchaField from '../molecules/CaptchaField.js';
 import Button from '../atoms/Button.js';
 import Link from "../atoms/Link.js";
-import { validateRegisterForm, setupPasswordToggle } from '../../utils/validators.js';
+import { validateRegisterForm, setupPasswordToggle, applyFormErrors } from '../../utils/validators.js';
 import Icon from "../atoms/Icon.js";
 import { countries } from '../../data/countries.js';
 
 export default function RegisterForm() {
     const form = document.createElement("form");
     form.className = "form";
+    form.noValidate = true;
 
-    // Header
+    // Header Organismo
     const mainHeaderContent = document.createElement("div");
     mainHeaderContent.className = "form-header";
 
@@ -20,8 +21,6 @@ export default function RegisterForm() {
     title.className = "form-h1";
 
     const logo = Icon("../assets/icons/logo-form.svg", "Logo");
-
-
     mainHeaderContent.append(logo, title);
 
     const subTitle = document.createElement("p");
@@ -54,16 +53,27 @@ export default function RegisterForm() {
 
     // Campos de contraseña
     const passwordField = FormField("Contraseña", "password", "password", "Mínimo 6 caracteres", true);
-    const confirmPasswordField = FormField("Repetí contraseña", "password", "password", "", true);
+    const confirmPasswordField = FormField("Repetí contraseña", "password", "confirmPassword", "", true);
 
     setupPasswordToggle(passwordField.querySelector("input"));
     setupPasswordToggle(confirmPasswordField.querySelector("input"));
 
-    // Checkbox de Términos y Componente Captcha Widget
+    // Checkbox y Captcha
     const termsField = CheckboxField("terms", "Acepto los términos y condiciones", true);
     termsField.classList.add("terms-field");
 
     const captchaField = CaptchaField();
+
+    // Mapeo entre la clave de error y la molécula DOM
+    const fieldsMap = {
+        name: nameField,
+        lastName: lastNameField,
+        email: emailField,
+        password: passwordField,
+        confirmPassword: confirmPasswordField,
+        terms: termsField,
+        captchaValid: captchaField
+    };
 
     // Botón Submit
     const submitBtn = Button("Registrarse", "submit");
@@ -93,10 +103,8 @@ export default function RegisterForm() {
     const loginLink = Link("Ingresar", "login.html");
     footerText.appendChild(loginLink);
 
-    // Mensaje de Error
-    const errorMessage = document.createElement("div");
-    errorMessage.className = "form-error-message";
 
+// Submit handler
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -107,30 +115,42 @@ export default function RegisterForm() {
             password: passwordField.querySelector("input")?.value,
             confirmPassword: confirmPasswordField.querySelector("input")?.value,
             terms: termsField.querySelector("input[type='checkbox']")?.checked,
-            captchaValid: captchaField.isValid()
+            captchaValid: typeof captchaField.isValid === "function" ? captchaField.isValid() : true
         };
 
-        const error = validateRegisterForm(formData);
+        const errors = validateRegisterForm(formData);
 
-        if (error) {
-            errorMessage.textContent = error;
-            errorMessage.style.display = "block";
+        // Aplica o limpia los errores individuales en los campos
+        applyFormErrors(fieldsMap, errors);
+
+        if (errors) {
+            // Reinicia la clase para re-ejecutar la animación si vuelve a presionar submit
+            form.classList.remove("form--error");
+            void form.offsetWidth; // Fuerza un reflow rápido del DOM
+            form.classList.add("form--error");
             return;
         }
 
-        errorMessage.style.display = "none";
+        // Limpia el estado de error si la validación pasa
+        form.classList.remove("form--error");
+
+        // Proceso de submit exitoso
         submitBtn.disabled = true;
         submitBtn.classList.add("atom-button--loading");
 
         setTimeout(() => {
             submitBtn.classList.remove("atom-button--loading");
             submitBtn.classList.add("atom-button--success");
+
+            // Activa elevación y sombra verde de éxito
+            form.classList.add("form--success");
+
             const btnSpan = submitBtn.querySelector("span");
             if (btnSpan) btnSpan.textContent = "✓ ¡Cuenta creada!";
 
             setTimeout(() => {
                 window.location.href = "login.html";
-            }, 1000);
+            }, 1200);
         }, 1500);
     });
 
@@ -138,7 +158,6 @@ export default function RegisterForm() {
         mainHeaderContent,
         subTitle,
         requiredLegend,
-        errorMessage,
         fullNameDiv,
         emailPhoneDiv,
         agePostalCountryDiv,
