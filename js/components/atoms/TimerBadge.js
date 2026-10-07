@@ -1,0 +1,1 @@
+/** Muestra el tiempo transcurrido o la cuenta regresiva formateada (MM:SS). **/

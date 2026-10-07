@@ -1,0 +1,1 @@
+/** Contenedor de la grilla de subimágenes (2 x 2, 2 x 3, etc.). Controla el estado de rotación de cada pieza y valida la condición de victoria. **/
