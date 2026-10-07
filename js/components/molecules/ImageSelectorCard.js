@@ -1,0 +1,1 @@
+/** Muestra la miniatura (thumbnail) animada durante la selección aleatoria de imagen (Extra 1). **/

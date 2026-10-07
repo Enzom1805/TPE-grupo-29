@@ -1,0 +1,1 @@
+/** Panel u overlay modal accesible que explica los controles (click izq/der) y la mecánica de filtros. **/

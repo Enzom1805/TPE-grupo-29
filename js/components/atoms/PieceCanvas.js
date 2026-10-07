@@ -1,0 +1,1 @@
+/** Renderiza un lienzo <canvas> individual para una subimagen. Captura eventos click y contextmenu (click derecho). **/

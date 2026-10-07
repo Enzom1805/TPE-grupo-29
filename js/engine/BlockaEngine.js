@@ -1,0 +1,1 @@
+/** Logica matematica, Canvas API, corte y manipulacion de pixeles **/

@@ -1,0 +1,1 @@
+/** Conecta el BlockaPlayer con el Header, Footer y Community (foro) para mantener la misma estructura institucional del sitio **/
