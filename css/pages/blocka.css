@@ -1,1 +1,227 @@
-/** Estilos globales y layout de la página del juego **/
+/* css/pages/blocka.css */
+
+/* ==========================================================================
+   Estructura Principal (Pantalla Completa y Centrado sin Scroll)
+   ========================================================================== */
+
+.blocka-game-frame {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: calc(100vh - 90px);
+    padding: var(--spacing-sm) var(--spacing-md);
+    box-sizing: border-box;
+}
+
+/* Workspace principal: Tablero + Sidebar Lateral */
+.blocka-workspace {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-xl);
+    width: 100%;
+    min-height: 540px;
+    background-color: var(--color-secondary-surface-elevated);
+    border: 1px solid var(--color-neutral-border-strong);
+    border-radius: var(--spacing-md);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    box-shadow: 0 16px 36px var(--color-secondary-shadow-deep);
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Contenedor y Tablero de Juego
+   ========================================================================== */
+
+.blocka-workspace__board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    padding: var(--spacing-md);
+    box-sizing: border-box;
+}
+
+/* El Tablero contenedor: respeta la relación 16:9 de imágenes 1280x720 */
+.organism-blocka-board {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols, var(--grid-size, 2)), 1fr);
+    grid-template-rows: repeat(var(--grid-rows, var(--grid-size, 2)), 1fr);
+    gap: 6px;
+    justify-content: center;
+    align-content: center;
+    padding: var(--spacing-sm, 12px);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 680px; /* Tamaño panorámico adecuado para 16:9 */
+    aspect-ratio: var(--board-aspect, 16 / 9); /* Mantiene la proporción sin deformar */
+    margin: 0 auto;
+}
+
+/* Variables para la cantidad de columnas según el nivel */
+.organism-blocka-board--2x2 { --grid-size: 2; }
+.organism-blocka-board--3x3 { --grid-size: 3; }
+.organism-blocka-board--4x4 { --grid-size: 4; }
+.organism-blocka-board--5x5 { --grid-size: 5; }
+
+/* ==========================================================================
+   Piezas / Canvas Atómicos
+   ========================================================================== */
+
+.atom-canvas-piece {
+    cursor: pointer;
+    border-radius: 4px;
+    transition: scale 0.2s ease, filter 0.2s ease, outline 0.2s ease;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+
+/* Hover independiente de la rotación */
+.atom-canvas-piece:not(.atom-canvas-piece--fixed):hover {
+    z-index: 10;
+    scale: 1.03;
+    filter: brightness(1.15) contrast(1.05);
+    outline: 2px solid var(--color-accent-default, #fcd34d);
+    outline-offset: -2px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.atom-canvas-piece:not(.atom-canvas-piece--fixed):active {
+    scale: 0.98;
+}
+
+.atom-canvas-piece--fixed {
+    cursor: not-allowed;
+    opacity: 0.85;
+}
+
+/* ==========================================================================
+   Sidebar Lateral de Métricas
+   ========================================================================== */
+
+.blocka-workspace__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    width: 280px;
+    flex-shrink: 0;
+    background-color: var(--color-secondary-surface-dropdown);
+    padding: var(--spacing-lg);
+    border-radius: var(--spacing-sm);
+    border: 1px solid var(--color-neutral-border-strong);
+    box-sizing: border-box;
+}
+
+.blocka-sidebar__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blocka-sidebar__badge {
+    font-family: var(--font-family-title), sans-serif;
+    font-size: var(--text-s1-size);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent-default);
+    background-color: rgba(252, 211, 77, 0.1);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--spacing-xl);
+    border: 1px solid var(--color-accent-default);
+    text-align: center;
+    width: 100%;
+}
+
+.blocka-sidebar__stats {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs, 10px);
+    width: 100%;
+}
+
+.blocka-stat-card {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--spacing-3xs);
+    background-color: var(--color-secondary-surface-elevated);
+    border: 1px solid var(--color-neutral-border-strong);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--spacing-xs);
+}
+
+.blocka-stat-card__label {
+    font-family: var(--font-family-body), sans-serif;
+    font-size: var(--text-caption-c1-size);
+    line-height: var(--text-caption-c1-line);
+    color: var(--color-neutral-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.blocka-stat-card__value {
+    font-family: var(--font-family-title), sans-serif;
+    font-size: var(--text-s1-size);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-text-primary);
+}
+
+/* Acciones en el lateral */
+.blocka-sidebar__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs, 10px);
+    width: 100%;
+}
+.blocka-sidebar__actions .atom-button {
+    width: 100%;
+    border-radius: 50px; /* Píldora uniforme para todos los botones de acción */
+}
+/* Tarjeta de Contador de Movimientos y Timer unificados */
+.blocka-stat-card,
+.blocka-sidebar__stats > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-3xs);
+    background-color: var(--color-secondary-surface-elevated);
+    border: 1px solid var(--color-neutral-border-strong);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: 12px; /* Borde unificado para los trackers */
+    min-height: 52px;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Adaptabilidad Responsiva
+   ========================================================================== */
+
+@media (max-width: 900px) {
+    .blocka-game-frame {
+        min-height: auto;
+    }
+
+    .blocka-workspace {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .blocka-workspace__sidebar {
+        width: 100%;
+    }
+}

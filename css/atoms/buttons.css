@@ -1,3 +1,5 @@
+/* css/atoms/buttons.css */
+
 /* Estilo Base para TODOS los botones */
 .atom-button {
     display: inline-flex;
@@ -10,12 +12,22 @@
     font-weight: var(--font-weight-semibold);
     transition: all 0.2s ease-in-out;
     box-sizing: border-box;
+    white-space: nowrap;
 }
+
+/* Alineación para íconos dentro de botones */
+.atom-button .atom-button__icon,
+.atom-button .icon-svg {
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
 .atom-button--small {
     font-size: var(--btn-font-small-size);
     line-height: var(--btn-font-small-line);
     padding: 4px 15px;
 }
+
 /* --- Tamaños de Botón --- */
 .atom-button--medium {
     font-size: var(--btn-font-medium-size);
@@ -28,15 +40,15 @@
     font-size: var(--btn-font-large-size);
     line-height: var(--btn-font-large-line);
     padding: 6px 20px;
-
 }
 
 /* --- Variantes de Color/Estilo --- */
 
-/* 1. Botón Primario (Registrarse) */
+/* 1. Botón Primario (Registrarse / Acciones de Juego) */
 .atom-button--primary {
     background-color: var(--color-primary-default);
     color: var(--color-neutral-text-primary);
+    border: 1px solid transparent;
     box-shadow: 0 0 15px rgba(109, 40, 217, 0.4);
 }
 
@@ -56,7 +68,7 @@
     border: 1px solid var(--color-primary-focus-ring);
     border-radius: 5px;
     width: 100%;
-    font-family: var(--font-family-body),sans-serif;
+    font-family: var(--font-family-body), sans-serif;
     font-weight: var(--font-weight-medium);
     font-size: var(--text-b3-size);
 }
@@ -70,7 +82,6 @@
     background-color: var(--color-primary-default);
     color: var(--color-neutral-text-primary);
     border-radius: 12px;
-
 }
 
 .atom-button--play:hover {
@@ -93,19 +104,18 @@
     transform: scale(1.05);
 }
 
-
 .atom-button--carousel svg {
     width: 32px;
     height: 32px;
 }
 
-
 .atom-button--hidden {
-    opacity: 0 ;
-    visibility: hidden ;
+    opacity: 0;
+    visibility: hidden;
     pointer-events: none;
 }
-/* 5. Boton Social para el juego (google,facebook,ig,twitter,msg) */
+
+/* 5. Boton Social para el juego */
 .atom-button--social-game {
     font-family: var(--font-family-batman), sans-serif;
     font-size: var(--text-caption-c2-size);
@@ -126,7 +136,6 @@
 }
 
 .atom-button--social-game .atom-button__text {
-
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -136,19 +145,20 @@
     font-size: 1rem;
     color: var(--color-neutral-text-primary);
 }
+
 .atom-button--social-game:hover {
     background-color: color-mix(in srgb, #7b7586 80%, black);
     transform: scale(0.98);
 }
-/* 6. Boton Ayuda (Juego peg) */
-.atom-button--help {
-    background: transparent ;
-    border: none ;
-    padding: 0;
-    width: 40px ;
-    height: 40px ;
-    box-shadow: none ;
 
+/* 6. Boton Ayuda */
+.atom-button--help {
+    background: transparent;
+    border: none;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    box-shadow: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -156,7 +166,6 @@
     cursor: pointer;
     transition: transform 0.2s ease, filter 0.2s ease;
 }
-
 
 .atom-button--help img {
     width: 100%;
@@ -168,24 +177,44 @@
     transform: scale(1.1);
     filter: drop-shadow(0 4px 10px rgba(0,0,0,0.8));
 }
-/* 7. Botón de Juego 2 (Play para Hero card) */
+
+/* 7. Botón Hero */
 .atom-button--hero {
     background-color: var(--color-accent-default);
     color: var(--color-secondary-chrome-header-footer);
     border-radius: 12px;
-
 }
 
 .atom-button--hero:hover {
     background-color: var(--color-accent-hover);
 }
+
+/* 8. Botón Secundario */
+.atom-button--secondary {
+    background-color: var(--color-secondary-surface-dropdown);
+    color: var(--color-neutral-text-primary);
+    border: 1px solid var(--color-neutral-border-strong);
+    border-radius: 50px;
+}
+
+.atom-button--secondary:hover {
+    background-color: var(--color-primary-hover);
+    border-color: var(--color-primary-focus-ring);
+}
+
+.atom-button__icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+}
+
 /* --- Estados de Carga y Éxito --- */
 .atom-button--loading {
     pointer-events: none;
     opacity: 0.85;
 }
 
-/* Spinner circular en CSS puro */
 .atom-button--loading::after {
     content: "";
     width: 14px;
@@ -198,35 +227,21 @@
 }
 
 @keyframes button-spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-/* Estado Éxito */
 .atom-button--success {
     background-color: var(--color-success-background-primary);
-    border-color: #10b981 ;
+    border-color: #10b981;
     color: var(--color-neutral-text-primary);
-    box-shadow: 0 0 15px var(--color-success-shadow) ;
+    box-shadow: 0 0 15px var(--color-success-shadow);
 }
 
-
-
-/* Efectos para el boton de google en registrar */
-
-/* --- Botón Especial Google (Efecto Sweep + Reemplazo de texto) --- */
-
-/* GOOGLE */
-
+/* --- Botones Especiales Sweep --- */
 .atom-button--google {
     position: relative;
-    overflow: hidden; /* Oculta el texto que sale y el que entra fuera de los bordes */
-
-    /* Gradiente amplio de fondo */
+    overflow: hidden;
     background: linear-gradient(
             90deg,
             var(--color-secondary-surface-dropdown) 0%,
@@ -237,25 +252,22 @@
             var(--color-success-background-primary) 100%
     );
     background-size: 220% 100%;
-    /* Transición suave para el fondo al hacer y deshacer hover */
     transition: background-position 0.6s ease-out;
 }
 
-/* 1. Texto original dentro del botón (el <span> que crea Button.js) */
 .atom-button--google span {
-    display: inline-block; /* Necesario para que transform: translateX funcione */
+    display: inline-block;
     transition: transform 0.5s ease-out, opacity 0.4s ease-out;
     transform: translateX(0);
     opacity: 1;
 }
 
-/* 2. Nuevo texto que entra desde la derecha (::before) */
 .atom-button--google::before {
     content: "Continuar con Google";
     position: absolute;
     top: 50%;
-    left: 150%; /* Comienza fuera del botón a la derecha */
-    transform: translate(-50%, -50%); /* Centrado perfecto horizontal y vertical */
+    left: 150%;
+    transform: translate(-50%, -50%);
     font-family: inherit;
     font-weight: 900;
     font-size: var(--text-b2-size);
@@ -265,32 +277,23 @@
     transition: left 0.5s ease-out, opacity 0.4s ease-out;
 }
 
-/* --- ESTADO HOVER --- */
-
-/* a) El fondo se desplaza a la izquierda */
 .atom-button--google:hover {
     background-position: 100%;
 }
 
-/* b) El texto original (span) se va hacia la izquierda y desaparece */
 .atom-button--google:hover span {
     transform: translateX(-150%);
     opacity: 0;
 }
 
-/* c) El nuevo texto (::before) entra al centro desde la derecha */
 .atom-button--google:hover::before {
     left: 50%;
     opacity: 1;
 }
 
-/* FACEBOOK */
-
 .atom-button--facebook {
     position: relative;
     overflow: hidden;
-
-    /* Sintaxis: linear-gradient(...) posicion / tamaño */
     background: linear-gradient(
             90deg,
             var(--color-media-primary) 0%,
@@ -299,11 +302,9 @@
             var(--color-secondary-surface-dropdown) 50%,
             var(--color-secondary-surface-dropdown) 100%
     ) 100% 0 / 220% 100%;
-
     transition: background-position 0.5s ease-out;
 }
 
-/* 1. Texto original (span generado por Button.js) */
 .atom-button--facebook span {
     display: inline-block;
     transition: transform 0.5s ease-out, opacity 0.4s ease-out;
@@ -311,13 +312,12 @@
     opacity: 1;
 }
 
-/* 2. Nuevo texto que entra desde la izquierda (::before) */
 .atom-button--facebook::before {
     content: "Continuar con Facebook";
     position: absolute;
     top: 50%;
-    left: -50%; /* Comienza fuera a la izquierda */
-    transform: translate(-50%, -50%); /* Centrado vertical y horizontal */
+    left: -50%;
+    transform: translate(-50%, -50%);
     font-family: var(--font-family-body), sans-serif;
     font-weight: 900;
     font-size: var(--text-b2-size);
@@ -327,22 +327,16 @@
     transition: left 0.5s ease-out, opacity 0.4s ease-out;
 }
 
-/* --- ESTADO HOVER --- */
-
-/* a) El fondo desplaza los colores de Facebook desde la izquierda hacia la derecha */
 .atom-button--facebook:hover {
     background-position: 0 0;
 }
 
-/* b) El texto original sale impulsado hacia la derecha */
 .atom-button--facebook:hover span {
     transform: translateX(150%);
     opacity: 0;
 }
 
-/* c) El nuevo texto entra al centro desde la izquierda */
 .atom-button--facebook:hover::before {
     left: 50%;
     opacity: 1;
 }
-

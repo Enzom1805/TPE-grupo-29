@@ -1,0 +1,53 @@
+/* css/organisms/blocka-board.css */
+
+.organism-blocka-board {
+    display: grid;
+    gap: 4px;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    background-color: var(--color-secondary-surface-elevated);
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px var(--color-secondary-shadow-deep);
+    border: 1px solid var(--color-neutral-border-strong);
+}
+
+/* Manejo de columnas mediante atributos CSS */
+.organism-blocka-board[data-cols="2"] {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.organism-blocka-board[data-cols="3"] {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.organism-blocka-board[data-cols="4"] {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Botón de Ayudita */
+.blocka-player__help-btn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 12px 24px;
+    background-color: var(--color-primary-default);
+    color: var(--color-neutral-text-primary);
+    font-family: var(--font-family-body), sans-serif;
+    font-size: var(--btn-font-medium-size);
+    line-height: var(--btn-font-medium-line);
+    font-weight: var(--font-weight-semibold);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.blocka-player__help-btn:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.blocka-player__help-btn:active {
+    background-color: var(--color-primary-active);
+    transform: scale(0.98);
+}

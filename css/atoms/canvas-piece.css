@@ -1,0 +1,39 @@
+/* css/atoms/canvas-piece.css */
+
+.atom-canvas-piece {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: transform 0.25s ease-in-out, box-shadow 0.2s ease, outline 0.2s ease;
+    user-select: none;
+}
+
+/* Rotación vía atributos CSS (Soluciona la var no reconocida) */
+.atom-canvas-piece[data-angle="0"] {
+    transform: rotate(0deg);
+}
+
+.atom-canvas-piece[data-angle="90"] {
+    transform: rotate(90deg);
+}
+
+.atom-canvas-piece[data-angle="180"] {
+    transform: rotate(180deg);
+}
+
+.atom-canvas-piece[data-angle="270"] {
+    transform: rotate(270deg);
+}
+
+.atom-canvas-piece:hover {
+    filter: brightness(1.08);
+}
+
+/* Modificador de pieza fijada por la Ayudita */
+.atom-canvas-piece--fixed {
+    outline: 3px solid var(--color-success-border);
+    outline-offset: -3px;
+    cursor: default;
+}

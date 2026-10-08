@@ -2,7 +2,7 @@
     background-color: var(--color-secondary-chrome-header-footer);
     border-radius: 8px;
     padding: 1.5rem 0;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     min-width: 260px;
 }
 
@@ -45,28 +45,33 @@
     padding: 0 2rem;
 }
 
-/* Configuración del botón de cerrar sesion con animación */
+/* --- Botón de Cerrar Sesión dentro del Footer --- */
 .user-menu__footer .atom-button {
     width: 100%;
     position: relative;
     overflow: hidden;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background-image: linear-gradient(
-            90deg,
-            var(--color-secondary-surface-dropdown) 0%,
-            var(--color-secondary-surface-dropdown) 50%,
-            var(--color-warning-text-primary) 50%,
-            var(--color-warning-text-primary) 100%
-    );
-    background-size: 200% 100%;
-    background-position: 0 0;
-    transition: background-position 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
+    z-index: 1;
+    background-color: var(--color-secondary-surface-dropdown);
+    color: var(--color-neutral-text-primary);
+    border: 1px solid var(--color-neutral-border-strong);
+    border-radius: 50px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    transition: color 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
+/* Capa de fondo rojo deslizante */
+.user-menu__footer .atom-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-warning-text-primary);
+    border-radius: inherit;
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
 
+/* Ícono de Logout (SVG con máscara) */
 .user-menu__footer .atom-button::after {
     content: "";
     display: inline-block;
@@ -74,7 +79,6 @@
     height: 18px;
     background-color: currentColor;
 
-    /* Aplica la máscara usando la variable definida en icons.css */
     -webkit-mask-image: var(--icon-logout-path);
     mask-image: var(--icon-logout-path);
     -webkit-mask-size: contain;
@@ -84,7 +88,6 @@
     -webkit-mask-position: center;
     mask-position: center;
 
-    /* Estado inicial */
     opacity: 0;
     transform: translateX(-8px);
     transition: transform 0.3s ease, opacity 0.3s ease;
@@ -92,13 +95,19 @@
 
 /* --- ESTADO HOVER --- */
 
-/* Mueve el fondo al color warning (rojo) y enciende el resplandor rojo */
+/* Anulamos el background violeta del .atom-button--primary */
 .user-menu__footer .atom-button:hover {
-    background-position: 100% 0;
+    background-color: var(--color-secondary-surface-dropdown);
+    border-color: var(--color-warning-text-primary);
     box-shadow: 0 0 15px var(--color-warning-text-primary);
 }
 
-/* Entra el icono desde la izquierda y se vuelve visible */
+/* Mueve la capa roja sobre el fondo */
+.user-menu__footer .atom-button:hover::before {
+    transform: translateX(0);
+}
+
+/* Muestra e impulsa el ícono de logout */
 .user-menu__footer .atom-button:hover::after {
     opacity: 1;
     transform: translateX(0);

@@ -1,0 +1,20 @@
+
+.atom-timer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-secondary-surface-elevated);
+    border: 1px solid var(--color-neutral-border-strong);
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.atom-timer-badge__icon {
+    font-size: var(--text-b2-size);
+}
+
+.atom-timer-badge__value {
+    font-family: var(--font-family-title) san serif;
+    font-size: var(--text-s2-size);
+    color: var(--color-neutral-text-primary);
+}
