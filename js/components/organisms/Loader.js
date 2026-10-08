@@ -2,25 +2,65 @@ export default function Loader() {
     const container = document.createElement("div");
     container.className = "loader-container";
 
-    const spinner = document.createElement("div");
-    spinner.className = "loader-spinner";
+    const iconContainer = document.createElement("div");
+    iconContainer.className = "loader-icon-container";
 
-    // Contenedor principal de la barra (pista)
-    const progressBar = document.createElement("div");
-    progressBar.className = "loader-progress";
+    // Envoltorio para alternar el porcentaje y el título sin saltos de diseño
+    const infoWrapper = document.createElement("div");
+    infoWrapper.className = "loader-info-wrapper";
 
-    // Elemento interno que se irá rellenando
-    const progressFill = document.createElement("div");
-    progressFill.className = "loader-progress-fill";
-    progressBar.appendChild(progressFill);
+    const title = document.createElement("h1");
+    title.className = "loader-title";
+    title.textContent = "Kingly Games";
 
     const text = document.createElement("p");
     text.className = "loader-text";
     text.textContent = "0%";
 
-    container.appendChild(spinner);
-    container.appendChild(progressBar);
-    container.appendChild(text);
+    infoWrapper.appendChild(title);
+    infoWrapper.appendChild(text);
+
+    container.appendChild(iconContainer);
+    container.appendChild(infoWrapper);
+
+    let stop1, stop2;
+
+    fetch("../assets/icons/crown.svg")
+        .then((res) => res.text())
+        .then((svgText) => {
+            iconContainer.innerHTML = svgText;
+            const svg = iconContainer.querySelector("svg");
+            if (!svg) return;
+
+            svg.classList.add("loader-icon");
+
+            const svgNS = "http://www.w3.org/2000/svg";
+            let defs = svg.querySelector("defs");
+            if (!defs) {
+                defs = document.createElementNS(svgNS, "defs");
+                svg.insertBefore(defs, svg.firstChild);
+            }
+
+            const gradient = document.createElementNS(svgNS, "linearGradient");
+            gradient.setAttribute("id", "crown-fill-gradient");
+            gradient.setAttribute("x1", "0%");
+            gradient.setAttribute("y1", "0%");
+            gradient.setAttribute("x2", "100%");
+            gradient.setAttribute("y2", "0%");
+
+            stop1 = document.createElementNS(svgNS, "stop");
+            stop1.setAttribute("offset", "0%");
+            stop1.classList.add("stop-fill");
+
+            stop2 = document.createElementNS(svgNS, "stop");
+            stop2.setAttribute("offset", "0%");
+            stop2.classList.add("stop-bg");
+
+            gradient.appendChild(stop1);
+            gradient.appendChild(stop2);
+            defs.appendChild(gradient);
+        })
+        .catch((err) => console.error("Error al cargar crown.svg:", err));
 
     let progress = 0;
     const intervalTime = 50;
@@ -34,17 +74,29 @@ export default function Loader() {
             clearInterval(loadingInterval);
 
             text.textContent = "100%";
-            progressFill.style.width = "100%";
+            if (stop1 && stop2) {
+                stop1.setAttribute("offset", "100%");
+                stop2.setAttribute("offset", "100%");
+            }
 
-            container.style.opacity = "0";
+            // Dispara la transición de bienvenida (sale porcentaje, entra título)
+            container.classList.add("is-complete");
 
+            // Pausa de 1.2s para mostrar el título antes de ocultar y remover el loader
             setTimeout(() => {
-                container.remove();
-            }, 500);
+                container.classList.add("is-hidden");
+                setTimeout(() => {
+                    container.remove();
+                }, 500);
+            }, 1200);
         } else {
             const currentProgress = Math.floor(progress);
             text.textContent = `${currentProgress}%`;
-            progressFill.style.width = `${currentProgress}%`;
+
+            if (stop1 && stop2) {
+                stop1.setAttribute("offset", `${currentProgress}%`);
+                stop2.setAttribute("offset", `${currentProgress}%`);
+            }
         }
     }, intervalTime);
 

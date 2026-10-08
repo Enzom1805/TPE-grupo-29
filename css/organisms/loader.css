@@ -11,64 +11,105 @@
     align-items: center;
     z-index: 9999;
     transition: opacity 0.5s ease;
-    gap: var(--spacing-xs);
+    gap: 0.75rem;
 }
 
-.loader-spinner {
-    width: 60px;
-    height: 60px;
-    border: 6px solid var(--color-secondary-surface-elevated);
-    border-top: 6px solid var(--color-primary-focus-ring);
-    border-radius: 50%;
-    animation: girar-y-pulsar 1.5s ease-in-out infinite;
-    margin-bottom: var(--spacing-sm);
+/* Ocultado final del loader */
+.loader-container.is-hidden {
+    opacity: 0;
 }
 
-.loader-text {
-    color: var(--color-neutral-text-primary);
-    font-family: var(--font-family-title), serif;
-    font-size: var(--text-b1-size);
-    font-weight: bold;
-}
-
-@keyframes girar-y-pulsar {
-    0% {
-        transform: rotate(0deg) scale(1);
-        border-top-color: var(--color-primary-focus-ring);
-    }
-
-    50% {
-        transform: rotate(180deg) scale(1.15);
-        border-top-color: var(--color-accent-default);
-    }
-
-    100% {
-        transform: rotate(360deg) scale(1);
-        border-top-color: var(--color-primary-focus-ring);
-    }
-}
-
-/* Pista de la barra de progreso */
-.loader-progress {
+.loader-icon-container {
+    position: relative;
     width: 80%;
     max-width: 600px;
-    height: 20px;
-    border-radius: 45px;
-    border: 2px solid var(--color-primary-focus-ring);
-    position: relative;
-    overflow: hidden;
-    background-color: var(--color-secondary-surface-elevated);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Relleno animado */
-.loader-progress-fill {
-    height: 100%;
-    width: 0;
-    background: linear-gradient(
-            90deg,
-            var(--color-primary-active) 0%,
-            var(--color-primary-hover) 100%
-    );
-    border-radius: 45px;
-    transition: width 0.05s linear;
+.loader-icon {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 0 12px var(--color-primary-active, rgba(0, 123, 255, 0.4)));
+    animation: pulsar-brillo 2s ease-in-out infinite alternate;
+}
+
+/* Envoltorio Grid para superponer Título y Porcentaje en la misma posición */
+.loader-info-wrapper {
+    display: grid;
+    place-items: center;
+}
+
+.loader-title,
+.loader-text {
+    grid-area: 1 / 1; /* Mismo espacio en la grilla */
+    margin: 0;
+    font-family: var(--font-family-title), sans-serif;
+}
+
+/* Título de bienvenida "Kingly Games" (Oculto inicialmente) */
+.loader-title {
+    color: var(--color-neutral-text-primary);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 0 16px var(--color-primary-active, rgba(0, 123, 255, 0.6));
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+/* Texto de porcentaje */
+.loader-text {
+    color: var(--color-neutral-text-primary);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 10px var(--color-primary-active, rgba(0, 123, 255, 0.4));
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Transición al llegar al 100% (.is-complete) */
+.loader-container.is-complete .loader-title {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.loader-container.is-complete .loader-text {
+    opacity: 0;
+    transform: translateY(-12px);
+}
+
+/* SVG Vector Styles */
+.loader-icon path,
+.loader-icon polygon,
+.loader-icon circle,
+.loader-icon rect {
+    fill: url(#crown-fill-gradient);
+    stroke: var(--color-primary-hover);
+    stroke-width: 0.5px;
+}
+
+.stop-fill {
+    stop-color: var(--color-primary-active, #007bff);
+}
+
+.stop-bg {
+    stop-color: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes pulsar-brillo {
+    0% {
+        filter: drop-shadow(0 0 8px var(--color-primary-active, rgba(0, 123, 255, 0.3)));
+    }
+    100% {
+        filter: drop-shadow(0 0 22px var(--color-primary-active, rgba(0, 123, 255, 0.8)));
+    }
 }
