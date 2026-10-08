@@ -18,11 +18,11 @@ export const games = [
     ),
     new Game(
         3,
-        "Comix Zone",
-        "Acción",
-        1995,
+        "Blocka Game",
+        "Puzzle",
+        2026,
         "Premium",
-        "../assets/images/games/comix.png"
+        "../assets/images/games/blocka.webp"
     ),
     new Game(
         4,
@@ -383,5 +383,13 @@ export const games = [
         1996,
         "Premium",
         "../assets/images/games/civil2.png"
-    )
+    ),
+    new Game(
+        49,
+        "Comix Zone",
+        "Acción",
+        1995,
+        "Premium",
+        "../assets/images/games/comix.png"
+    ),
 ];

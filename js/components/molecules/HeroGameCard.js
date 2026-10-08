@@ -46,6 +46,11 @@ export default function HeroCard(game) {
         playBtn.addEventListener("click", () => {
             window.location.href = "game.html";
         });
+    }    // SI ES EL JUEGO ID 2 (Blocka Game), LE ASIGNAMOS LA REDIRECCIÓN
+    if (game.id === 3) {
+        playBtn.addEventListener("click", () => {
+            window.location.href = "blocka.html";
+        });
     }
 
     meta.appendChild(tags);
