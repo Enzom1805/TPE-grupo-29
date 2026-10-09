@@ -38,6 +38,13 @@ export default function GameCard(game) {
     const playBtn = Button("Jugar", "button", "play", "small");
     playBtn.classList.add("game-card__play");
 
+    // =========================================================
+    // NUEVO: Redirección dinámica para las tarjetas de categoría
+    // =========================================================
+    playBtn.addEventListener("click", () => {
+        window.location.href = `game.html?id=${game.id}`;
+    });
+    // =========================================================
 
     meta.appendChild(textGroup);
     meta.appendChild(playBtn);
@@ -52,14 +59,11 @@ export default function GameCard(game) {
         badge.classList.add("game-card__badge--premium");
         const crownIcon = document.createElement("img");
         crownIcon.src = "../assets/icons/crown-2.svg";
-
         badge.appendChild(crownIcon);
-
     } else {
         badge.classList.add("game-card__badge--free");
         badge.textContent = "Gratis";
     }
-    card.appendChild(badge);
 
     card.appendChild(badge);
 

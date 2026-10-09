@@ -49,6 +49,7 @@
     background-color: var(--color-primary-default);
     color: var(--color-neutral-text-primary);
     border: 1px solid transparent;
+    border-radius: 10px;
     box-shadow: 0 0 15px rgba(109, 40, 217, 0.4);
 }
 
