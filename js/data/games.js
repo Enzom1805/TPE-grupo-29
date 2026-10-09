@@ -7,6 +7,7 @@ export const games = [
         1991,
         "Premium",
         "../assets/images/games/battletoads.jpg"
+        
     ),
     new Game(
         2,
