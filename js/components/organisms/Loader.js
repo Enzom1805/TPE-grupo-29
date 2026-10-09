@@ -1,3 +1,5 @@
+import { playCompletionSound } from "../../utils/sound.js";
+
 export default function Loader() {
     const container = document.createElement("div");
     container.className = "loader-container";
@@ -5,7 +7,6 @@ export default function Loader() {
     const iconContainer = document.createElement("div");
     iconContainer.className = "loader-icon-container";
 
-    // Envoltorio para alternar el porcentaje y el título sin saltos de diseño
     const infoWrapper = document.createElement("div");
     infoWrapper.className = "loader-info-wrapper";
 
@@ -81,6 +82,9 @@ export default function Loader() {
 
             // Dispara la transición de bienvenida (sale porcentaje, entra título)
             container.classList.add("is-complete");
+
+            // Reproduce el sonido exactamente al mismo tiempo que sale el título
+            playCompletionSound();
 
             // Pausa de 1.2s para mostrar el título antes de ocultar y remover el loader
             setTimeout(() => {
