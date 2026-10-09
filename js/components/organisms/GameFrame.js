@@ -1,99 +1,77 @@
 import ShareGroup from '../molecules/ShareGroup.js';
 import HelpButton from "../molecules/HelpButton.js";
 import PegBoard from './PegBoard.js';
-import {BlockaPlayer} from "./BlockaPlayer.js";
+import { BlockaController } from '../../controllers/BlockaController.js';
 
 export default function GameFrame(game) {
-    // Validación por seguridad
     if (!game) {
         console.error("GameFrame: No se recibió ningún juego.");
         return document.createElement('div');
     }
 
-    // Contenedor principal de la sección del juego
     const section = document.createElement('section');
     section.className = 'organism-game-frame';
 
     const screen = document.createElement('div');
     screen.className = 'game-frame__screen';
 
-    // 1. Título DINÁMICO
+    // Modificador temático exclusivamente para el juego de Batman (ID: 2)
+    if (game.id === 2) {
+        screen.classList.add('game-frame__screen--batman');
+    }
+
+    // 1. Título dinámico
     const title = document.createElement('h2');
     title.className = 'game-frame__title';
-    // Convertimos a mayúsculas para mantener tu diseño original
     title.textContent = game.title.toUpperCase();
 
-    // 2. Contenedor para el tablero
+    // 2. Área central del juego
     const boardArea = document.createElement('div');
     boardArea.className = 'game-frame__board-area';
 
     // =========================================================
-    // LÓGICA DINÁMICA: ¿Qué juego renderizamos en la pantalla?
+    // RENDERIZADO SEGÚN EL ID DEL JUEGO
     // =========================================================
     if (game.id === 2) {
-        // Es Batman Peg Solitaire: Inyectamos su lógica específica
+        // Batman Peg Solitaire
         const board = PegBoard();
         boardArea.appendChild(board);
 
     } else if (game.id === 3) {
-        // 1. Definir la configuración del nivel
-        const levelConfig = { name: "Nivel 1 - Básico" };
+        // Blocka Game
+        const blockaContainer = document.createElement('div');
+        blockaContainer.className = 'blocka-game-frame';
+        boardArea.appendChild(blockaContainer);
 
-        // 2. Instanciar tu motor real de Blocka (necesitarás importarlo arriba)
-        // const myBlockaEngine = new BlockaEngine();
-
-        // --> MOCK TEMPORAL: Usa esto para probar que la interfaz carga sin errores
-        // mientras conectas tu motor real.
-        const mockEngine = {
-            getGridConfig: () => ({ cols: 3, rows: 3 }), // Evita el error de getGridConfig
-            getPieces: () => [], // Evita errores en renderBoard()
-            loadedImage: { width: 800, height: 600 }
-        };
-
-        // 3. Inyectar los parámetros requeridos
-        const blocka = BlockaPlayer(mockEngine, levelConfig, (resultado) => {
-            console.log("¡Juego terminado!", resultado);
-        });
-
-        boardArea.appendChild(blocka);
+        const controller = new BlockaController(blockaContainer);
+        controller.init();
 
     } else {
-        // Para todos los demás juegos de la lista (Sonic, Contra, Doom, etc.)
-        // Normalmente aquí iría un iframe con un emulador web, o una imagen.
-        // Haremos un placeholder bonito usando la imagen del juego:
-        boardArea.style.position = 'relative';
-        boardArea.style.overflow = 'hidden';
+        // Placeholder BEM sin código de estilos en JS
+        const placeholderContainer = document.createElement('div');
+        placeholderContainer.className = 'game-frame__placeholder';
 
         const placeholderImg = document.createElement('img');
+        placeholderImg.className = 'game-frame__placeholder-img';
         placeholderImg.src = game.image;
         placeholderImg.alt = game.title;
-        placeholderImg.style.width = '100%';
-        placeholderImg.style.height = '100%';
-        placeholderImg.style.objectFit = 'cover';
-        placeholderImg.style.opacity = '0.3'; // Oscurecemos un poco la imagen
 
         const overlayText = document.createElement('h3');
+        overlayText.className = 'game-frame__placeholder-text';
         overlayText.textContent = "Juego no disponible en esta demo";
-        overlayText.style.position = 'absolute';
-        overlayText.style.top = '50%';
-        overlayText.style.left = '50%';
-        overlayText.style.transform = 'translate(-50%, -50%)';
-        overlayText.style.color = 'white';
 
-        boardArea.append(placeholderImg, overlayText);
+        placeholderContainer.append(placeholderImg, overlayText);
+        boardArea.appendChild(placeholderContainer);
     }
-    // =========================================================
-    // 3. Footer interno
+
+    // 3. Footer de controles
     const screenFooter = document.createElement('div');
     screenFooter.className = 'game-frame__footer';
 
-    // Redes sociales y ayuda
     const shareMolecule = ShareGroup();
     const helpMenu = HelpButton();
 
     screenFooter.append(shareMolecule, helpMenu);
-
-    // Ensamblamos la pantalla
     screen.append(title, boardArea, screenFooter);
     section.appendChild(screen);
 

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Pantalla del Juego (Full Width)
+   Organismo: GameFrame (Pantalla General del Juego)
    ========================================================================== */
 
 .organism-game-frame {
@@ -7,56 +7,114 @@
     height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: var(--color-secondary-background-page);
 }
 
 .game-frame__screen {
     width: 100%;
     height: 100%;
-    max-width: none;              /* <--- REMOVE el límite de 1200px */
-    min-height: 580px;            /* Mantiene una altura adecuada para el tablero */
+    min-height: 580px;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1.5rem;
+    padding: var(--spacing-md);
     box-sizing: border-box;
 
-    /* Fondo de Batman */
-    background-image: url('../../assets/images/batmanBackground.png');
+    /* Contenedor neutro estilo consola */
+    background-color: var(--color-secondary-chrome-header-footer);
+    border: 1px solid var(--color-neutral-border-strong);
+    border-radius: var(--spacing-xs) 0 0 var(--spacing-xs);
+    box-shadow: 0 10px 30px var(--color-secondary-shadow-deep);
+    overflow: hidden;
+}
+
+/* Modificador temático exclusivo para Batman Peg Solitaire */
+.game-frame__screen--batman {
+    background-image: linear-gradient(180deg, rgba(13, 10, 18, 0.75), rgba(13, 10, 18, 0.90)),
+    url('../../assets/images/batmanBackground.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-
-    border: 2px solid #333;
-    border-radius: 8px 0 0 8px; /* Superior-izq, Superior-der, Inferior-der, Inferior-izq */
-    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
 }
-/* titulo con la fuente DkcForever */
+
 .game-frame__title {
-    font-family: var(--font-family-batman), sans-serif;
+    font-family: var(--font-family-title), sans-serif;
     color: var(--color-neutral-text-primary);
-    font-size: 2rem;
+    font-size: var(--text-s1-size);
+    line-height: var(--text-s1-line);
     text-align: center;
-    margin: 0;
+    margin: 0 0 var(--spacing-sm) 0;
     text-transform: uppercase;
-    letter-spacing: var(--spacing-2xs);
-
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    letter-spacing: var(--spacing-3xs);
+    text-shadow: 0 2px 4px var(--color-secondary-shadow-deep);
 }
 
-/* El área central donde luego va la grilla ocupa el espacio sobrante */
+/*
+   ÁREA DE JUEGO INVISIBLE (Layout limpio sin bordes ni sombras)
+   Permite que los tableros o workspaces floten directamente sobre el fondo
+*/
 .game-frame__board-area {
     flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    position: relative;
+    background-color: transparent; /* Sin fondo negro delimitador */
+    border: none;                   /* Sin marco exterior */
+    box-shadow: none;               /* Sin sombra anidada */
+    overflow: hidden;
 }
 
-/* footer interno del juego */
+/* ==========================================================================
+   Placeholder de juegos no disponibles (Mantiene su marco propio)
+   ========================================================================== */
+
+.game-frame__placeholder {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-secondary-shadow-deep);
+    border: 1px solid var(--color-neutral-border-strong);
+    border-radius: var(--spacing-2xs);
+    overflow: hidden;
+}
+
+.game-frame__placeholder-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+}
+
+.game-frame__placeholder-text {
+    position: absolute;
+    color: var(--color-neutral-text-primary);
+    font-size: var(--text-b2-size);
+    line-height: var(--text-b2-line);
+    font-family: var(--font-family-body), sans-serif;
+    font-weight: var(--font-weight-medium);
+    background-color: var(--color-secondary-chrome-header-footer);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border: 1px solid var(--color-neutral-border-strong);
+    border-radius: var(--spacing-2xs);
+    margin: 0;
+    pointer-events: none;
+    box-shadow: 0 4px 12px var(--color-secondary-shadow-deep);
+}
+
 .game-frame__footer {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     width: 100%;
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-xs);
 }

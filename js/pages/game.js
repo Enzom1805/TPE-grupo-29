@@ -9,50 +9,44 @@ import Footer from '../components/organisms/FatFooter.js';
 import { gameBreadcrumbs } from '../data/breadcrumbData.js';
 import { commentsData } from '../data/comments.js';
 import { games } from '../data/games.js';
-
-// NUEVO: Importamos el servicio que busca las instrucciones (de la respuesta anterior)
 import { getInstructionsByGameId } from '../services/instructions.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app') || document.body;
 
-    // 1. LEER LA URL Y BUSCAR EL JUEGO
+    // 1. LECTURA DE LA URL Y BÚSQUEDA DEL JUEGO
     const urlParams = new URLSearchParams(window.location.search);
-    const idParam = urlParams.get('id'); // Obtiene el valor después de ?id=
+    const idParam = urlParams.get('id');
 
-    // Si no hay ID en la URL (por ejemplo si entras directo a game.html),
-    // usamos el ID 2 (Batman) por defecto para que no se rompa la página.
-    const gameId = idParam ? parseInt(idParam) : 2;
-
-    // Buscamos toda la información de este juego
+    // ID por defecto (2 = Batman) si se ingresa sin parámetros
+    const gameId = idParam ? parseInt(idParam, 10) : 2;
     const selectedGame = games.find(game => game.id === gameId);
 
     if (!selectedGame) {
-        app.innerHTML = "<h1>Error: El juego no existe.</h1>";
-        return; // Detenemos la ejecución si mandan un ID inválido
+        app.innerHTML = "<h1 style='color:white; text-align:center; padding: 2rem;'>Error: El juego solicitado no existe.</h1>";
+        return;
     }
 
-    // 2. HACER DINÁMICOS LOS BREADCRUMBS (Opcional, pero recomendado)
-    // Asumiendo que tu array gameBreadcrumbs tiene un último elemento que es el nombre del juego
+    // 2. ACTUALIZACIÓN DINÁMICA DEL TÍTULO DE PESTAÑA Y BREADCRUMBS
+    document.title = `${selectedGame.title} | Kingly Games`;
+
     const dynamicBreadcrumbs = [...gameBreadcrumbs];
-    dynamicBreadcrumbs[dynamicBreadcrumbs.length - 1].name = selectedGame.title;
+    if (dynamicBreadcrumbs.length > 0) {
+        dynamicBreadcrumbs[dynamicBreadcrumbs.length - 1].name = selectedGame.title;
+    }
 
     const header = Header();
     const breadcrumbs = Breadcrumbs(dynamicBreadcrumbs);
 
-    // --- CONTENEDOR PRINCIPAL: JUEGO (IZQ) + SIDEBAR (DER) ---
+    // 3. CONTENEDOR PRINCIPAL DEL JUEGO
     const gameMainContainer = document.createElement('div');
     gameMainContainer.className = 'game-main-container';
 
-    // Componente del juego (GameFrame)
     const gameArea = GameFrame(selectedGame);
     gameMainContainer.appendChild(gameArea);
 
-    // =========================================================
-    // SOLUCIÓN: Sidebar dinámico según el juego
-    // =========================================================
+    // 4. SIDEBAR CONDICIONAL (Únicamente para Batman Peg Solitaire ID=2)
     if (selectedGame.id === 2) {
-        // Solo inyectar la imagen de métricas si es Batman
         const sidebarContainer = document.createElement('div');
         sidebarContainer.className = 'game-main-container__sidebar';
 
@@ -64,43 +58,24 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebarContainer.appendChild(sidebarImg);
         gameMainContainer.appendChild(sidebarContainer);
     } else {
-        // Para Blocka y otros juegos, le decimos al contenedor que
-        // use todo el ancho disponible, ya que no habrá sidebar estático.
+        // Extiende el marco al 100% del ancho para los demás juegos
         gameMainContainer.classList.add('game-main-container--full-width');
     }
 
-    const sidebarContainer = document.createElement('div');
-    sidebarContainer.className = 'game-main-container__sidebar';
-
-    const sidebarImg = document.createElement('img');
-    sidebarImg.src = '../assets/images/game-stats-info.jpg';
-    sidebarImg.alt = `Métricas de ${selectedGame.title}`;
-    sidebarImg.className = 'game-main-container__sidebar-img';
-
-    sidebarContainer.appendChild(sidebarImg);
-    gameMainContainer.appendChild(gameArea);
-    gameMainContainer.appendChild(sidebarContainer);
-
-    // 3. INTEGRAR EL HOW TO PLAY DINÁMICO
-    // Obtenemos las instrucciones específicas para este juego
+    // 5. INSTRUCCIONES Y COMUNIDAD DINÁMICAS
     const gameInstructions = getInstructionsByGameId(selectedGame.id);
-
-    // Pasamos el juego y las instrucciones al componente que rediseñamos
     const howToPlaySection = HowToPlay(selectedGame, gameInstructions);
 
-    // 4. HACER DINÁMICA LA COMUNIDAD
     const communitySection = Community({
-        gameTitle: selectedGame.title, // Ahora dice "Comunidad de Blocka Game" dinámicamente
-        comments: commentsData // Idealmente aquí también filtrarías comentarios por gameId
+        gameTitle: selectedGame.title,
+        comments: commentsData
     });
 
-    // 5. JUEGOS SUGERIDOS DINÁMICOS
-    // Filtramos para que no te sugiera el juego que ya estás jugando
+    // 6. CARRUSEL DE JUEGOS SUGERIDOS
     const suggestedGames = games.filter(game => game.id !== selectedGame.id);
     const suggestedCarousel = CategoryCarousel("Juegos Sugeridos", suggestedGames);
     suggestedCarousel.classList.add("category-carousel--vertical");
 
-    // Contenedor inferior
     const bottomContainer = document.createElement("div");
     bottomContainer.className = "game-bottom-container";
 
@@ -116,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const footer = Footer();
 
-    // Renderizado en orden
+    // RENDERIZADO FINAL AL DOM
     app.appendChild(header);
     app.appendChild(breadcrumbs);
     app.appendChild(gameMainContainer);

@@ -1,34 +1,42 @@
+/* ==========================================================================
+   Molécula: HelpMenu / HelpSection (Sección de Ayuda y Modal Flotante)
+   ========================================================================== */
+
 .help-section {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--spacing-md);
     position: relative;
 }
 
 .help-section__title {
-    font-family: var(--font-family-batman), sans-serif;
-    font-weight: var(--font-weight-regular);
+    font-family: var(--font-family-title), sans-serif;
+    font-weight: var(--font-weight-medium);
     color: var(--color-neutral-text-primary);
-    font-size: 1rem;
+    font-size: var(--text-b3-size);
+    line-height: var(--text-b3-line);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: var(--spacing-3xs);
+    margin: 0;
 }
 
-/* Modal base: Flotante, oscuro y OCULTO por defecto */
+/* Modal Flotante */
 .help-section__modal {
     position: absolute;
     bottom: 120%;
     right: 0;
     width: 350px;
-    background: rgba(40, 40, 45, 0.95);
-    border-radius: 8px;
-    padding: 1.5rem;
-    color: #e0e0e0;
-    font-family: sans-serif;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-    /* reglas que ocultan el texto inicialmente */
+    background-color: var(--color-secondary-surface-dropdown);
+    border: 1px solid var(--color-neutral-border-strong);
+    border-radius: var(--spacing-xs);
+    padding: var(--spacing-md);
+    color: var(--color-neutral-text-secondary);
+    font-family: var(--font-family-body), sans-serif;
+    font-size: var(--text-b3-size);
+    line-height: var(--text-b3-line);
+    box-shadow: 0 10px 40px var(--color-secondary-shadow-deep);
+
+    /* Estado Oculto */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -36,13 +44,14 @@
 }
 
 .help-section__modal p {
-    margin-bottom: 1rem;
+    margin: 0 0 var(--spacing-sm) 0;
 }
+
 .help-section__modal p:last-child {
     margin-bottom: 0;
 }
 
-/* clase que JS activa al hacer clic */
+/* Estado Activo mediante JS */
 .help-section__modal--active {
     opacity: 1;
     visibility: visible;

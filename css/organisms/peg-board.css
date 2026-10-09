@@ -3,13 +3,12 @@
     grid-template-columns: repeat(9, max-content);
     gap: 20px;
     padding: 2rem;
-
     border-radius: 20px;
-
 }
 
 .board__placeholder {
     width: 75px; /* coincide con el width de las fichas */
     height: 75px; /* coincide con el height de las fichas */
     visibility: hidden;
+
 }

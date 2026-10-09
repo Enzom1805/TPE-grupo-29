@@ -14,11 +14,11 @@ export default function ShareGroup() {
 
     // Instanciamos los átomos usando la variante "social"
     // Pasamos el texto, tipo, variante, tamaño, y la clase de tu librería de íconos
-    const btnFacebook = Button("Facebook", "button", "social-game", "small", "icon-facebook");
-    const btnInstagram = Button("Instagram", "button", "social-game", "small", "icon-instagram");
-    const btnGmail = Button("Gmail", "button", "social-game", "small", "icon-google-circle");
-    const btnMensaje = Button("Mensaje", "button", "social-game", "small", "icon-chat-lines");
-    const btnYoutube = Button("Youtube", "button", "social-game", "small", "icon-youtube");
+    const btnFacebook = Button("Facebook", "button", "primary", "small", "icon-facebook");
+    const btnInstagram = Button("Instagram", "button", "primary", "small", "icon-instagram");
+    const btnGmail = Button("Gmail", "button", "primary", "small", "icon-google-circle");
+    const btnMensaje = Button("Mensaje", "button", "primary", "small", "icon-chat-lines");
+    const btnYoutube = Button("Youtube", "button", "primary", "small", "icon-youtube");
 
     // Ensamblamos
     buttonsContainer.append(btnFacebook, btnInstagram, btnGmail, btnMensaje, btnYoutube);
