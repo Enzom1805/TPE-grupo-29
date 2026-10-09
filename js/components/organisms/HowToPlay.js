@@ -1,8 +1,22 @@
-export default function HowToPlay() {
+/**
+ * @param {Object} game - Instancia del modelo Game (contiene id, title, etc.).
+ * @param {Object|null} instructions - Objeto con las instrucciones específicas del juego.
+ * @returns {HTMLElement} Elemento <section> con el contenido renderizado.
+ */
+export default function HowToPlay(game, instructions) {
     const section = document.createElement("section");
     section.className = "how-to-play";
 
-    // 1. Header (Icono + Título)
+    // Manejo de error si no existe la instancia del juego
+    if (!game) {
+        const errorMessage = document.createElement("p");
+        errorMessage.className = "how-to-play__error";
+        errorMessage.textContent = "Error: No se ha seleccionado un videojuego válido.";
+        section.appendChild(errorMessage);
+        return section;
+    }
+
+    // 1. Header (Icono + Título dinámico)
     const header = document.createElement("div");
     header.className = "how-to-play__header";
 
@@ -13,7 +27,7 @@ export default function HowToPlay() {
 
     const title = document.createElement("h2");
     title.className = "how-to-play__title";
-    title.textContent = "¿Cómo jugar a The Batman Peg Solitaire?";
+    title.textContent = `¿Cómo jugar a ${game.title}?`;
 
     header.append(icon, title);
 
@@ -25,74 +39,104 @@ export default function HowToPlay() {
     const content = document.createElement("div");
     content.className = "how-to-play__content";
 
-    // Parrafo 1 (con <strong> interno)
-    const p1 = document.createElement("p");
-    const strongGameTitle = document.createElement("strong");
-    strongGameTitle.textContent = "The Batman Peg Solitaire";
+    // Si el juego existe pero no posee un registro de instrucciones detalladas
+    if (!instructions) {
+        const fallbackMessage = document.createElement("p");
+        fallbackMessage.className = "how-to-play__empty";
+        fallbackMessage.textContent = `Próximamente agregaremos la guía paso a paso para ${game.title}. ¡Sigue explorando sus modos de juego!`;
+        content.appendChild(fallbackMessage);
+        section.append(header, divider, content);
+        return section;
+    }
 
-    p1.append(
-        "¡Pon a prueba tu ingenio con ",
-        strongGameTitle,
-        ", un clásico juego de estrategia donde cada movimiento cuenta! Tu objetivo será eliminar las fichas del tablero realizando saltos sobre las fichas adyacentes, hasta conseguir que quede una sola ficha."
-    );
+    // Parrafo 1: Intro
+    if (instructions.intro) {
+        const p1 = document.createElement("p");
+        const strongTitle = document.createElement("strong");
+        strongTitle.textContent = game.title;
 
-    // Parrafo 2
-    const p2 = document.createElement("p");
-    p2.textContent = "La mecánica es sencilla, pero requiere planificación. Deberás mover una ficha saltando por encima de otra hacia una casilla vacía; la ficha saltada desaparecerá.";
+        p1.append(strongTitle, " — ", instructions.intro);
+        content.appendChild(p1);
+    }
 
-    // Parrafo 3 (Destacado)
-    const p3 = document.createElement("p");
-    p3.className = "how-to-play__highlight";
-    p3.textContent = "¡Piensa tus movimientos con anticipación para no quedarte sin opciones!";
+    // Parrafo 2: Descripción
+    if (instructions.description) {
+        const p2 = document.createElement("p");
+        p2.textContent = instructions.description;
+        content.appendChild(p2);
+    }
 
-    // Subtítulo
-    const subtitle = document.createElement("h3");
-    subtitle.className = "how-to-play__subtitle";
-    subtitle.textContent = "¿Cuáles son las características principales de The Batman Peg Solitaire?";
+    // Parrafo 3: Destacado (Highlight)
+    if (instructions.highlight) {
+        const p3 = document.createElement("p");
+        p3.className = "how-to-play__highlight";
+        p3.textContent = instructions.highlight;
+        content.appendChild(p3);
+    }
 
-    // Lista de viñetas
-    const list = document.createElement("ul");
-    list.className = "how-to-play__list";
+    // Subtítulo condicional
+    if (instructions.subtitle) {
+        const subtitle = document.createElement("h3");
+        subtitle.className = "how-to-play__subtitle";
+        subtitle.textContent = instructions.subtitle;
+        content.appendChild(subtitle);
+    }
 
-    const itemsText = [
-        "Salta sobre las fichas adyacentes para eliminarlas.",
-        "Planifica tus movimientos para evitar quedarte bloqueado.",
-        "Intenta terminar el tablero con una única ficha.",
-        "Utiliza estratégicamente los espacios libres y la zona central."
-    ];
+    // Lista de características / Reglas
+    if (Array.isArray(instructions.features) && instructions.features.length > 0) {
+        const list = document.createElement("ul");
+        list.className = "how-to-play__list";
 
-    itemsText.forEach((text) => {
-        const item = document.createElement("li");
-        item.textContent = text;
-        list.appendChild(item);
-    });
+        instructions.features.forEach((featureText) => {
+            if (featureText) {
+                const item = document.createElement("li");
+                item.textContent = featureText;
+                list.appendChild(item);
+            }
+        });
 
-    // Parrafo 4
-    const p4 = document.createElement("p");
-    p4.textContent = "Procura mantener despejada la zona central y evita realizar movimientos al azar. Trabaja progresivamente desde los extremos hacia el centro y piensa siempre en los siguientes movimientos antes de realizar un salto. ¡Una buena planificación será la clave para resolver el tablero!";
+        content.appendChild(list);
+    }
 
-    // 4. Bloque Multimedia (Imagen + Video en la misma línea)
-    const mediaContainer = document.createElement("div");
-    mediaContainer.className = "how-to-play__media";
+    // Parrafo 4: Consejos / Tips
+    if (instructions.tips) {
+        const pTips = document.createElement("p");
+        pTips.textContent = instructions.tips;
+        content.appendChild(pTips);
+    }
 
-    const image = document.createElement("img");
-    image.className = "how-to-play__media-item";
-    image.src = "../assets/images/batman-peg-tuto.png";
-    image.alt = "Tutorial visual de The Batman Peg Solitaire";
+    // 4. Bloque Multimedia Condicional (Imagen y/o Video)
+    const hasImage = Boolean(instructions.media?.image?.src);
+    const hasVideo = Boolean(instructions.media?.video?.src);
 
-    const video = document.createElement("video");
-    video.className = "how-to-play__media-item";
-    video.src = "../assets/videos/Batman-peg-video.mp4";
-    video.controls = true;
-    video.autoplay = false;
-    video.muted = true;
-    video.loop = false;
-    video.playsInline = false;
+    if (hasImage || hasVideo) {
+        const mediaContainer = document.createElement("div");
+        mediaContainer.className = "how-to-play__media";
 
-    mediaContainer.append(video, image);
+        // Renderizado del video si está disponible
+        if (hasVideo) {
+            const video = document.createElement("video");
+            video.className = "how-to-play__media-item";
+            video.src = instructions.media.video.src;
+            video.controls = true;
+            video.autoplay = false;
+            video.muted = true;
+            video.loop = false;
+            video.playsInline = true;
+            mediaContainer.appendChild(video);
+        }
 
-    // Insertamos los párrafos y la sección de medios
-    content.append(p1, p2, p3, subtitle, list, p4, mediaContainer);
+        // Renderizado de la imagen si está disponible
+        if (hasImage) {
+            const image = document.createElement("img");
+            image.className = "how-to-play__media-item";
+            image.src = instructions.media.image.src;
+            image.alt = instructions.media.image.alt || `Guía tutorial de ${game.title}`;
+            mediaContainer.appendChild(image);
+        }
+
+        content.appendChild(mediaContainer);
+    }
 
     // Ensamblamos la sección completa
     section.append(header, divider, content);

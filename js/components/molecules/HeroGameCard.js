@@ -41,17 +41,15 @@ export default function HeroCard(game) {
     const playBtn = Button("Jugar", "button", "hero", "large");
     playBtn.classList.add("hero-card__play");
 
-    // SI ES EL JUEGO ID 2 (Batman Peg Solitaire), LE ASIGNAMOS LA REDIRECCIÓN
-    if (game.id === 2) {
-        playBtn.addEventListener("click", () => {
-            window.location.href = "game.html";
-        });
-    }    // SI ES EL JUEGO ID 2 (Blocka Game), LE ASIGNAMOS LA REDIRECCIÓN
-    if (game.id === 3) {
-        playBtn.addEventListener("click", () => {
-            window.location.href = "blocka.html";
-        });
-    }
+    // =========================================================
+    // MODIFICACIÓN CLAVE: Redirección dinámica universal
+    // =========================================================
+    // Eliminamos los if(game.id === 2) y if(game.id === 3).
+    // Ahora, sin importar qué juego sea, redirige pasando su propio ID.
+    playBtn.addEventListener("click", () => {
+        window.location.href = `game.html?id=${game.id}`;
+    });
+    // =========================================================
 
     meta.appendChild(tags);
     meta.appendChild(playBtn);
