@@ -1,44 +1,75 @@
-/* --- CONTENEDOR PRINCIPAL (Mobile por defecto) --- */
+/* --- CONTENEDOR PRINCIPAL (Mobile First) --- */
 .organism-header {
-    background-color: var(--color-secondary-chrome-header-footer);
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Z-index consistente para no solaparse con modales ni overlays */
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 1rem; /* Más compacto en celular */
-    width: 100%;
+    padding: 0.75rem 1rem;
     color: var(--color-neutral-text-primary);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    box-sizing: border-box;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+
+    /* Efecto Sticky Transparente + Glassmorphism */
+    background-color: color-mix(in srgb, var(--color-secondary-chrome-header-footer) 85%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* --- GRUPOS (Mobile por defecto) --- */
+/* --- GRUPOS --- */
 .header__left,
 .header__right {
     display: flex;
     align-items: center;
-    gap: 1rem; /* Menor espacio entre íconos en celular */
+    gap: 1rem;
 }
 
-/* Ocultamos el buscador en celular para que no rompa el ancho */
+/* Ocultar el centro en celular */
 .header__center {
     display: none;
 }
 
 /* --- IZQUIERDA: Menú y Logo --- */
 .header__menu-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 44px; /* Cumple con Ley de Fitts / WCAG Target Size */
+    min-height: 44px;
+    background: transparent;
+    border: none;
+    padding: 0;
     font-size: 1.5rem;
-    cursor: pointer;
     color: var(--color-neutral-text-primary);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+.header__menu-icon:hover,
+.header__menu-icon:focus-visible {
+    background-color: color-mix(in srgb, var(--color-neutral-text-primary) 10%, transparent);
+    outline: none;
+}
+
+/* Enlace/Contenedor unificado para el Logo */
 .header__logo {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+    padding: 0.25rem;
+    transition: opacity 0.2s ease;
+}
+
+.header__logo:hover,
+.header__logo:focus-visible {
+    opacity: 0.9;
 }
 
 .header__logo-box {
@@ -53,20 +84,20 @@
 }
 
 .header__logo-box .icon-crown {
-    color: #fff;
+    color: #ffffff;
     font-size: 20px;
 }
 
-/* Ocultamos el texto en celular, dejamos solo el isotipo (la corona) */
 .header__logo-text {
-    display: none;
+    display: none; /* Oculto en mobile */
     font-family: var(--font-family-title), sans-serif;
     font-size: 0.85rem;
     line-height: 1.2;
     text-transform: capitalize;
+    font-weight: 700;
 }
 
-/* --- CENTRO: Buscador (Se estructura pero arranca oculto por .header__center) --- */
+/* --- CENTRO: Buscador --- */
 .header__search {
     position: relative;
     width: 100%;
@@ -85,7 +116,7 @@
     padding: 0.75rem 2.5rem 0.75rem 1rem;
     border-radius: 8px;
     outline: none;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .header__search-input::placeholder {
@@ -94,6 +125,7 @@
 
 .header__search-input:focus {
     border-color: var(--color-primary-default);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-default) 25%, transparent);
 }
 
 .header__search-icon {
@@ -105,9 +137,8 @@
 }
 
 /* --- DERECHA: Acciones --- */
-/* Ocultamos el botón extra en celular */
 .header__btn-mis-juegos {
-    display: none !important;
+    display: none; /* Sin necesidad de !important */
     border-radius: 20px;
     padding: 0.5rem 1.5rem;
 }
@@ -116,13 +147,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    width: 44px; /* Ajustado de 40px a 44px para Ley de Fitts */
+    height: 44px;
     background-color: transparent;
     border: 1px solid var(--color-primary-default);
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .header__profile-box .icon-user {
@@ -130,8 +161,10 @@
     font-size: 20px;
 }
 
-.header__profile-box:hover {
+.header__profile-box:hover,
+.header__profile-box:focus-visible {
     background-color: color-mix(in srgb, var(--color-primary-default) 20%, transparent);
+    outline: none;
 }
 
 /* =========================================
@@ -139,7 +172,7 @@
    ========================================= */
 @media (min-width: 768px) {
     .organism-header {
-        padding: 1rem 24px;
+        padding: 1rem 1.5rem; /* Usamos unidades consistentes (1.5rem = 24px) */
     }
 
     .header__left,
@@ -147,12 +180,10 @@
         gap: 1.5rem;
     }
 
-    /* Mostramos el texto del logo */
     .header__logo-text {
         display: block;
     }
 
-    /* Revelamos el buscador y le damos su estructura central */
     .header__center {
         display: flex;
         flex: 1;
@@ -160,8 +191,7 @@
         padding: 0 2rem;
     }
 
-    /* Revelamos el botón de Mis Juegos */
     .header__btn-mis-juegos {
-        display: block;
+        display: inline-block;
     }
 }

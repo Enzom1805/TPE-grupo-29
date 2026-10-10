@@ -71,11 +71,11 @@
 
 .atom-textarea {
     width: 100%;
-    background-color: #ffffff;
-    border: 1px solid transparent;
+    background-color: var(--color-secondary-surface-elevated);
+    border: 1px solid var(--color-primary-active);
     border-radius: 8px;
     padding: 0.85rem 1rem;
-    color: #111111;
+    color: var(--color-neutral-text-primary);
     font-size: 0.95rem;
     resize: none;
     outline: none;
@@ -83,7 +83,7 @@
 }
 
 .atom-textarea::placeholder {
-    color: #71717a;
+    color: var(--color-neutral-text-secondary);
 }
 
 .comment-form__actions {
@@ -117,7 +117,7 @@
 .comment-card__username {
     font-size: 0.95rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--color-neutral-text-primary);
 }
 
 .comment-card__time {
@@ -130,7 +130,7 @@
     margin: 0;
     font-size: 0.92rem;
     line-height: 1.45;
-    color: #e0e0e0;
+    color: var(--color-neutral-text-primary);
 }
 
 .comment-card__footer {
@@ -161,7 +161,7 @@
 /* Estilos de botones redondeados */
 .atom-button--pill {
     background-color: #6b21a8;
-    color: #ffffff;
+    color: var(--color-neutral-text-primary);
     border: none;
     border-radius: 9999px;
     padding: 0.65rem 1.75rem;
@@ -177,7 +177,7 @@
 
 .comment-card__reply-btn {
     background: transparent;
-    color: #ffffff;
+    color: var(--color-neutral-text-primary);
     border: 1px solid #4a3f6e;
     border-radius: 9999px;
     padding: 0.45rem 1.25rem;
@@ -200,7 +200,7 @@
 
 .atom-button--pill-large {
     background-color: #6b21a8;
-    color: #ffffff;
+    color: var(--color-neutral-text-primary);
     border: none;
     border-radius: 9999px;
     padding: 0.8rem 2.25rem;

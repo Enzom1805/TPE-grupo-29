@@ -1,13 +1,16 @@
+/* --- CONTENEDOR PRINCIPAL (Mantiene separación con el Hero o secciones superiores) --- */
 .category-carousel {
     margin-bottom: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
     padding: 0 var(--spacing-md);
 }
 
+/* --- ENCABEZADO (Reducido margin-bottom para acercarse al carrusel) --- */
 .category-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-2xs); /* Disminuido para vincularlo a sus cards */
     gap: var(--spacing-md);
 }
 
@@ -45,7 +48,8 @@
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    padding: var(--spacing-md) var(--spacing-sm);
+    /* Reducido el padding superior (xs) para eliminar la brecha con el título */
+    padding: var(--spacing-xs) var(--spacing-sm) var(--spacing-md) var(--spacing-sm);
     margin: 0 calc(var(--spacing-sm) * -1);
     -webkit-overflow-scrolling: touch;
 }
@@ -70,6 +74,7 @@
 
 .category-carousel--vertical .category-header {
     justify-content: center;
+    margin-bottom: var(--spacing-xs);
 }
 
 .category-carousel--vertical .category-title {
@@ -125,17 +130,18 @@
 @media (min-width: 768px) {
     /* Carrusel Horizontal (PC) */
     .category-carousel {
-        margin-bottom: var(--spacing-2xl);
+        margin-bottom: var(--spacing-2xl); /* Mantiene buena distancia con el Hero arriba */
         padding: 0 var(--spacing-lg);
     }
 
     .category-header {
-        margin-bottom: var(--spacing-md);
+        margin-bottom: var(--spacing-2xs); /* Distancia estrecha con las tarjetas */
     }
 
     .carousel-track {
         gap: var(--spacing-md);
-        padding: var(--spacing-lg) var(--spacing-sm);
+        /* Reducido el padding superior a var(--spacing-xs) */
+        padding: var(--spacing-xs) var(--spacing-sm) var(--spacing-lg) var(--spacing-sm);
     }
 
     .category-more {

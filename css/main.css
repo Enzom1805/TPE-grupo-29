@@ -22,7 +22,7 @@ html, body {
     background-color: var(--color-secondary-background-page);
     color: var(--color-neutral-text-primary);
     font-family: var(--font-family-body), sans-serif;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 /* Contenedor principal de la App */

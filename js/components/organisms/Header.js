@@ -12,32 +12,25 @@ export default function Header() {
 
     const menuDropdown = HamburgerMenu();
 
-    const logoDiv = document.createElement('div');
-    logoDiv.className = 'header__logo';
-
-    const redirectToHome = () => {
-        window.location.href = "home.html";
-    };
+    // Cambiado a etiqueta <a> semántica para el Logo
+    const logoLink = document.createElement('a');
+    logoLink.className = 'header__logo';
+    logoLink.href = 'home.html';
+    logoLink.setAttribute('aria-label', 'Kingly Games - Ir al inicio');
 
     const logoBox = document.createElement('div');
     logoBox.className = 'header__logo-box';
     const crownIcon = document.createElement('i');
     crownIcon.className = 'icon icon-crown';
+    crownIcon.setAttribute('aria-hidden', 'true');
     logoBox.appendChild(crownIcon);
-    logoBox.addEventListener('click', (redirectToHome));
-
-
 
     const logoText = document.createElement('span');
     logoText.className = 'header__logo-text';
-    // Para que "Kingly Games" quede en dos líneas
     logoText.innerHTML = 'Kingly<br>Games';
-    logoText.addEventListener('click', (redirectToHome));
 
-
-
-    logoDiv.append(logoBox, logoText);
-    leftGroup.append(menuDropdown, logoDiv);
+    logoLink.append(logoBox, logoText);
+    leftGroup.append(menuDropdown, logoLink);
 
     // --- ZONA CENTRAL: Buscador ---
     const centerGroup = document.createElement('div');
@@ -47,12 +40,14 @@ export default function Header() {
     searchContainer.className = 'header__search';
 
     const searchInput = document.createElement('input');
-    searchInput.type = 'text';
-    searchInput.placeholder = 'Buscar un juego';
+    searchInput.type = 'search';
+    searchInput.placeholder = 'Buscar un juego...';
     searchInput.className = 'header__search-input';
+    searchInput.setAttribute('aria-label', 'Buscar un juego');
 
     const searchIcon = document.createElement('i');
     searchIcon.className = 'icon icon-search header__search-icon';
+    searchIcon.setAttribute('aria-hidden', 'true');
 
     searchContainer.append(searchInput, searchIcon);
     centerGroup.appendChild(searchContainer);
