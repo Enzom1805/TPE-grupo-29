@@ -1,4 +1,4 @@
-const completeSound = new Audio("../assets/sounds/introEffect.mp3");
+const completeSound = new Audio("../assets/sounds/introHome.mp3");
 
 // Escucha el primer clic o toque en la pantalla para desbloquear el permiso de audio
 const unlockAudio = () => {

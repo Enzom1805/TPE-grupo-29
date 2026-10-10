@@ -92,7 +92,7 @@ export default function Loader() {
                 setTimeout(() => {
                     container.remove();
                 }, 500);
-            }, 1200);
+            }, 810);
         } else {
             const currentProgress = Math.floor(progress);
             text.textContent = `${currentProgress}%`;
