@@ -1,5 +1,7 @@
 import GameCard from '../molecules/GameCard.js';
 import Button from '../atoms/Button.js'; // Importamos el átomo
+import { playSwipeLeftSound, playSwipeRightSound } from '../../utils/sound.js';
+
 
 export default function CategoryCarousel(title, gamesArray) {
     const section = document.createElement('section');
@@ -36,10 +38,15 @@ export default function CategoryCarousel(title, gamesArray) {
 
     btnPrev.addEventListener('click', () => {
         track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        playSwipeLeftSound(); // Sonido al desplazar hacia la izquierda
+
+
     });
 
     btnNext.addEventListener('click', () => {
         track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        playSwipeRightSound(); // Sonido al desplazar hacia la izquierda
+
     });
 
     // Lógica para ocultar/mostrar botones

@@ -5,7 +5,7 @@
  * @returns {Object|null} Objeto con clave/mensaje de error por campo o null si es válido.
  */
 export function validateRegisterForm(formData) {
-    const { name, lastName, email, password, confirmPassword, terms, captchaValid } = formData;
+    const { name, lastName, email, password, confirmPassword, terms } = formData;
     const errors = {};
 
     if (!name) errors.name = "Requerido";
@@ -33,7 +33,6 @@ export function validateRegisterForm(formData) {
     }
 
     if (!terms) errors.terms = "Aceptá los términos";
-    if (!captchaValid) errors.captchaValid = "Verificá el captcha";
 
     return Object.keys(errors).length > 0 ? errors : null;
 }
