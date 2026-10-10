@@ -1,6 +1,6 @@
-
 import Button from '../atoms/Button.js';
 import HeroCard from '../molecules/HeroGameCard.js';
+import { playSwipeLeftSound, playSwipeRightSound } from '../../utils/sound.js';
 
 export default function HeroCarousel(gamesArray) {
     const section = document.createElement('section');
@@ -32,7 +32,7 @@ export default function HeroCarousel(gamesArray) {
     });
 
     const btnPrev = Button("", "button", "carousel", "medium", "icon-nav-arrow-left");
-    btnPrev.classList.add('btn-prev'); // clase  para ubicarlo
+    btnPrev.classList.add('btn-prev');
 
     const btnNext = Button("", "button", "carousel", "medium", "icon-nav-arrow-right");
     btnNext.classList.add('btn-next');
@@ -54,8 +54,6 @@ export default function HeroCarousel(gamesArray) {
             } else if (index === currentIndex + 2) {
                 card.classList.add('hidden-right'); // 2 a la derecha
             }
-            // Si el índice es menor a currentIndex - 2 o mayor a currentIndex + 2,
-            // no le ponemos clase, vuelve a su estado base (opacity: 0)
         });
 
         btnPrev.style.display = currentIndex === 0 ? 'none' : 'flex';
@@ -65,6 +63,7 @@ export default function HeroCarousel(gamesArray) {
     btnPrev.addEventListener('click', () => {
         if (currentIndex > 0) {
             currentIndex--;
+            playSwipeLeftSound(); // Sonido al desplazar hacia la izquierda
             updateCarousel();
         }
     });
@@ -72,6 +71,7 @@ export default function HeroCarousel(gamesArray) {
     btnNext.addEventListener('click', () => {
         if (currentIndex < cards.length - 1) {
             currentIndex++;
+            playSwipeRightSound(); // Sonido al desplazar hacia la derecha
             updateCarousel();
         }
     });
