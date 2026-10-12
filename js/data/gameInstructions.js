@@ -31,13 +31,22 @@ export const gameInstructions = {
         features: [
             "Ubica las piezas sin límite de tiempo pero con espacio limitado.",
             "Completa filas o columnas completas para despejar la cuadrícula.",
-            "Consigue combos eliminando múltiples líneas simultáneamente."
+            "Consigue combos eliminando múltiples líneas simultáneamente.",
+            "En caso de necesitar ayuda, no dudes en utilizar la ayudita, esta colocara automaticamente una pieza en la posicion ideal",
+            "No abuses con las ayuditas, ya que aumentaran en 5 tu contador de segundos",
+            "En caso de perderte mucho, prueba reiniciando el nivel para reorganizar el nivel actual"
+
         ],
         tips: "Evita dejar huecos aislados de un solo bloque y reserva espacio en el centro para las piezas más grandes que puedan aparecer.",
+
+
         media: {
             image: {
-                src: "../assets/images/blocka-tuto.webp",
+                src: "../assets/images/blocka.jpg",
                 alt: "Guía visual de encaje de piezas en Blocka Game"
+            },
+            video: {
+                src: "../assets/videos/Blocka-video.mp4"
             }
         }
     }

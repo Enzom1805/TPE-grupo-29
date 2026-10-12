@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const dynamicBreadcrumbs = [...gameBreadcrumbs];
     if (dynamicBreadcrumbs.length > 0) {
-        dynamicBreadcrumbs[dynamicBreadcrumbs.length - 1].name = selectedGame.title;
+        dynamicBreadcrumbs[dynamicBreadcrumbs.length - 1].label = selectedGame.title;
     }
 
     const header = Header();
