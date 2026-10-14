@@ -1,4 +1,3 @@
-// js/controllers/BlockaController.js
 
 import { BLOCKA_CONFIG, getRandomImage } from '../data/blocka-data.js';
 import { BlockaEngine } from '../engine/BlockaEngine.js';
@@ -40,7 +39,7 @@ export class BlockaController {
                 ({ time, moves }) => {
                     this.handleLevelWin(levelConfig, this.currentImageSrc, time, moves);
                 },
-                // Callback de Derrota (NUEVO)
+                // Callback de Derrota
                 ({ time, moves }) => {
                     this.handleLevelLose(levelConfig, this.currentImageSrc, time, moves);
                 }

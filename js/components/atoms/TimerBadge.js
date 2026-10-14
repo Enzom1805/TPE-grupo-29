@@ -28,7 +28,6 @@ export function TimerBadge(options = {}) {
     const updateDisplay = () => {
         value.textContent = formatTime(currentSeconds);
 
-        // Agregamos o quitamos la clase modificadora por CSS en lugar de usar style
         if (maxTime !== null && currentSeconds <= 10 && currentSeconds > 0) {
             value.classList.add('atom-timer-badge__value--alert');
         } else {

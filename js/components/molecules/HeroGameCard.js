@@ -41,8 +41,7 @@ export default function HeroCard(game) {
     const playBtn = Button("Jugar", "button", "hero", "large");
     playBtn.classList.add("hero-card__play");
 
-    // =========================================================
-    // MODIFICACIÓN CLAVE: Redirección dinámica universal
+
     // =========================================================
     // Eliminamos los if(game.id === 2) y if(game.id === 3).
     // Ahora, sin importar qué juego sea, redirige pasando su propio ID.

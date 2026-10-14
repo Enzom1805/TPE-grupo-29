@@ -25,7 +25,7 @@ export const BLOCKA_CONFIG = {
             cols: 2,
             rows: 2,
             filter: 'grayscale(100%)'
-            // Sin maxTime: Funciona como cronómetro normal hacia arriba
+            // Sin maxTime
         },
         {
             id: 3,
@@ -41,7 +41,7 @@ export const BLOCKA_CONFIG = {
             cols: 3,
             rows: 3,
             filter: 'invert(100%)',
-            maxTime: 120
+            maxTime: 10
         }
     ]
 };
