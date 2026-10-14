@@ -5,6 +5,7 @@ import { BlockaEngine } from '../engine/BlockaEngine.js';
 import { BlockaPlayer } from '../components/organisms/BlockaPlayer.js';
 import { LevelCompleteModal } from '../components/molecules/LevelCompleteModal.js';
 import { LevelSelectorModal } from '../components/molecules/LevelSelectorModal.js';
+import { LevelFailedModal } from '../components/molecules/LevelFailedModal.js';
 
 export class BlockaController {
     constructor(container) {
@@ -32,9 +33,18 @@ export class BlockaController {
             await this.engine.loadLevel(levelConfig, this.currentImageSrc);
             this.container.innerHTML = '';
 
-            const playerView = BlockaPlayer(this.engine, levelConfig, ({ time, moves }) => {
-                this.handleLevelWin(levelConfig, this.currentImageSrc, time, moves);
-            });
+            const playerView = BlockaPlayer(
+                this.engine,
+                levelConfig,
+                // Callback de Victoria
+                ({ time, moves }) => {
+                    this.handleLevelWin(levelConfig, this.currentImageSrc, time, moves);
+                },
+                // Callback de Derrota (NUEVO)
+                ({ time, moves }) => {
+                    this.handleLevelLose(levelConfig, this.currentImageSrc, time, moves);
+                }
+            );
 
             this.setupSidebarButtons(playerView);
 
@@ -77,6 +87,24 @@ export class BlockaController {
                 this.loadGameLevel(nextIndex, false);
             },
             onMenu: () => {
+                this.openLevelSelector();
+            }
+        });
+
+        this.container.appendChild(modal);
+    }
+    handleLevelLose(levelConfig, imageUrl, time, moves) {
+        const modal = LevelFailedModal({
+            levelName: levelConfig.name,
+            time,
+            moves,
+            imageUrl,
+            onRetry: () => {
+                // Recargamos el mismo nivel manteniendo la misma imagen
+                this.loadGameLevel(this.currentLevelIndex, true);
+            },
+            onMenu: () => {
+                // Abrimos el selector de niveles
                 this.openLevelSelector();
             }
         });

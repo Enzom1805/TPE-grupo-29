@@ -239,6 +239,19 @@
 .molecules-level-selector-modal__cancel-btn {
     width: 100%;
 }
+.molecules-level-complete-modal__preview-image--failed {
+    filter: grayscale(100%) brightness(40%) blur(8px);
+}
+
+/* Pinta el título de rojo */
+.molecules-level-complete-modal__title--failed {
+    color: #ff4d4d;
+}
+
+/* Pinta el valor del tiempo en rojo */
+.value--failed {
+    color: #ff4d4d;
+}
 
 /* ==========================================================================
    3. Clases de Íconos

@@ -1,9 +1,3 @@
-/** Configuración de niveles, banco de imágenes y filtros **/
-/** Meta-información (rutas, filtros por nivel, tiempos límite, id de nivel). **/
-/** Justificación UX/UI --> Centraliza la configuración en un único punto sin hardcodear lógica en los componentes. **/
-/** Manternibilidad --> Permite modificar la dificultad, agregar niveles o alterar reglas del juego modificando únicamente una estructura de datos JSON/JS.**/
-
-
 export const BLOCKA_CONFIG = {
     // Banco de imágenes específico de la carpeta blocka
     imageBank: [
@@ -23,6 +17,7 @@ export const BLOCKA_CONFIG = {
             cols: 2,
             rows: 2,
             filter: 'none'
+            // Sin maxTime: Funciona como cronómetro normal hacia arriba
         },
         {
             id: 2,
@@ -30,20 +25,23 @@ export const BLOCKA_CONFIG = {
             cols: 2,
             rows: 2,
             filter: 'grayscale(100%)'
+            // Sin maxTime: Funciona como cronómetro normal hacia arriba
         },
         {
             id: 3,
             name: 'Nivel 3: Brillo al 30%',
             cols: 3,
             rows: 3,
-            filter: 'brightness(30%)'
+            filter: 'brightness(30%)',
+            maxTime: 120
         },
         {
             id: 4,
             name: 'Nivel 4: Modo Negativo',
             cols: 3,
             rows: 3,
-            filter: 'invert(100%)'
+            filter: 'invert(100%)',
+            maxTime: 120
         }
     ]
 };

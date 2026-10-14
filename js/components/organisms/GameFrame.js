@@ -42,6 +42,10 @@ export default function GameFrame(game) {
         const blockaContainer = document.createElement('div');
         blockaContainer.className = 'blocka-game-frame';
         boardArea.appendChild(blockaContainer);
+        const levelConfig = {
+            name: "Nivel 5 - Contra Reloj",
+            maxTime: 60 // 60 segundos de límite
+        };
 
         const controller = new BlockaController(blockaContainer);
         controller.init();

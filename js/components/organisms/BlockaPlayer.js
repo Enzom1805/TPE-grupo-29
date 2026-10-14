@@ -1,9 +1,12 @@
 import { PieceCanvas } from '../atoms/PieceCanvas.js';
 import { TimerBadge } from '../atoms/TimerBadge.js';
 
-export function BlockaPlayer(engine, levelConfig, onWinCallback) {
+export function BlockaPlayer(engine, levelConfig, onWinCallback,onLoseCallback) {
     const container = document.createElement('div');
     container.className = 'blocka-workspace';
+
+    // === NUEVO ESTADO: CONTROL DE GAME OVER ===
+    let isGameOver = false;
 
     // 1. Columna Tablero
     const boardWrapper = document.createElement('div');
@@ -16,6 +19,8 @@ export function BlockaPlayer(engine, levelConfig, onWinCallback) {
     board.style.setProperty('--grid-cols', cols);
     board.style.setProperty('--grid-rows', rows || cols);
     board.style.setProperty('--grid-size', cols);
+    // Para que podamos centrar el mensaje de derrota:
+    board.style.position = 'relative';
 
     const img = engine.loadedImage || engine.image;
     if (img && img.width && img.height) {
@@ -27,6 +32,27 @@ export function BlockaPlayer(engine, levelConfig, onWinCallback) {
     board.dataset.cols = cols;
     boardWrapper.appendChild(board);
 
+    // === NUEVO: FUNCIÓN DE DERROTA ===
+    const renderLoseState = () => {
+        isGameOver = true;
+
+        // Bloqueamos visualmente las piezas para que no parezcan clickeables
+        const pieces = engine.getPieces();
+        pieces.forEach(p => {
+            if (p.canvas) {
+                p.canvas.style.opacity = '0.5';
+                p.canvas.style.pointerEvents = 'none';
+            }
+        });
+
+        // Llamamos al controlador pasándole las estadísticas finales
+        if (onLoseCallback) {
+            onLoseCallback({
+                time: timerBadgeComponent.getTimeFormatted(),
+                moves: movesCount
+            });
+        }
+    };
     // 2. Columna Lateral de Métricas
     const metricsSidebar = document.createElement('aside');
     metricsSidebar.className = 'blocka-workspace__sidebar';
@@ -42,7 +68,13 @@ export function BlockaPlayer(engine, levelConfig, onWinCallback) {
     const statsContainer = document.createElement('div');
     statsContainer.className = 'blocka-sidebar__stats';
 
-    const timerBadgeComponent = TimerBadge();
+    // === NUEVO: INSTANCIAMOS EL TIMER PASÁNDOLE CONFIGURACIÓN ===
+    const timerBadgeComponent = TimerBadge({
+        // Si levelConfig.maxTime existe (ej. 60 segundos), lo usa. Si no, usa null.
+        maxTime: levelConfig.maxTime || null,
+        // Si el tiempo llega a 0, ejecuta renderLoseState
+        onTimeUp: renderLoseState
+    });
 
     let movesCount = 0;
     const movesCard = document.createElement('div');
@@ -66,29 +98,16 @@ export function BlockaPlayer(engine, levelConfig, onWinCallback) {
     const actionsContainer = document.createElement('div');
     actionsContainer.className = 'blocka-sidebar__actions';
 
-    // Botón 1: Pedir Ayudita
     const helpBtn = document.createElement('button');
     helpBtn.type = 'button';
     helpBtn.className = 'atom-button atom-button--medium atom-button--primary btn-blocka-help';
     helpBtn.innerHTML = `<span class="icon-svg icon-svg--ayuda"></span> Pedir Ayudita`;
 
-    // Botón 2: Reiniciar Nivel
     const resetBtn = document.createElement('button');
     resetBtn.type = 'button';
     resetBtn.className = 'atom-button atom-button--medium atom-button--secondary btn-blocka-reset';
+    resetBtn.innerHTML = `<img src="../assets/icons/reset.svg" alt="Reiniciar" class="atom-button__icon"><span>Reiniciar Nivel</span>`;
 
-    const resetIcon = document.createElement('img');
-    resetIcon.src = '../assets/icons/reset.svg';
-    resetIcon.alt = 'Reiniciar';
-    resetIcon.className = 'atom-button__icon';
-
-    const resetText = document.createElement('span');
-    resetText.textContent = 'Reiniciar Nivel';
-
-    resetBtn.appendChild(resetIcon);
-    resetBtn.appendChild(resetText);
-
-    // Botón 3: Cambiar Dificultad
     const difficultyBtn = document.createElement('button');
     difficultyBtn.type = 'button';
     difficultyBtn.className = 'atom-button atom-button--medium atom-button--secondary btn-blocka-difficulty';
@@ -107,17 +126,23 @@ export function BlockaPlayer(engine, levelConfig, onWinCallback) {
     };
 
     const renderBoard = () => {
+        // Limpiamos el tablero (si había un overlay de Game Over, se borra aquí)
         board.innerHTML = '';
         const pieces = engine.getPieces();
 
         pieces.forEach(piece => {
             const canvasElem = PieceCanvas(piece, (id, direction) => {
+                // === NUEVO: BLOQUEO DE ROTACIÓN ===
+                // Si el juego ya terminó (ganó o perdió), ignoramos el clic
+                if (isGameOver) return;
+
                 const rotated = engine.rotatePiece(id, direction);
                 if (rotated) {
                     movesCount++;
                     updateMovesDisplay();
                     renderBoard();
                     if (engine.isSolved) {
+                        isGameOver = true; // Para bloquear más clics
                         timerBadgeComponent.stop();
                         renderWinState();
                     }
@@ -135,20 +160,35 @@ export function BlockaPlayer(engine, levelConfig, onWinCallback) {
         renderBoard();
         if (onWinCallback) {
             onWinCallback({
-                time: timerBadgeComponent.getTimeFormatted(),
+                time: timerBadgeComponent.getTimeSpentFormatted(),
                 moves: movesCount
             });
         }
     };
 
     helpBtn.addEventListener('click', () => {
+        if (isGameOver) return; // Bloqueo preventivo
+
         const pieceId = engine.useHelp();
         if (pieceId !== null) {
             movesCount++;
-            timerBadgeComponent.addSeconds(5);
+
+            // 1. Aplicamos la penalidad (esto puede disparar el Game Over)
+            timerBadgeComponent.applyPenalty(5);
+
+            // ==========================================
+            // Si la penalidad nos dejó en 0,
+            // isGameOver ahora es true. Cortamos la ejecución
+            // para no borrar la pantalla negra de derrota.
+            // ==========================================
+            if (isGameOver) return;
+
+            // Si sobrevivimos, actualizamos la vista normalmente
             updateMovesDisplay();
             renderBoard();
+
             if (engine.isSolved) {
+                isGameOver = true;
                 timerBadgeComponent.stop();
                 renderWinState();
             }
@@ -156,6 +196,8 @@ export function BlockaPlayer(engine, levelConfig, onWinCallback) {
     });
 
     resetBtn.addEventListener('click', () => {
+        // === NUEVO: REESTABLECER ESTADO ===
+        isGameOver = false;
         engine.createPieces();
         movesCount = 0;
         updateMovesDisplay();

@@ -1,6 +1,6 @@
-/** Muestra el tiempo transcurrido o la cuenta regresiva formateada (MM:SS). **/
+export function TimerBadge(options = {}) {
+    const { maxTime = null, onTimeUp = null } = options;
 
-export function TimerBadge() {
     const container = document.createElement('div');
     container.className = 'atom-timer-badge';
 
@@ -10,27 +10,49 @@ export function TimerBadge() {
 
     const value = document.createElement('span');
     value.className = 'atom-timer-badge__value';
-    value.textContent = '00:00';
+    value.textContent = maxTime ? formatTime(maxTime) : '00:00';
 
     container.appendChild(icon);
     container.appendChild(value);
 
-    let secondsElapsed = 0;
+    let currentSeconds = maxTime || 0;
     let timerInterval = null;
 
+    function formatTime(seconds) {
+        const displaySecs = Math.max(0, seconds);
+        const mins = String(Math.floor(displaySecs / 60)).padStart(2, '0');
+        const secs = String(displaySecs % 60).padStart(2, '0');
+        return `${mins}:${secs}`;
+    }
+
     const updateDisplay = () => {
-        const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
-        const secs = String(secondsElapsed % 60).padStart(2, '0');
-        value.textContent = `${mins}:${secs}`;
+        value.textContent = formatTime(currentSeconds);
+
+        // Agregamos o quitamos la clase modificadora por CSS en lugar de usar style
+        if (maxTime !== null && currentSeconds <= 10 && currentSeconds > 0) {
+            value.classList.add('atom-timer-badge__value--alert');
+        } else {
+            value.classList.remove('atom-timer-badge__value--alert');
+        }
     };
 
     const start = () => {
         stop();
-        secondsElapsed = 0;
+        currentSeconds = maxTime || 0;
         updateDisplay();
+
         timerInterval = setInterval(() => {
-            secondsElapsed++;
-            updateDisplay();
+            if (maxTime !== null) {
+                currentSeconds--;
+                updateDisplay();
+                if (currentSeconds <= 0) {
+                    stop();
+                    if (onTimeUp) onTimeUp();
+                }
+            } else {
+                currentSeconds++;
+                updateDisplay();
+            }
         }, 1000);
     };
 
@@ -45,19 +67,35 @@ export function TimerBadge() {
         start();
     };
 
-    const addSeconds = (seconds) => {
-        secondsElapsed += seconds;
+    const applyPenalty = (seconds) => {
+        if (maxTime !== null) {
+            currentSeconds -= seconds;
+            if (currentSeconds <= 0) {
+                currentSeconds = 0;
+                updateDisplay();
+                stop();
+                if (onTimeUp) onTimeUp();
+            }
+        } else {
+            currentSeconds += seconds;
+        }
         updateDisplay();
     };
 
     const getTimeFormatted = () => value.textContent;
+
+    const getTimeSpentFormatted = () => {
+        const timeSpent = maxTime !== null ? (maxTime - currentSeconds) : currentSeconds;
+        return formatTime(timeSpent);
+    };
 
     return {
         element: container,
         start,
         stop,
         reset,
-        addSeconds,
-        getTimeFormatted
+        applyPenalty,
+        getTimeFormatted,
+        getTimeSpentFormatted
     };
 }
