@@ -1,44 +1,52 @@
-/* --- CONTENEDOR PRINCIPAL (Mantiene separación con el Hero o secciones superiores) --- */
+/* ==========================================================================
+   CATEGORY GAME CAROUSEL - CON FÍSICA DE ACELERACIÓN Y FRENADO (OVERSHOOT)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. ESTRUCTURA Y BASE (CARRUSEL HORIZONTAL TRADICIONAL)
+   -------------------------------------------------------------------------- */
 .category-carousel {
+    position: relative;
     margin-bottom: var(--spacing-xl);
-    margin-top: var(--spacing-xl);
     padding: 0 var(--spacing-md);
 }
 
-/* --- ENCABEZADO (Reducido margin-bottom para acercarse al carrusel) --- */
 .category-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-2xs); /* Disminuido para vincularlo a sus cards */
+    margin-bottom: var(--spacing-sm);
     gap: var(--spacing-md);
 }
 
 .category-title {
+    margin: 0;
     color: var(--color-neutral-text-primary);
     font-family: var(--font-family-title), sans-serif;
     font-size: var(--text-s1-size);
     line-height: var(--text-s1-line);
     font-weight: var(--font-weight-regular);
-    margin: 0;
 }
 
 .category-more {
-    color: var(--color-neutral-text-primary, #fff);
+    flex-shrink: 0;
+    color: var(--color-neutral-text-primary, #ffffff);
     font-family: var(--font-family-title), sans-serif;
     font-size: var(--text-b4-size);
     line-height: var(--text-b4-line);
     text-decoration: none;
-    opacity: 1;
-    transition: opacity 0.3s;
     white-space: nowrap;
-    flex-shrink: 0;
+    opacity: 1;
+    transition: opacity 0.25s ease;
+}
+
+.category-more:hover {
+    opacity: 0.8;
 }
 
 .carousel-wrapper {
     position: relative;
-    margin: 0 calc(var(--spacing-sm) * -1);
-    padding: 0 var(--spacing-sm);
+    width: 100%;
 }
 
 /* Pista deslizable horizontal */
@@ -47,10 +55,9 @@
     gap: var(--spacing-sm);
     overflow-x: auto;
     scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    /* Reducido el padding superior (xs) para eliminar la brecha con el título */
-    padding: var(--spacing-xs) var(--spacing-sm) var(--spacing-md) var(--spacing-sm);
-    margin: 0 calc(var(--spacing-sm) * -1);
+    padding: var(--spacing-md) 0;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -58,28 +65,50 @@
     display: none;
 }
 
-/* Ocultamos botones flotantes  */
-.carousel-wrapper .atom-button--carousel {
-    display: none;
+/* --------------------------------------------------------------------------
+   2. FÍSICA DE MOVIMIENTO EN LAS TARJETAS (ARRANQUE, FRENADO Y SKEW)
+   -------------------------------------------------------------------------- */
+.carousel-track .game-card {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    will-change: transform;
+
+    /* Transición elástica con cubic-bezier */
+    transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* Reacción elástica de arranque + inclinación (skew) según la dirección */
+.carousel-track.is-moving-next .game-card {
+    transform: translateX(15px) scale(0.92) skewX(-6deg);
+}
 
-/* --- VARIANTE VERTICAL  --- */
+.carousel-track.is-moving-prev .game-card {
+    transform: translateX(-15px) scale(0.92) skewX(6deg);
+}
+
+/* --------------------------------------------------------------------------
+   3. BOTONES DE NAVEGACIÓN DESKTOP
+   -------------------------------------------------------------------------- */
+.carousel-wrapper .atom-button--carousel {
+    display: none;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --------------------------------------------------------------------------
+   4. VARIANTE VERTICAL
+   -------------------------------------------------------------------------- */
 .category-carousel--vertical {
     display: flex;
     flex-direction: column;
-    margin-bottom: var(--spacing-xl);
-    padding: 0 var(--spacing-md);
 }
 
 .category-carousel--vertical .category-header {
     justify-content: center;
-    margin-bottom: var(--spacing-xs);
 }
 
 .category-carousel--vertical .category-title {
-    text-align: center;
     width: 100%;
+    text-align: center;
 }
 
 .category-carousel--vertical .category-more {
@@ -91,80 +120,48 @@
     flex-direction: column;
     flex: 1;
     min-height: 0;
-    margin: 0;
-    padding: 0;
 }
 
 .category-carousel--vertical .carousel-track {
-    display: flex;
     flex-direction: column;
     flex: 1;
-    gap: var(--spacing-sm);
+    scroll-snap-type: none;
     overflow-x: hidden;
     overflow-y: visible;
     padding: 0;
-    margin: 0;
 }
 
 .category-carousel--vertical .game-card {
     width: 100%;
     height: 120px;
-    flex-shrink: 0;
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
+    transform: none !important;
 }
 
-.category-carousel--vertical .game-card__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-}
-
-
-/* ==========================================================================
-   MEDIA QUERIES (TABLET Y DESKTOP)
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   5. MEDIA QUERIES (TABLET Y DESKTOP >= 768px)
+   -------------------------------------------------------------------------- */
 @media (min-width: 768px) {
-    /* Carrusel Horizontal (PC) */
     .category-carousel {
-        margin-bottom: var(--spacing-2xl); /* Mantiene buena distancia con el Hero arriba */
+        margin-bottom: var(--spacing-2xl);
         padding: 0 var(--spacing-lg);
-    }
-
-    .category-header {
-        margin-bottom: var(--spacing-2xs); /* Distancia estrecha con las tarjetas */
     }
 
     .carousel-track {
         gap: var(--spacing-md);
-        /* Reducido el padding superior a var(--spacing-xs) */
-        padding: var(--spacing-xs) var(--spacing-sm) var(--spacing-lg) var(--spacing-sm);
     }
 
-    .category-more {
-        opacity: 0.8;
-    }
-
-    .category-more:hover {
-        opacity: 1;
-    }
-
-    /* Botones laterales */
     .carousel-wrapper .atom-button--carousel {
         display: flex;
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
         z-index: 10;
         opacity: 0;
         visibility: hidden;
+        transform: translateY(-50%);
     }
 
     .carousel-wrapper .atom-button--carousel:hover {
-        transform: translateY(-50%) scale(1.05);
+        transform: translateY(-50%) scale(1.1);
     }
 
     .carousel-wrapper:hover .atom-button--carousel:not(.atom-button--hidden) {
@@ -180,13 +177,12 @@
         right: var(--spacing-sm);
     }
 
-    /* --- VARIANTE VERTICAL --- */
     .category-carousel--vertical {
         position: absolute;
         top: 0;
-        left: 0;
         right: 0;
         bottom: 70px;
+        left: 0;
         margin-bottom: 0;
         padding: 0;
     }
@@ -198,7 +194,18 @@
     .category-carousel--vertical .game-card {
         height: 150px;
     }
+
     .category-carousel--vertical .carousel-wrapper .atom-button--carousel {
         display: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   6. ACCESIBILIDAD
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    .carousel-track .game-card {
+        transition: none !important;
+        transform: none !important;
     }
 }

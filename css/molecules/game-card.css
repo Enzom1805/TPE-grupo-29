@@ -49,7 +49,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: var(--font-family-title), sans-serif ;
+    font-family: var(--font-family-title), sans-serif;
     font-size: var(--text-caption-c2-size);
     line-height: var(--text-caption-c2-line);
     font-weight: var(--font-weight-medium);
@@ -77,8 +77,6 @@
     background-color: color-mix(in srgb, var(--color-primary-default) 60%, transparent) !important;
     color: var(--color-neutral-text-primary);
 }
-
-
 
 /* ==========================================================================
    LISTÓN DIAGONAL (RIBBON) - ESTADOS PREMIUM Y GRATIS
@@ -118,14 +116,11 @@
 }
 
 .game-card__badge-icon {
-    width: 16px; /* Dejalo en el tamaño original que no te rompía el listón */
+    width: 16px;
     height: auto;
     display: block;
-
-    /* ACÁ ESTÁ LA MAGIA: scale(1.5) lo hace 50% más grande sin desarmar la caja */
     transform: translateY(1px) scale(1.5);
 }
-
 
 /* ==========================================================================
    MEDIA QUERIES (TABLET Y DESKTOP)
@@ -151,7 +146,8 @@
         opacity: 1;
     }
 
-    .game-card:hover {
+    /* Modificado para prevenir que el hover sobrescriba las transformaciones activas del carrusel */
+    .game-card:hover:not(.carousel-track.is-moving-next .game-card):not(.carousel-track.is-moving-prev .game-card) {
         transform: scale(1.05);
         box-shadow: 0 6px 12px color-mix(in srgb, var(--color-primary-default) 60%, transparent);
     }

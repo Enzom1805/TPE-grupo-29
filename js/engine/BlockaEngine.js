@@ -27,45 +27,51 @@ export class BlockaEngine {
 
     createPieces() {
         this.pieces = [];
-        const { cols, rows, filter } = this.currentLevel;
-        const pieceWidth = Math.floor(this.image.width / cols);
-        const pieceHeight = Math.floor(this.image.height / rows);
+        const { rows, filter } = this.currentLevel;
+
+        // 1. Tamaño cuadrado exacto (1:1) derivado de la altura de la imagen y las filas requeridas
+        const pieceSize = Math.floor(this.image.height / rows);
+
+        // 2. Cálculo dinámico de columnas para cubrir todo el ancho de la imagen sin pérdida de píxeles
+        const cols = Math.floor(this.image.width / pieceSize);
+
+        // 3. Actualizamos la propiedad cols del nivel actual para que getGridConfig() la exponga al tablero CSS
+        this.currentLevel.cols = cols;
 
         const possibleAngles = [0, 90, 180, 270];
         let id = 0;
 
         for (let row = 0; row < rows; row++) {
             for (let col = 0; col < cols; col++) {
-                const sx = col * pieceWidth;
-                const sy = row * pieceHeight;
+                const sx = col * pieceSize;
+                const sy = row * pieceSize;
 
-                // Canvas con filtro para el gameplay
+                // Canvas con filtro para el gameplay (Cuadrado 1:1)
                 const filteredCanvas = document.createElement('canvas');
-                filteredCanvas.width = pieceWidth;
-                filteredCanvas.height = pieceHeight;
+                filteredCanvas.width = pieceSize;
+                filteredCanvas.height = pieceSize;
                 const ctx = filteredCanvas.getContext('2d');
 
                 if (filter && filter !== 'none') {
                     ctx.filter = filter;
                 }
-                ctx.drawImage(this.image, sx, sy, pieceWidth, pieceHeight, 0, 0, pieceWidth, pieceHeight);
+                ctx.drawImage(this.image, sx, sy, pieceSize, pieceSize, 0, 0, pieceSize, pieceSize);
 
-                // Canvas original sin filtro (para mostrar cuando gana)
+                // Canvas original sin filtro para estado de victoria (Cuadrado 1:1)
                 const originalCanvas = document.createElement('canvas');
-                originalCanvas.width = pieceWidth;
-                originalCanvas.height = pieceHeight;
+                originalCanvas.width = pieceSize;
+                originalCanvas.height = pieceSize;
                 const origCtx = originalCanvas.getContext('2d');
-                origCtx.drawImage(this.image, sx, sy, pieceWidth, pieceHeight, 0, 0, pieceWidth, pieceHeight);
+                origCtx.drawImage(this.image, sx, sy, pieceSize, pieceSize, 0, 0, pieceSize, pieceSize);
 
-                // Asignar ángulo aleatorio
                 const randomAngle = possibleAngles[Math.floor(Math.random() * possibleAngles.length)];
 
                 this.pieces.push({
                     id: id++,
                     col,
                     row,
-                    width: pieceWidth,
-                    height: pieceHeight,
+                    width: pieceSize,
+                    height: pieceSize,
                     angle: randomAngle,
                     isFixed: false,
                     filteredCanvas,
