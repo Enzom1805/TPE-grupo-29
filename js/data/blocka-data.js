@@ -41,7 +41,7 @@ export const BLOCKA_CONFIG = {
             cols: 3,
             rows: 3,
             filter: 'invert(100%)',
-            maxTime: 10
+            maxTime: 240
         }
     ]
 };
