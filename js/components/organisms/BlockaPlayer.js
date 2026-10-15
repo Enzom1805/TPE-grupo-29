@@ -190,5 +190,9 @@ export function BlockaPlayer(engine, levelConfig, onWinCallback, onLoseCallback)
     renderBoard();
     timerBadgeComponent.start();
 
+    container.destroy = () => {
+        timerBadgeComponent.stop(); // Frena el setInterval
+    };
+
     return container;
 }

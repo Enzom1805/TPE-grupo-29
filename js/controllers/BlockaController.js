@@ -19,6 +19,13 @@ export class BlockaController {
     }
 
     async loadGameLevel(levelIndex, keepSameImage = false) {
+
+        // Limpiamos el reloj del nivel anterior si existe
+        const existingPlayer = this.container.querySelector('.blocka-workspace');
+        if (existingPlayer && typeof existingPlayer.destroy === 'function') {
+            existingPlayer.destroy();
+        }
+
         this.currentLevelIndex = levelIndex;
         const levelConfig = BLOCKA_CONFIG.levels[levelIndex];
 
