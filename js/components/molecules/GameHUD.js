@@ -1,1 +1,0 @@
-/** Agrupa el TimerBadge, el botón de "Ayudita" (+5s), el número de nivel actual y el botón de pausa/instrucciones. **/

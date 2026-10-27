@@ -1,0 +1,42 @@
+/* ==========================================================================
+   Molécula: Panel Lateral de Métricas
+   ========================================================================== */
+.peg-sidebar {
+    background-color: var(--color-secondary-surface-dropdown, #211B2C);
+    border: 1px solid var(--color-neutral-border-strong, #766F82);
+    border-radius: var(--spacing-sm, 12px);
+    padding: var(--spacing-md, 18px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md, 18px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.peg-sidebar__header {
+    border-bottom: 1px solid var(--color-neutral-border-strong, #766F82);
+    padding-bottom: var(--spacing-xs, 8px);
+}
+
+.peg-sidebar__title {
+    font-family: var(--font-family-title, 'Krona One', sans-serif);
+    font-size: var(--text-caption-c1-size, 12px);
+    color: var(--color-accent-default, #FCD34D);
+    letter-spacing: 1px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.peg-sidebar__stats {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs, 10px);
+}
+
+.peg-sidebar__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs, 10px);
+    margin-top: auto;
+}

@@ -1,0 +1,349 @@
+/* ==========================================================================
+   Organismo: Peg Solitaire (Design System & Structural CSS)
+   ========================================================================== */
+
+/* Contenedor Principal (Establece el contexto de posicionamiento para el modal) */
+.peg-workspace {
+    position: relative;
+    width: 100%;
+    max-width: 1020px;
+    margin: 0 auto;
+    background-color: var(--color-secondary-surface-elevated, #2A2238);
+    border: 1px solid var(--color-neutral-border-strong, #766F82);
+    border-radius: var(--spacing-md, 16px);
+    overflow: hidden;
+    box-shadow: 0 12px 36px var(--color-secondary-shadow-deep, #050407);
+    box-sizing: border-box;
+    color: var(--color-neutral-text-primary, #F8F7FC);
+    font-family: var(--font-family-body, 'Inter', sans-serif);
+    min-height: 520px;
+}
+
+/* --- 1. Pantalla de Menú Inicial --- */
+.peg-menu-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 520px;
+    background: radial-gradient(
+            circle,
+            var(--color-secondary-surface-dropdown, #211B2C) 0%,
+            var(--color-secondary-chrome-header-footer, #0D0A12) 100%
+    );
+    padding: var(--spacing-lg, 24px);
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.peg-menu-card {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+}
+
+.peg-menu-card__title {
+    font-family: var(--font-family-title, 'Krona One', sans-serif);
+    font-size: var(--text-h3-size, 28px);
+    color: var(--color-accent-default, #FCD34D);
+    margin: 0 0 var(--spacing-xs, 8px) 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.peg-menu-card__subtitle {
+    font-size: var(--text-b3-size, 14px);
+    color: var(--color-neutral-text-secondary, #C9C5D3);
+    margin: 0 0 var(--spacing-xl, 28px) 0;
+}
+
+.peg-menu-card__themes {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md, 16px);
+    margin-bottom: var(--spacing-2xl, 32px);
+}
+
+/* Reseteo y Estilos de Tarjetas de Temática */
+button.peg-theme-card {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--color-secondary-surface-dropdown, #211B2C);
+    border: 2px solid var(--color-neutral-border-strong, #766F82);
+    border-radius: var(--spacing-sm, 12px);
+    padding: var(--spacing-sm, 12px);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs, 8px);
+    color: var(--color-neutral-text-primary, #F8F7FC);
+    width: 115px;
+    outline: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-family: var(--font-family-body, 'Inter', sans-serif);
+    transition: all 0.25s ease-in-out;
+}
+
+button.peg-theme-card:hover,
+button.peg-theme-card.selected {
+    border-color: var(--color-accent-default, #FCD34D);
+    background-color: var(--color-secondary-surface-elevated, #2A2238);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(252, 211, 77, 0.25);
+}
+
+.peg-theme-card__preview {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--color-neutral-border-strong, #766F82);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-secondary-chrome-header-footer, #0D0A12);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.peg-theme-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.peg-theme-card__label {
+    font-size: var(--text-caption-c1-size, 12px);
+    font-weight: var(--font-weight-semibold, 600);
+}
+
+/* --- 2. Vista de Juego (Canvas + Sidebar) --- */
+.peg-workspace__content {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: var(--spacing-md, 20px);
+    padding: var(--spacing-md, 20px);
+    box-sizing: border-box;
+    width: 100%;
+    align-items: center;
+    min-height: 520px;
+}
+
+.peg-workspace__board-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.peg-board-canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.peg-board-canvas {
+    border-radius: var(--spacing-sm, 12px);
+    box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.8);
+    cursor: grab;
+    max-width: 100%;
+    height: auto;
+    background-color: var(--color-secondary-surface-dropdown, #211B2C);
+}
+
+.peg-board-canvas:active {
+    cursor: grabbing;
+}
+
+/* --- 3. Sidebar de Métricas --- */
+.peg-sidebar {
+    background-color: var(--color-secondary-surface-dropdown, #211B2C);
+    border: 1px solid var(--color-neutral-border-strong, #766F82);
+    border-radius: var(--spacing-sm, 12px);
+    padding: var(--spacing-md, 18px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md, 18px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.peg-sidebar__header {
+    border-bottom: 1px solid var(--color-neutral-border-strong, #766F82);
+    padding-bottom: var(--spacing-xs, 8px);
+}
+
+.peg-sidebar__title {
+    font-family: var(--font-family-title, 'Krona One', sans-serif);
+    font-size: var(--text-caption-c1-size, 12px);
+    color: var(--color-accent-default, #FCD34D);
+    letter-spacing: 1px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.peg-sidebar__stats {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs, 10px);
+}
+
+.peg-stat-card {
+    background-color: var(--color-secondary-surface-elevated, #2A2238);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: var(--spacing-xs, 10px) var(--spacing-md, 16px);
+    border-radius: var(--spacing-2xs, 6px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.peg-stat-card__label {
+    font-size: var(--text-caption-c1-size, 11px);
+    color: var(--color-neutral-text-secondary, #C9C5D3);
+    font-weight: var(--font-weight-semibold, 600);
+    letter-spacing: 0.5px;
+}
+
+.peg-stat-card__value {
+    font-size: var(--text-s2-size, 18px);
+    font-weight: var(--font-weight-bold, 700);
+    color: var(--color-neutral-text-primary, #F8F7FC);
+    text-shadow: 0 0 8px rgba(252, 211, 77, 0.3);
+}
+
+.peg-sidebar__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs, 10px);
+    margin-top: auto;
+}
+
+.peg-sidebar__actions .atom-button {
+    width: 100%;
+}
+
+/* --- 4. Modal Flotante de Fin de Partida (Overlay Absoluto) --- */
+.peg-modal-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 10, 18, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: var(--spacing-md, 16px);
+    box-sizing: border-box;
+    animation: fadeInModal 0.25s ease-out forwards;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.peg-modal-card {
+    background-color: var(--color-secondary-surface-dropdown, #211B2C);
+    border: 1px solid var(--color-neutral-border-strong, #766F82);
+    border-radius: var(--spacing-md, 16px);
+    width: 100%;
+    max-width: 440px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(139, 92, 246, 0.25);
+    text-align: center;
+    animation: slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpModal {
+    from { transform: translateY(20px) scale(0.95); }
+    to { transform: translateY(0) scale(1); }
+}
+
+.peg-modal-card__header {
+    padding: var(--spacing-md, 18px);
+    border-bottom: 1px solid var(--color-neutral-border-strong, #766F82);
+}
+
+.peg-modal-card__header--victory {
+    background: linear-gradient(180deg, rgba(15, 225, 155, 0.2) 0%, rgba(15, 225, 155, 0.02) 100%);
+    border-bottom-color: rgba(15, 225, 155, 0.4);
+}
+
+.peg-modal-card__header--victory .peg-modal-card__title {
+    color: var(--color-success-border, #0FE19B);
+    text-shadow: 0 0 10px rgba(15, 225, 155, 0.4);
+}
+
+.peg-modal-card__header--defeat {
+    background: linear-gradient(180deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.02) 100%);
+    border-bottom-color: rgba(239, 68, 68, 0.4);
+}
+
+.peg-modal-card__header--defeat .peg-modal-card__title {
+    color: var(--color-warning-text-primary, #EF4444);
+    text-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+.peg-modal-card__title {
+    font-family: var(--font-family-title, 'Krona One', sans-serif);
+    font-size: var(--text-s1-size, 18px);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.peg-modal-card__body {
+    padding: var(--spacing-lg, 24px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md, 16px);
+}
+
+.peg-modal-card__msg {
+    color: var(--color-neutral-text-secondary, #C9C5D3);
+    font-size: var(--text-b3-size, 14px);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.peg-modal-card__summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs, 8px);
+    background-color: var(--color-secondary-surface-elevated, #2A2238);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--spacing-xs, 10px);
+    padding: var(--spacing-xs, 10px);
+}
+
+.peg-modal-card__summary .peg-stat-card {
+    box-shadow: none;
+    background-color: var(--color-secondary-chrome-header-footer, #0D0A12);
+}
+
+.peg-modal-card__footer {
+    padding: var(--spacing-md, 16px) var(--spacing-lg, 24px);
+    background-color: var(--color-secondary-chrome-header-footer, #0D0A12);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    gap: var(--spacing-xs, 12px);
+    justify-content: center;
+}
+
+.peg-modal-card__footer .atom-button {
+    flex: 1;
+}
+
+/* --- 5. Ocultamiento Limpio por Especificidad (Al FINAL de la Hoja) --- */
+.peg-workspace .hidden,
+.peg-menu-screen.hidden,
+.peg-workspace__content.hidden,
+.peg-modal-overlay.hidden {
+    display: none;
+}

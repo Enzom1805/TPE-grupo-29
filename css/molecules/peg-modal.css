@@ -1,0 +1,124 @@
+/* ==========================================================================
+   Molécula: Modal de Resultado in-game (Overlay Centrado)
+   ========================================================================== */
+.peg-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 10, 18, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: var(--spacing-md, 16px);
+    box-sizing: border-box;
+    animation: fadeInModal 0.25s ease-out forwards;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.peg-modal-card {
+    background-color: var(--color-secondary-surface-dropdown, #211B2C);
+    border: 1px solid var(--color-neutral-border-strong, #766F82);
+    border-radius: var(--spacing-md, 16px);
+    width: 100%;
+    max-width: 440px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(139, 92, 246, 0.2);
+    text-align: center;
+    animation: slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpModal {
+    from {
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.peg-modal-card__header {
+    padding: var(--spacing-md, 18px);
+    border-bottom: 1px solid var(--color-neutral-border-strong, #766F82);
+}
+
+.peg-modal-card__header--victory {
+    background: linear-gradient(180deg, rgba(15, 225, 155, 0.2) 0%, rgba(15, 225, 155, 0.02) 100%);
+    border-bottom-color: rgba(15, 225, 155, 0.4);
+}
+
+.peg-modal-card__header--victory .peg-modal-card__title {
+    color: var(--color-success-border, #0FE19B);
+    text-shadow: 0 0 10px rgba(15, 225, 155, 0.4);
+}
+
+.peg-modal-card__header--defeat {
+    background: linear-gradient(180deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.02) 100%);
+    border-bottom-color: rgba(239, 68, 68, 0.4);
+}
+
+.peg-modal-card__header--defeat .peg-modal-card__title {
+    color: var(--color-warning-text-primary, #EF4444);
+    text-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+.peg-modal-card__title {
+    font-family: var(--font-family-title, 'Krona One', sans-serif);
+    font-size: var(--text-s1-size, 18px);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.peg-modal-card__body {
+    padding: var(--spacing-lg, 24px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md, 16px);
+}
+
+.peg-modal-card__msg {
+    color: var(--color-neutral-text-secondary, #C9C5D3);
+    font-size: var(--text-b3-size, 14px);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.peg-modal-card__summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs, 8px);
+    background-color: var(--color-secondary-surface-elevated, #2A2238);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--spacing-xs, 10px);
+    padding: var(--spacing-xs, 10px);
+}
+
+.peg-modal-card__summary .peg-stat-card {
+    box-shadow: none;
+    background-color: var(--color-secondary-chrome-header-footer, #0D0A12);
+}
+
+.peg-modal-card__footer {
+    padding: var(--spacing-md, 16px) var(--spacing-lg, 24px);
+    background-color: var(--color-secondary-chrome-header-footer, #0D0A12);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    gap: var(--spacing-xs, 12px);
+    justify-content: center;
+}
+
+.peg-modal-card__footer .atom-button {
+    flex: 1;
+}

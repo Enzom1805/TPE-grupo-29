@@ -1,6 +1,6 @@
 import ShareGroup from '../molecules/ShareGroup.js';
 import HelpButton from "../molecules/HelpButton.js";
-import PegBoard from './PegBoard.js';
+import PegPlayer from './PegPlayer.js';
 import { BlockaController } from '../../controllers/BlockaController.js';
 
 export default function GameFrame(game) {
@@ -15,43 +15,35 @@ export default function GameFrame(game) {
     const screen = document.createElement('div');
     screen.className = 'game-frame__screen';
 
-    // Modificador temático exclusivamente para el juego de Batman (ID: 2)
     if (game.id === 2) {
         screen.classList.add('game-frame__screen--batman');
     }
 
-    // 1. Título dinámico
     const title = document.createElement('h2');
     title.className = 'game-frame__title';
     title.textContent = game.title.toUpperCase();
 
-    // 2. Área central del juego
     const boardArea = document.createElement('div');
     boardArea.className = 'game-frame__board-area';
 
     // =========================================================
-    // RENDERIZADO SEGÚN EL ID DEL JUEGO
+    // RENDERIZADO DINÁMICO SEGÚN ID DE JUEGO
     // =========================================================
     if (game.id === 2) {
-        // Batman Peg Solitaire
-        const board = PegBoard();
-        boardArea.appendChild(board);
+        // Batman Peg Solitaire (Canvas + HUD + Timer + Hints)
+        const pegPlayer = PegPlayer();
+        boardArea.appendChild(pegPlayer);
 
     } else if (game.id === 3) {
         // Blocka Game
         const blockaContainer = document.createElement('div');
         blockaContainer.className = 'blocka-game-frame';
         boardArea.appendChild(blockaContainer);
-        const levelConfig = {
-            name: "Nivel 5 - Contra Reloj",
-            maxTime: 60 // 60 segundos de límite
-        };
 
         const controller = new BlockaController(blockaContainer);
         controller.init();
 
     } else {
-        // Placeholder BEM sin código de estilos en JS
         const placeholderContainer = document.createElement('div');
         placeholderContainer.className = 'game-frame__placeholder';
 
@@ -68,7 +60,6 @@ export default function GameFrame(game) {
         boardArea.appendChild(placeholderContainer);
     }
 
-    // 3. Footer de controles
     const screenFooter = document.createElement('div');
     screenFooter.className = 'game-frame__footer';
 

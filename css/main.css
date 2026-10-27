@@ -5,6 +5,7 @@
 @import url('./atoms/buttons.css');
 @import url('./molecules/share-group.css');
 @import url('./molecules/help-menu.css');
+@import url('./pages/peg-solitaire.css');
 
 /* ==========================================================================
    Estructura Global & Reseteo

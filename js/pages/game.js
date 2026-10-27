@@ -14,11 +14,9 @@ import { getInstructionsByGameId } from '../services/instructions.js';
 document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app') || document.body;
 
-    // 1. LECTURA DE LA URL Y BÚSQUEDA DEL JUEGO
     const urlParams = new URLSearchParams(window.location.search);
     const idParam = urlParams.get('id');
 
-    // ID por defecto (2 = Batman) si se ingresa sin parámetros
     const gameId = idParam ? parseInt(idParam, 10) : 2;
     const selectedGame = games.find(game => game.id === gameId);
 
@@ -27,42 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // 2. ACTUALIZACIÓN DINÁMICA DEL TÍTULO DE PESTAÑA Y BREADCRUMBS
     document.title = `${selectedGame.title} | Kingly Games`;
 
     const dynamicBreadcrumbs = [...gameBreadcrumbs];
     if (dynamicBreadcrumbs.length > 0) {
-        dynamicBreadcrumbs[dynamicBreadcrumbs.length - 1].label = selectedGame.title;
+        dynamicBreadcrumbs[dynamicBreadcrumbs.length - 1].name = selectedGame.title;
     }
 
     const header = Header();
     const breadcrumbs = Breadcrumbs(dynamicBreadcrumbs);
 
-    // 3. CONTENEDOR PRINCIPAL DEL JUEGO
+    // Contenedor a ancho completo para alojar el juego y sus métricas
     const gameMainContainer = document.createElement('div');
-    gameMainContainer.className = 'game-main-container';
+    gameMainContainer.className = 'game-main-container game-main-container--full-width';
 
     const gameArea = GameFrame(selectedGame);
     gameMainContainer.appendChild(gameArea);
 
-    // 4. SIDEBAR CONDICIONAL (Únicamente para Batman Peg Solitaire ID=2)
-    if (selectedGame.id === 2) {
-        const sidebarContainer = document.createElement('div');
-        sidebarContainer.className = 'game-main-container__sidebar';
-
-        const sidebarImg = document.createElement('img');
-        sidebarImg.src = '../assets/images/game-stats-info.jpg';
-        sidebarImg.alt = `Métricas de ${selectedGame.title}`;
-        sidebarImg.className = 'game-main-container__sidebar-img';
-
-        sidebarContainer.appendChild(sidebarImg);
-        gameMainContainer.appendChild(sidebarContainer);
-    } else {
-        // Extiende el marco al 100% del ancho para los demás juegos
-        gameMainContainer.classList.add('game-main-container--full-width');
-    }
-
-    // 5. INSTRUCCIONES Y COMUNIDAD DINÁMICAS
     const gameInstructions = getInstructionsByGameId(selectedGame.id);
     const howToPlaySection = HowToPlay(selectedGame, gameInstructions);
 
@@ -71,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         comments: commentsData
     });
 
-    // 6. CARRUSEL DE JUEGOS SUGERIDOS
     const suggestedGames = games.filter(game => game.id !== selectedGame.id);
     const suggestedCarousel = CategoryCarousel("Juegos Sugeridos", suggestedGames);
     suggestedCarousel.classList.add("category-carousel--vertical");
@@ -91,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const footer = Footer();
 
-    // RENDERIZADO FINAL AL DOM
     app.appendChild(header);
     app.appendChild(breadcrumbs);
     app.appendChild(gameMainContainer);
