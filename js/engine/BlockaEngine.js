@@ -53,7 +53,7 @@ export class BlockaEngine {
                 const ctx = filteredCanvas.getContext('2d');
 
                 if (filter && filter !== 'none') {
-                    ctx.filter = filter;
+                    ctx.filter = filter; //asigna el efecto (por ej: 'Grayscale(100%))
                 }
                 ctx.drawImage(this.image, sx, sy, pieceSize, pieceSize, 0, 0, pieceSize, pieceSize);
 
