@@ -13,7 +13,7 @@
 }
 
 .peg-stat-card__label {
-    font-size: var(--text-caption-c1-size, 11px);
+    font-size: var(--text-caption-c1-size, 14px);
     color: var(--color-neutral-text-secondary, #C9C5D3);
     font-weight: var(--font-weight-semibold, 600);
     letter-spacing: 0.5px;

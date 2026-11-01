@@ -64,6 +64,9 @@ export function BlockaPlayer(engine, levelConfig, onWinCallback, onLoseCallback)
     const movesCard = document.createElement('div');
     movesCard.className = 'blocka-stat-card';
 
+    let helpsRemaining = 3;
+
+
     const movesLabel = document.createElement('span');
     movesLabel.className = 'blocka-stat-card__label';
     movesLabel.textContent = 'Movimientos';
@@ -159,10 +162,20 @@ export function BlockaPlayer(engine, levelConfig, onWinCallback, onLoseCallback)
 
         const pieceId = engine.useHelp();
         if (pieceId !== null) {
+            helpsRemaining--;
             movesCount++;
             timerBadgeComponent.applyPenalty(5);
 
             if (isGameOver) return;
+
+            //Actualizar el texto del boton con las ayudas restantes
+            helpBtn.innerHTML = `<span class="icon-svg icon-svg--settings"></span> Pedir ayuda(${helpsRemaining})`;
+
+            //Si se gastaron las 3, deshabilitamos el boton visualmente
+            if(helpsRemaining === 0){
+                helpBtn.disabled = true;
+                helpBtn.classList.add('atom-button--disabled');
+            }
 
             updateMovesDisplay();
             renderBoard();

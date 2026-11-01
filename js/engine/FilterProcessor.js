@@ -31,4 +31,12 @@ export class FilterProcessor {
         }
         return imageData;
     }
+
+    static applyOpacity(imageData, factor = 0.3) {
+        const data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+           data[i + 3] = data[i + 3] * factor
+        }
+        return imageData;
+    }
 }

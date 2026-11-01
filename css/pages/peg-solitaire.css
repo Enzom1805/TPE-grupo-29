@@ -6,7 +6,7 @@
 .peg-workspace {
     position: relative;
     width: 100%;
-    max-width: 1020px;
+    max-width: 1200px;
     margin: 0 auto;
     background-color: var(--color-secondary-surface-elevated, #2A2238);
     border: 1px solid var(--color-neutral-border-strong, #766F82);
@@ -16,7 +16,7 @@
     box-sizing: border-box;
     color: var(--color-neutral-text-primary, #F8F7FC);
     font-family: var(--font-family-body, 'Inter', sans-serif);
-    min-height: 520px;
+    min-height: 700px;
 }
 
 /* --- 1. Pantalla de Menú Inicial --- */
@@ -25,7 +25,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 520px;
+    min-height: 700px;
     background: radial-gradient(
             circle,
             var(--color-secondary-surface-dropdown, #211B2C) 0%,
@@ -126,14 +126,20 @@ button.peg-theme-card.selected {
     padding: var(--spacing-md, 20px);
     box-sizing: border-box;
     width: 100%;
-    align-items: center;
-    min-height: 520px;
+    height: 100%;
+    align-items: stretch;
+    min-height: 700px;
 }
 
 .peg-workspace__board-area {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    background-color: var(--color-secondary-surface-dropdown, #211B2C);
+    border-radius: var(--spacing-sm, 12px);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
 }
 
 .peg-board-canvas-container {
@@ -141,15 +147,18 @@ button.peg-theme-card.selected {
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 100%;
 }
 
 .peg-board-canvas {
-    border-radius: var(--spacing-sm, 12px);
-    box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.8);
-    cursor: grab;
+    width: 100%;
+    height: 100%;
     max-width: 100%;
-    height: auto;
-    background-color: var(--color-secondary-surface-dropdown, #211B2C);
+    max-height: 100%;
+    object-fit: contain;
+    background-color: transparent;
+    box-shadow: none;
+    cursor: grab;
 }
 
 .peg-board-canvas:active {
@@ -177,7 +186,7 @@ button.peg-theme-card.selected {
 
 .peg-sidebar__title {
     font-family: var(--font-family-title, 'Krona One', sans-serif);
-    font-size: var(--text-caption-c1-size, 12px);
+    font-size: var(--text-b4-size, 15px);
     color: var(--color-accent-default, #FCD34D);
     letter-spacing: 1px;
     margin: 0;
@@ -187,13 +196,17 @@ button.peg-theme-card.selected {
 .peg-sidebar__stats {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs, 10px);
+    gap: var(--spacing-lg, 24px); /* Más separación entre tarjeta y tarjeta */
+    flex-grow: 1; /* CLAVE: Le dice que ocupe todo el espacio vacío disponible */
+    /* Centra las tarjetas verticalmente en ese espacio */
 }
 
+/* 2. Hacemos las tarjetas físicamente más grandes */
 .peg-stat-card {
     background-color: var(--color-secondary-surface-elevated, #2A2238);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: var(--spacing-xs, 10px) var(--spacing-md, 16px);
+
+    padding: 24px var(--spacing-md, 16px);
     border-radius: var(--spacing-2xs, 6px);
     display: flex;
     justify-content: space-between;
@@ -201,24 +214,24 @@ button.peg-theme-card.selected {
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+/* 3. Agrandamos los textos para que acompañen el nuevo tamaño de la tarjeta */
 .peg-stat-card__label {
-    font-size: var(--text-caption-c1-size, 11px);
+    font-size: 18px;
     color: var(--color-neutral-text-secondary, #C9C5D3);
     font-weight: var(--font-weight-semibold, 600);
     letter-spacing: 0.5px;
 }
 
 .peg-stat-card__value {
-    font-size: var(--text-s2-size, 18px);
+    font-size: 30px;
     font-weight: var(--font-weight-bold, 700);
     color: var(--color-neutral-text-primary, #F8F7FC);
     text-shadow: 0 0 8px rgba(252, 211, 77, 0.3);
 }
-
 .peg-sidebar__actions {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs, 10px);
+    gap: var(--spacing-xs, 20px);
     margin-top: auto;
 }
 

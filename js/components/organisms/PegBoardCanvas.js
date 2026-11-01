@@ -7,7 +7,7 @@ export default function PegBoardCanvas({ onMovePerformed, onGameOver, currentThe
     container.className = 'peg-board-canvas-container';
 
     const canvas = document.createElement('canvas');
-    canvas.width = 620;
+    canvas.width = 700;
     canvas.height = 480;
     canvas.className = 'peg-board-canvas';
     container.appendChild(canvas);
@@ -30,10 +30,21 @@ export default function PegBoardCanvas({ onMovePerformed, onGameOver, currentThe
     let isDragging = false;
     let dragOffset = { x: 0, y: 0 };
 
-    const cellSpacing = 58;
+    const padding = 60; // Margen de seguridad para no chocar con los bordes
+    const availableWidth = canvas.width - padding;
+    const availableHeight = canvas.height - padding;
+
+    // Calcula el espaciado máximo permitido sin desbordar el canvas
+    const cellSpacing = Math.min(
+        availableWidth / (engine.cols - 1),
+        availableHeight / (engine.rows - 1)
+    );
+
+    // Escala la ficha proporcionalmente al tamaño de su celda
+    const pegRadius = cellSpacing * 0.38;
+
     const offsetX = (canvas.width - (engine.cols - 1) * cellSpacing) / 2;
     const offsetY = (canvas.height - (engine.rows - 1) * cellSpacing) / 2;
-    const pegRadius = 22;
 
     function gridToCanvas(col, row) {
         return { x: offsetX + col * cellSpacing, y: offsetY + row * cellSpacing };
@@ -123,10 +134,24 @@ export default function PegBoardCanvas({ onMovePerformed, onGameOver, currentThe
         animationId = requestAnimationFrame(render);
     }
 
-    function handleMouseDown(e) {
+    function getMousePos(e) {
         const rect = canvas.getBoundingClientRect();
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
+        const scale = Math.min(rect.width / canvas.width, rect.height / canvas.height);
+        const drawnWidth = canvas.width * scale;
+        const drawnHeight = canvas.height * scale;
+        const paddingLeft = (rect.width - drawnWidth) / 2;
+        const paddingTop = (rect.height - drawnHeight) / 2;
+
+        const x = (e.clientX - rect.left - paddingLeft) / scale;
+        const y = (e.clientY - rect.top - paddingTop) / scale;
+
+        return { x, y };
+    }
+
+    function handleMouseDown(e) {
+        const pos = getMousePos(e);
+        const mx = pos.x;
+        const my = pos.y;
 
         const clicked = pieces.find(p => p.isPointInside(mx, my));
         if (clicked) {
@@ -148,9 +173,9 @@ export default function PegBoardCanvas({ onMovePerformed, onGameOver, currentThe
 
     function handleMouseMove(e) {
         if (isDragging && selectedPiece) {
-            const rect = canvas.getBoundingClientRect();
-            selectedPiece.x = (e.clientX - rect.left) - dragOffset.x;
-            selectedPiece.y = (e.clientY - rect.top) - dragOffset.y;
+            const pos = getMousePos(e);
+            selectedPiece.x = pos.x - dragOffset.x;
+            selectedPiece.y = pos.y - dragOffset.y;
         }
     }
 

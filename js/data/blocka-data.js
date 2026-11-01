@@ -24,7 +24,7 @@ export const BLOCKA_CONFIG = {
             name: 'Nivel 2: Escala de Grises',
             cols: 2,
             rows: 2,
-            filter: 'grayscale(100%)'
+            filter: 'grayscale'
             // Sin maxTime
         },
         {
@@ -32,7 +32,7 @@ export const BLOCKA_CONFIG = {
             name: 'Nivel 3: Brillo al 30%',
             cols: 3,
             rows: 3,
-            filter: 'brightness(30%)',
+            filter: 'brightness',
             maxTime: 120
         },
         {
@@ -40,7 +40,7 @@ export const BLOCKA_CONFIG = {
             name: 'Nivel 4: Modo Negativo',
             cols: 3,
             rows: 3,
-            filter: 'invert(100%)',
+            filter: 'negative',
             maxTime: 240
         }
     ]

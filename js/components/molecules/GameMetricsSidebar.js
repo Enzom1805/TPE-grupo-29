@@ -14,7 +14,7 @@ export function GameMetricsSidebar({ onReset, onBackMenu }) {
 
     const title = document.createElement('h3');
     title.className = 'peg-sidebar__title';
-    title.textContent = '⚙️ MÉTRICAS DEL JUEGO';
+    title.textContent = ' MÉTRICAS DEL JUEGO';
     header.appendChild(title);
 
     const statsContainer = document.createElement('div');

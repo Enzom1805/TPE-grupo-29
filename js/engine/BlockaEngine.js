@@ -1,4 +1,5 @@
 /** Logica matematica, Canvas API, corte y manipulacion de pixeles **/
+import {FilterProcessor} from "./FilterProcessor.js";
 
 export class BlockaEngine {
     constructor() {
@@ -52,10 +53,28 @@ export class BlockaEngine {
                 filteredCanvas.height = pieceSize;
                 const ctx = filteredCanvas.getContext('2d');
 
+               ctx.drawImage(this.image, sx, sy, pieceSize,pieceSize, 0,0, pieceSize, pieceSize);
+
                 if (filter && filter !== 'none') {
-                    ctx.filter = filter; //asigna el efecto (por ej: 'Grayscale(100%))
+
+                    let imageData = ctx.getImageData(0,0, pieceSize, pieceSize);
+
+                    //Seleccionariamos el algoritmo segun el tipo de filtro
+                    switch(filter){
+                        case 'grayscale':
+                            imageData = FilterProcessor.applyGrayscale(imageData);
+                            break;
+                        case 'brightness':
+                            imageData = FilterProcessor.applyBrightness(imageData, 0.3);
+                            break;
+                        case 'negative':
+                            imageData = FilterProcessor.applyNegative(imageData);
+                            break;
+
+                    }
+                    ctx.putImageData(imageData, 0, 0);
                 }
-                ctx.drawImage(this.image, sx, sy, pieceSize, pieceSize, 0, 0, pieceSize, pieceSize);
+
 
                 // Canvas original sin filtro para estado de victoria (Cuadrado 1:1)
                 const originalCanvas = document.createElement('canvas');
@@ -92,7 +111,7 @@ export class BlockaEngine {
         const piece = this.pieces.find(p => p.id === pieceId);
         if (!piece || piece.isFixed || this.isSolved) return false;
 
-        const delta = direction === 'right' ? 90 : -90;
+        const delta = direction === 'right' ? -90 : 90;
         piece.angle = (piece.angle + delta + 360) % 360;
 
         this.checkSolved();
