@@ -188,7 +188,8 @@ button.peg-theme-card.selected {
     font-family: var(--font-family-title, 'Krona One', sans-serif);
     font-size: var(--text-b4-size, 15px);
     color: var(--color-accent-default, #FCD34D);
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    padding-left: 2px;
     margin: 0;
     text-transform: uppercase;
 }

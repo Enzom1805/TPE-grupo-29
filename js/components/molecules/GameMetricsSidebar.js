@@ -30,10 +30,10 @@ export function GameMetricsSidebar({ onReset, onBackMenu }) {
     actionsContainer.className = 'peg-sidebar__actions';
 
     // Usamos tu componente Button.js atómico
-    const resetBtn = Button('🔄 REINICIAR TABLERO', 'button', 'primary', 'medium');
+    const resetBtn = Button(' REINICIAR TABLERO', 'button', 'primary', 'medium');
     resetBtn.addEventListener('click', onReset);
 
-    const menuBtn = Button('⚙️ CAMBIAR FICHAS', 'button', 'secondary', 'medium');
+    const menuBtn = Button(' CAMBIAR FICHAS', 'button', 'secondary', 'medium');
     menuBtn.addEventListener('click', onBackMenu);
 
     actionsContainer.append(resetBtn, menuBtn);
