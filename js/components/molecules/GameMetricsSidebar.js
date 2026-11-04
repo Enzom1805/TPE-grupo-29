@@ -23,8 +23,9 @@ export function GameMetricsSidebar({ onReset, onBackMenu }) {
     const movesStat = StatCard({ label: 'MOVIMIENTOS', initialValue: '0', id: 'peg-moves-val' });
     const timerStat = StatCard({ label: 'TIEMPO', initialValue: '05:00', id: 'peg-timer-val' });
     const themeStat = StatCard({ label: 'FICHAS', initialValue: 'Batman', id: 'peg-theme-val' });
+    const chipStat  = StatCard({label: 'Restantes', initialValue: '32', id: 'peg-left-val'});
 
-    statsContainer.append(movesStat, timerStat, themeStat);
+    statsContainer.append(movesStat, timerStat,chipStat, themeStat);
 
     const actionsContainer = document.createElement('div');
     actionsContainer.className = 'peg-sidebar__actions';
@@ -43,6 +44,7 @@ export function GameMetricsSidebar({ onReset, onBackMenu }) {
     sidebar.updateMoves = (count) => movesStat.update(count);
     sidebar.updateTimer = (timeStr) => timerStat.update(timeStr);
     sidebar.updateTheme = (name, color) => themeStat.update(name, color);
+    sidebar.updateRemaining = (count) => chipStat.update(count);
     sidebar.getTimerValue = () => timerStat.querySelector('#peg-timer-val').textContent;
 
     return sidebar;

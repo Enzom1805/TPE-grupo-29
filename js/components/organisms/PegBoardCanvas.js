@@ -191,7 +191,8 @@ export default function PegBoardCanvas({ onMovePerformed, onGameOver, currentThe
         if (validMove) {
             engine.executeMove(selectedPiece.col, selectedPiece.row, validMove);
             syncPiecesWithGrid();
-            if (onMovePerformed) onMovePerformed();
+            const remaining = engine.getRemainingPegsCount();
+            if (onMovePerformed) onMovePerformed(remaining);
 
             if (!engine.hasPossibleMoves()) {
                 const remaining = engine.getRemainingPegsCount();

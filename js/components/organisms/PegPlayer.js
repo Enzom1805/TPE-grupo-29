@@ -78,6 +78,7 @@ export default function PegPlayer() {
     function resetCurrentGame() {
         movesCount = 0;
         sidebar.updateMoves('0');
+        sidebar.updateRemaining(32);
         if (boardCanvasNode && boardCanvasNode.reset) {
             boardCanvasNode.reset();
         } else {
@@ -102,15 +103,17 @@ export default function PegPlayer() {
         boardArea.innerHTML = '';
         movesCount = 0;
         sidebar.updateMoves('0');
+        sidebar.updateRemaining(32);
 
         const activeTheme = PEG_THEMES[currentThemeKey];
         sidebar.updateTheme(activeTheme.name, activeTheme.accentColor);
 
         boardCanvasNode = PegBoardCanvas({
             currentThemeKey,
-            onMovePerformed: () => {
+            onMovePerformed: (remainingPegs) => {
                 movesCount++;
                 sidebar.updateMoves(movesCount);
+                sidebar.updateRemaining(remainingPegs);
             },
             onGameOver: (result) => {
                 stopTimer();

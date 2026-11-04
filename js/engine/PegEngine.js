@@ -1,3 +1,5 @@
+import { gridLayout } from "../data/pegGrid.js";
+
 /**
  * Clase encargada del motor lógico del juego Peg Solitaire.
  * Controla el mapa del tablero de 33 posiciones y verifica la validez de los saltos.
@@ -6,16 +8,7 @@ export class PegEngine {
     constructor() {
         this.cols = 9;
         this.rows = 7;
-        // 0 = Fuera del tablero, 1 = Ficha activa, 2 = Hueco vacío
-        this.initialGrid = [
-            0, 0, 0, 1, 1, 1, 0, 0, 0,
-            0, 0, 0, 1, 1, 1, 0, 0, 0,
-            0, 1, 1, 1, 1, 1, 1, 1, 0,
-            0, 1, 1, 1, 2, 1, 1, 1, 0, // El centro inicia vacío
-            0, 1, 1, 1, 1, 1, 1, 1, 0,
-            0, 0, 0, 1, 1, 1, 0, 0, 0,
-            0, 0, 0, 1, 1, 1, 0, 0, 0
-        ];
+        this.initialGrid = [...gridLayout];
         this.grid = [];
         this.reset();
     }
