@@ -18,7 +18,7 @@ export const PEG_THEMES = {
     },
     robin: {
         id: 'robin',
-        name: 'Red Robin',
+        name: 'Robin',
         iconPath: '../assets/images/robin.png',
         accentColor: '#EF4444',
         glowColor: 'rgba(239, 68, 68, 0.8)'
