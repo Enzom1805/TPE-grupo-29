@@ -7,8 +7,8 @@ export default function PegBoardCanvas({ onMovePerformed, onGameOver, currentThe
     container.className = 'peg-board-canvas-container';
 
     const canvas = document.createElement('canvas');
-    canvas.width = 700;
-    canvas.height = 480;
+    canvas.width = 1920;
+    canvas.height = 1080;
     canvas.className = 'peg-board-canvas';
     container.appendChild(canvas);
 
@@ -30,7 +30,8 @@ export default function PegBoardCanvas({ onMovePerformed, onGameOver, currentThe
     let isDragging = false;
     let dragOffset = { x: 0, y: 0 };
 
-    const padding = 60; // Margen de seguridad para no chocar con los bordes
+    // Margen de seguridad ajustado para resolución 1920x1080
+    const padding = 220;
     const availableWidth = canvas.width - padding;
     const availableHeight = canvas.height - padding;
 
