@@ -5,7 +5,7 @@ import { StatCard } from '../atoms/StatCard.js';
  * Molécula: GameMetricsSidebar
  * Sidebar lateral utilizando el átomo Button del proyecto.
  */
-export function GameMetricsSidebar({ onReset, onBackMenu }) {
+export function GameMetricsSidebar({ onReset, onBackMenu, onHelp }) {
     const sidebar = document.createElement('aside');
     sidebar.className = 'peg-sidebar';
 
@@ -37,10 +37,12 @@ export function GameMetricsSidebar({ onReset, onBackMenu }) {
     const menuBtn = Button(' CAMBIAR FICHAS', 'button', 'secondary', 'medium');
     menuBtn.addEventListener('click', onBackMenu);
 
-    actionsContainer.append(resetBtn, menuBtn);
+    const helpBtn = Button(' REACOMODAR FICHAS', 'button', 'secondary', 'medium');
+    helpBtn.addEventListener('click', onHelp);
+
+    actionsContainer.append(resetBtn, menuBtn, helpBtn);
 
     sidebar.append(header, statsContainer, actionsContainer);
-
     sidebar.updateMoves = (count) => movesStat.update(count);
     sidebar.updateTimer = (timeStr) => timerStat.update(timeStr);
     sidebar.updateTheme = (name, color) => themeStat.update(name, color);
