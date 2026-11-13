@@ -42,35 +42,78 @@ export class PegEngine {
         return idx !== -1 ? this.grid[idx] : 0;
     }
 
+    /**
+     * Obtiene todos los movimientos válidos de una ficha.
+     *
+     * Permite:
+     * - Saltar sobre una ficha.
+     * - Saltar sobre dos fichas consecutivas.
+     *
+     * El destino debe estar vacío.
+     */
     getValidMoves(col, row) {
+
         if (this.getCell(col, row) !== 1) return [];
 
         const validMoves = [];
 
         const directions = [
-            { dc: 0, dr: -2, jc: 0, jr: -1 },
-            { dc: 0, dr: 2, jc: 0, jr: 1 },
-            { dc: -2, dr: 0, jc: -1, jr: 0 },
-            { dc: 2, dr: 0, jc: 1, jr: 0 }
+            { dc: 0, dr: -1 },
+            { dc: 0, dr: 1 },
+            { dc: -1, dr: 0 },
+            { dc: 1, dr: 0 }
         ];
+
+        // Máxima cantidad de fichas que podemos saltar.
+        const MAX_JUMPED_PEGS = 2;
 
         directions.forEach(dir => {
 
-            const targetCol = col + dir.dc;
-            const targetRow = row + dir.dr;
-
-            const jumpedCol = col + dir.jc;
-            const jumpedRow = row + dir.jr;
-
-            if (
-                this.getCell(jumpedCol, jumpedRow) === 1 &&
-                this.getCell(targetCol, targetRow) === 2
+            // Probamos saltar una o dos fichas.
+            for (
+                let jumpedCount = 1;
+                jumpedCount <= MAX_JUMPED_PEGS;
+                jumpedCount++
             ) {
+
+                const targetCol = col + dir.dc * (jumpedCount + 1);
+                const targetRow = row + dir.dr * (jumpedCount + 1);
+
+                const jumpedPositions = [];
+
+                let pathIsValid = true;
+
+                // Comprobamos todas las posiciones intermedias.
+                for (let step = 1; step <= jumpedCount; step++) {
+
+                    const jumpedCol = col + dir.dc * step;
+                    const jumpedRow = row + dir.dr * step;
+
+                    if (this.getCell(jumpedCol, jumpedRow) !== 1) {
+                        pathIsValid = false;
+                        break;
+                    }
+
+                    jumpedPositions.push({
+                        col: jumpedCol,
+                        row: jumpedRow
+                    });
+                }
+
+                if (!pathIsValid) continue;
+
+                // El destino debe estar vacío.
+                if (this.getCell(targetCol, targetRow) !== 2) {
+                    continue;
+                }
+
                 validMoves.push({
                     toCol: targetCol,
                     toRow: targetRow,
-                    jumpedCol,
-                    jumpedRow
+
+                    jumpedPositions,
+
+                    jumpedCount
                 });
             }
 
@@ -79,22 +122,62 @@ export class PegEngine {
         return validMoves;
     }
 
+    /**
+     * Ejecuta un movimiento y elimina todas las fichas saltadas.
+     */
     executeMove(fromCol, fromRow, move) {
-        const fromIdx = this.getIndex(fromCol, fromRow);
 
-        const jumpedIdx = this.getIndex(
-            move.jumpedCol,
-            move.jumpedRow
-        );
+        const fromIdx = this.getIndex(fromCol, fromRow);
 
         const toIdx = this.getIndex(
             move.toCol,
             move.toRow
         );
 
+        if (fromIdx === -1 || toIdx === -1) {
+            return false;
+        }
+
+        if (
+            this.grid[fromIdx] !== 1 ||
+            this.grid[toIdx] !== 2
+        ) {
+            return false;
+        }
+
+        if (
+            !Array.isArray(move.jumpedPositions) ||
+            move.jumpedPositions.length < 1 ||
+            move.jumpedPositions.length > 2
+        ) {
+            return false;
+        }
+
+        // Verificamos que todas las fichas intermedias existan.
+        const jumpedIndexes = move.jumpedPositions.map(position =>
+            this.getIndex(position.col, position.row)
+        );
+
+        if (
+            jumpedIndexes.some(index =>
+                index === -1 || this.grid[index] !== 1
+            )
+        ) {
+            return false;
+        }
+
+        // Eliminamos la ficha de origen.
         this.grid[fromIdx] = 2;
-        this.grid[jumpedIdx] = 2;
+
+        // Eliminamos todas las fichas saltadas.
+        jumpedIndexes.forEach(index => {
+            this.grid[index] = 2;
+        });
+
+        // Colocamos la ficha en el destino.
         this.grid[toIdx] = 1;
+
+        return true;
     }
 
     getRemainingPegsCount() {
@@ -105,6 +188,7 @@ export class PegEngine {
     }
 
     hasPossibleMoves() {
+
         for (let r = 0; r < this.rows; r++) {
             for (let c = 0; c < this.cols; c++) {
 
@@ -122,21 +206,13 @@ export class PegEngine {
     }
 
     /**
-     * Obtiene todos los movimientos inversos posibles.
+     * Obtiene movimientos inversos para la reorganización.
      *
-     * Movimiento normal:
-     * 1 ficha + 1 ficha + 1 vacío
-     *             ↓
-     * 2 vacíos + 1 ficha
-     *
-     * Movimiento inverso:
-     * 2 vacíos + 1 ficha
-     *             ↓
-     * 1 ficha + 1 ficha + 1 vacío
-     *
-     * Estos movimientos permiten construir un tablero
-     * que sabemos que puede resolverse.
+     * IMPORTANTE:
+     * Esta implementación conserva la lógica original
+     * de movimientos inversos de una ficha.
      */
+
     getReverseMoves(grid) {
 
         const reverseMoves = [];
@@ -153,30 +229,22 @@ export class PegEngine {
 
                 const targetIdx = this.getIndex(col, row);
 
-                // El destino del movimiento normal debe tener ficha.
                 if (grid[targetIdx] !== 1) continue;
 
                 directions.forEach(dir => {
 
-                    const fromCol = col + dir.dc;
-                    const fromRow = row + dir.dr;
-
-                    const jumpedCol = col + dir.jc;
-                    const jumpedRow = row + dir.jr;
-
                     const fromIdx = this.getIndex(
-                        fromCol,
-                        fromRow
+                        col + dir.dc,
+                        row + dir.dr
                     );
 
                     const jumpedIdx = this.getIndex(
-                        jumpedCol,
-                        jumpedRow
+                        col + dir.jc,
+                        row + dir.jr
                     );
 
                     if (fromIdx === -1 || jumpedIdx === -1) return;
 
-                    // Ambas posiciones deben pertenecer al tablero.
                     if (
                         this.initialGrid[fromIdx] === 0 ||
                         this.initialGrid[jumpedIdx] === 0
@@ -184,7 +252,6 @@ export class PegEngine {
                         return;
                     }
 
-                    // Las posiciones de origen y salto deben estar vacías.
                     if (
                         grid[fromIdx] === 2 &&
                         grid[jumpedIdx] === 2
@@ -197,7 +264,6 @@ export class PegEngine {
                     }
 
                 });
-
             }
         }
 
@@ -205,18 +271,7 @@ export class PegEngine {
     }
 
     /**
-     * Reorganiza las fichas existentes conservando su cantidad.
-     *
-     * Construye una distribución mediante movimientos inversos
-     * a partir de una sola ficha.
-     *
-     * Si encuentra una solución:
-     * - Actualiza this.grid.
-     * - Devuelve true.
-     *
-     * Si no encuentra una solución dentro del límite:
-     * - Conserva el tablero original.
-     * - Devuelve false.
+     * Reorganiza las fichas conservando su cantidad.
      */
     reorganizeToSolvable() {
 
@@ -225,12 +280,9 @@ export class PegEngine {
         const validPositions = [];
 
         this.initialGrid.forEach((cell, index) => {
-            if (cell !== 0) {
-                validPositions.push(index);
-            }
+            if (cell !== 0) validPositions.push(index);
         });
 
-        // No hay fichas o hay más fichas que posiciones válidas.
         if (
             targetCount < 1 ||
             targetCount > validPositions.length
@@ -238,12 +290,8 @@ export class PegEngine {
             return false;
         }
 
-        // Una única ficha ya representa una partida ganada.
-        if (targetCount === 1) {
-            return true;
-        }
+        if (targetCount === 1) return true;
 
-        // Aleatoriza el orden de exploración.
         const shuffle = array => {
 
             const result = [...array];
@@ -267,30 +315,17 @@ export class PegEngine {
 
         const MAX_NODES = 1000000;
 
-        /**
-         * Búsqueda recursiva con retroceso.
-         *
-         * currentCount indica cuántas fichas contiene
-         * actualmente la distribución candidata.
-         */
         const search = (grid, currentCount) => {
 
-            // Alcanzamos exactamente la cantidad original.
-            if (currentCount === targetCount) {
-                return true;
-            }
+            if (currentCount === targetCount) return true;
 
-            if (exploredNodes >= MAX_NODES) {
-                return false;
-            }
+            if (exploredNodes >= MAX_NODES) return false;
 
             exploredNodes++;
 
             const stateKey = grid.join('');
 
-            if (visited.has(stateKey)) {
-                return false;
-            }
+            if (visited.has(stateKey)) return false;
 
             const possibleMoves = shuffle(
                 this.getReverseMoves(grid)
@@ -298,7 +333,6 @@ export class PegEngine {
 
             for (const move of possibleMoves) {
 
-                // Ejecutamos el movimiento inverso.
                 grid[move.fromIdx] = 1;
                 grid[move.jumpedIdx] = 1;
                 grid[move.targetIdx] = 2;
@@ -307,14 +341,11 @@ export class PegEngine {
                     return true;
                 }
 
-                // Backtracking: deshacemos el movimiento.
                 grid[move.fromIdx] = 2;
                 grid[move.jumpedIdx] = 2;
                 grid[move.targetIdx] = 1;
 
-                if (exploredNodes >= MAX_NODES) {
-                    break;
-                }
+                if (exploredNodes >= MAX_NODES) break;
             }
 
             visited.add(stateKey);
@@ -322,27 +353,20 @@ export class PegEngine {
             return false;
         };
 
-        // Probamos diferentes posiciones como punto de partida.
         const startingPositions = shuffle(validPositions);
 
         for (const startPosition of startingPositions) {
 
-            if (exploredNodes >= MAX_NODES) {
-                break;
-            }
+            if (exploredNodes >= MAX_NODES) break;
 
-            // Creamos un tablero vacío.
             const candidateGrid = this.initialGrid.map(
                 cell => cell === 0 ? 0 : 2
             );
 
-            // Colocamos una única ficha inicial.
             candidateGrid[startPosition] = 1;
 
             if (search(candidateGrid, 1)) {
 
-                // Solo modificamos el tablero original
-                // cuando encontramos una distribución válida.
                 this.grid = candidateGrid;
 
                 return true;
