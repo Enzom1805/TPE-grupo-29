@@ -33,7 +33,7 @@
 /* Modificador temático exclusivo para Batman Peg Solitaire */
 .game-frame__screen--batman {
     background-image: linear-gradient(180deg, rgba(13, 10, 18, 0.75), rgba(13, 10, 18, 0.90)),
-    url('../../assets/images/batmanBackground.png');
+    url('../../peg-solitaire/assets/images/batmanBackground.png');
     background-size: cover;
     background-position: center;
 }

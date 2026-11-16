@@ -5,21 +5,21 @@ export const PEG_THEMES = {
     batman: {
         id: 'batman',
         name: 'Batman',
-        iconPath: '../assets/images/bat.png',
+        iconPath: '../games/peg-solitaire/assets/images/bat.png',
         accentColor: '#FCD34D',
         glowColor: 'rgba(252, 211, 77, 0.8)'
     },
     joker: {
         id: 'joker',
         name: 'Joker',
-        iconPath: '../assets/images/joker.png',
+        iconPath: '../games/peg-solitaire/assets/images/joker.png',
         accentColor: '#A78BFA',
         glowColor: 'rgba(167, 139, 250, 0.8)'
     },
     robin: {
         id: 'robin',
         name: 'Robin',
-        iconPath: '../assets/images/robin.png',
+        iconPath: '../games/peg-solitaire/assets/images/robin.png',
         accentColor: '#EF4444',
         glowColor: 'rgba(239, 68, 68, 0.8)'
     }

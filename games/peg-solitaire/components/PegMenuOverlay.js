@@ -1,6 +1,6 @@
 import Button from '../../../shared/ui/atoms/Button.js';
 import { PegThemeCard } from './PegThemeCard.js';
-import { PEG_THEMES } from '../../data/pegThemes.js';
+import { PEG_THEMES } from '../data/pegThemes.js';
 
 /**
  * Molécula: PegMenuOverlay

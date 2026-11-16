@@ -1,10 +1,10 @@
 
-import { PegEngine } from '../../engine/PegEngine.js';
-import { PegPiece } from '../../engine/PegPiece.js';
+import { PegEngine } from '../engine/PegEngine.js';
+import { PegPiece } from '../engine/PegPiece.js';
 import {
     PEG_THEMES,
     loadThemeImageSafely
-} from '../../data/pegThemes.js';
+} from '../data/pegThemes.js';
 
 export default function PegBoardCanvas({
                                            onMovePerformed,

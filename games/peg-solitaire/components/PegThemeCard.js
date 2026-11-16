@@ -1,4 +1,4 @@
-import { loadThemeImageSafely } from '../../data/pegThemes.js';
+import { loadThemeImageSafely } from '../data/pegThemes.js';
 
 /**
  * Molécula: PegThemeCard

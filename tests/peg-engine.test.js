@@ -1,6 +1,6 @@
 import { assert, assertEquals } from "./assert.js";
-import { PegEngine } from "../js/engine/PegEngine.js";
-import { gridLayout } from "../js/data/pegGrid.js";
+import { PegEngine } from "../games/peg-solitaire/engine/PegEngine.js";
+import { gridLayout } from "../games/peg-solitaire/data/pegGrid.js";
 
 export default [
     {

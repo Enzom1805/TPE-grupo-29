@@ -14,11 +14,11 @@ export const gameInstructions = {
         tips: "Procura mantener despejada la zona central y evita realizar movimientos al azar. Trabaja progresivamente desde los extremos hacia el centro y piensa siempre en los siguientes movimientos antes de realizar un salto. ¡Una buena planificación será la clave para resolver el tablero!",
         media: {
             image: {
-                src: "../assets/images/batman-peg-tuto.png",
+                src: "../games/peg-solitaire/assets/images/batman-peg-tuto.png",
                 alt: "Tutorial visual de posiciones en The Batman Peg Solitaire"
             },
             video: {
-                src: "../assets/videos/Batman-peg-video.mp4"
+                src: "../games/peg-solitaire/assets/videos/Batman-peg-video.mp4"
             }
         }
     },

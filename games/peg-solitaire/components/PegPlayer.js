@@ -1,11 +1,11 @@
 
 import PegBoardCanvas from './PegBoardCanvas.js';
 
-import { PegMenuOverlay } from '../molecules/PegMenuOverlay.js';
-import { GameMetricsSidebar } from '../molecules/GameMetricsSidebar.js';
-import { PegResultModal } from '../molecules/PegResultModal.js';
+import { PegMenuOverlay } from './PegMenuOverlay.js';
+import { GameMetricsSidebar } from './GameMetricsSidebar.js';
+import { PegResultModal } from './PegResultModal.js';
 
-import { PEG_THEMES } from '../../data/pegThemes.js';
+import { PEG_THEMES } from '../data/pegThemes.js';
 
 export default function PegPlayer() {
 

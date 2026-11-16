@@ -1,5 +1,5 @@
 import Button from '../../../shared/ui/atoms/Button.js';
-import { StatCard } from '../atoms/StatCard.js';
+import { StatCard } from './StatCard.js';
 
 /**
  * Molécula: PegResultModal
