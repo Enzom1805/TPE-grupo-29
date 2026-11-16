@@ -1,17 +1,28 @@
 /**
- * Jugador: murciélago con física de planeo, animación pixel-art de 6 frames,
+ * Jugador: murciélago con física de planeo, spritesheet real de 3 poses
+ * (atlas generado desde el GIF de referencia, ciclo ping-pong 0→1→2→1),
  * animaciones de golpe y de cono sonar, e invulnerabilidad temporal.
  *
  * La física (gravedad/impulso/rotación) es EXACTAMENTE la del original.
+ * Si el atlas aún no cargó (o falló), cae al pixel-art ASCII original.
  */
 
 import { GameEntity } from './entities/GameEntity.js';
 import { createCircle } from './collider/shapes.js';
 import { BAT_PALETTE, BAT_PIXEL_FRAMES } from '../data/bat-sprite.js';
+import { BAT_SHEET_SPEC, pingPongFrame, loadBatSheet } from '../data/bat-sheet.js';
 import { ECHOBAT_CONFIG } from '../data/config.js';
 
 export class BatPlayer extends GameEntity {
-    constructor(x, y) {
+    /**
+     * @param {number} x posición inicial
+     * @param {number} y posición inicial
+     * @param {object} [options] inyecciones para tests (DIP)
+     * @param {HTMLImageElement} [options.sheetImage] atlas ya cargado
+     * @param {() => HTMLCanvasElement} [options.createCanvas] factory de canvas
+     *   auxiliares (para los tintes de golpe/sonar)
+     */
+    constructor(x, y, options = {}) {
         super(x, y, ECHOBAT_CONFIG.player.width, ECHOBAT_CONFIG.player.height);
 
         const p = ECHOBAT_CONFIG.player;
@@ -32,6 +43,24 @@ export class BatPlayer extends GameEntity {
         this.animFrame = 2;
         this.flapSpeed = p.flapSpeed;
         this.pixelScale = p.pixelScale;
+
+        /** Spritesheet inyectado (tests) o cargado en diferido. */
+        this.sheetImage = options.sheetImage || null;
+        this._createCanvas = options.createCanvas || (() => document.createElement('canvas'));
+        /** Canvas auxiliar reutilizado para los tintes (creación diferida). */
+        this._tintCanvas = null;
+
+        if (!this.sheetImage && typeof Image !== 'undefined') {
+            loadBatSheet()
+                .then(img => { this.sheetImage = img; })
+                .catch(() => { /* fallback al pixel-art */ });
+        }
+    }
+
+    /** El atlas está listo para dibujarse (imagen cargada y válida). */
+    _hasSheet() {
+        const img = this.sheetImage;
+        return Boolean(img && img.complete && img.naturalWidth > 0);
     }
 
     /** Impulso hacia arriba (requisito del entregable). Resetea el aleteo al frame 0. */
@@ -154,7 +183,63 @@ export class BatPlayer extends GameEntity {
         ctx.restore();
     }
 
+    /**
+     * Dibuja el murciélago desde el spritesheet (celda del frame actual del
+     * ciclo ping-pong, a drawScale). Los efectos de golpe (silueta roja) y de
+     * sonar (tinte violeta) se aplican con composición source-atop sobre un
+     * canvas auxiliar para preservar la transparencia del sprite.
+     */
     _drawSprite(ctx) {
+        if (this._hasSheet()) {
+            this._drawSheetFrame(ctx);
+        } else {
+            this._drawPixelSprite(ctx);
+        }
+    }
+
+    _drawSheetFrame(ctx) {
+        const spec = BAT_SHEET_SPEC;
+        const frameIdx = pingPongFrame(this.animFrame, spec.cycle);
+        const drawW = spec.cellWidth * spec.drawScale;
+        const drawH = spec.cellHeight * spec.drawScale;
+        const sx = frameIdx * spec.cellWidth;
+        const dx = -drawW / 2;
+        const dy = -drawH / 2;
+
+        // Sin efectos → blit directo del frame
+        if (!this.isHit && this.sonarConeTimer <= 0) {
+            ctx.drawImage(
+                this.sheetImage,
+                sx, 0, spec.cellWidth, spec.cellHeight,
+                dx, dy, drawW, drawH
+            );
+            return;
+        }
+
+        // Con efecto → tinte plano preservando alfa (source-atop)
+        const tint = this.isHit ? spec.hitTint : spec.sonarTint;
+        if (!this._tintCanvas) {
+            this._tintCanvas = this._createCanvas();
+            this._tintCanvas.width = spec.cellWidth;
+            this._tintCanvas.height = spec.cellHeight;
+        }
+        const tctx = this._tintCanvas.getContext('2d');
+        tctx.clearRect(0, 0, spec.cellWidth, spec.cellHeight);
+        tctx.drawImage(this.sheetImage, sx, 0, spec.cellWidth, spec.cellHeight, 0, 0, spec.cellWidth, spec.cellHeight);
+        tctx.globalCompositeOperation = 'source-atop';
+        tctx.fillStyle = tint;
+        tctx.fillRect(0, 0, spec.cellWidth, spec.cellHeight);
+        tctx.globalCompositeOperation = 'source-over';
+
+        ctx.drawImage(
+            this._tintCanvas,
+            0, 0, spec.cellWidth, spec.cellHeight,
+            dx, dy, drawW, drawH
+        );
+    }
+
+    /** Fallback: pixel-art ASCII original (si el atlas no cargó). */
+    _drawPixelSprite(ctx) {
         if (isNaN(this.animFrame) || !isFinite(this.animFrame)) {
             this.animFrame = 0;
         }
