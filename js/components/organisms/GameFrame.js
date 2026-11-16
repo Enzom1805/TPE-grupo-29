@@ -1,5 +1,5 @@
-import ShareGroup from '../molecules/ShareGroup.js';
-import HelpButton from "../molecules/HelpButton.js";
+import ShareGroup from '../../../shared/ui/molecules/ShareGroup.js';
+import HelpButton from "../../../shared/ui/molecules/HelpButton.js";
 import PegPlayer from './PegPlayer.js';
 import { BlockaController } from '../../controllers/BlockaController.js';
 

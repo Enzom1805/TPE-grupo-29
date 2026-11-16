@@ -1,7 +1,7 @@
 import { assert, assertEquals } from "./assert.js";
-import Game from "../js/models/Game.js";
-import User from "../js/models/User.js";
-import Subscription from "../js/models/Subscription.js";
+import Game from "../shared/models/Game.js";
+import User from "../shared/models/User.js";
+import Subscription from "../shared/models/Subscription.js";
 
 export default [
     {

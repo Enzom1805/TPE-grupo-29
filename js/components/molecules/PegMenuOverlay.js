@@ -1,4 +1,4 @@
-import Button from '../atoms/Button.js';
+import Button from '../../../shared/ui/atoms/Button.js';
 import { PegThemeCard } from './PegThemeCard.js';
 import { PEG_THEMES } from '../../data/pegThemes.js';
 

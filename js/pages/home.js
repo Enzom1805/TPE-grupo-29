@@ -1,11 +1,11 @@
-import CategoryCarousel from '../components/organisms/CategoryGameCarousel.js';
-import HeroCarousel from '../components/organisms/HeroGameCarousel.js';
-import Breadcrumbs from '../components/molecules/Breadcrumbs.js';
-import { homeBreadcrumbs } from '../data/breadcrumbData.js';
-import Footer from '../components/organisms/FatFooter.js';
-import Header from '../components/organisms/Header.js';
-import { games } from '../data/games.js';
-import Loader from "../components/organisms/Loader.js";
+import CategoryCarousel from '../../shared/ui/organisms/CategoryGameCarousel.js';
+import HeroCarousel from '../../shared/ui/organisms/HeroGameCarousel.js';
+import Breadcrumbs from '../../shared/ui/molecules/Breadcrumbs.js';
+import { homeBreadcrumbs } from '../../shared/data/breadcrumbData.js';
+import Footer from '../../shared/ui/organisms/FatFooter.js';
+import Header from '../../shared/ui/organisms/Header.js';
+import { games } from '../../shared/data/games.js';
+import Loader from "../../shared/ui/organisms/Loader.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 

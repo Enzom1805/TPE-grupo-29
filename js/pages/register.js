@@ -1,4 +1,4 @@
-import RegisterForm from '../components/organisms/RegisterForm.js';
+import RegisterForm from '../../features/auth/components/RegisterForm.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const appContainer = document.getElementById('app');

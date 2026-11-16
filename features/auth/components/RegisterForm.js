@@ -1,11 +1,11 @@
-import FormField from '../molecules/FormField.js';
-import CheckboxField from '../molecules/CheckboxField.js';
-import CaptchaField from '../molecules/CaptchaField.js';
-import Button from '../atoms/Button.js';
-import Link from "../atoms/Link.js";
-import { validateRegisterForm, setupPasswordToggle, applyFormErrors } from '../../utils/validators.js';
-import Icon from "../atoms/Icon.js";
-import { countries } from '../../data/countries.js';
+import FormField from '../../../shared/ui/molecules/FormField.js';
+import CheckboxField from '../../../shared/ui/molecules/CheckboxField.js';
+import CaptchaField from './CaptchaField.js';
+import Button from '../../../shared/ui/atoms/Button.js';
+import Link from "../../../shared/ui/atoms/Link.js";
+import { validateRegisterForm, setupPasswordToggle, applyFormErrors } from '../../../shared/utils/validators.js';
+import Icon from "../../../shared/ui/atoms/Icon.js";
+import { countries } from '../data/countries.js';
 
 export default function RegisterForm() {
     const form = document.createElement("form");

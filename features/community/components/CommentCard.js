@@ -1,5 +1,5 @@
-import Icon from '../atoms/Icon.js';
-import Button from '../atoms/Button.js';
+import Icon from '../../../shared/ui/atoms/Icon.js';
+import Button from '../../../shared/ui/atoms/Button.js';
 
 export default function CommentCard({ username, timeAgo, content, likes = 0, avatarSrc }) {
     const card = document.createElement("article");

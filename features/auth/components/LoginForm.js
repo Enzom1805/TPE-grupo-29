@@ -1,9 +1,9 @@
-import FormField from '../molecules/FormField.js';
-import CheckboxField from '../molecules/CheckboxField.js';
-import Button from '../atoms/Button.js';
-import Link from "../atoms/Link.js";
-import Icon from "../atoms/Icon.js";
-import { setupPasswordToggle } from '../../utils/validators.js';
+import FormField from '../../../shared/ui/molecules/FormField.js';
+import CheckboxField from '../../../shared/ui/molecules/CheckboxField.js';
+import Button from '../../../shared/ui/atoms/Button.js';
+import Link from "../../../shared/ui/atoms/Link.js";
+import Icon from "../../../shared/ui/atoms/Icon.js";
+import { setupPasswordToggle } from '../../../shared/utils/validators.js';
 
 export default function LoginForm() {
 

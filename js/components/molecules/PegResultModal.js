@@ -1,4 +1,4 @@
-import Button from '../atoms/Button.js';
+import Button from '../../../shared/ui/atoms/Button.js';
 import { StatCard } from '../atoms/StatCard.js';
 
 /**

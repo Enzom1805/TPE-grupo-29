@@ -1,10 +1,10 @@
 // js/pages/blocka-page.js
 
-import Header from '../components/organisms/Header.js';
-import Breadcrumbs from '../components/molecules/Breadcrumbs.js';
-import Footer from '../components/organisms/FatFooter.js';
+import Header from '../../shared/ui/organisms/Header.js';
+import Breadcrumbs from '../../shared/ui/molecules/Breadcrumbs.js';
+import Footer from '../../shared/ui/organisms/FatFooter.js';
 
-import { blockaBreadcrumbs } from '../data/breadcrumbData.js';
+import { blockaBreadcrumbs } from '../../shared/data/breadcrumbData.js';
 import { BlockaController } from '../controllers/BlockaController.js';
 
 document.addEventListener('DOMContentLoaded', () => {

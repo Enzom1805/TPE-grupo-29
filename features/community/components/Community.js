@@ -1,7 +1,7 @@
 //Encabezado + CommentForm.js + Lista de CommentCard.js + Button.js ("Ver más")
-import CommentForm from '../molecules/CommentForm.js';
-import CommentCard from '../molecules/CommentCard.js';
-import Button from '../atoms/Button.js';
+import CommentForm from './CommentForm.js';
+import CommentCard from './CommentCard.js';
+import Button from '../../../shared/ui/atoms/Button.js';
 
 export default function Community({ gameTitle = "The Batman Peg Solitaire", comments = [] }) {
     const section = document.createElement("section");

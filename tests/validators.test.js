@@ -1,5 +1,5 @@
 import { assert, assertEquals } from "./assert.js";
-import { validateRegisterForm } from "../js/utils/validators.js";
+import { validateRegisterForm } from "../shared/utils/validators.js";
 
 export default [
     {

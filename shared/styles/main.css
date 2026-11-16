@@ -1,11 +1,10 @@
-/* css/main.css */
+/* shared/styles/main.css */
 @import url('./tokens/colors.css');
 @import url('./tokens/typography.css');
 @import url('./tokens/spacing.css');
 @import url('./atoms/buttons.css');
 @import url('./molecules/share-group.css');
 @import url('./molecules/help-menu.css');
-@import url('./pages/peg-solitaire.css');
 
 /* ==========================================================================
    Estructura Global & Reseteo

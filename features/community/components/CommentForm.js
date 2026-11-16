@@ -1,6 +1,6 @@
 //Label + Textarea.js + Button.js ("Publicar")
-import Textarea from '../atoms/Textarea.js';
-import Button from '../atoms/Button.js';
+import Textarea from '../../../shared/ui/atoms/Textarea.js';
+import Button from '../../../shared/ui/atoms/Button.js';
 
 export default function CommentForm(onSubmit) {
     const form = document.createElement("form");
