@@ -21,12 +21,14 @@
     import filterTests from './filter-processor.test.js';
     import validatorTests from './validators.test.js';
     import modelTests from './models.test.js';
+    import registryTests from './registry.test.js';
 
     const suites = [
         ['peg-engine', pegTests],
         ['filter-processor', filterTests],
         ['validators', validatorTests],
-        ['models', modelTests]
+        ['models', modelTests],
+        ['game-registry', registryTests]
     ];
 
     const resultsEl = document.getElementById('results');

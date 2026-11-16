@@ -1,8 +1,12 @@
-import ShareGroup from '../../../shared/ui/molecules/ShareGroup.js';
-import HelpButton from "../../../shared/ui/molecules/HelpButton.js";
-import PegPlayer from '../../../games/peg-solitaire/components/PegPlayer.js';
-import { BlockaController } from '../../../games/blocka/controller/BlockaController.js';
+import ShareGroup from '../../shared/ui/molecules/ShareGroup.js';
+import HelpButton from "../../shared/ui/molecules/HelpButton.js";
+import { getGameById } from '../index.js';
 
+/**
+ * Viewport único de juegos: resuelve dinámicamente qué jugar según el id del
+ * catálogo y delega en el contrato público del juego registrado
+ * (games/index.js → GameRegistry). No conoce implementaciones internas.
+ */
 export default function GameFrame(game) {
     if (!game) {
         console.error("GameFrame: No se recibió ningún juego.");
@@ -27,21 +31,12 @@ export default function GameFrame(game) {
     boardArea.className = 'game-frame__board-area';
 
     // =========================================================
-    // RENDERIZADO DINÁMICO SEGÚN ID DE JUEGO
+    // INYECCIÓN DINÁMICA SEGÚN EL REGISTRO DE JUEGOS
     // =========================================================
-    if (game.id === 2) {
-        // Batman Peg Solitaire (Canvas + HUD + Timer + Hints)
-        const pegPlayer = PegPlayer();
-        boardArea.appendChild(pegPlayer);
+    const gameEntry = getGameById(game.id);
 
-    } else if (game.id === 3) {
-        // Blocka Game
-        const blockaContainer = document.createElement('div');
-        blockaContainer.className = 'blocka-game-frame';
-        boardArea.appendChild(blockaContainer);
-
-        const controller = new BlockaController(blockaContainer);
-        controller.init();
+    if (gameEntry) {
+        gameEntry.mount(boardArea);
 
     } else {
         const placeholderContainer = document.createElement('div');

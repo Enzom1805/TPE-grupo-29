@@ -1,5 +1,5 @@
 import Header from '../../shared/ui/organisms/Header.js';
-import GameFrame from '../components/organisms/GameFrame.js';
+import GameFrame from '../../games/core/game-frame.js';
 import HowToPlay from '../../shared/ui/organisms/HowToPlay.js';
 import Community from '../../features/community/components/Community.js';
 import CategoryCarousel from '../../shared/ui/organisms/CategoryGameCarousel.js';

@@ -5,7 +5,7 @@ import Breadcrumbs from '../../shared/ui/molecules/Breadcrumbs.js';
 import Footer from '../../shared/ui/organisms/FatFooter.js';
 
 import { blockaBreadcrumbs } from '../../shared/data/breadcrumbData.js';
-import { BlockaController } from '../../games/blocka/controller/BlockaController.js';
+import { getGameById } from '../../games/index.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app') || document.body;
@@ -23,7 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
     app.appendChild(gameFrame);
     app.appendChild(footer);
 
-    // Inicializa el controlador enviándole el contenedor principal
-    const controller = new BlockaController(gameFrame);
-    controller.init();
+    // Inicializa el juego a través del contrato público del registry (id 3)
+    const blockaEntry = getGameById(3);
+    if (blockaEntry) {
+        blockaEntry.mount(gameFrame);
+    } else {
+        console.error('blocka-page: el juego con id 3 no está registrado.');
+    }
 });

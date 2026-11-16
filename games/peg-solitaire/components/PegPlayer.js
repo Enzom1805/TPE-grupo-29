@@ -276,5 +276,13 @@ export default function PegPlayer() {
         launchGame();
     }
 
+    // Contrato de ciclo de vida: expone la limpieza ya existente (timer + canvas)
+    container.destroy = () => {
+        stopTimer();
+        if (boardCanvasNode && boardCanvasNode.destroy) {
+            boardCanvasNode.destroy();
+        }
+    };
+
     return container;
 }
