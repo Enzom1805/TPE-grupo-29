@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>TESTS RUNNING...</title>
+    <style>
+        body { font-family: monospace; background: #111; color: #ddd; padding: 2rem; }
+        .case { margin: .3rem 0; }
+        .pass { color: #6f6; }
+        .fail { color: #f66; }
+        h1 { font-size: 1.2rem; }
+        pre { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1 id="summary">Ejecutando tests...</h1>
+    <div id="results"></div>
+
+<script type="module">
+    import pegTests from './peg-engine.test.js';
+    import filterTests from './filter-processor.test.js';
+    import validatorTests from './validators.test.js';
+    import modelTests from './models.test.js';
+
+    const suites = [
+        ['peg-engine', pegTests],
+        ['filter-processor', filterTests],
+        ['validators', validatorTests],
+        ['models', modelTests]
+    ];
+
+    const resultsEl = document.getElementById('results');
+    const summaryEl = document.getElementById('summary');
+    let pass = 0, fail = 0;
+    const failures = [];
+
+    for (const [suiteName, cases] of suites) {
+        const suiteTitle = document.createElement('h2');
+        suiteTitle.textContent = suiteName;
+        resultsEl.appendChild(suiteTitle);
+
+        for (const testCase of cases) {
+            const line = document.createElement('div');
+            line.className = 'case';
+            try {
+                await testCase.fn();
+                pass++;
+                line.classList.add('pass');
+                line.textContent = `  PASS  ${testCase.name}`;
+            } catch (err) {
+                fail++;
+                failures.push(`[${suiteName}] ${testCase.name}: ${err.message}`);
+                line.classList.add('fail');
+                line.textContent = `  FAIL  ${testCase.name} → ${err.message}`;
+            }
+            resultsEl.appendChild(line);
+        }
+    }
+
+    const allPass = fail === 0;
+    summaryEl.textContent = allPass
+        ? `✔ ${pass}/${pass + fail} tests OK`
+        : `✘ ${fail} de ${pass + fail} tests FALLARON`;
+
+    // El título permite verificar el resultado desde screenshot headless
+    document.title = allPass ? `TESTS PASS ${pass}/${pass + fail}` : `TESTS FAIL ${fail}/${pass + fail}`;
+
+    if (failures.length) {
+        const pre = document.createElement('pre');
+        pre.textContent = failures.join('\n');
+        resultsEl.appendChild(pre);
+    }
+
+    window.__TEST_RESULTS__ = { pass, fail, failures };
+    console.log(`TESTS ${allPass ? 'PASS' : 'FAIL'} ${pass}/${pass + fail}`);
+</script>
+</body>
+</html>

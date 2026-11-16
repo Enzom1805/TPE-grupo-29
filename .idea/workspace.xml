@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2ada8f-5d52-45e5-8673-f084c7c5d738" name="Changes" comment="added a new functionallity that reorganice the peg board in favourable way that allows keep playing">
+    <list default="true" id="cd2ada8f-5d52-45e5-8673-f084c7c5d738" name="Changes" comment="added a new functionallity that allows the player to eat 2 chips too">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/PegEngine.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/PegEngine.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +184,7 @@
       <workItem from="1794177746192" duration="150000" />
       <workItem from="1794186553170" duration="609000" />
       <workItem from="1794422501546" duration="671000" />
-      <workItem from="1794587088001" duration="5811000" />
+      <workItem from="1794587088001" duration="8094000" />
     </task>
     <task id="LOCAL-00001" summary="Create new class models">
       <option name="closed" value="true" />
@@ -451,7 +450,15 @@
       <option name="project" value="LOCAL" />
       <updated>1794592762810</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="added a new functionallity that allows the player to eat 2 chips too">
+      <option name="closed" value="true" />
+      <created>1794593447990</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1794593447990</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -469,7 +476,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="jejej my bad" />
     <MESSAGE value="improve de RegisterForm, i added tipography, color and a few styles for buttons, input, label, form-field, register-form and main. I improve the atoms molecules organism and pages in js components. Also added code to registro on pages html" />
     <MESSAGE value="improve de RegisterForm" />
     <MESSAGE value="improve a lot of things XD" />
@@ -494,6 +500,7 @@
     <MESSAGE value="refactor(peg-solitaire): reestructurar arquitectura css atómica y corregir modal in-game&#10;&#10;- Implementar metodología Atomic Design (Átomos, Moléculas y Organismos) para Peg Solitaire.&#10;- Eliminar parches de `!important` en CSS para restablecer la cascada y especificidad natural del navegador.&#10;- Desacoplar vistas mediante `.hidden` en el flujo de la grilla de juego (`.peg-workspace`).&#10;- Posicionar de forma absoluta y centrada el modal de fin de partida (`PegResultModal`) con efecto de difuminado (`backdrop-filter`).&#10;- Reutilizar los átomos globales `Button.js` y `StatCard.js` en el menú principal, sidebar de métricas y modales de juego.&#10;- Solucionar bug de navegación que impedía ocultar la pantalla de inicio al comenzar la partida." />
     <MESSAGE value="fix(ui): resolver recorte de canvas FHD y modularizar CSS según Atomic Design&#10;&#10;- fix(canvas): ajustar padding interno en PegBoardCanvas.js a 220px para evitar el recorte de fichas superiores e inferiores en resolución 1920x1080.&#10;- fix(modal): corregir posicionamiento absoluto e inset: 0 en peg-modal.css para evitar que el overlay de fin de juego se desborde fuera del workspace.&#10;- style(menu): agregar contenedor elevado tipo tarjeta y sombreado a la pantalla inicial en peg-menu-screen.css.&#10;- refactor(css): eliminar reglas de modal y menú duplicadas en peg-solitaire.css para resolver colisiones de especificidad en la cascada CSS.&#10;- html: vincular hojas de estilo de moléculas (peg-modal.css y peg-menu-screen.css) en game.html." />
     <MESSAGE value="added a new functionallity that reorganice the peg board in favourable way that allows keep playing" />
-    <option name="LAST_COMMIT_MESSAGE" value="added a new functionallity that reorganice the peg board in favourable way that allows keep playing" />
+    <MESSAGE value="added a new functionallity that allows the player to eat 2 chips too" />
+    <option name="LAST_COMMIT_MESSAGE" value="added a new functionallity that allows the player to eat 2 chips too" />
   </component>
 </project>
