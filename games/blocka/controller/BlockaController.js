@@ -1,10 +1,10 @@
 
 import { BLOCKA_CONFIG, getRandomImage } from '../data/blocka-data.js';
 import { BlockaEngine } from '../engine/BlockaEngine.js';
-import { BlockaPlayer } from '../components/organisms/BlockaPlayer.js';
-import { LevelCompleteModal } from '../components/molecules/LevelCompleteModal.js';
-import { LevelSelectorModal } from '../components/molecules/LevelSelectorModal.js';
-import { LevelFailedModal } from '../components/molecules/LevelFailedModal.js';
+import { BlockaPlayer } from '../components/BlockaPlayer.js';
+import { LevelCompleteModal } from '../components/LevelCompleteModal.js';
+import { LevelSelectorModal } from '../components/LevelSelectorModal.js';
+import { LevelFailedModal } from '../components/LevelFailedModal.js';
 
 export class BlockaController {
     constructor(container) {

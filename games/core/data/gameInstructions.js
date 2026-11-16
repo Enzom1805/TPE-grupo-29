@@ -42,11 +42,11 @@ export const gameInstructions = {
 
         media: {
             image: {
-                src: "../assets/images/blocka.jpg",
+                src: "../games/blocka/assets/images/blocka.jpg",
                 alt: "Guía visual de encaje de piezas en Blocka Game"
             },
             video: {
-                src: "../assets/videos/Blocka-video.mp4"
+                src: "../games/blocka/assets/videos/Blocka-video.mp4"
             }
         }
     }

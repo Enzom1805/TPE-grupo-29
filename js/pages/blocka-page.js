@@ -5,7 +5,7 @@ import Breadcrumbs from '../../shared/ui/molecules/Breadcrumbs.js';
 import Footer from '../../shared/ui/organisms/FatFooter.js';
 
 import { blockaBreadcrumbs } from '../../shared/data/breadcrumbData.js';
-import { BlockaController } from '../controllers/BlockaController.js';
+import { BlockaController } from '../../games/blocka/controller/BlockaController.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app') || document.body;

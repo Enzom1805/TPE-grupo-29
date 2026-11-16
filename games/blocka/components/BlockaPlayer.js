@@ -1,5 +1,5 @@
-import { PieceCanvas } from '../atoms/PieceCanvas.js';
-import { TimerBadge } from '../atoms/TimerBadge.js';
+import { PieceCanvas } from './PieceCanvas.js';
+import { TimerBadge } from './TimerBadge.js';
 
 export function BlockaPlayer(engine, levelConfig, onWinCallback, onLoseCallback) {
     const container = document.createElement('div');

@@ -1,7 +1,7 @@
 import ShareGroup from '../../../shared/ui/molecules/ShareGroup.js';
 import HelpButton from "../../../shared/ui/molecules/HelpButton.js";
 import PegPlayer from '../../../games/peg-solitaire/components/PegPlayer.js';
-import { BlockaController } from '../../controllers/BlockaController.js';
+import { BlockaController } from '../../../games/blocka/controller/BlockaController.js';
 
 export default function GameFrame(game) {
     if (!game) {

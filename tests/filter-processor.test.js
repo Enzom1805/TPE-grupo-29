@@ -1,5 +1,5 @@
 import { assert, assertEquals } from "./assert.js";
-import { FilterProcessor } from "../js/engine/FilterProcessor.js";
+import { FilterProcessor } from "../games/blocka/engine/FilterProcessor.js";
 
 function fakeImageData(pixels) {
     // Imita la interfaz ImageData usada por FilterProcessor (solo .data)

@@ -1,12 +1,12 @@
 export const BLOCKA_CONFIG = {
     // Banco de imágenes específico de la carpeta blocka
     imageBank: [
-        '../assets/images/games/blocka/game_01_zelda.webp',
-        '../assets/images/games/blocka/game_02_cyberpunk.webp',
-        '../assets/images/games/blocka/game_03_mario.webp',
-        '../assets/images/games/blocka/game_04_hollowknight.webp',
-        '../assets/images/games/blocka/game_05_minecraft.webp',
-        '../assets/images/games/blocka/game_06_godofwar.webp',
+        '../games/blocka/assets/images/levels/game_01_zelda.webp',
+        '../games/blocka/assets/images/levels/game_02_cyberpunk.webp',
+        '../games/blocka/assets/images/levels/game_03_mario.webp',
+        '../games/blocka/assets/images/levels/game_04_hollowknight.webp',
+        '../games/blocka/assets/images/levels/game_05_minecraft.webp',
+        '../games/blocka/assets/images/levels/game_06_godofwar.webp',
     ],
 
     // Configuración de Niveles (Entregable Punto 4)
