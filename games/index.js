@@ -12,9 +12,10 @@
 
 import pegSolitaire from './peg-solitaire/index.js';
 import blocka from './blocka/index.js';
+import echobat from './echobat/index.js';
 
 import { registerGame } from './core/game-registry.js';
 
-[pegSolitaire, blocka].forEach(entry => registerGame(entry));
+[pegSolitaire, blocka, echobat].forEach(entry => registerGame(entry));
 
 export { getGameById, getRegisteredGameIds } from './core/game-registry.js';

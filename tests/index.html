@@ -22,13 +22,19 @@
     import validatorTests from './validators.test.js';
     import modelTests from './models.test.js';
     import registryTests from './registry.test.js';
+    import colliderTests from './echobat-collider.test.js';
+    import engineTests from './echobat-engine.test.js';
+    import atlasTests from './echobat-atlas.test.js';
 
     const suites = [
         ['peg-engine', pegTests],
         ['filter-processor', filterTests],
         ['validators', validatorTests],
         ['models', modelTests],
-        ['game-registry', registryTests]
+        ['game-registry', registryTests],
+        ['echobat-collider', colliderTests],
+        ['echobat-engine', engineTests],
+        ['echobat-atlas', atlasTests]
     ];
 
     const resultsEl = document.getElementById('results');

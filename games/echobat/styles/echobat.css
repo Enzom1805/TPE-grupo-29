@@ -1,0 +1,434 @@
+/**
+ * EchoBat — estilos del juego (id 31).
+ * CSS3 puro, sin frameworks ni CDNs externos (restricción vanilla del TPE).
+ *
+ * Usa los design tokens del proyecto (shared/styles/tokens/) con fallbacks
+ * para que el juego también funcione standalone fuera del TPE.
+ *
+ * Animaciones @keyframes (requisito entregable: el avatar/escena reaccionan
+ * con animaciones CSS según la acción):
+ *   1. sonarPulse    → pulso del cono de ecolocalización (acción: usar sonar)
+ *   2. batHover      → flotación idle del ícono en el overlay (estado inicial)
+ *   3. screenShake   → sacudida del viewport al colisionar (evento: daño)
+ *   4. scorePop      → salto del puntaje al sumar puntos (evento: pilar/luciérnaga)
+ *   5. overlayEnter  → entrada del overlay de inicio / game over
+ */
+
+.echobat {
+    /* Fallbacks locales si los tokens del TPE no están cargados */
+    --echobat-primary: var(--color-primary-default, #6D28D9);
+    --echobat-primary-highlight: var(--color-primary-highlight, #C4B5FD);
+    --echobat-primary-hover: var(--color-primary-hover, #7C3AED);
+    --echobat-surface: var(--color-secondary-surface-elevated, #2A2238);
+    --echobat-background: var(--color-secondary-background-page, #15111F);
+    --echobat-chrome: var(--color-secondary-chrome-header-footer, #0D0A12);
+    --echobat-text: var(--color-neutral-text-primary, #F8F7FC);
+    --echobat-text-secondary: var(--color-neutral-text-secondary, #C9C5D3);
+    --echobat-border: rgba(118, 111, 130, 0.35);
+    --echobat-success: var(--color-success-background-primary, #10b981);
+    --echobat-accent: var(--color-accent-default, #FCD34D);
+    --echobat-danger: #ef4444;
+    --echobat-cyan: #38bdf8;
+
+    font-family: var(--font-family-body, sans-serif);
+    color: var(--echobat-text);
+    width: 100%;
+    user-select: none;
+}
+
+/* ======================================================
+   VIEWPORT DEL JUEGO
+   ====================================================== */
+
+.echobat__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--echobat-background);
+    border: 2px solid var(--echobat-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+        inset 0 0 50px rgba(15, 23, 42, 0.9),
+        0 10px 40px rgba(147, 51, 234, 0.15);
+}
+
+/* Evento: colisión con daño → sacudida del viewport */
+.echobat__frame.is-hit {
+    animation: screenShake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+.echobat__canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: var(--echobat-chrome);
+    touch-action: none;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* ======================================================
+   HUD SUPERIOR
+   ====================================================== */
+
+.echobat__hud {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.echobat__hud-panel {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(13, 10, 18, 0.9);
+    backdrop-filter: blur(8px);
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--echobat-border);
+}
+
+.echobat__hud-panel--right {
+    gap: 12px;
+}
+
+.echobat__lives {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.echobat__heart {
+    font-size: 14px;
+    line-height: 1;
+}
+
+.echobat__heart--full {
+    color: var(--echobat-danger);
+    text-shadow: 0 0 6px rgba(239, 68, 68, 0.5);
+}
+
+.echobat__heart--lost {
+    color: rgba(118, 111, 130, 0.4);
+}
+
+.echobat__hud-separator {
+    width: 1px;
+    height: 16px;
+    background: var(--echobat-border);
+}
+
+.echobat__hud-separator--tall {
+    height: 24px;
+}
+
+.echobat__sonar {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.echobat__sonar-labels {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.echobat__sonar-labels > span:first-child {
+    color: var(--echobat-primary-highlight);
+}
+
+.echobat__sonar-status {
+    font-weight: 700;
+}
+
+.echobat__sonar-status--ready {
+    color: var(--echobat-success);
+    animation: batHover 0.8s ease-in-out infinite;
+}
+
+.echobat__sonar-status--charging {
+    color: var(--echobat-primary-highlight);
+}
+
+.echobat__sonar-track {
+    width: 112px;
+    height: 8px;
+    background: rgba(5, 4, 7, 0.9);
+    border: 1px solid var(--echobat-border);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.echobat__sonar-bar {
+    height: 100%;
+    background: linear-gradient(to right, var(--echobat-primary), var(--echobat-cyan));
+    transition: width 75ms linear;
+}
+
+.echobat__hud-caption {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--echobat-text-secondary);
+    line-height: 1;
+    font-weight: 600;
+}
+
+.echobat__score {
+    text-align: right;
+}
+
+.echobat__score-value {
+    display: block;
+    font-family: var(--font-family-title, monospace);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--echobat-primary-highlight);
+    line-height: 1.2;
+}
+
+/* Evento: suma de puntaje → pop del número */
+.echobat__score-value.is-pop {
+    animation: scorePop 0.3s ease-out;
+}
+
+.echobat__time {
+    text-align: right;
+}
+
+.echobat__time-value {
+    display: block;
+    font-family: var(--font-family-title, monospace);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--echobat-cyan);
+    line-height: 1.4;
+}
+
+/* ======================================================
+   HINT DE CONTROLES
+   ====================================================== */
+
+.echobat__hint {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--echobat-border);
+    background: rgba(13, 10, 18, 0.8);
+    backdrop-filter: blur(4px);
+    font-size: 12px;
+    color: var(--echobat-text-secondary);
+    pointer-events: none;
+}
+
+.echobat__hint-key {
+    padding: 2px 8px;
+    background: rgba(91, 33, 182, 0.6);
+    border: 1px solid var(--echobat-primary-hover);
+    border-radius: 4px;
+    color: var(--echobat-primary-highlight);
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+/* ======================================================
+   OVERLAY INICIO / GAME OVER
+   ====================================================== */
+
+.echobat__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(5, 4, 7, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 20;
+    transition: opacity 0.3s ease;
+}
+
+.echobat__overlay.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Evento: aparición del overlay → animación de entrada */
+.echobat__overlay.is-entering .echobat__overlay-card {
+    animation: overlayEnter 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.echobat__overlay-card {
+    max-width: 420px;
+    text-align: center;
+}
+
+.echobat__overlay-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--echobat-primary), var(--echobat-cyan));
+    box-shadow: 0 12px 30px rgba(124, 58, 237, 0.3);
+    animation: batHover 0.8s ease-in-out infinite;
+}
+
+.echobat__overlay-title {
+    font-family: var(--font-family-title, monospace);
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    background: linear-gradient(to right, var(--echobat-primary-highlight), var(--echobat-cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.echobat__overlay-desc {
+    color: var(--echobat-text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 24px;
+}
+
+.echobat__text-accent {
+    color: var(--echobat-primary-highlight);
+}
+
+.echobat__text-success {
+    color: var(--echobat-success);
+}
+
+.echobat__overlay-scores {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: var(--echobat-surface);
+    border: 1px solid var(--echobat-border);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 24px;
+}
+
+.echobat__overlay-scores > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.echobat__overlay-score-value {
+    font-family: var(--font-family-title, monospace);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.echobat__overlay-score-value--best {
+    color: var(--echobat-success);
+}
+
+.echobat__overlay-score-value--last {
+    color: var(--echobat-cyan);
+}
+
+.echobat__start-btn {
+    width: 100%;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    font-family: var(--font-family-title, monospace);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--echobat-chrome);
+    background: linear-gradient(to right, var(--echobat-success), var(--echobat-cyan));
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.25);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+.echobat__start-btn:hover {
+    filter: brightness(1.1);
+}
+
+.echobat__start-btn:active {
+    transform: scale(0.96);
+}
+
+/* ======================================================
+   KEYFRAMES
+   ====================================================== */
+
+/* 1. Pulso del sonar / ecolocalización */
+@keyframes sonarPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 0.9;
+    }
+    50% { opacity: 0.6; }
+    100% {
+        transform: translate(-50%, -50%) scale(4.5);
+        opacity: 0;
+    }
+}
+
+/* 2. Flotación idle (ícono del overlay / estado LISTO del sonar) */
+@keyframes batHover {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* 3. Evento colisión: sacudida del viewport */
+@keyframes screenShake {
+    0%, 100% { transform: translate(0, 0); }
+    15% { transform: translate(-8px, 4px); }
+    30% { transform: translate(7px, -5px); }
+    45% { transform: translate(-6px, -3px); }
+    60% { transform: translate(5px, 4px); }
+    75% { transform: translate(-3px, 1px); }
+}
+
+/* 4. Evento puntaje: pop del número */
+@keyframes scorePop {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.35); color: var(--echobat-accent); }
+    100% { transform: scale(1); }
+}
+
+/* 5. Entrada del overlay de inicio / game over */
+@keyframes overlayEnter {
+    0% {
+        opacity: 0;
+        transform: translateY(24px) scale(0.96);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

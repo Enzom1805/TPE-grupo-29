@@ -49,5 +49,28 @@ export const gameInstructions = {
                 src: "../games/blocka/assets/videos/Blocka-video.mp4"
             }
         }
+    },
+    50: {
+        gameId: 50,
+        intro: "¡Viví la vida de un murciélago en la penumbra! EchoBat es un scroller horizontal de vuelo: avanzás a velocidad constante por una cueva oscura y debés mantener el vuelo esquivando estalactitas y estalagmitas.",
+        description: "El murciélago vuela solo hacia adelante: vos controlás la altura. Cada impulso lo eleva y la gravedad lo baja. La cueva está envuelta en oscuridad, pero tu instinto de ecolocalización te salva: lanzá un cono de sonar que revela los obstáculos escondidos durante 3 segundos.",
+        highlight: "¡El sonar se recarga al instante cuando esquivás un pilar o atrapás una luciérnaga. Usalo con cabeza!",
+        subtitle: "¿Cuáles son las características principales?",
+        features: [
+            "Impulso hacia arriba con ESPACIO o flecha Arriba para mantener el vuelo.",
+            "Ecolocalización con SHIFT: cono de luz que revela la cueva durante 3 segundos.",
+            "Luciérnagas: otorgan +50 puntos y recargan el sonar al instante.",
+            "Arañas colgantes: restan una vida, ¡esquiválas o atravesálas con cuidado!",
+            "El hueco entre estalactitas se hace cada vez más chico y varía de altura a medida que avanzás.",
+            "La distancia entre obstáculos cambia constantemente: nada de memorizar patrones.",
+            "Contás con 3 vidas y un periodo de invulnerabilidad tras cada choque: el vuelo continúa."
+        ],
+        tips: "Mantené el murciélago en el tercio medio de la pantalla y aleteá con toques cortos en vez de mantener presionado. Guardá el sonar para los tramos con huecos angostos y buscá las luciérnagas: además de sumar puntaje, dejan el sonar listo para la próxima emergencia.",
+        media: {
+            image: {
+                src: "../games/echobat/assets/images/echobat-tuto.png",
+                alt: "Captura de vuelo de EchoBat: murciélago, estalactitas y luciérnaga en la cueva"
+            }
+        }
     }
 };

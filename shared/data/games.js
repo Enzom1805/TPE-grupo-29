@@ -393,4 +393,12 @@ export const games = [
         "Premium",
         "../assets/images/games/comix.png"
     ),
+    new Game(
+        50,
+        "EchoBat",
+        "Arcade",
+        2026,
+        "Free",
+        "../assets/images/games/echobat.gif"
+    ),
 ];
