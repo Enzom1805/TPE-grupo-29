@@ -134,14 +134,18 @@ PROYECTO: TPE (Kingly Games, minijuegos, académico, vanilla-only)
 
 ## 8. ÚLTIMA ACTUALIZACIÓN (mantener al avanzar)
 
-- **2026-11-16 (MIGRACIÓN COMPLETA ✅)**: Bloques 0–5 ejecutados y committeados en
-  TPE-refactor. Registry formal con contrato {id,mount,destroy}, manifest games/index.js,
-  viewport dinámico conservado. Tests 23/23 (runner: tests/index.html; ejecutar con
-  `python3 -m http.server 8123` + firefox headless screenshot). Integridad 0 refs rotas.
-  ARCHITECTURE.md escrito (incluye problemas preexistentes y CSS muertos conservados).
-  Lección registrada: tooling SIEMPRE con rutas absolutas ancladas a la copia (un fixer
-  modificó por error archivos del ORIGINAL; fue restaurado con `git restore js/`).
-  Original TPE intacto (solo .idea/workspace.xml modificado de antes).
+- **2026-11-16 (REEMPLAZO AL ORIGINAL ✅)**: `/home/ccindor/Escritorio/TPE` es ahora el
+  proyecto refactorizado (historial git completo: original + 7 commits de migración).
+  Backup verificado bit a bit del original pre-refactorización en
+  `/home/ccindor/Escritorio/TPE-backup-original`. Post-reemplazo: integridad 0 rotas y
+  tests 23/23 (byte-idéntico) contra TPE. Servidor de pruebas: `python3 -m http.server
+  8123` desde TPE (PID 20576). `/home/ccindor/Escritorio/TPE-refactor` quedó como copia
+  redundante (se puede eliminar). favicon.ico 404 es cosmético y preexistente.
+- **2026-11-16 (MIGRACIÓN COMPLETA ✅)**: Bloques 0–5 ejecutados y committeados.
+  Registry formal con contrato {id,mount,destroy}, manifest games/index.js,
+  viewport dinámico conservado. Tests 23/23 (runner: tests/index.html). Integridad 0
+  refs rotas. ARCHITECTURE.md escrito (incluye problemas preexistentes y CSS muertos
+  conservados). Lección: tooling SIEMPRE con rutas absolutas ancladas a la copia.
 - **2026-11-16 (Bloque 0 ✅)**: copia + harness de tests vanilla (19/19 baseline).
 - **2026-11-16 (Auditoría + propuesta ✅)**: ver §6/§7. Viewport único game.html?id=N es
   requisito permanente del usuario.
