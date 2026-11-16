@@ -1,4 +1,4 @@
-import LoginForm from '../../features/auth/components/LoginForm.js';
+import LoginForm from '../features/auth/components/LoginForm.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const appContainer = document.getElementById('app');

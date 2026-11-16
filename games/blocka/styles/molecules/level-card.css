@@ -271,13 +271,13 @@
 }
 
 .icon-svg--settings {
-    mask-image: url('../../../assets/icons/settings.svg');
-    -webkit-mask-image: url('../../../assets/icons/settings.svg');
+    mask-image: url('../../../../assets/icons/settings.svg');
+    -webkit-mask-image: url('../../../../assets/icons/settings.svg');
 }
 
 .icon-svg--ayuda {
-    mask-image: url('../../../assets/icons/ayuda.svg');
-    -webkit-mask-image: url('../../../assets/icons/ayuda.svg');
+    mask-image: url('../../../../assets/icons/ayuda.svg');
+    -webkit-mask-image: url('../../../../assets/icons/ayuda.svg');
 }
 
 /* Animaciones */

@@ -1,15 +1,15 @@
-import Header from '../../shared/ui/organisms/Header.js';
-import GameFrame from '../../games/core/game-frame.js';
-import HowToPlay from '../../shared/ui/organisms/HowToPlay.js';
-import Community from '../../features/community/components/Community.js';
-import CategoryCarousel from '../../shared/ui/organisms/CategoryGameCarousel.js';
-import Breadcrumbs from '../../shared/ui/molecules/Breadcrumbs.js';
-import Footer from '../../shared/ui/organisms/FatFooter.js';
+import Header from '../shared/ui/organisms/Header.js';
+import GameFrame from '../games/core/game-frame.js';
+import HowToPlay from '../shared/ui/organisms/HowToPlay.js';
+import Community from '../features/community/components/Community.js';
+import CategoryCarousel from '../shared/ui/organisms/CategoryGameCarousel.js';
+import Breadcrumbs from '../shared/ui/molecules/Breadcrumbs.js';
+import Footer from '../shared/ui/organisms/FatFooter.js';
 
-import { gameBreadcrumbs } from '../../shared/data/breadcrumbData.js';
-import { commentsData } from '../../features/community/data/comments.js';
-import { games } from '../../shared/data/games.js';
-import { getInstructionsByGameId } from '../../games/core/services/instructions.js';
+import { gameBreadcrumbs } from '../shared/data/breadcrumbData.js';
+import { commentsData } from '../features/community/data/comments.js';
+import { games } from '../shared/data/games.js';
+import { getInstructionsByGameId } from '../games/core/services/instructions.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app') || document.body;

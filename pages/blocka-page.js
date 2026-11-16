@@ -1,11 +1,11 @@
 // js/pages/blocka-page.js
 
-import Header from '../../shared/ui/organisms/Header.js';
-import Breadcrumbs from '../../shared/ui/molecules/Breadcrumbs.js';
-import Footer from '../../shared/ui/organisms/FatFooter.js';
+import Header from '../shared/ui/organisms/Header.js';
+import Breadcrumbs from '../shared/ui/molecules/Breadcrumbs.js';
+import Footer from '../shared/ui/organisms/FatFooter.js';
 
-import { blockaBreadcrumbs } from '../../shared/data/breadcrumbData.js';
-import { getGameById } from '../../games/index.js';
+import { blockaBreadcrumbs } from '../shared/data/breadcrumbData.js';
+import { getGameById } from '../games/index.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app') || document.body;
