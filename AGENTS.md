@@ -91,9 +91,15 @@ sitio). Cada página carga tokens + global + CSS de lo que usa. Cero cambios de 
       filtración cruzada, doble integración de Blocka).
 - [x] Etapa 3: Propuesta presentada. Usuario la enriqueció: el viewport único de
       `game.html` con inyección por id es una decisión de diseño a CONSERVAR y formalizar.
-- [ ] Etapa 4: Migración por bloques (pendiente de aprobación explícita para ejecutar;
-      se requiere cambio al agente build desde el modo Plan).
-- [ ] Etapa 5: Validación + ARCHITECTURE.md + resumen de migración.
+- [x] Etapa 4: Migración COMPLETA (Bloques 0–5) sobre `/home/ccindor/Escritorio/TPE-refactor`.
+      Estructura final: pages/ (entries+styles), shared/ (ui/utils/data/models/styles),
+      features/ (auth, community), games/ (core + peg-solitaire + blocka + index.js manifest),
+      assets/ (compartidos), tests/. NO se crearon app/ ni layouts/ (decisión documentada
+      en ARCHITECTURE.md: abstracción innecesaria para 5 entries con diferencias reales).
+- [x] Etapa 5: Validación: tests 23/23 OK, integridad de referencias 0 rotas (script
+      /tmp/opencode/verify_integrity.py), screenshots de las 6 páginas + placeholder OK.
+      ARCHITECTURE.md creado. Commits por bloque en el repo de la copia.
+- [ ] Entrega final al usuario (resumen de migración en chat).
 
 ## 7. GRAFO DE CONTEXTO (releer para reconstruir el estado)
 
@@ -128,16 +134,14 @@ PROYECTO: TPE (Kingly Games, minijuegos, académico, vanilla-only)
 
 ## 8. ÚLTIMA ACTUALIZACIÓN (mantener al avanzar)
 
-- **2026-11-16 (Bloque 0 ✅)**: Copia creada en `/home/ccindor/Escritorio/TPE-refactor`
-  (con .git). Sin node/deno/bun → tests vanilla en `tests/` (assert.js + runner
-  `tests/index.html`) ejecutados con `python3 -m http.server 8123` (background, PID
-  http.server) + `firefox --headless --screenshot` (perfil /tmp/opencode/ffprof2).
-  Baseline: **19/19 tests OK** (peg-engine, filter-processor, validators, models).
-  Baselines visuales: /tmp/opencode/before-*.png (home captura el Loader: comparar
-  siempre con mismo método/timing). **Bug preexistente documentado**: data/games.js pasa
-  "Premium"/"Free" en mayúscula pero Game.isPremium() compara en minúscula → nunca
-  detecta premium. NO corregir en la migración. Otros hallazgos: index.js raíz es stub
-  muerto; ImageSelectorCard.js y BlockaInstructions.js son solo comentarios sin refs;
-  css/atoms/a.css y badge.css sin componente JS claro (verificar antes de borrar).
+- **2026-11-16 (MIGRACIÓN COMPLETA ✅)**: Bloques 0–5 ejecutados y committeados en
+  TPE-refactor. Registry formal con contrato {id,mount,destroy}, manifest games/index.js,
+  viewport dinámico conservado. Tests 23/23 (runner: tests/index.html; ejecutar con
+  `python3 -m http.server 8123` + firefox headless screenshot). Integridad 0 refs rotas.
+  ARCHITECTURE.md escrito (incluye problemas preexistentes y CSS muertos conservados).
+  Lección registrada: tooling SIEMPRE con rutas absolutas ancladas a la copia (un fixer
+  modificó por error archivos del ORIGINAL; fue restaurado con `git restore js/`).
+  Original TPE intacto (solo .idea/workspace.xml modificado de antes).
+- **2026-11-16 (Bloque 0 ✅)**: copia + harness de tests vanilla (19/19 baseline).
 - **2026-11-16 (Auditoría + propuesta ✅)**: ver §6/§7. Viewport único game.html?id=N es
-  requisito permanente del usuario. Pendiente: Bloque 1 (shared/).
+  requisito permanente del usuario.
