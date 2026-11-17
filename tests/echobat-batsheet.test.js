@@ -90,9 +90,10 @@ export default [
 
     // ---------------- Spec del atlas ----------------
     {
-        name: "batsheet/spec: 3 frames, ciclo ping-pong de 4 pasos y escala 0.5",
+        name: "batsheet/spec: 4 frames (3 del GIF + pose dash), ciclo ping-pong de 4 pasos y escala 0.5",
         fn: () => {
-            assertEquals(BAT_SHEET_SPEC.frameCount, 3);
+            assertEquals(BAT_SHEET_SPEC.frameCount, 4);
+            assertEquals(BAT_SHEET_SPEC.dashFrame, 3);
             assertEquals(BAT_SHEET_SPEC.cycle.length, 4);
             assertEquals(BAT_SHEET_SPEC.cellWidth, 112);
             assertEquals(BAT_SHEET_SPEC.cellHeight, 84);

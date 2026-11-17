@@ -14,22 +14,26 @@ const SHEET_URL = new URL('../assets/images/echobat-bat-sheet.png', import.meta.
 
 export const BAT_SHEET_SPEC = {
     url: SHEET_URL.href,
-    /** Cantidad de poses en el atlas (una fila). */
-    frameCount: 3,
+    /** Cantidad de poses en el atlas (una fila): 3 del GIF + 1 de dash sintetizada. */
+    frameCount: 4,
+    /** Índice de la pose de dash (alas hacia atrás, picado). */
+    dashFrame: 3,
     /** Tamaño de celda en píxeles del atlas. */
     cellWidth: 112,
     cellHeight: 84,
     /** Escala de dibujo en pantalla (0.5× → 56×42, contenido ≈54×40). */
     drawScale: 0.5,
     /**
-     * Secuencia de índices del ciclo de aleteo: ping-pong sobre las 3 poses.
-     * Cada avance de animFrame consume un paso de esta secuencia.
+     * Secuencia de índices del ciclo de aleteo: ping-pong sobre las 3 poses
+     * del GIF (la pose de dash no entra en el ciclo normal).
      */
     cycle: [0, 1, 2, 1],
     /** Tinte de daño (silueta roja, como el original). */
     hitTint: '#ef4444',
     /** Tinte mientras el sonar está activo (violeta claro). */
-    sonarTint: 'rgba(192, 132, 252, 0.85)'
+    sonarTint: 'rgba(192, 132, 252, 0.85)',
+    /** Tinte cian del murciélago y sus estelas durante el dash. */
+    dashTint: 'rgba(56, 189, 248, 0.85)'
 };
 
 /**

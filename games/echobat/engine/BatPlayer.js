@@ -44,17 +44,35 @@ export class BatPlayer extends GameEntity {
         this.flapSpeed = p.flapSpeed;
         this.pixelScale = p.pixelScale;
 
+        // Dash (→ / D): ráfaga hacia adelante con gravedad reducida
+        this.isDashing = false;
+        this.dashTimer = 0;
+        this.dashFrames = ECHOBAT_CONFIG.dash.dashFrames;
+
         /** Spritesheet inyectado (tests) o cargado en diferido. */
         this.sheetImage = options.sheetImage || null;
         this._createCanvas = options.createCanvas || (() => document.createElement('canvas'));
         /** Canvas auxiliar reutilizado para los tintes (creación diferida). */
         this._tintCanvas = null;
+        /** Siluetas cian cacheadas por pose (para las estelas fantasma). */
+        this._ghostCanvases = null;
 
         if (!this.sheetImage && typeof Image !== 'undefined') {
             loadBatSheet()
                 .then(img => { this.sheetImage = img; })
                 .catch(() => { /* fallback al pixel-art */ });
         }
+    }
+
+    /** Activa la ráfaga de dash (el controller valida cargas previamente). */
+    triggerDash() {
+        this.isDashing = true;
+        this.dashTimer = this.dashFrames;
+    }
+
+    /** X base del murciélago (posición fija del viewport): adonde vuelve tras el dash. */
+    get baseX() {
+        return ECHOBAT_CONFIG.player.x;
     }
 
     /** El atlas está listo para dibujarse (imagen cargada y válida). */
@@ -97,15 +115,34 @@ export class BatPlayer extends GameEntity {
     update(canvasHeight, dt = 1) {
         if (isNaN(dt) || dt <= 0) dt = 1;
 
-        // Física de planeo
-        this.velocity += this.gravity * dt;
+        // Física de planeo (gravedad reducida durante el dash: vuelo horizontal)
+        const gravityFactor = this.isDashing ? ECHOBAT_CONFIG.dash.gravityFactor : 1;
+        this.velocity += this.gravity * gravityFactor * dt;
         if (this.velocity > this.maxFallSpeed) {
             this.velocity = this.maxFallSpeed;
         }
         this.pos.y += this.velocity * dt;
 
-        // Inclinación según velocidad vertical
-        const targetRotation = Math.min(Math.PI / 6, Math.max(-Math.PI / 7, this.velocity * 0.08));
+        // Ráfaga hacia adelante: empuje + clamping (no invade el spawn de pilares)
+        if (this.isDashing) {
+            this.pos.x += ECHOBAT_CONFIG.dash.playerPush * dt;
+            if (this.pos.x > ECHOBAT_CONFIG.dash.maxX) {
+                this.pos.x = ECHOBAT_CONFIG.dash.maxX;
+            }
+            this.dashTimer -= dt;
+            if (this.dashTimer <= 0) {
+                this.isDashing = false;
+            }
+        } else if (this.pos.x > this.baseX) {
+            // Al terminar el dash, regreso suave a la posición base del viewport
+            this.pos.x -= 6 * dt;
+            if (this.pos.x < this.baseX) this.pos.x = this.baseX;
+        }
+
+        // Inclinación según velocidad vertical (enderezado durante el dash)
+        const targetRotation = this.isDashing
+            ? 0.08
+            : Math.min(Math.PI / 6, Math.max(-Math.PI / 7, this.velocity * 0.08));
         this.rotation += (targetRotation - this.rotation) * 0.15 * dt;
 
         // Límites verticales del canvas
@@ -199,15 +236,22 @@ export class BatPlayer extends GameEntity {
 
     _drawSheetFrame(ctx) {
         const spec = BAT_SHEET_SPEC;
-        const frameIdx = pingPongFrame(this.animFrame, spec.cycle);
+        // Durante el dash se usa la pose dedicada de picado (alas hacia atrás)
+        const frameIdx = this.isDashing ? spec.dashFrame : pingPongFrame(this.animFrame, spec.cycle);
         const drawW = spec.cellWidth * spec.drawScale;
         const drawH = spec.cellHeight * spec.drawScale;
         const sx = frameIdx * spec.cellWidth;
         const dx = -drawW / 2;
         const dy = -drawH / 2;
 
+        // Prioridad de tinte: daño (rojo) > dash (cian) > sonar (violeta)
+        const tint = this.isHit ? spec.hitTint
+            : this.isDashing ? spec.dashTint
+            : this.sonarConeTimer > 0 ? spec.sonarTint
+            : null;
+
         // Sin efectos → blit directo del frame
-        if (!this.isHit && this.sonarConeTimer <= 0) {
+        if (!tint) {
             ctx.drawImage(
                 this.sheetImage,
                 sx, 0, spec.cellWidth, spec.cellHeight,
@@ -217,7 +261,6 @@ export class BatPlayer extends GameEntity {
         }
 
         // Con efecto → tinte plano preservando alfa (source-atop)
-        const tint = this.isHit ? spec.hitTint : spec.sonarTint;
         if (!this._tintCanvas) {
             this._tintCanvas = this._createCanvas();
             this._tintCanvas.width = spec.cellWidth;
@@ -236,6 +279,53 @@ export class BatPlayer extends GameEntity {
             0, 0, spec.cellWidth, spec.cellHeight,
             dx, dy, drawW, drawH
         );
+    }
+
+    /**
+     * Siluetas cian cacheadas por pose (para las estelas fantasma del dash).
+     * Se generan una única vez por pose del atlas y se reutilizan con alpha.
+     * @returns {HTMLCanvasElement[]}
+     */
+    _getGhostCanvases() {
+        if (this._ghostCanvases) return this._ghostCanvases;
+        const spec = BAT_SHEET_SPEC;
+        this._ghostCanvases = [];
+        for (let i = 0; i < spec.frameCount; i++) {
+            const canvas = this._createCanvas();
+            canvas.width = spec.cellWidth;
+            canvas.height = spec.cellHeight;
+            const gctx = canvas.getContext('2d');
+            gctx.drawImage(this.sheetImage, i * spec.cellWidth, 0, spec.cellWidth, spec.cellHeight, 0, 0, spec.cellWidth, spec.cellHeight);
+            gctx.globalCompositeOperation = 'source-atop';
+            gctx.fillStyle = spec.dashTint;
+            gctx.fillRect(0, 0, spec.cellWidth, spec.cellHeight);
+            this._ghostCanvases.push(canvas);
+        }
+        return this._ghostCanvases;
+    }
+
+    /**
+     * Dibuja una estela fantasma (silueta cian translúcida) en una posición
+     * y rotación capturadas durante el dash.
+     */
+    drawGhost(ctx, ghost) {
+        if (!this._hasSheet()) return;
+        const spec = BAT_SHEET_SPEC;
+        const ghosts = this._getGhostCanvases();
+        const alpha = Math.max(0, Math.min(1, ghost.life / ghost.maxLife)) * 0.55;
+        const drawW = spec.cellWidth * spec.drawScale;
+        const drawH = spec.cellHeight * spec.drawScale;
+
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.translate(ghost.x + this.width / 2, ghost.y + this.height / 2);
+        ctx.rotate(ghost.rotation);
+        ctx.drawImage(
+            ghosts[ghost.frameIdx % ghosts.length],
+            0, 0, spec.cellWidth, spec.cellHeight,
+            -drawW / 2, -drawH / 2, drawW, drawH
+        );
+        ctx.restore();
     }
 
     /** Fallback: pixel-art ASCII original (si el atlas no cargó). */

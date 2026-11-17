@@ -10,7 +10,7 @@
  */
 export class InputHandler {
     constructor() {
-        this.keys = { jump: false, echolocate: false };
+        this.keys = { jump: false, echolocate: false, dash: false };
         this._onKeyDown = this._handleKeyDown.bind(this);
         this._buttonBindings = [];
         this._pauseCallback = null;
@@ -86,6 +86,11 @@ export class InputHandler {
         }
         if (e.code === 'ShiftLeft' || e.code === 'ShiftRight' || e.key === 'Shift') {
             this.keys.echolocate = true;
+            e.preventDefault();
+        }
+        // Dash: flecha derecha o D (la flecha scrollea la página → preventDefault)
+        if (e.code === 'ArrowRight' || e.code === 'KeyD') {
+            this.keys.dash = true;
             e.preventDefault();
         }
         if (e.code === 'KeyP' || e.code === 'Escape') {

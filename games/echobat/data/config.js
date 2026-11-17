@@ -106,6 +106,31 @@ export const ECHOBAT_CONFIG = {
         revealFrames: 180
     },
 
+    /**
+     * Dash hacia adelante (→ / D): ráfaga de movilidad que se carga pasando
+     * pilares. Sin invulnerabilidad: atravesar un pilar dashando duele igual.
+     */
+    dash: {
+        /** Pilares superados por carga (cada 5 → +1 dash). */
+        pillarsPerCharge: 5,
+        /** Cargas acumulables máxima. */
+        maxCharges: 2,
+        /** Duración de la ráfaga (frames normalizados ≈0.3s). */
+        dashFrames: 18,
+        /** Empuje del murciélago hacia adelante durante el dash (px/frame). */
+        playerPush: 8,
+        /** Multiplicador de velocidad del mundo mientras dura el dash. */
+        worldSpeedMult: 1.3,
+        /** Factor de gravedad durante el dash (vuelo casi horizontal). */
+        gravityFactor: 0.35,
+        /** X máximo del murciélago (no invade la zona de spawn de pilares). */
+        maxX: 360,
+        /** Cada cuántos frames de dash se muestrea una estela fantasma. */
+        trailEveryFrames: 2,
+        /** Máximo de fantasmas vivos simultáneos (y frames de desvanecimiento). */
+        trailMaxGhosts: 6
+    },
+
     /** Clave de Web Storage para el mejor puntaje. */
     storageKey: 'echobat_highscore'
 };

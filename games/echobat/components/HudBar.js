@@ -42,6 +42,31 @@ export function HudBar() {
     sonarBlock.append(sonarLabels, sonarTrack);
     statusPanel.append(livesContainer, separator, sonarBlock);
 
+    // --- Panel dash (carga por pilares pasados) ---
+    const dashSeparator = document.createElement('div');
+    dashSeparator.className = 'echobat__hud-separator';
+
+    const dashBlock = document.createElement('div');
+    dashBlock.className = 'echobat__dash';
+
+    const dashLabels = document.createElement('div');
+    dashLabels.className = 'echobat__sonar-labels';
+    const dashTitle = document.createElement('span');
+    dashTitle.textContent = 'DASH';
+    const dashStatus = document.createElement('span');
+    dashStatus.textContent = '»»';
+    dashLabels.append(dashTitle, dashStatus);
+
+    const dashTrack = document.createElement('div');
+    dashTrack.className = 'echobat__sonar-track echobat__dash-track';
+    const dashBar = document.createElement('div');
+    dashBar.className = 'echobat__sonar-bar echobat__dash-bar';
+    dashBar.style.width = '0%';
+    dashTrack.appendChild(dashBar);
+
+    dashBlock.append(dashLabels, dashTrack);
+    statusPanel.append(dashSeparator, dashBlock);
+
     // --- Panel puntaje + tiempo ---
     const scorePanel = document.createElement('div');
     scorePanel.className = 'echobat__hud-panel echobat__hud-panel--right';
@@ -119,5 +144,29 @@ export function HudBar() {
         }
     }
 
-    return { element, setLives, setScore, setTime, setSonar };
+    /**
+     * Estado del dash: progreso de carga (pilares/pilares) y cargas listas.
+     * La barra muestra el avance hacia la próxima carga; el estado muestra
+     * las cargas acumuladas como rayas (» = 1, »» = 2) o el contador.
+     */
+    function setDash(pillarsSinceCharge, charges, maxCharges) {
+        const pct = Math.max(0, Math.min(100, (pillarsSinceCharge / ECHOBAT_CONFIG.dash.pillarsPerCharge) * 100));
+        dashBar.style.width = `${pct}%`;
+
+        if (charges >= maxCharges) {
+            dashStatus.textContent = '»»';
+            dashStatus.className = 'echobat__sonar-status echobat__dash-status echobat__dash-status--ready';
+            dashBar.classList.add('echobat__dash-bar--ready');
+        } else if (charges > 0) {
+            dashStatus.textContent = '»';
+            dashStatus.className = 'echobat__sonar-status echobat__dash-status echobat__dash-status--ready';
+            dashBar.classList.remove('echobat__dash-bar--ready');
+        } else {
+            dashStatus.textContent = `${pillarsSinceCharge}/${ECHOBAT_CONFIG.dash.pillarsPerCharge}`;
+            dashStatus.className = 'echobat__sonar-status echobat__dash-status echobat__dash-status--charging';
+            dashBar.classList.remove('echobat__dash-bar--ready');
+        }
+    }
+
+    return { element, setLives, setScore, setTime, setSonar, setDash };
 }

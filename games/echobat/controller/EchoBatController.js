@@ -17,6 +17,7 @@ import { InputHandler } from './InputHandler.js';
 import { HudBar } from '../components/HudBar.js';
 import { GameOverlay } from '../components/GameOverlay.js';
 import { PauseOverlay } from '../components/PauseOverlay.js';
+import { BAT_SHEET_SPEC } from '../data/bat-sheet.js';
 import { ECHOBAT_CONFIG, gapHeightForScore, scrollSpeedForScore } from '../data/config.js';
 
 export class EchoBatController {
@@ -43,6 +44,12 @@ export class EchoBatController {
         // Velocidad de scroll actual (sube por escalones según el puntaje)
         this.scrollSpeed = this.baseSpeed;
         this._speedLevel = 0;
+
+        // Dash (→ / D): cargas por pilares superados + estelas fantasma
+        this.dashCharges = 0;
+        this.pillarsSinceCharge = 0;
+        this.ghosts = [];
+        this._trailCounter = 0;
 
         // Recursos de ciclo de vida (liberados en destroy)
         this.animFrameId = null;
@@ -92,8 +99,13 @@ export class EchoBatController {
         kbd.className = 'echobat__hint-key';
         kbd.textContent = 'SHIFT';
         const hintText = document.createElement('span');
-        hintText.textContent = 'Ecolocalizar cueva (Cono 3s)';
-        hint.append(kbd, hintText);
+        hintText.textContent = 'Sonar (3s)';
+        const kbdDash = document.createElement('kbd');
+        kbdDash.className = 'echobat__hint-key echobat__hint-key--dash';
+        kbdDash.textContent = 'D';
+        const hintDash = document.createElement('span');
+        hintDash.textContent = 'Dash';
+        hint.append(kbd, hintText, kbdDash, hintDash);
 
         // Botón de pantalla completa (esquina inferior derecha)
         this.fsButton = document.createElement('button');
@@ -186,6 +198,7 @@ export class EchoBatController {
         this._stopLoop();
         this.input.detach();
         clearTimeout(this._speedUpTimeout);
+        clearTimeout(this._dashFlashTimeout);
         if (document.fullscreenElement === this.frame) {
             document.exitFullscreen().catch(() => {});
         }
@@ -229,7 +242,11 @@ export class EchoBatController {
         this.isPaused = false;
         this.scrollSpeed = this.baseSpeed;
         this._speedLevel = 0;
+        this.dashCharges = 0;
+        this.pillarsSinceCharge = 0;
+        this.ghosts = [];
         this.pauseOverlay.hide();
+        this.hud.setDash(0, 0, ECHOBAT_CONFIG.dash.maxCharges);
 
         this.hud.setLives(this.lives);
         this.hud.setScore(this.score);
@@ -340,6 +357,12 @@ export class EchoBatController {
             this._triggerEcholocate();
             this.input.keys.echolocate = false;
         }
+        if (this.input.keys.dash) {
+            this.input.keys.dash = false;
+            if (this.dashCharges > 0 && !this.player.isDashing) {
+                this._triggerDash();
+            }
+        }
 
         // Recarga del sonar
         if (this.sonarCooldownFrames > 0) {
@@ -348,8 +371,11 @@ export class EchoBatController {
         }
         this.hud.setSonar(this.sonarCooldownFrames, this.maxCooldownFrames);
 
-        // Parallax (4 capas, velocidad diferenciada)
-        this.parallaxBg.update(this.scrollSpeed, dt);
+        // Parallax (4 capas, velocidad diferenciada) + mundo acelerado en dash
+        const worldSpeed = this.player.isDashing
+            ? this.scrollSpeed * ECHOBAT_CONFIG.dash.worldSpeedMult
+            : this.scrollSpeed;
+        this.parallaxBg.update(worldSpeed, dt);
 
         // Física del jugador
         this.player.update(this.height, dt);
@@ -374,13 +400,22 @@ export class EchoBatController {
 
         for (let i = this.pillars.length - 1; i >= 0; i--) {
             const pillar = this.pillars[i];
-            pillar.update(this.scrollSpeed, dt);
+            pillar.update(worldSpeed, dt);
 
             // Puntaje al superar el pilar + recarga instantánea de sonar
             if (!pillar.passed && pillar.x + pillar.width < this.player.pos.x) {
                 pillar.passed = true;
                 this.score += ECHOBAT_CONFIG.scorePerPillar;
                 this.sonarCooldownFrames = 0;
+                // Progreso de carga del dash: +1 carga cada N pilares
+                this.pillarsSinceCharge++;
+                if (this.pillarsSinceCharge >= ECHOBAT_CONFIG.dash.pillarsPerCharge) {
+                    this.pillarsSinceCharge = 0;
+                    if (this.dashCharges < ECHOBAT_CONFIG.dash.maxCharges) {
+                        this.dashCharges++;
+                    }
+                }
+                this.hud.setDash(this.pillarsSinceCharge, this.dashCharges, ECHOBAT_CONFIG.dash.maxCharges);
             }
 
             // Colisión con estalactita/estalagmita (trapecios reales, NO se elimina el terreno)
@@ -405,7 +440,7 @@ export class EchoBatController {
         // ---- Entidades dinámicas: luciérnagas (premio) y arañas (peligro) ----
         for (let i = this.entities.length - 1; i >= 0; i--) {
             const entity = this.entities[i];
-            entity.update(this.scrollSpeed, dt);
+            entity.update(worldSpeed, dt);
 
             const entityCollider = entity.getCollider();
             if (entityCollider && ColliderSystem.collides(playerCollider, entityCollider)) {
@@ -425,7 +460,46 @@ export class EchoBatController {
             }
         }
 
+        // ---- Estelas fantasma del dash (siluetas cian que se desvanecen) ----
+        if (this.player.isDashing) {
+            this._trailCounter += dt;
+            if (this._trailCounter >= ECHOBAT_CONFIG.dash.trailEveryFrames) {
+                this._trailCounter = 0;
+                this.ghosts.push({
+                    frameIdx: BAT_SHEET_SPEC.dashFrame,
+                    x: this.player.pos.x,
+                    y: this.player.pos.y,
+                    rotation: this.player.rotation,
+                    life: ECHOBAT_CONFIG.dash.trailMaxGhosts,
+                    maxLife: ECHOBAT_CONFIG.dash.trailMaxGhosts
+                });
+                if (this.ghosts.length > ECHOBAT_CONFIG.dash.trailMaxGhosts) {
+                    this.ghosts.shift();
+                }
+            }
+        }
+        for (let i = this.ghosts.length - 1; i >= 0; i--) {
+            this.ghosts[i].life -= dt;
+            if (this.ghosts[i].life <= 0) this.ghosts.splice(i, 1);
+        }
+
         this.hud.setScore(this.score);
+    }
+
+    /**
+     * Activa el dash: consume una carga, dispara la ráfaga del jugador y el
+     * destello cian del frame (keyframe de evento CSS).
+     */
+    _triggerDash() {
+        this.dashCharges--;
+        this.player.triggerDash();
+        this.hud.setDash(this.pillarsSinceCharge, this.dashCharges, ECHOBAT_CONFIG.dash.maxCharges);
+
+        this.frame.classList.remove('is-dashing');
+        void this.frame.offsetWidth; // fuerza reflow para reiniciar la animación
+        this.frame.classList.add('is-dashing');
+        clearTimeout(this._dashFlashTimeout);
+        this._dashFlashTimeout = setTimeout(() => this.frame.classList.remove('is-dashing'), 450);
     }
 
     _handleLifeLoss() {
@@ -487,7 +561,10 @@ export class EchoBatController {
         // 4. Viñeta de oscuridad de la cueva
         this._drawCaveDarknessOverlay();
 
-        // 5. Murciélago jugador
+        // 5. Estelas fantasma del dash (debajo del murciélago, sobre la oscuridad)
+        this.ghosts.forEach(ghost => this.player.drawGhost(this.ctx, ghost));
+
+        // 6. Murciélago jugador
         this.player.draw(this.ctx);
     }
 

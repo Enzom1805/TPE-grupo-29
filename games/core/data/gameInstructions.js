@@ -58,6 +58,8 @@ export const gameInstructions = {
         subtitle: "¿Cuáles son las características principales?",
         features: [
             "Impulso hacia arriba con ESPACIO o flecha Arriba para mantener el vuelo.",
+            "Dash con D o flecha Derecha: ráfaga hacia adelante que atraviesa el aire a toda velocidad, con estelas fantasma.",
+            "El dash se carga pasando pilares: cada 5 esquivados te dan una carga, y podés acumular hasta 2.",
             "Ecolocalización con SHIFT: cono de luz que revela la cueva durante 3 segundos.",
             "Pausa el vuelo cuando quieras con la tecla P o ESC.",
             "Pantalla completa con el botón ⛶ o la tecla F, sin que la página se mueva de lugar.",
@@ -68,7 +70,7 @@ export const gameInstructions = {
             "A partir de los 100 puntos la cueva acelera de a tramos: cada vez será más difícil sobrevivir.",
             "Contás con 3 vidas y un periodo de invulnerabilidad tras cada choque: el vuelo continúa."
         ],
-        tips: "Mantené el murciélago en el tercio medio de la pantalla y aleteá con toques cortos en vez de mantener presionado. Guardá el sonar para los tramos con huecos angostos y buscá las luciérnagas: además de sumar puntaje, dejan el sonar listo para la próxima emergencia.",
+        tips: "Mantené el murciélago en el tercio medio de la pantalla y aleteá con toques cortos en vez de mantener presionado. Guardá el sonar para los tramos con huecos angostos y reservá las cargas de dash para cruzar rápido los tramos más densos: avisá que el dash no te hace invencible, atravesar un pilar duele igual.",
         media: {
             image: {
                 src: "../games/echobat/assets/images/echobat-tuto.png",

@@ -190,6 +190,39 @@
     transition: width 75ms linear;
 }
 
+/* ======================================================
+   HUD: INDICADOR DE DASH (carga por pilares superados)
+   ====================================================== */
+
+.echobat__dash {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.echobat__dash-status--ready {
+    color: var(--echobat-cyan);
+}
+
+.echobat__dash-status--charging {
+    color: var(--echobat-text-secondary, #C9C5D3);
+}
+
+.echobat__dash-track {
+    width: 78px;
+}
+
+.echobat__dash-bar {
+    background: linear-gradient(to right, #0369a1, var(--echobat-cyan));
+    transition: width 75ms linear;
+}
+
+/* Con cargas listas, la barra queda llena y brillante */
+.echobat__dash-bar--ready {
+    width: 100% !important;
+    box-shadow: 0 0 8px var(--echobat-cyan);
+}
+
 .echobat__hud-caption {
     display: block;
     font-size: 10px;
@@ -262,6 +295,13 @@
     font-family: monospace;
     font-weight: 700;
     font-size: 11px;
+}
+
+/* Tecla del dash: cian (acorde a la habilidad) */
+.echobat__hint-key--dash {
+    background: rgba(3, 105, 161, 0.6);
+    border-color: var(--echobat-cyan);
+    color: var(--echobat-cyan);
 }
 
 /* ======================================================
@@ -444,6 +484,29 @@
         opacity: 1;
         transform: translateY(0) scale(1);
     }
+}
+
+/* 6. Destello cian del frame al activar el dash */
+@keyframes dashFlash {
+    0% {
+        box-shadow:
+            inset 0 0 50px rgba(15, 23, 42, 0.9),
+            0 0 0 rgba(56, 189, 248, 0);
+    }
+    35% {
+        box-shadow:
+            inset 0 0 50px rgba(15, 23, 42, 0.5),
+            0 0 45px rgba(56, 189, 248, 0.65);
+    }
+    100% {
+        box-shadow:
+            inset 0 0 50px rgba(15, 23, 42, 0.9),
+            0 0 0 rgba(56, 189, 248, 0);
+    }
+}
+
+.echobat__frame.is-dashing {
+    animation: dashFlash 0.45s ease-out;
 }
 
 /* ======================================================
