@@ -26,6 +26,7 @@
     import engineTests from './echobat-engine.test.js';
     import atlasTests from './echobat-atlas.test.js';
     import batsheetTests from './echobat-batsheet.test.js';
+    import pauseSpeedTests from './echobat-pause-speed.test.js';
 
     const suites = [
         ['peg-engine', pegTests],
@@ -36,7 +37,8 @@
         ['echobat-collider', colliderTests],
         ['echobat-engine', engineTests],
         ['echobat-atlas', atlasTests],
-        ['echobat-batsheet', batsheetTests]
+        ['echobat-batsheet', batsheetTests],
+        ['echobat-pause-speed', pauseSpeedTests]
     ];
 
     const resultsEl = document.getElementById('results');

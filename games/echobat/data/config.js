@@ -1,5 +1,5 @@
 /**
- * Configuración centralizada de gameplay de EchoBat (id 31).
+ * Configuración centralizada de gameplay de EchoBat (id 50).
  *
  * Todos los valores provienen del comportamiento original de echoBatv3.html
  * (se conservan EXACTOS para preservar la dificultad y el feel del juego).
@@ -65,7 +65,18 @@ export const ECHOBAT_CONFIG = {
         /** Cada `gapScoreStep` puntos reduce el hueco `gapReductionPerStep` px. */
         gapScoreStep: 60,
         gapReductionPerStep: 6,
-        maxGapReduction: 55
+        maxGapReduction: 55,
+        /**
+         * Progresión de velocidad: tras `speedStartScore` puntos la velocidad
+         * de scroll sube `speedStepIncrease` px/frame cada `speedScoreStep`
+         * puntos, con tope en `maxSpeed`. Escalonada (no aceleración física):
+         * dentro de cada tramo la velocidad es constante, como exige el
+         * entregable.
+         */
+        speedStartScore: 100,
+        speedScoreStep: 100,
+        speedStepIncrease: 0.4,
+        maxSpeed: 4.8
     },
 
     /** Spawning de pilares y entidades dinámicas. */
@@ -110,4 +121,21 @@ export function gapHeightForScore(score) {
     const steps = Math.floor((score || 0) / gapScoreStep);
     const reduction = Math.min(maxGapReduction, steps * gapReductionPerStep);
     return Math.max(minGap, initialGap - reduction);
+}
+
+/**
+ * Velocidad de scroll actual según el puntaje (curva de dificultad pura).
+ * Constante (= baseSpeed) hasta `speedStartScore`; luego sube un escalón
+ * `speedStepIncrease` cada `speedScoreStep` puntos, con tope `maxSpeed`.
+ * Función pura: fácil de testear y reutilizable por el controller.
+ * @param {number} score
+ * @returns {number} velocidad en px/frame
+ */
+export function scrollSpeedForScore(score) {
+    const { baseSpeed, difficulty } = ECHOBAT_CONFIG;
+    const { speedStartScore, speedScoreStep, speedStepIncrease, maxSpeed } = difficulty;
+    const s = (typeof score === 'number' && !isNaN(score) && isFinite(score)) ? Math.max(0, score) : 0;
+    if (s < speedStartScore) return baseSpeed;
+    const steps = Math.floor((s - speedStartScore) / speedScoreStep) + 1;
+    return Math.min(maxSpeed, baseSpeed + steps * speedStepIncrease);
 }

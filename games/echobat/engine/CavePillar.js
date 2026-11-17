@@ -24,7 +24,10 @@ export class CavePillar {
 
         const minTop = cfg.edgeMargin;
         const maxTop = canvasHeight - currentGapHeight - cfg.edgeMargin;
-        this.topHeight = MathUtils.randomRange(minTop, maxTop);
+        // Grilla de enteros: hace determinista bottomY - topHeight === gapHeight
+        // (evita el error de coma flotante de (f + gap) - f) y alinea el hueco
+        // con la grilla de dibujo pixel-art (imperceptible).
+        this.topHeight = Math.round(MathUtils.randomRange(minTop, maxTop));
         this.bottomY = this.topHeight + this.gapHeight;
         this.bottomHeight = canvasHeight - this.bottomY;
 

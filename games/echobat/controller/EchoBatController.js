@@ -1,5 +1,5 @@
 /**
- * EchoBatController: controller principal del juego (id 31).
+ * EchoBatController: controller principal del juego (id 50).
  *
  * Responsabilidades (SRP): componer el DOM del viewport, administrar el estado
  * de partida, el loop con delta-time normalizado y el ciclo de vida.
@@ -16,7 +16,8 @@ import { ColliderSystem } from '../engine/collider/ColliderSystem.js';
 import { InputHandler } from './InputHandler.js';
 import { HudBar } from '../components/HudBar.js';
 import { GameOverlay } from '../components/GameOverlay.js';
-import { ECHOBAT_CONFIG, gapHeightForScore } from '../data/config.js';
+import { PauseOverlay } from '../components/PauseOverlay.js';
+import { ECHOBAT_CONFIG, gapHeightForScore, scrollSpeedForScore } from '../data/config.js';
 
 export class EchoBatController {
     /**
@@ -32,11 +33,16 @@ export class EchoBatController {
 
         // Estado de partida
         this.isRunning = false;
+        this.isPaused = false;
         this.score = 0;
         this.lives = ECHOBAT_CONFIG.lives;
         this.gameTimeSeconds = 0;
         this.highScore = parseInt(localStorage.getItem(ECHOBAT_CONFIG.storageKey) || '0', 10);
         this.sonarCooldownFrames = 0;
+
+        // Velocidad de scroll actual (sube por escalones según el puntaje)
+        this.scrollSpeed = this.baseSpeed;
+        this._speedLevel = 0;
 
         // Recursos de ciclo de vida (liberados en destroy)
         this.animFrameId = null;
@@ -77,6 +83,7 @@ export class EchoBatController {
 
         this.hud = HudBar();
         this.overlay = GameOverlay();
+        this.pauseOverlay = PauseOverlay();
 
         // Hint de controles (esquina inferior izquierda, como el original)
         const hint = document.createElement('div');
@@ -88,7 +95,23 @@ export class EchoBatController {
         hintText.textContent = 'Ecolocalizar cueva (Cono 3s)';
         hint.append(kbd, hintText);
 
-        frame.append(this.canvas, this.hud.element, hint, this.overlay.element);
+        // Botón de pantalla completa (esquina inferior derecha)
+        this.fsButton = document.createElement('button');
+        this.fsButton.type = 'button';
+        this.fsButton.className = 'echobat__fs-btn';
+        this.fsButton.textContent = '⛶';
+        this.fsButton.title = 'Pantalla completa (F)';
+        this.fsButton.setAttribute('aria-label', 'Pantalla completa');
+
+        // Aviso de aceleración de la cueva (evento: sube el escalón de velocidad)
+        this.speedUpNotice = document.createElement('div');
+        this.speedUpNotice.className = 'echobat__speedup echobat__speedup--hidden';
+        this.speedUpNotice.textContent = '¡LA CUEVA SE ACELERA!';
+
+        frame.append(
+            this.canvas, this.hud.element, hint, this.fsButton,
+            this.speedUpNotice, this.overlay.element, this.pauseOverlay.element
+        );
         this.root.appendChild(frame);
         this.container.appendChild(this.root);
 
@@ -103,7 +126,13 @@ export class EchoBatController {
 
     init() {
         this.input.attach();
+        this.input.bindScrollLock(this.frame);
         this.overlay.onStart(() => this.start());
+
+        // Pausa (P/Esc) y pantalla completa (F o botón ⛶)
+        this.input.onPause(() => this._togglePause());
+        this.input.onFullscreenToggle(() => this._toggleFullscreen());
+        this.fsButton.addEventListener('click', () => this._toggleFullscreen());
 
         // Iniciar también con Espacio/Enter cuando el juego no corre (como el original)
         this._keyStartHandler = (e) => {
@@ -114,9 +143,52 @@ export class EchoBatController {
         window.addEventListener('keydown', this._keyStartHandler);
     }
 
+    /**
+     * Alterna pausa: congela update+render (el loop sigue, refrescando
+     * lastTime para que al reanudar no haya salto) y detiene el tiempo de
+     * partida. Solo actúa con partida en curso (no interfiere con menú/game over).
+     */
+    _togglePause() {
+        if (!this.isRunning) return;
+        this.isPaused = !this.isPaused;
+        if (this.isPaused) {
+            this.pauseOverlay.show();
+        } else {
+            this.pauseOverlay.hide();
+        }
+    }
+
+    /** Alterna pantalla completa del frame (API nativa del navegador). */
+    _toggleFullscreen() {
+        if (document.fullscreenElement === this.frame) {
+            document.exitFullscreen();
+        } else if (this.frame.requestFullscreen) {
+            this.frame.requestFullscreen();
+        }
+    }
+
+    /**
+     * Aviso visual cuando la cueva acelera (sube el escalón de velocidad):
+     * reutiliza la animación scorePop como evento reactiva.
+     */
+    _flashSpeedUp() {
+        this.speedUpNotice.classList.remove('echobat__speedup--hidden', 'is-popping');
+        void this.speedUpNotice.offsetWidth;
+        this.speedUpNotice.classList.add('is-popping');
+        clearTimeout(this._speedUpTimeout);
+        this._speedUpTimeout = setTimeout(() => {
+            this.speedUpNotice.classList.add('echobat__speedup--hidden');
+            this.speedUpNotice.classList.remove('is-popping');
+        }, 2000);
+    }
+
     destroy() {
         this._stopLoop();
         this.input.detach();
+        clearTimeout(this._speedUpTimeout);
+        if (document.fullscreenElement === this.frame) {
+            document.exitFullscreen().catch(() => {});
+        }
         if (this._keyStartHandler) {
             window.removeEventListener('keydown', this._keyStartHandler);
             this._keyStartHandler = null;
@@ -154,6 +226,10 @@ export class EchoBatController {
         this.player = new BatPlayer(ECHOBAT_CONFIG.player.x, this.height / 2);
         this.nextSpacing = this._randomSpacing();
         this.isRunning = true;
+        this.isPaused = false;
+        this.scrollSpeed = this.baseSpeed;
+        this._speedLevel = 0;
+        this.pauseOverlay.hide();
 
         this.hud.setLives(this.lives);
         this.hud.setScore(this.score);
@@ -161,7 +237,8 @@ export class EchoBatController {
         this.overlay.hide();
 
         this.timerInterval = setInterval(() => {
-            if (this.isRunning) {
+            // El tiempo de partida NO avanza durante la pausa
+            if (this.isRunning && !this.isPaused) {
                 this.gameTimeSeconds++;
                 this.hud.setTime(this.gameTimeSeconds);
             }
@@ -224,6 +301,14 @@ export class EchoBatController {
     _loop(timestamp) {
         if (!this.isRunning) return;
 
+        // Pausa: se congela la simulación pero el loop sigue vivo, refrescando
+        // lastTime para que al reanudar el delta no acumule el tiempo pausado.
+        if (this.isPaused) {
+            this.lastTime = timestamp || performance.now();
+            this.animFrameId = requestAnimationFrame((t) => this._loop(t));
+            return;
+        }
+
         const elapsed = (timestamp && this.lastTime) ? (timestamp - this.lastTime) : 16.667;
         this.lastTime = timestamp || performance.now();
         let dt = elapsed / 16.667;
@@ -238,6 +323,14 @@ export class EchoBatController {
     }
 
     _update(dt) {
+        // Velocidad de scroll según puntaje: sube por escalones (con aviso)
+        this.scrollSpeed = scrollSpeedForScore(this.score);
+        const level = Math.round((this.scrollSpeed - this.baseSpeed) / ECHOBAT_CONFIG.difficulty.speedStepIncrease);
+        if (level > this._speedLevel) {
+            this._speedLevel = level;
+            this._flashSpeedUp();
+        }
+
         // Acciones de input (flags consumidas por frame)
         if (this.input.keys.jump) {
             this.player.flap();
@@ -256,7 +349,7 @@ export class EchoBatController {
         this.hud.setSonar(this.sonarCooldownFrames, this.maxCooldownFrames);
 
         // Parallax (4 capas, velocidad diferenciada)
-        this.parallaxBg.update(this.baseSpeed, dt);
+        this.parallaxBg.update(this.scrollSpeed, dt);
 
         // Física del jugador
         this.player.update(this.height, dt);
@@ -281,7 +374,7 @@ export class EchoBatController {
 
         for (let i = this.pillars.length - 1; i >= 0; i--) {
             const pillar = this.pillars[i];
-            pillar.update(this.baseSpeed, dt);
+            pillar.update(this.scrollSpeed, dt);
 
             // Puntaje al superar el pilar + recarga instantánea de sonar
             if (!pillar.passed && pillar.x + pillar.width < this.player.pos.x) {
@@ -312,7 +405,7 @@ export class EchoBatController {
         // ---- Entidades dinámicas: luciérnagas (premio) y arañas (peligro) ----
         for (let i = this.entities.length - 1; i >= 0; i--) {
             const entity = this.entities[i];
-            entity.update(this.baseSpeed, dt);
+            entity.update(this.scrollSpeed, dt);
 
             const entityCollider = entity.getCollider();
             if (entityCollider && ColliderSystem.collides(playerCollider, entityCollider)) {
@@ -400,6 +493,7 @@ export class EchoBatController {
 
     gameOver() {
         this.isRunning = false;
+        this.isPaused = false;
         this._stopLoop();
 
         if (this.score > this.highScore) {
@@ -407,6 +501,7 @@ export class EchoBatController {
             localStorage.setItem(ECHOBAT_CONFIG.storageKey, this.highScore.toString());
         }
 
+        this.pauseOverlay.hide();
         this.overlay.setTitle('¡VUELO TERMINADO!');
         this.overlay.setDescription(
             `Has sobrevivido <strong>${this.gameTimeSeconds}s</strong> en la penumbra ` +

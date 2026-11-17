@@ -59,10 +59,13 @@ export const gameInstructions = {
         features: [
             "Impulso hacia arriba con ESPACIO o flecha Arriba para mantener el vuelo.",
             "Ecolocalización con SHIFT: cono de luz que revela la cueva durante 3 segundos.",
+            "Pausa el vuelo cuando quieras con la tecla P o ESC.",
+            "Pantalla completa con el botón ⛶ o la tecla F, sin que la página se mueva de lugar.",
             "Luciérnagas: otorgan +50 puntos y recargan el sonar al instante.",
             "Arañas colgantes: restan una vida, ¡esquiválas o atravesálas con cuidado!",
             "El hueco entre estalactitas se hace cada vez más chico y varía de altura a medida que avanzás.",
             "La distancia entre obstáculos cambia constantemente: nada de memorizar patrones.",
+            "A partir de los 100 puntos la cueva acelera de a tramos: cada vez será más difícil sobrevivir.",
             "Contás con 3 vidas y un periodo de invulnerabilidad tras cada choque: el vuelo continúa."
         ],
         tips: "Mantené el murciélago en el tercio medio de la pantalla y aleteá con toques cortos en vez de mantener presionado. Guardá el sonar para los tramos con huecos angostos y buscá las luciérnagas: además de sumar puntaje, dejan el sonar listo para la próxima emergencia.",
