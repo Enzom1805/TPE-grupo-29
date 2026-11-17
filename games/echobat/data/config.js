@@ -107,6 +107,13 @@ export const ECHOBAT_CONFIG = {
     },
 
     /**
+     * Milisegundos tras el game over durante los cuales se ignora el
+     * reinicio por teclado (Espacio/Enter): evita que un Space retenido o
+     * un toque de pánico reinicie la partida sin dejar ver el cartel.
+     */
+    gameOverRestartGraceMs: 600,
+
+    /**
      * Dash hacia adelante (→ / D): ráfaga de movilidad que se carga pasando
      * pilares. Sin invulnerabilidad: atravesar un pilar dashando duele igual.
      */

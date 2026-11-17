@@ -20,6 +20,30 @@ import { PauseOverlay } from '../components/PauseOverlay.js';
 import { BAT_SHEET_SPEC } from '../data/bat-sheet.js';
 import { ECHOBAT_CONFIG, gapHeightForScore, scrollSpeedForScore } from '../data/config.js';
 
+/**
+ * ¿Puede (re)iniciarse la partida por teclado (Espacio/Enter) en este instante?
+ *
+ * Reglas:
+ *  - El juego no debe estar corriendo (menú o game over).
+ *  - Un key repeat (tecla retenida) nunca inicia la partida.
+ *  - Tras un game over, debe haber pasado el período de gracia: si el jugador
+ *    muere con Space presionado, los repeats/toques inmediatos no deben
+ *    reiniciar la partida sin dejar ver el cartel de puntaje.
+ *
+ * Función pura para poder testearla sin DOM.
+ *
+ * @param {boolean} isRunning ¿hay una partida en curso?
+ * @param {number|null} gameOverAt timestamp del último game over (null si nunca)
+ * @param {number} now timestamp actual (performance.now())
+ * @param {boolean} repeat ¿es un evento keydown de tipo repeat?
+ * @returns {boolean}
+ */
+export function canStartByKey(isRunning, gameOverAt, now, repeat) {
+    if (isRunning || repeat) return false;
+    if (gameOverAt === null) return true; // primera partida desde el menú
+    return now - gameOverAt >= ECHOBAT_CONFIG.gameOverRestartGraceMs;
+}
+
 export class EchoBatController {
     /**
      * @param {HTMLElement} container nodo donde se monta el juego
@@ -56,6 +80,8 @@ export class EchoBatController {
         this.timerInterval = null;
         this.lastTime = 0;
         this._keyStartHandler = null;
+        /** Timestamp del último game over: protege el cartel del reinicio por teclado. */
+        this._gameOverAt = null;
 
         // Espaciado horizontal aleatorio hasta el próximo pilar (requisito 6a)
         this.nextSpacing = this._randomSpacing();
@@ -146,9 +172,12 @@ export class EchoBatController {
         this.input.onFullscreenToggle(() => this._toggleFullscreen());
         this.fsButton.addEventListener('click', () => this._toggleFullscreen());
 
-        // Iniciar también con Espacio/Enter cuando el juego no corre (como el original)
+        // Iniciar también con Espacio/Enter cuando el juego no corre (como el
+        // original). canStartByKey filtra key repeats y respeta el período de
+        // gracia tras el game over (un Space retenido no debe saltarse el cartel).
         this._keyStartHandler = (e) => {
-            if (!this.isRunning && (e.code === 'Space' || e.code === 'Enter')) {
+            if (e.code !== 'Space' && e.code !== 'Enter') return;
+            if (canStartByKey(this.isRunning, this._gameOverAt, performance.now(), e.repeat)) {
                 this.start();
             }
         };
@@ -234,6 +263,7 @@ export class EchoBatController {
         this.lives = ECHOBAT_CONFIG.lives;
         this.gameTimeSeconds = 0;
         this.sonarCooldownFrames = 0;
+        this._gameOverAt = null; // nueva partida: ya no hay gracia activa
         this.pillars = [];
         this.entities = [];
         this.player = new BatPlayer(ECHOBAT_CONFIG.player.x, this.height / 2);
@@ -572,6 +602,7 @@ export class EchoBatController {
         this.isRunning = false;
         this.isPaused = false;
         this._stopLoop();
+        this._gameOverAt = performance.now(); // arranca el período de gracia
 
         if (this.score > this.highScore) {
             this.highScore = this.score;

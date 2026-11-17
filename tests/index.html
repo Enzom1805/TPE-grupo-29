@@ -28,6 +28,7 @@
     import batsheetTests from './echobat-batsheet.test.js';
     import pauseSpeedTests from './echobat-pause-speed.test.js';
     import dashTests from './echobat-dash.test.js';
+    import gameoverTests from './echobat-gameover.test.js';
 
     const suites = [
         ['peg-engine', pegTests],
@@ -40,7 +41,8 @@
         ['echobat-atlas', atlasTests],
         ['echobat-batsheet', batsheetTests],
         ['echobat-pause-speed', pauseSpeedTests],
-        ['echobat-dash', dashTests]
+        ['echobat-dash', dashTests],
+        ['echobat-gameover', gameoverTests]
     ];
 
     const resultsEl = document.getElementById('results');

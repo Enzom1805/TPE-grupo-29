@@ -12,6 +12,8 @@
  *   3. screenShake   → sacudida del viewport al colisionar (evento: daño)
  *   4. scorePop      → salto del puntaje al sumar puntos (evento: pilar/luciérnaga)
  *   5. overlayEnter  → entrada del overlay de inicio / game over
+ *   6. dashFlash     → destello cian del frame al activar el dash (evento: dash)
+ *   7. speedupEnter  → entrada del aviso "la cueva se acelera" (centrado estable)
  */
 
 .echobat {
@@ -638,7 +640,21 @@
     display: none;
 }
 
-/* Evento: aparición del aviso (reutiliza la entrada del overlay) */
+/* Evento: aparición del aviso. NO reutiliza overlayEnter: esa animación pisa
+   transform y anula el translateX(-50%) del centrado (el cartel aparece a la
+   derecha del centro y salta al centro al terminar). Estos keyframes incluyen
+   el centrado en cada paso. */
 .echobat__speedup.is-popping {
-    animation: overlayEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: speedupEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes speedupEnter {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(24px) scale(0.96);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
 }
