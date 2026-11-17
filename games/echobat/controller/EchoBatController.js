@@ -82,6 +82,9 @@ export class EchoBatController {
         this._keyStartHandler = null;
         /** Timestamp del último game over: protege el cartel del reinicio por teclado. */
         this._gameOverAt = null;
+        /** Timeouts de limpieza de clases de evento (is-hit / is-dashing). */
+        this._dashFlashTimeout = null;
+        this._hitFlashTimeout = null;
 
         // Espaciado horizontal aleatorio hasta el próximo pilar (requisito 6a)
         this.nextSpacing = this._randomSpacing();
@@ -228,6 +231,7 @@ export class EchoBatController {
         this.input.detach();
         clearTimeout(this._speedUpTimeout);
         clearTimeout(this._dashFlashTimeout);
+        clearTimeout(this._hitFlashTimeout);
         if (document.fullscreenElement === this.frame) {
             document.exitFullscreen().catch(() => {});
         }
@@ -538,10 +542,15 @@ export class EchoBatController {
         this.lives--;
         this.hud.setLives(this.lives);
 
-        // Animación keyframe de evento: sacudida de pantalla al recibir daño
+        // Animación keyframe de evento: sacudida de pantalla al recibir daño.
+        // La clase se limpia al terminar (0.35s): si quedara pegada, quitar
+        // is-dashing al terminar un dash re-aplicaría screenShake desde 0%
+        // (la pantalla temblaría "sola" al dashear tras un golpe viejo).
         this.frame.classList.remove('is-hit');
         void this.frame.offsetWidth;
         this.frame.classList.add('is-hit');
+        clearTimeout(this._hitFlashTimeout);
+        this._hitFlashTimeout = setTimeout(() => this.frame.classList.remove('is-hit'), 350);
 
         if (this.lives <= 0) {
             this.gameOver();
