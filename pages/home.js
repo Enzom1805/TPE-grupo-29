@@ -24,22 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     appContainer.appendChild(breadcrumbs);
 
-    // 1. Creamos la función para redirigir a la página del juego
-    const redirectToGame = () => {
-        window.location.href = "game.html"; // Redirige a game.html
-    };
-
     const farLeftGame = games.find(game => game.id === 5);
     const leftGame = games.find(game => game.id === 3);
     const centerGame = games.find(game => game.id === 2); // Batman Peg Solitaire
-    const rightGame = games.find(game => game.id === 1);
+    const rightGame = games.find(game => game.id === 50); // EchoBat
     const farRightGame = games.find(game => game.id === 6);
-
-    // Pasamos el ID correspondiente al hacer clic
-    if (centerGame && centerGame.button) {
-        centerGame.button.addEventListener('click', () => redirectToGame(centerGame.id));
-    }
-
 
     const heroGamesArray = [farLeftGame, leftGame, centerGame, rightGame, farRightGame];
 

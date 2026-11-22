@@ -399,6 +399,6 @@ export const games = [
         "Arcade",
         2026,
         "Free",
-        "../assets/images/games/echobat.gif"
+        "../games/echobat/assets/images/portada-echoBat.png"
     ),
 ];

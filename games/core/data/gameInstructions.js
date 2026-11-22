@@ -73,8 +73,11 @@ export const gameInstructions = {
         tips: "Mantené el murciélago en el tercio medio de la pantalla y aleteá con toques cortos en vez de mantener presionado. Guardá el sonar para los tramos con huecos angostos y reservá las cargas de dash para cruzar rápido los tramos más densos: avisá que el dash no te hace invencible, atravesar un pilar duele igual.",
         media: {
             image: {
-                src: "../games/echobat/assets/images/echobat-tuto.png",
+                src: "../games/echobat/assets/images/tutorial-echobat.png",
                 alt: "Captura de vuelo de EchoBat: murciélago, estalactitas y luciérnaga en la cueva"
+            },
+            video: {
+                src: "../games/echobat/assets/videos/echobat-tutorial.mp4"
             }
         }
     }

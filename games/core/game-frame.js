@@ -59,7 +59,7 @@ export default function GameFrame(game) {
     screenFooter.className = 'game-frame__footer';
 
     const shareMolecule = ShareGroup();
-    const helpMenu = HelpButton();
+    const helpMenu = HelpButton(game);
 
     screenFooter.append(shareMolecule, helpMenu);
     screen.append(title, boardArea, screenFooter);
