@@ -99,11 +99,19 @@ export function HudBar() {
 
     let lastScore = -1;
 
-    function setLives(lives) {
-        const maxLives = ECHOBAT_CONFIG.lives;
+    /**
+     * Dibuja los contenedores de vida actuales (no siempre los iniciales).
+     * @param {number} lives corazones llenos
+     * @param {number} maxLives contenedores disponibles (crece con la dificultad)
+     */
+    function setLives(lives, maxLives = ECHOBAT_CONFIG.lives) {
+        const totalSlots = Math.max(ECHOBAT_CONFIG.lives, maxLives);
         livesContainer.innerHTML = '';
-        for (let i = 0; i < maxLives; i++) {
+
+        for (let i = 0; i < totalSlots; i++) {
             const heart = document.createElement('span');
+            // Todos los contenedores se dibujan igual: los ganados por
+            // dificultad son corazones normales, sin estilo especial.
             heart.className = i < lives
                 ? 'echobat__heart echobat__heart--full'
                 : 'echobat__heart echobat__heart--lost';

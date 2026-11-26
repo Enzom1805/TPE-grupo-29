@@ -16,6 +16,13 @@ export const ECHOBAT_CONFIG = {
 
     /** Vidas iniciales y puntajes. */
     lives: 3,
+    /**
+     * Tope absoluto de contenedores de vida. Arrancamos con `lives` (3) y,
+     * cuando sube la dificultad, se cura un hueco o se agrega un contenedor
+     * permanente con su corazón, hasta llegar a este máximo.
+     * Al tocarse el tope de velocidad no se entregan más vidas.
+     */
+    maxLives: 10,
     scorePerPillar: 10,
     scorePerMoth: 50,
 
