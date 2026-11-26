@@ -153,7 +153,7 @@ export class EchoBatController {
         // Aviso de aceleración de la cueva (evento: sube el escalón de velocidad)
         this.speedUpNotice = document.createElement('div');
         this.speedUpNotice.className = 'echobat__speedup echobat__speedup--hidden';
-        this.speedUpNotice.textContent = '¡LA CUEVA SE ACELERA!';
+        this.speedUpNotice.textContent = '¡LA CUEVA SE ACELERA!, VIDA EXTRA!';
 
         frame.append(
             this.canvas, this.hud.element, hint, this.fsButton,
