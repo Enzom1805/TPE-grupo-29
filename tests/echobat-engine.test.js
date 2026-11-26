@@ -7,6 +7,7 @@ import { assert, assertEquals } from "./assert.js";
 import { BatPlayer } from "../games/echobat/engine/BatPlayer.js";
 import { CavePillar } from "../games/echobat/engine/CavePillar.js";
 import { ParallaxBackground } from "../games/echobat/engine/ParallaxBackground.js";
+import { PARALLAX_LAYER_URLS } from "../games/echobat/data/parallax-layers.js";
 import { MothEntity } from "../games/echobat/engine/entities/MothEntity.js";
 import { SpiderEntity } from "../games/echobat/engine/entities/SpiderEntity.js";
 import { ColliderSystem } from "../games/echobat/engine/collider/ColliderSystem.js";
@@ -149,25 +150,84 @@ export default [
 
     // ---------------- ParallaxBackground ----------------
     {
-        name: "engine/ParallaxBackground: 4 capas con offsets proporcionales",
+        name: "engine/ParallaxBackground: 4 capas con offsets proporcionales a worldSpeed",
         fn: () => {
             const bg = new ParallaxBackground(800, 450);
             bg.update(10, 1);
-            const offsets = bg.layers.map(l => l.offsetX);
-            assert(offsets[0] === 1, "capa 0 → speedRatio 0.1");
-            assert(offsets[1] === 2.5, "capa 1 → speedRatio 0.25");
-            assert(offsets[2] === 5, "capa 2 → speedRatio 0.5");
-            assert(offsets[3] === 8.5, "capa 3 → speedRatio 0.85");
+            const expected = [0.5, 1, 1.6, 2.4];
+            assertEquals(bg.layers.length, 4);
+            bg.layers.forEach((layer, index) => {
+                assert(Math.abs(layer.offsetX - expected[index]) < 1e-9,
+                    `capa ${index}: offset ${layer.offsetX} ≈ ${expected[index]}`);
+            });
         }
     },
     {
-        name: "engine/ParallaxBackground: offset envuelve con módulo del ancho",
+        name: "engine/ParallaxBackground: offset envuelve con el ancho del tile espejado",
         fn: () => {
             const bg = new ParallaxBackground(100, 450);
             bg.update(1000, 1);
+            assertEquals(bg.tileWidth, 200);
             bg.layers.forEach(layer => {
-                assert(layer.offsetX >= 0 && layer.offsetX < 100);
+                assert(layer.offsetX >= 0 && layer.offsetX < bg.tileWidth,
+                    `offset ${layer.offsetX} dentro de [0, ${bg.tileWidth})`);
             });
+        }
+    },
+    {
+        name: "engine/ParallaxBackground: 4 capas de imagen (7 fuentes pre-compuestas)",
+        fn: () => {
+            assertEquals(PARALLAX_LAYER_URLS.length, 4);
+            const bg = new ParallaxBackground(800, 450);
+            assertEquals(bg.layers.length, 4);
+            assertEquals(bg.layers.map(l => l.speedRatio), [0.05, 0.10, 0.16, 0.24]);
+        }
+    },
+    {
+        name: "engine/ParallaxBackground: draw sin imágenes usa fallback y no rompe",
+        fn: () => {
+            const calls = [];
+            const ctx = {
+                fillStyle: '',
+                fillRect: (...args) => calls.push(args),
+                save() {},
+                restore() {},
+                drawImage() { throw new Error('no debería dibujar imágenes sin cargar'); }
+            };
+            const bg = new ParallaxBackground(800, 450, { dim: 0 });
+            bg.draw(ctx);
+            assertEquals(calls.length, 1, "dibuja el fallback una vez");
+            assertEquals(calls[0], [0, 0, 800, 450]);
+        }
+    },
+    {
+        name: "engine/ParallaxBackground: dibuja normal + espejo solo cuando se ven",
+        fn: () => {
+            const draws = [];
+            const ctx = {
+                save() {},
+                restore() {},
+                translate() {},
+                scale() {},
+                drawImage: (...args) => draws.push(args)
+            };
+            const bg = new ParallaxBackground(800, 450, { dim: 0 });
+            bg._images = [{}, {}, {}, {}];
+            bg._loaded = true;
+
+            bg.layers.forEach(layer => { layer.offsetX = 0; });
+            bg.draw(ctx);
+            assertEquals(draws.length, 4, "offset 0: solo la copia normal de cada capa");
+
+            draws.length = 0;
+            bg.layers.forEach(layer => { layer.offsetX = 400; });
+            bg.draw(ctx);
+            assertEquals(draws.length, 8, "offset 400: normal + espejo de cada capa");
+
+            draws.length = 0;
+            bg.layers.forEach(layer => { layer.offsetX = 1200; });
+            bg.draw(ctx);
+            assertEquals(draws.length, 8, "offset 1200: espejo del tile 0 + normal del tile 1");
         }
     },
 

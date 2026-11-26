@@ -1,6 +1,6 @@
 /**
  * Jugador: murciélago con física de planeo, spritesheet real de 3 poses
- * (atlas generado desde el GIF de referencia, ciclo ping-pong 0→1→2→1),
+ * (atlas generado desde un GIF de referencia, ciclo ping-pong 0→1→2→1),
  * animaciones de golpe y de cono sonar, e invulnerabilidad temporal.
  *
  * La física (gravedad/impulso/rotación) es EXACTAMENTE la del original.

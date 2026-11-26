@@ -32,7 +32,7 @@
     --echobat-danger: #ef4444;
     --echobat-cyan: #38bdf8;
 
-    font-family: var(--font-family-body, sans-serif);
+    font-family: var(--font-family-body, sans-serif), serif;
     color: var(--echobat-text);
     width: 100%;
     height: 100%;
@@ -79,8 +79,13 @@
     height: 100%;
     background-color: var(--echobat-chrome);
     touch-action: none;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
+    /*
+     * El canvas se renderiza a 2x (1600x900) y el fondo AI se dibuja 1:1.
+     * `auto` deja que el navegador escale suave al tamaño CSS del viewport;
+     * con `pixelated` las escenas de cueva se veían blocky. El pixel-art se
+     * conserva porque se dibuja a resolución 2x.
+     */
+    image-rendering: auto;
 }
 
 /* ======================================================

@@ -1,7 +1,7 @@
 /**
  * Configuración centralizada de gameplay de EchoBat (id 50).
  *
- * Todos los valores provienen del comportamiento original de echoBatv3.html
+ *
  * (se conservan EXACTOS para preservar la dificultad y el feel del juego).
  * Ningún módulo del juego debería hardcodear números mágicos: leer de acá.
  */
@@ -144,6 +144,23 @@ export const ECHOBAT_CONFIG = {
         trailEveryFrames: 2,
         /** Máximo de fantasmas vivos simultáneos (y frames de desvanecimiento). */
         trailMaxGhosts: 6
+    },
+
+    /**
+     * Fondo parallax basado en imágenes (4 capas de 1600x900).
+     *
+     * `speedRatios` son relativos a la velocidad del mundo (`worldSpeed`), la
+     * misma que mueve pilares y entidades: incluye el multiplicador del dash
+     * y se congela en pausa. La capa 0 es la más lejana y la 3 la más cercana.
+     * Al ser escenas completas (no tileables), ratios altos desalinean las
+     * capas; estos valores mantienen la cueva coherente.
+     *
+     * `dim` es el alpha del tinte oscuro que se aplica al fondo antes de
+     * dibujar pilares/entidades, para que los obstáculos se lean bien.
+     */
+    parallax: {
+        dim: 0.25,
+        speedRatios: [0.05, 0.10, 0.16, 0.24]
     },
 
     /** Clave de Web Storage para el mejor puntaje. */

@@ -113,9 +113,16 @@ export class EchoBatController {
 
         this.canvas = document.createElement('canvas');
         this.canvas.className = 'echobat__canvas';
-        this.canvas.width = this.width;
-        this.canvas.height = this.height;
+
+        // Backing store fijo a 2x: el fondo AI se dibuja a 1600x900 nativo y
+        // el pixel-art queda nítido incluso en pantallas 1x. Toda la lógica
+        // sigue en coordenadas 800x450; el transform escala el contexto una
+        // sola vez.
+        this.renderScale = 2;
+        this.canvas.width = this.width * this.renderScale;
+        this.canvas.height = this.height * this.renderScale;
         this.ctx = this.canvas.getContext('2d');
+        this.ctx.setTransform(this.renderScale, 0, 0, this.renderScale, 0, 0);
 
         this.hud = HudBar();
         this.overlay = GameOverlay();
@@ -169,6 +176,9 @@ export class EchoBatController {
         this.input.attach();
         this.input.bindScrollLock(this.frame);
         this.overlay.onStart(() => this.start());
+
+        // El fondo se carga mientras el overlay de inicio está visible.
+        this.parallaxBg.load();
 
         // Pausa (P/Esc) y pantalla completa (F o botón ⛶)
         this.input.onPause(() => this._togglePause());
@@ -229,6 +239,7 @@ export class EchoBatController {
     destroy() {
         this._stopLoop();
         this.input.detach();
+        this.parallaxBg.destroy();
         clearTimeout(this._speedUpTimeout);
         clearTimeout(this._dashFlashTimeout);
         clearTimeout(this._hitFlashTimeout);
