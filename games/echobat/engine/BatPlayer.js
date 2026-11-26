@@ -40,6 +40,13 @@ export class BatPlayer extends GameEntity {
         this.invincibilityTimer = 0;
         this.invincibilityFrames = p.invincibilityFrames;
 
+        /** Mecanica Achicado */
+        this.shrinkTimer = 0;
+        this.shrinkFrames = p.mothShrinkFrames;
+        this.shrinkScale = p.mothShrinkScale;
+        this.shrinkLerp = p.mothShrinkLerp;
+        this.renderScale = 1;
+
         this.animFrame = 2;
         this.flapSpeed = p.flapSpeed;
         this.pixelScale = p.pixelScale;
@@ -68,6 +75,11 @@ export class BatPlayer extends GameEntity {
     triggerDash() {
         this.isDashing = true;
         this.dashTimer = this.dashFrames;
+    }
+
+    /** La luciérnaga reduce temporalmente el tamaño del murciélago. */
+    triggerShrink() {
+        this.shrinkTimer = this.shrinkFrames;
     }
 
     /** X base del murciélago (posición fija del viewport): adonde vuelve tras el dash. */
@@ -108,7 +120,7 @@ export class BatPlayer extends GameEntity {
         return createCircle(
             this.pos.x + this.width / 2 + p.colliderOffsetX,
             this.pos.y + this.height / 2 + p.colliderOffsetY,
-            p.colliderRadius
+            p.colliderRadius * this.renderScale
         );
     }
 
@@ -172,6 +184,15 @@ export class BatPlayer extends GameEntity {
         if (this.sonarConeTimer > 0) {
             this.sonarConeTimer -= dt;
         }
+
+        // Efecto "mini" de la luciérnaga: el render y el collider se achican
+        // suavemente mientras dura el timer y vuelven al tamaño normal después.
+        if (this.shrinkTimer > 0) {
+            this.shrinkTimer -= dt;
+            if (this.shrinkTimer < 0) this.shrinkTimer = 0;
+        }
+        const targetScale = this.shrinkTimer > 0 ? this.shrinkScale : 1;
+        this.renderScale += (targetScale - this.renderScale) * this.shrinkLerp * dt;
     }
 
     draw(ctx) {
@@ -238,8 +259,9 @@ export class BatPlayer extends GameEntity {
         const spec = BAT_SHEET_SPEC;
         // Durante el dash se usa la pose dedicada de picado (alas hacia atrás)
         const frameIdx = this.isDashing ? spec.dashFrame : pingPongFrame(this.animFrame, spec.cycle);
-        const drawW = spec.cellWidth * spec.drawScale;
-        const drawH = spec.cellHeight * spec.drawScale;
+        const scale = this.renderScale;
+        const drawW = spec.cellWidth * spec.drawScale * scale;
+        const drawH = spec.cellHeight * spec.drawScale * scale;
         const sx = frameIdx * spec.cellWidth;
         const dx = -drawW / 2;
         const dy = -drawH / 2;
@@ -313,8 +335,9 @@ export class BatPlayer extends GameEntity {
         const spec = BAT_SHEET_SPEC;
         const ghosts = this._getGhostCanvases();
         const alpha = Math.max(0, Math.min(1, ghost.life / ghost.maxLife)) * 0.55;
-        const drawW = spec.cellWidth * spec.drawScale;
-        const drawH = spec.cellHeight * spec.drawScale;
+        const scale = ghost.scale ?? 1;
+        const drawW = spec.cellWidth * spec.drawScale * scale;
+        const drawH = spec.cellHeight * spec.drawScale * scale;
 
         ctx.save();
         ctx.globalAlpha = alpha;
@@ -341,7 +364,7 @@ export class BatPlayer extends GameEntity {
         const frameData = BAT_PIXEL_FRAMES[currentFrameIdx] || BAT_PIXEL_FRAMES[0];
         const rows = frameData.length;
         const cols = frameData[0].length;
-        const pSize = this.pixelScale;
+        const pSize = this.pixelScale * this.renderScale;
 
         const startX = - (cols * pSize) / 2;
         const startY = - (rows * pSize) / 2;

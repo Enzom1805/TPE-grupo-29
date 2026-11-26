@@ -481,6 +481,7 @@ export class EchoBatController {
                 if (entity instanceof MothEntity) {
                     this.score += ECHOBAT_CONFIG.scorePerMoth;
                     this.sonarCooldownFrames = 0; // la luciérnaga recarga el sonar
+                    this.player.triggerShrink(); // y achica temporalmente al murciélago
                 } else if (entity instanceof SpiderEntity) {
                     if (this.player.invincibilityTimer <= 0) {
                         this._handleLifeLoss();
@@ -504,6 +505,7 @@ export class EchoBatController {
                     x: this.player.pos.x,
                     y: this.player.pos.y,
                     rotation: this.player.rotation,
+                    scale: this.player.renderScale,
                     life: ECHOBAT_CONFIG.dash.trailMaxGhosts,
                     maxLife: ECHOBAT_CONFIG.dash.trailMaxGhosts
                 });

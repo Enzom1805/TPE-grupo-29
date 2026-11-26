@@ -27,6 +27,14 @@ export const ECHOBAT_CONFIG = {
         gravity: 0.18,
         jumpStrength: -4.4,
         maxFallSpeed: 3.4,
+
+        /** Duración del efecto de la luciérnaga (180 frames ≈ 3 s a 60 fps). */
+        mothShrinkFrames: 180,
+        /** Escala a la que se reduce el murciélago (0.62 = 38% más chico). */
+        mothShrinkScale: 0.62,
+        /** Velocidad de transición suave hacia/desde la escala reducida. */
+        mothShrinkLerp: 0.2,
+
         /** Velocidad de avance de la animación de aleteo (frames pixel-art). */
         flapSpeed: 0.15,
         pixelScale: 2.2,
