@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>EchoBat Parallax Preview</title>
+    <link rel="stylesheet" href="../games/echobat/styles/echobat.css">
+    <style>
+        html, body { margin: 0; padding: 0; background: #000; overflow: hidden; }
+        #game { width: 1333px; height: 750px; }
+    </style>
+</head>
+<body>
+<div id="game"></div>
+
+<!-- Preload de las capas: el load event del documento espera estas imágenes,
+     así el screenshot headless las encuentra listas. -->
+<img src="../games/echobat/assets/images/parallax/parallax-layer-1.png" alt="" style="display:none">
+<img src="../games/echobat/assets/images/parallax/parallax-layer-2.png" alt="" style="display:none">
+<img src="../games/echobat/assets/images/parallax/parallax-layer-3.png" alt="" style="display:none">
+<img src="../games/echobat/assets/images/parallax/parallax-layer-4.png" alt="" style="display:none">
+
+<script type="module">
+    import { EchoBatController } from '../games/echobat/controller/EchoBatController.js';
+
+    const container = document.getElementById('game');
+    const controller = new EchoBatController(container);
+    controller.init();
+
+    // Arrancar recién cuando las capas están cargadas (mismo cache que el preload).
+    controller.parallaxBg.load().then(() => {
+        controller.start();
+        // El overlay tiene una transición de 0.3s: para el screenshot lo
+        // ocultamos de inmediato (no afecta al juego real).
+        controller.overlay.element.style.display = 'none';
+        // Solo para validar el fondo: sin la viñeta de oscuridad del juego.
+        controller._drawCaveDarknessOverlay = () => {};
+        // Mantener al murciélago lejos del suelo durante el screenshot.
+        controller.player.pos.y = 180;
+        controller.player.velocity = -1;
+    });
+</script>
+</body>
+</html>

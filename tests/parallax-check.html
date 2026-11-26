@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Parallax seam check</title>
+    <style>
+        html, body { margin: 0; padding: 12px; background: #0b0b12; color: #ddd; font: 12px monospace; }
+        .grid { display: grid; grid-template-columns: repeat(3, 400px); gap: 10px; }
+        figure { margin: 0; }
+        canvas { display: block; width: 400px; height: 225px; border: 1px solid #444; }
+        figcaption { padding: 3px 0; }
+    </style>
+</head>
+<body>
+<div class="grid" id="grid"></div>
+
+<img src="../games/echobat/assets/images/parallax/parallax-layer-1.png" alt="" style="display:none">
+<img src="../games/echobat/assets/images/parallax/parallax-layer-2.png" alt="" style="display:none">
+<img src="../games/echobat/assets/images/parallax/parallax-layer-3.png" alt="" style="display:none">
+<img src="../games/echobat/assets/images/parallax/parallax-layer-4.png" alt="" style="display:none">
+
+<script type="module">
+    import { ParallaxBackground } from '../games/echobat/engine/ParallaxBackground.js';
+
+    const fractions = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 0.999];
+    const grid = document.getElementById('grid');
+
+    const bg = new ParallaxBackground(800, 450);
+    bg.load().then(() => {
+        for (const fraction of fractions) {
+            bg.layers.forEach(layer => {
+                layer.offsetX = fraction * bg.tileWidth;
+            });
+
+            const figure = document.createElement('figure');
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 450;
+            bg.draw(canvas.getContext('2d'));
+
+            const caption = document.createElement('figcaption');
+            caption.textContent = `offset = ${(fraction * 100).toFixed(1)}% del tile espejado`;
+
+            figure.append(canvas, caption);
+            grid.append(figure);
+        }
+
+        document.title = 'SEAM CHECK READY';
+    });
+</script>
+</body>
+</html>
