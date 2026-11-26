@@ -60,7 +60,13 @@ export class EchoBatController {
         this.isRunning = false;
         this.isPaused = false;
         this.score = 0;
+        /** Corazones llenos actuales (se descuentan al recibir daño). */
         this.lives = ECHOBAT_CONFIG.lives;
+        /**
+         * Contenedores de vida disponibles en el HUD. Arranca igual que
+         * `lives` y crece cuando la dificultad sube con la vida llena.
+         */
+        this.maxLives = ECHOBAT_CONFIG.lives;
         this.gameTimeSeconds = 0;
         this.highScore = parseInt(localStorage.getItem(ECHOBAT_CONFIG.storageKey) || '0', 10);
         this.sonarCooldownFrames = 0;
@@ -154,7 +160,7 @@ export class EchoBatController {
         // Aviso de aceleración de la cueva (evento: sube el escalón de velocidad)
         this.speedUpNotice = document.createElement('div');
         this.speedUpNotice.className = 'echobat__speedup echobat__speedup--hidden';
-        this.speedUpNotice.textContent = '¡LA CUEVA SE ACELERA!';
+        this.speedUpNotice.textContent = '¡LA CUEVA SE ACELERA!, VIDA EXTRA!';
 
         frame.append(
             this.canvas, this.hud.element, hint, this.fsButton,
@@ -164,7 +170,7 @@ export class EchoBatController {
         this.container.appendChild(this.root);
 
         this.overlay.setScores(this.highScore, 0);
-        this.hud.setLives(this.lives);
+        this.hud.setLives(this.lives, this.maxLives);
         this.hud.setSonar(0, this.maxCooldownFrames);
     }
 
@@ -236,6 +242,29 @@ export class EchoBatController {
         }, 2000);
     }
 
+    /**
+     * Recompensa por subir un escalón de dificultad (velocidad):
+     *   1. Si queda algún contenedor vacío, se cura una vida.
+     *   2. Si está lleno, se agrega un contenedor PERMANENTE con su corazón
+     *   3. Si ya llegamos a `ECHOBAT_CONFIG.maxLives`, no se hace nada.
+     *   Se llama SOLO desde el cambio real de `level`, no por puntaje.
+     */
+    _grantDifficultyReward() {
+        // Cubre un config inválido (maxLives menor que las vidas iniciales).
+        const absoluteMax = Math.max(ECHOBAT_CONFIG.lives, ECHOBAT_CONFIG.maxLives);
+
+        if (this.lives < this.maxLives) {
+            this.lives++;
+        } else if (this.maxLives < absoluteMax) {
+            this.maxLives++;
+            this.lives++;
+        } else {
+            return;
+        }
+
+        this.hud.setLives(this.lives, this.maxLives);
+    }
+
     destroy() {
         this._stopLoop();
         this.input.detach();
@@ -276,6 +305,8 @@ export class EchoBatController {
 
         this.score = 0;
         this.lives = ECHOBAT_CONFIG.lives;
+        // Cada partida vuelve a los 3 contenedores iniciales.
+        this.maxLives = ECHOBAT_CONFIG.lives;
         this.gameTimeSeconds = 0;
         this.sonarCooldownFrames = 0;
         this._gameOverAt = null; // nueva partida: ya no hay gracia activa
@@ -293,7 +324,7 @@ export class EchoBatController {
         this.pauseOverlay.hide();
         this.hud.setDash(0, 0, ECHOBAT_CONFIG.dash.maxCharges);
 
-        this.hud.setLives(this.lives);
+        this.hud.setLives(this.lives, this.maxLives);
         this.hud.setScore(this.score);
         this.hud.setTime(0);
         this.overlay.hide();
@@ -385,12 +416,16 @@ export class EchoBatController {
     }
 
     _update(dt) {
-        // Velocidad de scroll según puntaje: sube por escalones (con aviso)
+        // Velocidad de scroll según puntaje: sube por escalones (con aviso).
+        // Solo cuando el nivel de velocidad aumenta de verdad se entrega la
+        // recompensa de vida/contenedor (si la velocidad ya tocó el tope,
+        // la dificultad no sube y por lo tanto no se entregan más vidas).
         this.scrollSpeed = scrollSpeedForScore(this.score);
         const level = Math.round((this.scrollSpeed - this.baseSpeed) / ECHOBAT_CONFIG.difficulty.speedStepIncrease);
         if (level > this._speedLevel) {
             this._speedLevel = level;
             this._flashSpeedUp();
+            this._grantDifficultyReward();
         }
 
         // Acciones de input (flags consumidas por frame)
@@ -552,8 +587,8 @@ export class EchoBatController {
     _handleLifeLoss() {
         this.player.triggerHitAnimation();
         this.player.invincibilityTimer = ECHOBAT_CONFIG.player.invincibilityFrames;
-        this.lives--;
-        this.hud.setLives(this.lives);
+        this.lives--; // los contenedores extra (maxLives) se conservan
+        this.hud.setLives(this.lives, this.maxLives);
 
         // Animación keyframe de evento: sacudida de pantalla al recibir daño.
         // La clase se limpia al terminar (0.35s): si quedara pegada, quitar
